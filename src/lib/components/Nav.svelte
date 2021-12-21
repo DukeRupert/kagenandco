@@ -6,14 +6,29 @@
 	import { modal, siteData } from '$lib/stores';
 	let isNavOpen = false;
 	let timing = TIMING;
+
 	const toggleMenu = () => {
 		isNavOpen = !isNavOpen;
 	};
+
+	function openOrderModal() {
+		modal.set({ active: true, action: 'order' });
+		isNavOpen = false;
+	}
+
+	function openMenuModal() {
+		modal.set({ active: true, action: 'menu' });
+		isNavOpen = false;
+	}
+
+	function closeModal() {
+		modal.set({ active: false, action: '' });
+	}
 </script>
 
 <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
 	<div class="relative flex justify-between h-20">
-		<div class="flex items-center mr-auto md:hidden">
+		<div class="flex items-center mr-auto lg:hidden">
 			<!-- Mobile menu button -->
 			<button
 				type="button"
@@ -61,12 +76,11 @@
 				{/if}
 			</button>
 		</div>
-		<div class="flex-1 flex items-center justify-center sm:items-stretch md:justify-start">
-			<a sveltekit:prefetch href="/" class="flex items-center">
-				<!-- max-width: 98% is a hacky fix. SVG gets fuzzy at max-size. Probably should fix svg file itself -->
+		<div class="flex-1 flex items-center justify-center sm:items-stretch lg:justify-start">
+			<a sveltekit:prefetch href="/" class="flex flex-shrink-0 items-center">
 				<img class="block h-16 w-auto" src="/logoKCC.svg" alt="One Sleep Company logo" />
 			</a>
-			<div class="hidden md:ml-6 md:flex md:space-x-4">
+			<div class="hidden lg:ml-6 lg:flex lg:flex-shrink-0 lg:space-x-4">
 				<!-- Current: " text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" -->
 				<a
 					sveltekit:prefetch
@@ -95,9 +109,27 @@
 				>
 					About Us
 				</a>
+				<a
+					sveltekit:prefetch
+					href="/contact-us"
+					class="{$page.path == '/contact-us'
+						? 'current'
+						: 'default'} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+				>
+					Contact Us
+				</a>
+				<a
+					sveltekit:prefetch
+					href="/join-our-team"
+					class="{$page.path == '/join-our-team'
+						? 'current'
+						: 'default'} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+				>
+					Join our team
+				</a>
 			</div>
 		</div>
-		<div class="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
+		<div class="hidden lg:flex items-center justify-end lg:flex-1 lg:w-0">
 			<a
 				href={$siteData.shop}
 				class="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900"
@@ -105,7 +137,7 @@
 				Shop
 			</a>
 			<button
-				on:click={() => modal.set({ active: true, action: 'order' })}
+				on:click={openOrderModal}
 				class="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-3xl shadow-sm text-base font-medium text-black bg-custard-500 hover:bg-custard-400"
 			>
 				Order Online
@@ -116,25 +148,17 @@
 
 <!-- Mobile menu, show/hide based on menu state. -->
 {#if isNavOpen}
-	<div transition:slide={{ duration: timing, easing: quartOut }} class="md:hidden" id="mobile-menu">
+	<div transition:slide={{ duration: timing, easing: quartOut }} class="lg:hidden" id="mobile-menu">
 		<div class="pt-2 pb-4 space-y-1">
-			<a
-				sveltekit:prefetch
-				href="/inventory/mattresses"
-				class="{$page.path == '/inventory/mattresses'
+			<button
+				on:click={openMenuModal}
+				class="{$page.path == '/menu/tri-cites' || $page.path == '/menu/spokane'
 					? 'mobile-current'
-					: 'mobile-default'} block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Mattresses</a
+					: 'mobile-default'} block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Menu</button
 			>
 			<a
 				sveltekit:prefetch
-				href="/inventory/adjustable-bases"
-				class="{$page.path == '/inventory/adjustable-bases'
-					? 'mobile-current'
-					: 'mobile-default'} block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
-				>Adjustable Bases</a
-			>
-			<a
-				sveltekit:prefetch
+				on:click={toggleMenu}
 				href="/locations"
 				class="{$page.path == '/locations'
 					? 'mobile-current'
@@ -142,10 +166,28 @@
 			>
 			<a
 				sveltekit:prefetch
+				on:click={toggleMenu}
 				href="/about-us"
 				class="{$page.path == '/about-us'
 					? 'mobile-current'
 					: 'mobile-default'} block pl-3 pr-4 py-2 border-l-4 text-base font-medium">About Us</a
+			>
+			<a
+				sveltekit:prefetch
+				on:click={toggleMenu}
+				href="/contact-us"
+				class="{$page.path == '/contact-us'
+					? 'mobile-current'
+					: 'mobile-default'} block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Contact Us</a
+			>
+			<a
+				sveltekit:prefetch
+				on:click={toggleMenu}
+				href="/join-our-team"
+				class="{$page.path == '/join-our-team'
+					? 'mobile-current'
+					: 'mobile-default'} block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
+				>Join our team</a
 			>
 		</div>
 	</div>
