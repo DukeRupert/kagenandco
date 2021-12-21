@@ -16,17 +16,23 @@
 
 <script lang="ts">
 	import '../app.css';
-	// import Navbar from '$lib/components/navbar.svelte';
+	import { siteData } from '$lib/stores';
+	import Modal from '$lib/components/Modal.svelte';
+	import Nav from '$lib/components/Nav.svelte';
 	// import Footer from '$lib/components/footer.svelte';
 	// import Banner from '$lib/components/banner.svelte';
+
+	// Write Sanity content to global store
+	export let data;
+	siteData.set(data);
 </script>
 
 <div class="parent">
 	<nav class="bg-white shadow">
-		<!-- <Banner />
-		<Navbar /> -->
+		<Nav />
 	</nav>
 	<main class="bg-white">
+		<Modal />
 		<slot />
 	</main>
 	<footer>

@@ -18,27 +18,12 @@
 	import { urlFor } from '$lib/image-url';
 	import PrimaryBanner from '$lib/components/PrimaryBanner.svelte';
 	import LocationsBanner from '$lib/components/LocationsBanner.svelte';
-	import ModalLocation from '$lib/components/ModalLocation.svelte';
 
 	// SEO
 	const pageUrl = `https://${$page.host}${$page.path}`;
 
 	// Sanity Content
 	export let data;
-	console.log(data);
-
-	// Modal
-	let active = false;
-	let action = 'order';
-
-	function closeModal() {
-		active = false;
-	}
-
-	function openModal(event) {
-		active = true;
-		action = event.detail;
-	}
 </script>
 
 <SvelteSeo
@@ -60,6 +45,5 @@
 		]
 	}}
 />
-<ModalLocation on:close={closeModal} {active} {action} />
-<PrimaryBanner on:active={openModal} />
+<PrimaryBanner />
 <LocationsBanner />

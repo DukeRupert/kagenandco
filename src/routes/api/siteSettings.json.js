@@ -1,12 +1,9 @@
 import client from '$lib/sanity-client';
 
 export async function get() {
-	// You must be on the home page if you reached this endpoint
-	const slug = '/';
-
-	// Build query using slug
+	// Build query
 	const filter = `*[_type == "siteSettings"]`;
-	const projection = `{...}`;
+	const projection = `{..., logo{..., asset->}, "order" : *[_type=="location"]{name, "url" : orderUrl}}`;
 	const query = filter + projection;
 
 	// Since only one match is expected destructure result
