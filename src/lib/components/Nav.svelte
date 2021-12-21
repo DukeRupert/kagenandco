@@ -82,15 +82,14 @@
 			</a>
 			<div class="hidden lg:ml-6 lg:flex lg:flex-shrink-0 lg:space-x-4">
 				<!-- Current: " text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" -->
-				<a
-					sveltekit:prefetch
-					href="/menu/tri-cities"
+				<button
+					on:click={openMenuModal}
 					class="{$page.path == '/menu/tri-cities' || $page.path == '/menu/spokane'
 						? 'current'
 						: 'default'} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
 				>
 					Menu
-				</a>
+				</button>
 				<a
 					sveltekit:prefetch
 					href="/locations"

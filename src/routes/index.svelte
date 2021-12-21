@@ -37,9 +37,9 @@
 		type: 'website',
 		images: [
 			{
-				url: urlFor(data.mainImage.asset).width(388).height(388).format('webp').url(),
-				width: '388',
-				height: '388',
+				url: urlFor(data.mainImage.asset).width(600).height(600).format('webp').url(),
+				width: '600',
+				height: '600',
 				alt: data.mainImage.alt
 			}
 		]
