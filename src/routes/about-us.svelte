@@ -17,12 +17,15 @@
 	import SvelteSeo from 'svelte-seo';
 	import { page } from '$app/stores';
 	import { urlFor } from '$lib/image-url';
+	import BlockContent from '@arzidava/svelte-portable-text';
+	import serializers from '$lib/serializers';
 
 	// SEO
 	const pageUrl = `https://${$page.host}${$page.path}`;
 
 	// Sanity Content
 	export let data;
+	console.log(data.body);
 </script>
 
 <SvelteSeo
@@ -44,4 +47,21 @@
 		]
 	}}
 />
-<h1>{data.title}</h1>
+
+<div class="relative py-16 bg-white overflow-hidden">
+	<div class="relative px-4 sm:px-6 lg:px-8">
+		<div class="mt-6 prose prose-indigo prose-lg text-gray-500 mx-auto">
+			<BlockContent blocks={data.body} {serializers} />
+			<figure>
+				<img
+					class="w-full rounded-lg"
+					src={urlFor(data.mainImage.asset).width(1310).height(873).format('webp').url()}
+					alt={data.mainImage.alt}
+					width="1310"
+					height="873"
+				/>
+				<figcaption>{data.mainImage.caption}</figcaption>
+			</figure>
+		</div>
+	</div>
+</div>

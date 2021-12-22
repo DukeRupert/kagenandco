@@ -3,7 +3,7 @@ import client from '$lib/sanity-client';
 export async function get({ params }) {
 	// You must be on the home page if you reached this endpoint
 	const { slug } = params;
-	console.log(JSON.stringify(slug));
+
 	// Build query using slug
 	const filter = `*[_type == "page" && slug.current == "${slug}-menu"]`;
 	const projection = `{..., mainImage{..., asset->}}`;

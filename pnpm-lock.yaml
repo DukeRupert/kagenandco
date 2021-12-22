@@ -32,10 +32,10 @@ specifiers:
   typescript: ^4.5.4
 
 dependencies:
-  '@arzidava/svelte-portable-text': 0.1.0
   felte: 0.8.7_svelte@3.44.3
 
 devDependencies:
+  '@arzidava/svelte-portable-text': 0.1.0
   '@sanity/client': 2.23.2
   '@sanity/image-url': 1.0.1
   '@sendgrid/mail': 7.6.0
@@ -68,7 +68,7 @@ packages:
 
   /@arzidava/svelte-portable-text/0.1.0:
     resolution: {integrity: sha512-r5tw7yWJue2/24JuYTuE6aek6YmFGnD+1qv4rAUkq8htt6RwMUxj1J2oYAzFv2rnBMEwmLGI6RswvcA6kW3guA==}
-    dev: false
+    dev: true
 
   /@babel/code-frame/7.12.11:
     resolution: {integrity: sha512-Zt1yodBx1UcyiePMSkWnU4hPqhwq7hGi2nFL1LeA3EUl+q2LQx16MISgJ0+z7dnmgvP9QtIleuETGOiOH1RcIw==}
