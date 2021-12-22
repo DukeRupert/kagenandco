@@ -47,10 +47,18 @@
 </div>
 <div class="mt-4 sm:mt-6">
 	<a
+		href={`/menu/${slug}`}
+		class="inline-flex justify-center w-full rounded-3xl border border-custard-500 shadow-sm px-4 py-2 bg-custard-white text-base font-medium text-black hover:bg-custard-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-custard-300 sm:text-sm"
+	>
+		View Menu
+	</a>
+</div>
+<div class="mt-4 sm:mt-6">
+	<a
 		href={locationUrl}
 		class="inline-flex justify-center w-full rounded-3xl border border-custard-500 shadow-sm px-4 py-2 bg-custard-white text-base font-medium text-black hover:bg-custard-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-custard-300 sm:text-sm"
 	>
-		View on Map
+		Get Directions
 	</a>
 </div>
 <div class="mt-4 sm:mt-6">
