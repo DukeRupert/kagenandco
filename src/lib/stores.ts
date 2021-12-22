@@ -114,22 +114,6 @@ export const siteData = writable({
 
 export const mobile = writable(false);
 
-export const dropdown = writable(false);
-function toggleDropdown() {
-	dropdown.update((value) => !value);
-}
+export const modal = writable(false);
 
-export const menuToggle = writable(false);
-function toggleSubmenuLocation() {
-	menuToggle.update((value) => !value);
-}
-
-export const orderToggle = writable(false);
-function toggleSubmenuOrder() {
-	orderToggle.update((value) => !value);
-}
-
-export const modal = writable({
-	active: false,
-	action: 'order'
-});
+export const modalAction = writable('order');

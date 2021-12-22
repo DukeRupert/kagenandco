@@ -3,7 +3,7 @@
 	import { quartOut } from 'svelte/easing';
 	import { page } from '$app/stores';
 	import { TIMING } from '$lib/constants';
-	import { modal, siteData } from '$lib/stores';
+	import { modal, modalAction, siteData } from '$lib/stores';
 	let isNavOpen = false;
 	let timing = TIMING;
 
@@ -12,17 +12,19 @@
 	};
 
 	function openOrderModal() {
-		modal.set({ active: true, action: 'order' });
+		modalAction.set('order');
+		modal.set(true);
 		isNavOpen = false;
 	}
 
 	function openMenuModal() {
-		modal.set({ active: true, action: 'menu' });
+		modalAction.set('menu');
+		modal.set(true);
 		isNavOpen = false;
 	}
 
 	function closeModal() {
-		modal.set({ active: false, action: '' });
+		modal.set(false);
 	}
 </script>
 
