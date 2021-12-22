@@ -1,14 +1,15 @@
 <script lang="ts">
-	import { modal } from '$lib/stores';
+	import { modal, modalAction } from '$lib/stores';
 
-	const buttons = [
-		{
-			title: 'order now'
-		},
-		{
-			title: 'view menu'
-		}
-	];
+	function openOrderModal() {
+		modalAction.set('order');
+		modal.set(true);
+	}
+
+	function openMenuModal() {
+		modalAction.set('menu');
+		modal.set(true);
+	}
 </script>
 
 <!-- Hero card -->
@@ -26,13 +27,13 @@
 				<div class="mt-10 max-w-sm mx-auto sm:max-w-none sm:flex sm:justify-center">
 					<div class="space-y-4 sm:space-y-0 sm:mx-auto sm:inline-grid sm:grid-cols-2 sm:gap-5">
 						<button
-							on:click={() => modal.set({ active: true, action: 'order' })}
+							on:click={openOrderModal}
 							class="flex items-center justify-center px-4 py-3 border-2 text-base uppercase font-medium rounded-3xl shadow-sm text-white hover:bg-custard-500 hover:border-custard-500 transition-all ease-in sm:px-8"
 						>
 							Order Now
 						</button>
 						<button
-							on:click={() => modal.set({ active: true, action: 'menu' })}
+							on:click={openMenuModal}
 							class="flex items-center justify-center px-4 py-3 border-2 text-base uppercase font-medium rounded-3xl shadow-sm text-white hover:bg-custard-500 hover:border-custard-500 transition-all ease-in sm:px-8"
 						>
 							View Menu
