@@ -19,7 +19,7 @@
 				/>
 			</div>
 			<div class="relative px-4 py-16 sm:px-6 sm:py-24 lg:py-32 lg:px-8">
-				<div class="mt-10 max-w-sm mx-auto sm:flex sm:justify-center">
+				<div class="mb-10 max-w-sm mx-auto sm:flex sm:justify-center">
 					<div class="space-y-4 sm:space-y-0 sm:mx-auto sm:inline-grid sm:grid-cols-2 sm:gap-5">
 						<a
 							href={buttons[0].link}
