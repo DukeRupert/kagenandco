@@ -20,7 +20,7 @@
 	import Modal from '$lib/components/Modal.svelte';
 	import Nav from '$lib/components/Nav.svelte';
 	import Footer from '$lib/components/Footer.svelte';
-	// import Banner from '$lib/components/banner.svelte';
+	import Banner from '$lib/components/Banner.svelte';
 
 	// Write Sanity content to global store
 	export let data;
@@ -29,6 +29,7 @@
 
 <div class="parent">
 	<nav class="bg-white shadow">
+		<Banner />
 		<Nav />
 	</nav>
 	<main class="bg-white">
