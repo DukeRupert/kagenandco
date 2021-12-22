@@ -13,7 +13,7 @@
 				<img
 					class="h-60 w-auto"
 					src={urlFor($siteData.logo.asset).format('webp').width(400).url()}
-					alt="One Sleep Company logo"
+					alt={$siteData.logo.alt}
 				/>
 			</a>
 		</div>

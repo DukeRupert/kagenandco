@@ -19,7 +19,7 @@
 	import { siteData } from '$lib/stores';
 	import Modal from '$lib/components/Modal.svelte';
 	import Nav from '$lib/components/Nav.svelte';
-	// import Footer from '$lib/components/footer.svelte';
+	import Footer from '$lib/components/Footer.svelte';
 	// import Banner from '$lib/components/banner.svelte';
 
 	// Write Sanity content to global store
@@ -36,7 +36,7 @@
 		<slot />
 	</main>
 	<footer>
-		<!-- <Footer /> -->
+		<Footer />
 	</footer>
 </div>
 
