@@ -26,7 +26,6 @@
 
 	// Sanity Content
 	export let data;
-	console.log(data.body);
 </script>
 
 <SvelteSeo
