@@ -188,6 +188,17 @@
 					: 'mobile-default'} block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
 				>Join our team</a
 			>
+			<div class="space-y-3">
+				<button
+					class="block pl-3 pr-4 py-2 ml-3 border rounded-3xl border-custard-500 text-base font-medium"
+					><a href={$siteData.shop}>Shop Merchandise </a></button
+				>
+				<button
+					on:click={openOrderModal}
+					class="block pl-3 pr-4 py-2 ml-3 border rounded-3xl border-custard-500 text-base font-medium"
+					>Order Online</button
+				>
+			</div>
 		</div>
 	</div>
 {/if}
