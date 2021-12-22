@@ -48,7 +48,7 @@
 					<a
 						href={$modal.action == 'order' ? url : `/menu/${name.toLowerCase()}`}
 						on:click={closeModal}
-						class="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm"
+						class="inline-flex justify-center w-full rounded-3xl border border-transparent shadow-sm px-4 py-2 bg-custard-500 text-base font-medium text-black hover:bg-custard-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-custard-300 sm:text-sm"
 					>
 						{name}
 					</a>

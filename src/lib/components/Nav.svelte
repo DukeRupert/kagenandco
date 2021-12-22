@@ -27,59 +27,11 @@
 </script>
 
 <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
-	<div class="relative flex justify-between h-20">
-		<div class="flex items-center mr-auto lg:hidden">
-			<!-- Mobile menu button -->
-			<button
-				type="button"
-				class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-highlight"
-				aria-controls="mobile-menu"
-				aria-expanded="false"
-				on:click={toggleMenu}
-			>
-				<span class="sr-only">Open main menu</span>
-				{#if !isNavOpen}
-					<svg
-						class="h-6 w-6 block"
-						xmlns="http://www.w3.org/2000/svg"
-						fill="none"
-						viewBox="0 0 24 24"
-						stroke="currentColor"
-						aria-hidden="true"
-					>
-						<path
-							in:draw={{ duration: timing, easing: quartOut }}
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							d="M4 6h16M4 12h16M4 18h16"
-						/>
-					</svg>
-				{/if}
-				{#if isNavOpen}
-					<svg
-						class="h-6 w-6 block"
-						xmlns="http://www.w3.org/2000/svg"
-						fill="none"
-						viewBox="0 0 24 24"
-						stroke="currentColor"
-						aria-hidden="true"
-					>
-						<path
-							in:draw={{ duration: timing, easing: quartOut }}
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							d="M6 18L18 6M6 6l12 12"
-						/>
-					</svg>
-				{/if}
-			</button>
-		</div>
+	<div class="relative flex justify-center h-20">
+		<a sveltekit:prefetch href="/" class="flex flex-shrink-0 items-center">
+			<img class="block h-16 w-auto" src="/logoKCC.svg" alt="One Sleep Company logo" />
+		</a>
 		<div class="flex-1 flex items-center justify-center sm:items-stretch lg:justify-start">
-			<a sveltekit:prefetch href="/" class="flex flex-shrink-0 items-center">
-				<img class="block h-16 w-auto" src="/logoKCC.svg" alt="One Sleep Company logo" />
-			</a>
 			<div class="hidden lg:ml-6 lg:flex lg:flex-shrink-0 lg:space-x-4">
 				<!-- Current: " text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" -->
 				<button
@@ -140,6 +92,54 @@
 				class="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-3xl shadow-sm text-base font-medium text-black bg-custard-500 hover:bg-custard-400"
 			>
 				Order Online
+			</button>
+		</div>
+		<div class="flex items-center ml-auto lg:hidden">
+			<!-- Mobile menu button -->
+			<button
+				type="button"
+				class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-highlight"
+				aria-controls="mobile-menu"
+				aria-expanded="false"
+				on:click={toggleMenu}
+			>
+				<span class="sr-only">Open main menu</span>
+				{#if !isNavOpen}
+					<svg
+						class="h-6 w-6 block"
+						xmlns="http://www.w3.org/2000/svg"
+						fill="none"
+						viewBox="0 0 24 24"
+						stroke="currentColor"
+						aria-hidden="true"
+					>
+						<path
+							in:draw={{ duration: timing, easing: quartOut }}
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2"
+							d="M4 6h16M4 12h16M4 18h16"
+						/>
+					</svg>
+				{/if}
+				{#if isNavOpen}
+					<svg
+						class="h-6 w-6 block"
+						xmlns="http://www.w3.org/2000/svg"
+						fill="none"
+						viewBox="0 0 24 24"
+						stroke="currentColor"
+						aria-hidden="true"
+					>
+						<path
+							in:draw={{ duration: timing, easing: quartOut }}
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2"
+							d="M6 18L18 6M6 6l12 12"
+						/>
+					</svg>
+				{/if}
 			</button>
 		</div>
 	</div>
