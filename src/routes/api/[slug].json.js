@@ -6,7 +6,14 @@ export async function get({ params }) {
 
 	// Build query using slug
 	const filter = `*[_type == "page" && slug.current == "${slug}"]`;
-	const projection = `{..., mainImage{..., asset->}}`;
+	const projection = `{..., 
+        mainImage{..., 
+            asset->},
+		body[]{..., 
+            location->{..., 
+                image{..., 
+                    asset->}}}
+        }`;
 	const query = filter + projection;
 
 	// Since only one match is expected destructure result
