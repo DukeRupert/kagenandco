@@ -19,6 +19,7 @@
 	import { urlFor } from '$lib/image-url';
 	import BlockContent from '@arzidava/svelte-portable-text';
 	import serializers from '$lib/serializers';
+	import CallToAction from '$lib/components/CallToAction.svelte';
 
 	// SEO
 	const pageUrl = `https://${$page.host}${$page.path}`;
@@ -50,7 +51,7 @@
 
 <div class="relative py-16 bg-white overflow-hidden">
 	<div class="relative px-4 sm:px-6 lg:px-8">
-		<div class="mt-6 prose prose-indigo prose-lg text-gray-500 mx-auto">
+		<div class="mt-6 prose prose-indigo prose-lg text-gray-700 mx-auto">
 			<BlockContent blocks={data.body} {serializers} />
 			<figure>
 				<img
@@ -63,5 +64,6 @@
 				<figcaption>{data.mainImage.caption}</figcaption>
 			</figure>
 		</div>
+		<CallToAction />
 	</div>
 </div>
