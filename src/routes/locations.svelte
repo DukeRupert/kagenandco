@@ -1,6 +1,6 @@
 <script context="module">
-	export async function load({ page, fetch }) {
-		const slug = page.path;
+	export async function load({ url, fetch }) {
+		const slug = url.pathname;
 		const res = await fetch(`/api${slug}.json`);
 		if (res.ok) {
 			const { data } = await res.json();

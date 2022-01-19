@@ -1,7 +1,6 @@
 <script context="module">
 	export async function load({ url, fetch }) {
 		const slug = url.pathname;
-		console.log(slug);
 		const res = await fetch(`/api${slug}.json`);
 		if (res.ok) {
 			const { data } = await res.json();

@@ -1,6 +1,6 @@
 <script context="module">
-	export async function load({ page, fetch }) {
-		const { slug } = page.params;
+	export async function load({ params, fetch }) {
+		const { slug } = params;
 
 		const res = await fetch(`/api/menu/${slug}.json`);
 		if (res.ok) {
