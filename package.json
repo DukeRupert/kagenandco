@@ -43,6 +43,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@felte/reporter-svelte": "^0.3.20",
 		"felte": "^0.8.7"
 	}
 }

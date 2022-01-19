@@ -20,7 +20,7 @@
 	import { siteData } from '$lib/stores';
 
 	// SEO
-	const pageUrl = `https://${$page.host}${$page.path}`;
+	const pageUrl = `https://${$page.url.hostname}${$page.url.pathname}`;
 
 	// Sanity Content
 	export let data;
@@ -29,7 +29,7 @@
 <SvelteSeo
 	title={data.title}
 	description={data.description}
-	canonical={$page.host + $page.path}
+	canonical={$page.url.hostname + $page.url.pathname}
 	openGraph={{
 		title: data.title,
 		description: data.excerpt,

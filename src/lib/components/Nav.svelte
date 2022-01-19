@@ -38,7 +38,7 @@
 				<!-- Current: " text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" -->
 				<button
 					on:click={openMenuModal}
-					class="{$page.path == '/menu/tri-cities' || $page.path == '/menu/spokane'
+					class="{$page.url.pathname == '/menu/tri-cities' || $page.url.pathname == '/menu/spokane'
 						? 'current'
 						: 'default'} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
 				>
@@ -47,7 +47,7 @@
 				<a
 					sveltekit:prefetch
 					href="/locations"
-					class="{$page.path == '/locations'
+					class="{$page.url.pathname == '/locations'
 						? 'current'
 						: 'default'} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
 				>
@@ -56,7 +56,7 @@
 				<a
 					sveltekit:prefetch
 					href="/about-us"
-					class="{$page.path == '/about-us'
+					class="{$page.url.pathname == '/about-us'
 						? 'current'
 						: 'default'} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
 				>
@@ -65,7 +65,7 @@
 				<a
 					sveltekit:prefetch
 					href="/contact-us"
-					class="{$page.path == '/contact-us'
+					class="{$page.url.pathname == '/contact-us'
 						? 'current'
 						: 'default'} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
 				>
@@ -74,7 +74,7 @@
 				<a
 					sveltekit:prefetch
 					href="/join-our-team"
-					class="{$page.path == '/join-our-team'
+					class="{$page.url.pathname == '/join-our-team'
 						? 'current'
 						: 'default'} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
 				>
@@ -153,7 +153,7 @@
 		<div class="pt-2 pb-4 space-y-1">
 			<button
 				on:click={openMenuModal}
-				class="{$page.path == '/menu/tri-cites' || $page.path == '/menu/spokane'
+				class="{$page.url.pathname == '/menu/tri-cites' || $page.url.pathname == '/menu/spokane'
 					? 'mobile-current'
 					: 'mobile-default'} block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Menu</button
 			>
@@ -161,7 +161,7 @@
 				sveltekit:prefetch
 				on:click={toggleMenu}
 				href="/locations"
-				class="{$page.path == '/locations'
+				class="{$page.url.pathname == '/locations'
 					? 'mobile-current'
 					: 'mobile-default'} block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Locations</a
 			>
@@ -169,7 +169,7 @@
 				sveltekit:prefetch
 				on:click={toggleMenu}
 				href="/about-us"
-				class="{$page.path == '/about-us'
+				class="{$page.url.pathname == '/about-us'
 					? 'mobile-current'
 					: 'mobile-default'} block pl-3 pr-4 py-2 border-l-4 text-base font-medium">About Us</a
 			>
@@ -177,7 +177,7 @@
 				sveltekit:prefetch
 				on:click={toggleMenu}
 				href="/contact-us"
-				class="{$page.path == '/contact-us'
+				class="{$page.url.pathname == '/contact-us'
 					? 'mobile-current'
 					: 'mobile-default'} block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Contact Us</a
 			>
@@ -185,7 +185,7 @@
 				sveltekit:prefetch
 				on:click={toggleMenu}
 				href="/join-our-team"
-				class="{$page.path == '/join-our-team'
+				class="{$page.url.pathname == '/join-our-team'
 					? 'mobile-current'
 					: 'mobile-default'} block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
 				>Join our team</a

@@ -5,8 +5,6 @@
 	function closeModal() {
 		modal.set(false);
 	}
-
-	console.log($modal);
 </script>
 
 <!-- This example requires Tailwind CSS v2.0+ -->
