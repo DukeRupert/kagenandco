@@ -1,7 +1,6 @@
 import sendgrid from '@sendgrid/mail';
 
-// sendgrid.setApiKey(process.env.SENDGRID_API_KEY);
-sendgrid.setApiKey('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');
+sendgrid.setApiKey(process.env.SENDGRID_API_KEY);
 
 export async function post(req) {
 	if (req.body.password !== '') {
