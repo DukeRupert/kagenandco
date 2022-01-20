@@ -12,7 +12,7 @@ export async function post(req) {
 	try {
 		// console.log("REQ.BODY", req.body);
 		await sendgrid.send({
-			to: 'lwilliams56@gmail.com', // Your email where you'll receive emails
+			to: 'kagen.cox@gmail.com', // Your email where you'll receive emails
 			from: 'logan@firefly.llc', // your website email address here
 			templateId: 'd-b1eec2575b564d60a7e14c10205378e6',
 			dynamicTemplateData: {
