@@ -219,10 +219,8 @@
 								name="location"
 								class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-matisse-500 focus:border-matisse-500 sm:text-sm rounded-md"
 							>
-								<option selected>Tacoma</option>
-								<option>Sumner</option>
-								<option>Kent</option>
-								<option>Clackamas</option>
+								<option selected>Tri-Cities</option>
+								<option>Spokane</option>
 							</select>
 						</div>
 						<div class="sm:col-span-2">
