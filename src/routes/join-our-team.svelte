@@ -58,17 +58,6 @@
 			if (values.priorTitle && /<.*?script.*\/?>/gi.test(values.priorTitle)) {
 				errors.priorTitle = '<script> tags are not allowed';
 			}
-			if (!values.body) {
-				errors.body = 'Must not be empty';
-			}
-			// Message cannot exceed 500 characters
-			if (values.body && values.body.length > 500) {
-				errors.body = 'Too many characters.';
-			}
-			// Sanitize body of script tags
-			if (values.body && /<.*?script.*\/?>/gi.test(values.body)) {
-				errors.body = '<script> tags are not allowed';
-			}
 
 			return errors;
 		},
