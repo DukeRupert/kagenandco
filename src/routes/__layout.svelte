@@ -29,7 +29,6 @@
 
 <div class="parent">
 	<nav class="bg-white shadow">
-		<Banner />
 		<Nav />
 	</nav>
 	<main class="bg-white">

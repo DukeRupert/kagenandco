@@ -14,7 +14,7 @@
 
 <!-- Hero card -->
 <div class="relative h-[75vh]">
-	<div class="max-w-7xl mx-auto h-full sm:px-6 lg:px-8">
+	<div class="w-full mx-auto h-full">
 		<div class="relative h-full flex justify-center items-center sm:overflow-hidden">
 			<div class="absolute inset-0">
 				<img

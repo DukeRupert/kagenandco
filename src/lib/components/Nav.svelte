@@ -28,7 +28,7 @@
 	}
 </script>
 
-<div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+<div class="bg-white max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
 	<div class="relative flex justify-center h-20">
 		<a sveltekit:prefetch href="/" class="flex flex-shrink-0 items-center">
 			<img class="block h-16 w-auto" src="/logoKCC.svg" alt="One Sleep Company logo" />

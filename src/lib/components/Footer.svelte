@@ -2,39 +2,48 @@
 	import { siteData } from '$lib/stores';
 </script>
 
-<footer class="bg-white">
-	<div class="max-w-7xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
-		<nav class="-mx-5 -my-2 flex flex-wrap justify-center" aria-label="Footer">
+<footer class="bg-oldGrey">
+	<div class="bg-oldGrey max-w-7xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
+		<nav
+			class="-mx-5 -my-2 flex flex-wrap flex-col text-center md:flex-row md:text-left justify-center"
+			aria-label="Footer"
+		>
 			<div class="px-5 py-2">
-				<a href="/about-us" class="text-base text-gray-500 hover:text-gray-900"> About </a>
+				<a href="/about-us" class="text-base text-custard-500 hover:text-custard-300"> About </a>
 			</div>
 
 			<div class="px-5 py-2">
-				<a href="/locations" class="text-base text-gray-500 hover:text-gray-900"> Locations </a>
+				<a href="/locations" class="text-base text-custard-500 hover:text-custard-300">
+					Locations
+				</a>
 			</div>
 
 			<div class="px-5 py-2">
-				<a href="/join-our-team" class="text-base text-gray-500 hover:text-gray-900"> Jobs </a>
+				<a href="/join-our-team" class="text-base text-custard-500 hover:text-custard-300">
+					Jobs
+				</a>
 			</div>
 
 			<div class="px-5 py-2">
-				<a href="/contact-us" class="text-base text-gray-500 hover:text-gray-900"> Contact Us </a>
+				<a href="/contact-us" class="text-base text-custard-500 hover:text-custard-300">
+					Contact Us
+				</a>
 			</div>
 
 			<div class="px-5 py-2">
-				<a href="/menu/tri-cities" class="text-base text-gray-500 hover:text-gray-900">
+				<a href="/menu/tri-cities" class="text-base text-custard-500 hover:text-custard-300">
 					Tri-Cities Menu
 				</a>
 			</div>
 
 			<div class="px-5 py-2">
-				<a href="/menu/spokane" class="text-base text-gray-500 hover:text-gray-900">
+				<a href="/menu/spokane" class="text-base text-custard-500 hover:text-custard-300">
 					Spokane Menu
 				</a>
 			</div>
 		</nav>
 		<div class="mt-8 flex justify-center space-x-6">
-			<a href={$siteData.facebook} class="text-gray-400 hover:text-gray-500">
+			<a href={$siteData.facebook} class="text-gray-300 hover:text-gray-100">
 				<span class="sr-only">Facebook</span>
 				<svg class="h-8 w-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
 					<path
@@ -45,7 +54,7 @@
 				</svg>
 			</a>
 
-			<a href={$siteData.instagram} class="text-gray-400 hover:text-gray-500">
+			<a href={$siteData.instagram} class="text-gray-300 hover:text-gray-100">
 				<span class="sr-only">Instagram</span>
 				<svg class="h-8 w-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
 					<path
@@ -56,7 +65,7 @@
 				</svg>
 			</a>
 		</div>
-		<p class="mt-8 text-center text-base text-gray-400">
+		<p class="mt-8 text-center text-base text-custard-500">
 			&copy; 2020 The Crepe Shop, Inc. All rights reserved.
 		</p>
 	</div>

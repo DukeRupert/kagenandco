@@ -29,7 +29,8 @@ const config = {
 					800: '#97742e',
 					900: '#7b5f25'
 				},
-				coffee: '#3D2F12'
+				coffee: '#3D2F12',
+				oldGrey: '#404040'
 			}
 		}
 	},
