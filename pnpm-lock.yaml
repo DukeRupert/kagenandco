@@ -22,6 +22,7 @@ specifiers:
   felte: ^0.8.7
   postcss: ^8.4.5
   postcss-load-config: ^3.1.0
+  postmark: ^2.8.1
   prettier: ^2.5.1
   prettier-plugin-svelte: ^2.5.1
   svelte: ^3.44.3
@@ -35,15 +36,16 @@ specifiers:
 dependencies:
   '@felte/reporter-svelte': 0.3.20_svelte@3.44.3
   felte: 0.8.7_svelte@3.44.3
+  postmark: 2.8.1
 
 devDependencies:
   '@arzidava/svelte-portable-text': 0.1.0
   '@sanity/client': 2.23.2
   '@sanity/image-url': 1.0.1
   '@sendgrid/mail': 7.6.0
-  '@sveltejs/adapter-auto': 1.0.0-next.10
-  '@sveltejs/adapter-vercel': 1.0.0-next.36
-  '@sveltejs/kit': 1.0.0-next.229_svelte@3.44.3
+  '@sveltejs/adapter-auto': 1.0.0-next.15
+  '@sveltejs/adapter-vercel': 1.0.0-next.39
+  '@sveltejs/kit': 1.0.0-next.241_svelte@3.44.3
   '@tailwindcss/aspect-ratio': 0.4.0_tailwindcss@3.0.7
   '@tailwindcss/forms': 0.4.0_tailwindcss@3.0.7
   '@tailwindcss/typography': 0.5.0_tailwindcss@3.0.7
@@ -258,36 +260,36 @@ packages:
       - debug
     dev: true
 
-  /@sveltejs/adapter-auto/1.0.0-next.10:
-    resolution: {integrity: sha512-ETMhpg8bUtLpRAqGxuRmm7teRCdg8u8ANF6eC8R2QLSy1ylPP6RPPg8D5q6LiJavVG/kHMH8fj7vvfobpVfwFg==}
+  /@sveltejs/adapter-auto/1.0.0-next.15:
+    resolution: {integrity: sha512-Xv3YU7t7j1wlVkg/6/T5cpkznoFRx9BU79OctQgQ+De+HMbpnxuQ4GM7k5YkOQmlO9Wr+hlcuFPOs0JVgAjkOw==}
     dependencies:
-      '@sveltejs/adapter-cloudflare': 1.0.0-next.7
-      '@sveltejs/adapter-netlify': 1.0.0-next.38
-      '@sveltejs/adapter-vercel': 1.0.0-next.36
+      '@sveltejs/adapter-cloudflare': 1.0.0-next.8
+      '@sveltejs/adapter-netlify': 1.0.0-next.43
+      '@sveltejs/adapter-vercel': 1.0.0-next.39
     dev: true
 
-  /@sveltejs/adapter-cloudflare/1.0.0-next.7:
-    resolution: {integrity: sha512-P2rq+Tdvv9IKX4SVrIRqgZ2DnjmpPjp/bhAISs6cgbMzc2AmLMCeN++DXAZAVWugIjF1freLmtXcCl3/0HByNg==}
+  /@sveltejs/adapter-cloudflare/1.0.0-next.8:
+    resolution: {integrity: sha512-uje8eUfP1xrMEdKczvjl0rpu7WTZZrZCBTgH2sTSYYiAqpCevsmJNZ9Lgh5U5a4BYBYGVvAcYdh8nzoddxOZkw==}
     dependencies:
       esbuild: 0.13.15
     dev: true
 
-  /@sveltejs/adapter-netlify/1.0.0-next.38:
-    resolution: {integrity: sha512-u0mCV3YOBakdeiIt4Sd7buiTACkzHpPuUoSkLjtmJ5PsbrvtFhFNKE4AARqI8nDoX1yjs6pUKlIX3IZDmEeM5A==}
+  /@sveltejs/adapter-netlify/1.0.0-next.43:
+    resolution: {integrity: sha512-F/45VpKHDiEUNHdQi/fUNA0SbxNFyUfuZctMEOGvypdYng3R25pyywFHFL8aQFpHUye/CW/fhPr/tSrMp15IPg==}
     dependencies:
       '@iarna/toml': 2.2.5
       esbuild: 0.13.15
       tiny-glob: 0.2.9
     dev: true
 
-  /@sveltejs/adapter-vercel/1.0.0-next.36:
-    resolution: {integrity: sha512-IpvxBb5n9k5l6nikwq8mCeBg0VtSqAt7AY/PSujwjGs5KqYx3CrVu/Cyj4b0dyCO2Yyt2dr2QjS/R2R42PRBeA==}
+  /@sveltejs/adapter-vercel/1.0.0-next.39:
+    resolution: {integrity: sha512-YOPGKIILm26h22GN4/iliXce61aTG3Dq5hX8xpDx0cNuCocv0OoLfIqiGpdyJ9NIMpjwXmpVoL4+nV+yh2wcSA==}
     dependencies:
       esbuild: 0.13.15
     dev: true
 
-  /@sveltejs/kit/1.0.0-next.229_svelte@3.44.3:
-    resolution: {integrity: sha512-i609g5T58Qdgh/qgO1atak70R7woNuJwWp7GtF/YUOZ9csMR9JPUr1tfX9lSh2I4Ez7j+Dc10RLlQ3szVywfXA==}
+  /@sveltejs/kit/1.0.0-next.241_svelte@3.44.3:
+    resolution: {integrity: sha512-KuRXJEoSPloGxv3HYniZT2u04zwkYFk1lE1pLOyX96D5Po8CxIhBJlSo3YjTBNJ+AbN5a3T2zxLSw6azecdd7Q==}
     engines: {node: '>=14.13'}
     hasBin: true
     peerDependencies:
@@ -610,10 +612,18 @@ packages:
   /axios/0.21.4:
     resolution: {integrity: sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==}
     dependencies:
-      follow-redirects: 1.14.6_debug@2.6.9
+      follow-redirects: 1.14.6
     transitivePeerDependencies:
       - debug
     dev: true
+
+  /axios/0.24.0:
+    resolution: {integrity: sha512-Q6cWsys88HoPgAaFAVUb0WpPk0O8iTeisR9IMqy9G8AbO4NlpVknrnQS03zzF9PGAWgO3cgletO3VjV/P7VztA==}
+    dependencies:
+      follow-redirects: 1.14.6
+    transitivePeerDependencies:
+      - debug
+    dev: false
 
   /balanced-match/1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
@@ -1425,7 +1435,7 @@ packages:
     resolution: {integrity: sha512-8/sOawo8tJ4QOBX8YlQBMxL8+RLZfxMQOif9o0KUKTNTjMYElWPE0r/m5VNFxTRd0NSw8qSy8dajrwX4RYI1Hw==}
     dev: true
 
-  /follow-redirects/1.14.6_debug@2.6.9:
+  /follow-redirects/1.14.6:
     resolution: {integrity: sha512-fhUl5EwSJbbl8AR+uYL2KQDxLkdSjZGR36xy46AO7cOMTrCMON6Sa28FmAnC2tRTDbd/Uuzz3aJBv7EBN7JH8A==}
     engines: {node: '>=4.0'}
     peerDependencies:
@@ -1433,9 +1443,6 @@ packages:
     peerDependenciesMeta:
       debug:
         optional: true
-    dependencies:
-      debug: 2.6.9
-    dev: true
 
   /form-urlencoded/2.0.9:
     resolution: {integrity: sha512-fWUzNiOnYa126vFAT6TFXd1mhJrvD8IqmQ9ilZPjkLYQfaRreBr5fIUoOpPlWtqaAG64nzoE7u5zSetifab9IA==}
@@ -1480,7 +1487,7 @@ packages:
       create-error-class: 3.0.2
       debug: 2.6.9
       decompress-response: 3.3.0
-      follow-redirects: 1.14.6_debug@2.6.9
+      follow-redirects: 1.14.6
       form-urlencoded: 2.0.9
       into-stream: 3.1.0
       is-plain-object: 2.0.4
@@ -2323,6 +2330,14 @@ packages:
       picocolors: 1.0.0
       source-map-js: 1.0.1
     dev: true
+
+  /postmark/2.8.1:
+    resolution: {integrity: sha512-0rpIqBQ9ey7MqLVBlEJAnnw8lbnANqgnwR/lrXEzzdH1RggmTP/zAdZB9OEzgILK+Uw2FpIVyJrnhMimfjWMRQ==}
+    dependencies:
+      axios: 0.24.0
+    transitivePeerDependencies:
+      - debug
+    dev: false
 
   /prelude-ls/1.2.1:
     resolution: {integrity: sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==}

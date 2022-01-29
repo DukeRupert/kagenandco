@@ -74,20 +74,18 @@
 		},
 		extend: svelteReporter,
 		onSubmit: async (values) => {
-			const response = await fetch('api/sendgrid', {
+			const response = await fetch('api/contact', {
 				method: 'POST',
-
 				headers: {
 					'Content-Type': 'application/json'
 				},
 				body: JSON.stringify(values)
 			});
 
-			let error = response.errors;
-			if (error) {
-				console.log(error);
-			} else {
+			if (response.ok) {
 				goto('/success');
+			} else {
+				console.log(response.statusText);
 			}
 		}
 	});

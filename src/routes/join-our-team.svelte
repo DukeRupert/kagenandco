@@ -49,15 +49,6 @@
 			) {
 				errors.tel = 'Must be a valid phone number';
 			}
-			if (!values.priorTitle) {
-				errors.priorTitle = 'Must not be empty';
-			}
-			if (values.priorTitle && values.priorTitle.length > 80) {
-				errors.priorTitle = 'Too long. Entry may not exceed 80 characters';
-			}
-			if (values.priorTitle && /<.*?script.*\/?>/gi.test(values.priorTitle)) {
-				errors.priorTitle = '<script> tags are not allowed';
-			}
 
 			return errors;
 		},
@@ -65,21 +56,23 @@
 		onSubmit: async (values) => {
 			const response = await fetch('api/applicant', {
 				method: 'POST',
-
 				headers: {
-					'Content-Type': 'application/json'
+					'content-type': 'application/json'
 				},
 				body: JSON.stringify(values)
 			});
 
-			let error = response.errors;
-			if (error) {
-				console.log(error);
-			} else {
+			if (response.ok) {
 				goto('/success');
+			} else {
+				console.log(response.statusText);
 			}
 		}
 	});
+
+	// Job counter
+	let count = 1;
+	const maxCount = 5;
 </script>
 
 <SvelteSeo
@@ -201,12 +194,12 @@
 								</ValidationMessage>
 							</div>
 						</div>
-						<div class="sm:col-span-2">
-							<label for="location" class="block text-sm font-medium text-gray-700">Location</label>
+						<div>
+							<label for="location" class="block text-sm font-medium text-gray-900">Location</label>
 							<select
 								id="location"
 								name="location"
-								class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-matisse-500 focus:border-matisse-500 sm:text-sm rounded-md"
+								class="mt-1 block w-full pl-3 pr-10 py-3 px-4 text-base border-gray-300 focus:outline-none focus:ring-matisse-500 focus:border-matisse-500 sm:text-sm rounded-md"
 							>
 								<option selected>Tri-Cities</option>
 								<option>Spokane</option>
@@ -215,37 +208,37 @@
 						<div class="sm:col-span-2">
 							<!-- Legal to work? -->
 							<label>
-								Are you legally eligible to work in the US?
 								<input
 									type="checkbox"
 									name="legal"
 									value="Yes"
 									class="focus:ring-custard-500 h-4 w-4 text-custard-600 border-gray-300 rounded"
 								/>
+								Are you legally eligible to work in the US?
 							</label>
 						</div>
 						<div class="sm:col-span-2">
 							<!-- Veteran? -->
 							<label>
-								Are you a Veteran?
 								<input
 									type="checkbox"
 									name="veteran"
 									value="Yes"
 									class="focus:ring-custard-500 h-4 w-4 text-custard-600 border-gray-300 rounded"
 								/>
+								Are you a Veteran?
 							</label>
 						</div>
 						<div class="sm:col-span-2">
 							<!-- Background Check? -->
 							<label>
-								If selected for employment are you willing to submit to a background check?
 								<input
 									type="checkbox"
 									name="backgroundCheck"
 									value="Yes"
 									class="focus:ring-custard-500 h-4 w-4 text-custard-600 border-gray-300 rounded"
 								/>
+								If selected for employment are you willing to submit to a background check?
 							</label>
 						</div>
 						<div class="sm:col-span-2">
@@ -291,27 +284,60 @@
 								</p>
 							</fieldset>
 						</div>
-						<div class="sm:col-span-2">
-							<label for="priorTitle" class="block text-sm font-medium text-gray-900"
-								>What was your last job title?</label
-							>
-							<div class="mt-1">
-								<input
-									type="text"
-									id="priorTitle"
-									name="priorTitle"
-									class="py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-highlight focus:border-highlight border-gray-300 rounded-md"
-								/>
-								<ValidationMessage for="priorTitle" let:messages>
-									{messages || ''}
-								</ValidationMessage>
-							</div>
+						<div class="col-span-2">
+							<p>Work History</p>
 						</div>
-						<div class="sm:col-span-2 sm:flex sm:justify-end md:col-span-1">
+						{#each Array(count) as _, i}
+							<div>
+								<label for="jobs[{i}][title]" class="block text-sm font-medium text-gray-900"
+									>Job Title</label
+								>
+								<div class="mt-1">
+									<input
+										type="text"
+										id="jobs[{i}][title]"
+										name="jobs[{i}][title]"
+										class="py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-highlight focus:border-highlight border-gray-300 rounded-md"
+									/>
+								</div>
+							</div>
+							<div>
+								<label for="jobs[{i}][years]" class="block text-sm font-medium text-gray-900"
+									>How Long?</label
+								>
+								<div class="mt-1 flex">
+									<input
+										type="number"
+										placeholder="years"
+										id="jobs[{i}][years]"
+										name="jobs[{i}][years]"
+										class="py-3 px-2 flex-initial w-24 shadow-sm text-gray-900 focus:ring-highlight focus:border-highlight border-gray-300 rounded-md"
+									/>
+
+									<input
+										type="number"
+										placeholder="months"
+										id="jobs[{i}][months]"
+										name="jobs[{i}][months]"
+										class="py-3 px-2 ml-4 flex-inital w-24 shadow-sm text-gray-900 focus:ring-highlight focus:border-highlight border-gray-300 rounded-md"
+									/>
+								</div>
+							</div>
+						{/each}
+						<div>
+							<button
+								on:click={() => (count = count + 1)}
+								class="mt-2 px-4 py-3 shadow-sm text-gray-900 border border-gray-300 rounded-md {count >
+								4
+									? 'hidden'
+									: 'visible'}">+</button
+							>
+						</div>
+						<div class="sm:col-span-2 sm:flex sm:justify-end">
 							<button
 								type="submit"
 								value="Submit Form"
-								class="mt-2 w-full inline-flex items-center justify-center px-6 py-3 rounded-3xl border border-transparent shadow-sm bg-custard-500 text-base font-medium text-black hover:bg-custard-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-custard-300 sm:text-sm"
+								class="mt-2 w-full flex items-center justify-center px-6 py-3 rounded-3xl border border-transparent shadow-sm bg-custard-500 text-base font-medium text-black hover:bg-custard-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-custard-300 sm:text-sm"
 							>
 								Submit
 							</button>
