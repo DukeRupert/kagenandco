@@ -380,7 +380,7 @@
 									<div class="mt-4 space-y-4">
 										<div>
 											<button
-												on:click={() => (count = count + 1)}
+												on:click|preventDefault={() => (count = count + 1)}
 												class="mt-2 px-4 py-3 shadow-sm text-gray-900 border border-gray-300 rounded-md {count >
 												4
 													? 'hidden'
