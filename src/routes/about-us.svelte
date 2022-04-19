@@ -17,25 +17,25 @@
 	import SvelteSeo from 'svelte-seo';
 	import { page } from '$app/stores';
 	import { urlFor } from '$lib/image-url';
-	import BlockContent from '@arzidava/svelte-portable-text';
+	import PortableText from '@portabletext/svelte';
 	import serializers from '$lib/serializers';
 	import CallToAction from '$lib/components/CallToAction.svelte';
-
-	// SEO
-	const pageUrl = `https://${$page.url.hostname}${$page.url.pathname}`;
+	import Link from '$lib/components/Link.svelte';
+	import TextSection from '$lib/components/TextSection.svelte';
 
 	// Sanity Content
 	export let data;
+	const { asset, alt, caption } = data.mainImage;
 </script>
 
 <SvelteSeo
 	title={data.title}
 	description={data.description}
-	canonical={$page.url.hostname + $page.url.pathname}
+	canonical={$page.url.href}
 	openGraph={{
 		title: data.title,
 		description: data.excerpt,
-		url: pageUrl,
+		url: $page.url.href,
 		type: 'website',
 		images: [
 			{
@@ -51,17 +51,24 @@
 <div class="relative py-16 bg-white overflow-hidden">
 	<div class="relative px-4 sm:px-6 lg:px-8">
 		<div class="mt-6 prose prose-indigo prose-lg text-gray-700 mx-auto">
-			<BlockContent blocks={data.body} {serializers} />
-			<figure>
-				<img
-					class="w-full rounded-lg"
-					src={urlFor(data.mainImage.asset).width(1310).height(873).format('webp').url()}
-					alt={data.mainImage.alt}
-					width="1310"
-					height="873"
+			{#if data.body}
+				<PortableText
+					blocks={data.body}
+					serializers={{ types: { textSection: TextSection }, marks: { link: Link } }}
 				/>
-				<figcaption>{data.mainImage.caption}</figcaption>
-			</figure>
+			{/if}
+			{#if data.mainImage}
+				<figure>
+					<img
+						class="w-full rounded-lg"
+						src={urlFor(asset).width(1310).height(873).format('webp').url()}
+						{alt}
+						width="1310"
+						height="873"
+					/>
+					<figcaption>{caption}</figcaption>
+				</figure>
+			{/if}
 		</div>
 		<CallToAction />
 	</div>

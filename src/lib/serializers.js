@@ -1,6 +1,5 @@
 // https://www.npmjs.com/package/@sanity/image-url
 import { urlFor } from '$lib/image-url';
-import Link from '$lib/components/Link.svelte';
 import TextSection from '$lib/components/TextSection.svelte';
 import Crepe from '$lib/components/Crepe.svelte';
 import Coffee from '$lib/components/Coffee.svelte';
@@ -8,14 +7,6 @@ import Drink from '$lib/components/Drink.svelte';
 import LocationCard from '$lib/components/LocationCard.svelte';
 
 export default {
-	marks: {
-		link: (node) => {
-			return {
-				component: Link,
-				props: node.mark
-			};
-		}
-	},
 	types: {
 		textSection: (node) => {
 			return {
@@ -23,18 +14,6 @@ export default {
 				props: {
 					data: node.body,
 					name: node.name
-				}
-			};
-		},
-		crepe: (node) => {
-			return {
-				component: Crepe,
-				props: {
-					url: urlFor(node.image.asset).format('webp').width(400).height(400).url(),
-					alt: node.image.alt,
-					name: node.name,
-					price: node.price,
-					ingredients: node.ingredients
 				}
 			};
 		},
@@ -53,22 +32,6 @@ export default {
 				props: {
 					name: node.name,
 					price: node.price
-				}
-			};
-		},
-		locationReference: (node) => {
-			return {
-				component: LocationCard,
-				props: {
-					name: node.location.name,
-					url: urlFor(node.location.image.asset).width(500).format('webp').url(),
-					alt: node.location.image.alt,
-					locationUrl: node.location.locationUrl,
-					orderUrl: node.location.orderUrl,
-					address: node.location.address,
-					hours: node.location.hours,
-					tel: node.location.phone,
-					slug: node.location.slug.current
 				}
 			};
 		}

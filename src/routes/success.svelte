@@ -3,14 +3,6 @@
 	import { urlFor } from '$lib/image-url';
 </script>
 
-<!--
-  This example requires updating your template:
-
-  ```
-  <html class="h-full">
-  <body class="h-full">
-  ```
--->
 <div class="min-h-screen pt-16 pb-12 flex flex-col bg-white">
 	<main
 		class="flex-grow flex flex-col justify-center max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8"

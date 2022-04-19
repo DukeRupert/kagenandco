@@ -1,7 +1,8 @@
 <script lang="ts">
-	import ContentBlocks from '@arzidava/svelte-portable-text';
-	export let name;
-	export let data;
+	import PortableText from '@portabletext/svelte';
+	import Link from './Link.svelte';
+	export let portableText;
+	const { name, body } = portableText.block;
 </script>
 
-<ContentBlocks blocks={data} serializers={{}} />
+<PortableText blocks={body} serializers={{ marks: { link: Link } }} />

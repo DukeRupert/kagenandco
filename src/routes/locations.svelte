@@ -17,31 +17,30 @@
 	import SvelteSeo from 'svelte-seo';
 	import { page } from '$app/stores';
 	import { urlFor } from '$lib/image-url';
-	import BlockContent from '@arzidava/svelte-portable-text';
-	import serializers from '$lib/serializers';
-
-	// SEO
-	const pageUrl = `https://${$page.url.hostname}${$page.url.pathname}`;
+	import PortableText from '@portabletext/svelte';
+	import LocationCard from '$lib/components/LocationCard.svelte';
+	import Link from '$lib/components/Link.svelte';
 
 	// Sanity Content
 	export let data;
+	const { title, body, mainImage } = data;
 </script>
 
 <SvelteSeo
 	title={data.title}
 	description={data.description}
-	canonical={$page.url.hostname + $page.url.pathname}
+	canonical={$page.url.href}
 	openGraph={{
 		title: data.title,
 		description: data.excerpt,
-		url: pageUrl,
+		url: $page.url.href,
 		type: 'website',
 		images: [
 			{
-				url: urlFor(data.mainImage.asset).width(600).height(600).format('webp').url(),
+				url: urlFor(mainImage.asset).width(600).height(600).format('webp').url(),
 				width: '600',
 				height: '600',
-				alt: data.mainImage.alt
+				alt: mainImage.alt
 			}
 		]
 	}}
@@ -53,14 +52,14 @@
 			<div class="absolute inset-0">
 				<img
 					class="h-full w-full object-cover"
-					src={urlFor(data.mainImage.asset).width(1216).height(368).format('webp').url()}
-					alt={data.mainImage.alt}
+					src={urlFor(mainImage.asset).width(1216).height(368).format('webp').url()}
+					alt={mainImage.alt}
 				/>
 				<div class="absolute inset-0 bg-gray-400 mix-blend-multiply" />
 			</div>
 			<div class="relative px-4 py-16 sm:px-6 sm:py-24 lg:py-32 lg:px-8">
 				<h1 class="text-center text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
-					<span class="block text-custard-500">{data.title}</span>
+					<span class="block text-custard-500">{title}</span>
 				</h1>
 				<p class="mt-6 max-w-lg mx-auto text-center text-xl text-custard-200 sm:max-w-3xl">
 					Crepes, Coffee, Community
@@ -73,9 +72,13 @@
 <div class="bg-white">
 	<div class="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-5xl lg:px-8">
 		<h2 id="products-heading" class="sr-only">Locations</h2>
-
-		<div class="grid grid-cols-1 gap-y-10 sm:grid-cols-2 gap-x-6 lg:grid-cols-2 xl:gap-x-8">
-			<BlockContent blocks={data.body} {serializers} />
-		</div>
+		{#if body}
+			<div class="grid grid-cols-1 gap-y-10 sm:grid-cols-2 gap-x-6 lg:grid-cols-2 xl:gap-x-8">
+				<PortableText
+					blocks={body}
+					serializers={{ types: { locationReference: LocationCard }, marks: { link: Link } }}
+				/>
+			</div>
+		{/if}
 	</div>
 </div>

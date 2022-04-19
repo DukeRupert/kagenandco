@@ -1,13 +1,11 @@
 <script lang="ts">
-	export let name;
-	export let url;
-	export let alt;
-	export let address;
-	export let hours;
-	export let locationUrl;
-	export let orderUrl;
-	export let tel;
-	export let slug;
+	export let portableText;
+	import { urlFor } from '$lib/image-url';
+	const { location } = portableText.block;
+	const { name, address, hours, locationUrl, orderUrl, phone } = location;
+	const url = urlFor(location.image.asset).width(500).format('webp').url();
+	const alt = location.image.alt;
+	const slug = location.slug.current;
 </script>
 
 <div class="w-full aspect-w-1 aspect-h-1 rounded-lg overflow-hidden sm:aspect-w-2 sm:aspect-h-3">
@@ -28,9 +26,9 @@
 			<p class="text-base text-gray-600">{hour}</p>
 		{/each}
 	</div>
-	<a id="phone" href={`tel: ${tel}`}>
+	<a id="phone" href={`phone: ${phone}`}>
 		<p class="text-base text-gray-600">
-			{tel}
+			{phone}
 		</p>
 	</a>
 	<p class="text-base text-gray-800">
@@ -63,7 +61,7 @@
 </div>
 <div class="mt-4 sm:mt-6">
 	<a
-		href={`tel: ${tel}`}
+		href={`phone: ${phone}`}
 		class="inline-flex justify-center w-full rounded-3xl border border-custard-500 shadow-sm px-4 py-2 bg-custard-white text-base font-medium text-black hover:bg-custard-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-custard-300 sm:text-sm"
 	>
 		Call Us

@@ -1,9 +1,9 @@
 <script lang="ts">
-	export let url;
-	export let alt;
-	export let name;
-	export let price;
-	export let ingredients;
+	export let portableText;
+	import { urlFor } from '$lib/image-url';
+	const { name, price, ingredients, image } = portableText.block;
+	const url = urlFor(image.asset).format('webp').width(400).height(400).url();
+	const alt = image.alt;
 </script>
 
 <div class="group relative">
