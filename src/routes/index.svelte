@@ -1,9 +1,15 @@
 <script context="module">
-	export async function load({ fetch }) {
+	import { getProducts } from '$lib/store';
+
+	export async function load({ fetch, ctx }) {
+		// Page data from Sanity
 		const res = await fetch(`/api/home.json`);
+
+		const products = await getProducts();
+
 		if (res.ok) {
 			const { data } = await res.json();
-			return { props: { data } };
+			return { props: { data, products } };
 		}
 		return {
 			status: res.status,
@@ -24,6 +30,9 @@
 
 	// Sanity Content
 	export let data;
+	export let products;
+
+	console.log(products);
 </script>
 
 <SvelteSeo
