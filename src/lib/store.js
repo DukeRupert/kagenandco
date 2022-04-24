@@ -38,7 +38,7 @@ export const getProducts = async () => {
               images(first: 1) {
                 edges {
                   node {
-                    src
+                    url
                     altText
                   }
                 }
