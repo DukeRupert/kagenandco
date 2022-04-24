@@ -2,9 +2,9 @@
 <script context="module">
 	import { getProducts } from '$lib/store';
 
-	export async function load({ ctx }) {
-		// Page data from Sanity
-		const { products } = await getProducts();
+	export async function load() {
+		const data = await getProducts();
+		const { products } = data;
 		return { props: { products } };
 	}
 </script>
@@ -14,27 +14,8 @@
 
 	export let products;
 	console.log(products);
-	let { edges } = products;
-	console.log(edges);
 </script>
 
-<!--
-  This example requires Tailwind CSS v2.0+ 
-  
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-      require('@tailwindcss/aspect-ratio'),
-    ],
-  }
-  ```
--->
 <div class="bg-white">
 	<div>
 		<!--
@@ -702,16 +683,13 @@
 						class="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:gap-x-8 xl:grid-cols-3"
 					>
 						{#each products.edges as item}
-							<ProductCard product={item.node} collection="coffee" />
+							<ProductCard
+								product={item.node}
+								collection={item.node.collections.edges[0].node.handle}
+							/>
 						{/each}
 					</div>
 				</section>
-				<!-- {#each products.edges as product}
-					<h1>{product.node.title}</h1>
-					<p>{product.node.description}</p>
-					<img src={product.node.images.edges[0].node.src} alt="blah blah blah" />
-					<p>{product.node.priceRange.maxVariantPrice.amount}</p>
-				{/each} -->
 			</div>
 		</main>
 	</div>

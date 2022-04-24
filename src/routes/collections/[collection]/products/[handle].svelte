@@ -4,11 +4,8 @@
 	import { getProductByHandle } from '$lib/store';
 
 	export async function load({ params }) {
-		const handle = params.handle;
-
+		const { handle } = params;
 		const { productByHandle: product } = await getProductByHandle(handle);
-		// const { productByHandle: product } = res;
-
 		return { props: { product } };
 	}
 </script>

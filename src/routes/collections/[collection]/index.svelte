@@ -1,21 +1,22 @@
 <!-- Coffee.svelte -->
 <script context="module">
-	import { getProducts } from '$lib/store';
+	import { getCollectionByHandle } from '$lib/store';
 
-	export async function load({ ctx }) {
+	export async function load({ params }) {
+		const { collection } = params;
 		// Page data from Sanity
-		const { products } = await getProducts();
-		return { props: { products } };
+		const {
+			collectionByHandle: { products }
+		} = await getCollectionByHandle(collection);
+		return { props: { products, collection } };
 	}
 </script>
 
 <script lang="ts">
 	import ProductCard from '$lib/components/cards/ProductCard.svelte';
 
+	export let collection;
 	export let products;
-	console.log(products);
-	let { edges } = products;
-	console.log(edges);
 </script>
 
 <!--
@@ -702,16 +703,10 @@
 						class="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:gap-x-8 xl:grid-cols-3"
 					>
 						{#each products.edges as item}
-							<ProductCard product={item.node} collection="coffee" />
+							<ProductCard product={item.node} {collection} />
 						{/each}
 					</div>
 				</section>
-				<!-- {#each products.edges as product}
-					<h1>{product.node.title}</h1>
-					<p>{product.node.description}</p>
-					<img src={product.node.images.edges[0].node.src} alt="blah blah blah" />
-					<p>{product.node.priceRange.maxVariantPrice.amount}</p>
-				{/each} -->
 			</div>
 		</main>
 	</div>
