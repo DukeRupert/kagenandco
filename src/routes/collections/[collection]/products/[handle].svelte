@@ -14,6 +14,35 @@
 	import { productDetails } from '$lib/store';
 
 	let mainImage = 0;
+
+	// Cart operations
+	let quantity = 1;
+	let selectedProduct = $productDetails.variants.edges[0].node.id;
+	console.log(selectedProduct);
+	const addToCart = async () => {
+		// add selected product to cart
+		try {
+			const addToCartResponse = await fetch('/api/utils/addToCart', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					cartId: localStorage.getItem('cartId'),
+					itemId: selectedProduct,
+					quantity: quantity
+				})
+			});
+			const data = await addToCartResponse.json();
+			// save cart to localStorage
+			localStorage.setItem('cartId', data.id);
+			localStorage.setItem('cart', JSON.stringify(data));
+			console.log(JSON.stringify(data));
+			location.reload();
+		} catch (e) {
+			console.log(e);
+		}
+	};
 </script>
 
 <div class="bg-white">
@@ -238,8 +267,9 @@
 					<div class="mt-10 flex sm:flex-col1">
 						<button
 							type="submit"
+							on:click|preventDefault={addToCart}
 							class="max-w-xs flex-1 bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500 sm:w-full"
-							>Add to bag</button
+							>Add to cart</button
 						>
 
 						<button

@@ -1,6 +1,7 @@
 import { products, productDetails } from './store';
 import { postToShopify } from '../../src/routes/api/utils/postToShopify';
 
+// Get all products
 export const getProducts = async () => {
 	try {
 		const shopifyResponse = await postToShopify({
@@ -46,6 +47,7 @@ export const getProducts = async () => {
 	}
 };
 
+// Get only items from a single collection
 export const getCollectionByHandle = async (handle) => {
 	const query = `query ($handle: String!) {
   collectionByHandle(handle: $handle) {
@@ -108,6 +110,7 @@ export const getCollectionByHandle = async (handle) => {
 	}
 };
 
+// Get details a single product using product handle
 export const getProductByHandle = async (handle) => {
 	const query = `
     query getProduct($handle: String!) {
@@ -154,6 +157,149 @@ export const getProductByHandle = async (handle) => {
 		const shopifyResponse = await postToShopify({ query, variables });
 		productDetails.set(shopifyResponse.productByHandle);
 		return shopifyResponse.productByHandle;
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+// Creates a cart with a single item
+export const createCartWithItem = async ({ itemId, quantity }) => {
+	try {
+		const response = await postToShopify({
+			query: `
+        mutation createCart($cartInput: CartInput) {
+          cartCreate(input: $cartInput) {
+            cart {
+              id
+              createdAt
+              updatedAt
+              lines(first:10) {
+                edges {
+                  node {
+                    id
+                    quantity
+                    merchandise {
+                      ... on ProductVariant {
+                        id
+                        title
+                        priceV2 {
+                          amount
+                          currencyCode
+                        }
+                        product {
+                          id
+                          title
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+              estimatedCost {
+                totalAmount {
+                  amount
+                  currencyCode
+                }
+                subtotalAmount {
+                  amount
+                  currencyCode
+                }
+                totalTaxAmount {
+                  amount
+                  currencyCode
+                }
+                totalDutyAmount {
+                  amount
+                  currencyCode
+                }
+              }
+            }
+          }
+        }
+      `,
+			variables: {
+				cartInput: {
+					lines: [
+						{
+							quantity,
+							merchandiseId: itemId
+						}
+					]
+				}
+			}
+		});
+
+		return response;
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+// Adds item to existing cart
+export const addItemToCart = async ({ cartId, itemId, quantity }) => {
+	try {
+		const shopifyResponse = postToShopify({
+			query: `
+        mutation addItemToCart($cartId: ID!, $lines: [CartLineInput!]!) {
+          cartLinesAdd(cartId: $cartId, lines: $lines) {
+            cart {
+              id
+              lines(first: 10) {
+                edges {
+                  node {
+                    id
+                    quantity
+                    merchandise {
+                      ... on ProductVariant {
+                        id
+                        title
+                        priceV2 {
+                          amount
+                          currencyCode
+                        }
+                        product {
+                          title
+                          handle
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+              estimatedCost {
+                totalAmount {
+                  amount
+                  currencyCode
+                }
+                subtotalAmount {
+                  amount
+                  currencyCode
+                }
+                totalTaxAmount {
+                  amount
+                  currencyCode
+                }
+                totalDutyAmount {
+                  amount
+                  currencyCode
+                }
+              }
+            }
+          }
+        }
+      `,
+			variables: {
+				cartId,
+				lines: [
+					{
+						merchandiseId: itemId,
+						quantity
+					}
+				]
+			}
+		});
+
+		return shopifyResponse;
 	} catch (error) {
 		console.log(error);
 	}
