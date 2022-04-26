@@ -1,23 +1,19 @@
 <!-- Coffee.svelte -->
 <script context="module">
-	import { getCollectionByHandle } from '$lib/store';
+	import { getCollectionByHandle } from '$lib/shopify';
 
 	export async function load({ params }) {
 		const { collection } = params;
-		// Page data from Sanity
-		const {
-			collectionByHandle: { products }
-		} = await getCollectionByHandle(collection);
-		return { props: { products, collection } };
+		await getCollectionByHandle(collection);
+		return { props: { collection } };
 	}
 </script>
 
 <script lang="ts">
 	import ProductList from '$lib/components/ProductList.svelte';
+	import { products } from '$lib/store';
 
 	export let collection;
-	export let products;
-	const { edges } = products;
 </script>
 
 <!--
@@ -697,7 +693,7 @@
 					</div>
 				</aside>
 
-				<ProductList {edges} heading={collection} />
+				<ProductList products={$products} heading={collection} />
 			</div>
 		</main>
 	</div>

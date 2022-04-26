@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { ProductType } from 'src/types/product';
+	import { productDetails } from '$lib/store';
 	import { price } from '$lib/utils';
 
 	export let product: ProductType;
@@ -24,7 +25,7 @@
 		<h3 class="text-sm font-medium text-gray-900">
 			<a href="/collections/{collection}/products/{handle}">
 				<span aria-hidden="true" class="absolute inset-0" />
-				{title}
+				{$productDetails.title}
 			</a>
 		</h3>
 		<p class="text-sm text-gray-500">

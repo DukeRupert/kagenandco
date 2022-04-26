@@ -1,19 +1,16 @@
 <!-- Coffee.svelte -->
 <script context="module">
-	import { getProducts } from '$lib/store';
+	import { getProducts } from '$lib/shopify';
 
 	export async function load() {
-		const data = await getProducts();
-		const { products } = data;
-		return { props: { products } };
+		await getProducts();
+		return { props: {} };
 	}
 </script>
 
 <script lang="ts">
-	import ProductCard from '$lib/components/cards/ProductCard.svelte';
+	import { products } from '$lib/store';
 	import ProductList from '$lib/components/ProductList.svelte';
-
-	export let products;
 </script>
 
 <div class="bg-white">
@@ -676,7 +673,7 @@
 					</div>
 				</aside>
 
-				<!-- <ProductList edges={products.edges} /> -->
+				<ProductList products={$products} />
 			</div>
 		</main>
 	</div>

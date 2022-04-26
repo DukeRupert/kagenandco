@@ -1,6 +1,5 @@
-// store.js
-import { writable } from 'svelte/store';
-import { postToShopify } from '../routes/api/utils/postToShopify';
+import { products, productDetails } from './store';
+import { postToShopify } from '../../src/routes/api/utils/postToShopify';
 
 export const getProducts = async () => {
 	try {
@@ -40,6 +39,7 @@ export const getProducts = async () => {
         }
       }`
 		});
+		products.set(shopifyResponse.products.edges);
 		return shopifyResponse;
 	} catch (error) {
 		console.log(error);
@@ -101,6 +101,7 @@ export const getCollectionByHandle = async (handle) => {
 	const variables = { handle: handle };
 	try {
 		const shopifyResponse = await postToShopify({ query, variables });
+		products.set(shopifyResponse.collectionByHandle.products.edges);
 		return shopifyResponse;
 	} catch (error) {
 		console.log(error);
@@ -108,7 +109,8 @@ export const getCollectionByHandle = async (handle) => {
 };
 
 export const getProductByHandle = async (handle) => {
-	const query = `query ($handle: String!) {
+	const query = `
+    query getProduct($handle: String!) {
       productByHandle(handle: $handle) {
         id
         handle
@@ -121,7 +123,6 @@ export const getProductByHandle = async (handle) => {
             node {
               id
               title
-              quantityAvailable
               price
             }
           }
@@ -145,12 +146,14 @@ export const getProductByHandle = async (handle) => {
           }
         }
       }
-    }`;
+    }
+  `;
 
 	const variables = { handle: handle };
 	try {
 		const shopifyResponse = await postToShopify({ query, variables });
-		return shopifyResponse;
+		productDetails.set(shopifyResponse.productByHandle);
+		return shopifyResponse.productByHandle;
 	} catch (error) {
 		console.log(error);
 	}

@@ -1,19 +1,18 @@
 <!-- Individual Coffee Product -->
 <script context="module">
 	//** @type {import('./[handle]').Load} */
-	import { getProductByHandle } from '$lib/store';
+	import { getProductByHandle } from '$lib/shopify';
 
 	export async function load({ params }) {
 		const { handle } = params;
-		const { productByHandle: product } = await getProductByHandle(handle);
-		return { props: { product } };
+		await getProductByHandle(handle);
+		return { props: {} };
 	}
 </script>
 
 <script lang="ts">
-	import type { ProductType } from 'src/types/product';
+	import { productDetails } from '$lib/store';
 
-	export let product: ProductType;
 	let mainImage = 0;
 </script>
 
@@ -25,7 +24,7 @@
 				<!-- Image selector -->
 				<div class="hidden mt-6 w-full max-w-2xl mx-auto sm:block lg:max-w-none">
 					<div class="grid grid-cols-4 gap-6" aria-orientation="horizontal" role="tablist">
-						{#each product.images.edges as image, index}
+						{#each $productDetails.images.edges as image, index}
 							<button
 								id="tab-{index}"
 								class="relative h-24 bg-white rounded-md flex items-center justify-center text-sm font-medium uppercase text-gray-900 cursor-pointer hover:bg-gray-50 focus:outline-none focus:ring focus:ring-offset-4 focus:ring-opacity-50"
@@ -38,7 +37,7 @@
 								<span class="absolute inset-0 rounded-md overflow-hidden">
 									<img
 										src={image.node.url}
-										alt={image.node.altText ? image.node.altText : product.title}
+										alt={image.node.altText ? image.node.altText : $productDetails.title}
 										class="w-full h-full object-center object-cover"
 									/>
 								</span>
@@ -56,7 +55,7 @@
 					<!-- Tab panel, show/hide based on tab state. -->
 					<div id="tabs-1-panel-1" aria-labelledby="tabs-1-tab-1" role="tabpanel" tabindex="0">
 						<img
-							src={product.images.edges[mainImage].node.url}
+							src={$productDetails.images.edges[mainImage].node.url}
 							alt="Angled front view with bag zipped and handles upright."
 							class="w-full h-full object-center object-cover sm:rounded-lg"
 						/>
@@ -65,11 +64,13 @@
 			</div>
 			<!-- Product info -->
 			<div class="mt-10 px-4 sm:px-0 sm:mt-16 lg:mt-0">
-				<h1 class="text-3xl font-extrabold tracking-tight text-gray-900">{product.title}</h1>
+				<h1 class="text-3xl font-extrabold tracking-tight text-gray-900">
+					{$productDetails.title}
+				</h1>
 
 				<div class="mt-3">
 					<h2 class="sr-only">Product information</h2>
-					<p class="text-3xl text-gray-900">${product.priceRange.maxVariantPrice.amount}</p>
+					<p class="text-3xl text-gray-900">${$productDetails.priceRange.maxVariantPrice.amount}</p>
 				</div>
 
 				<!-- Reviews -->
@@ -155,7 +156,7 @@
 
 					<div class="text-base text-gray-700 space-y-6">
 						<p>
-							{product.description}
+							{$productDetails.description}
 						</p>
 					</div>
 				</div>
