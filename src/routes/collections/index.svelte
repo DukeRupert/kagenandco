@@ -11,9 +11,9 @@
 
 <script lang="ts">
 	import ProductCard from '$lib/components/cards/ProductCard.svelte';
+	import ProductList from '$lib/components/ProductList.svelte';
 
 	export let products;
-	console.log(products);
 </script>
 
 <div class="bg-white">
@@ -676,20 +676,7 @@
 					</div>
 				</aside>
 
-				<section aria-labelledby="product-heading" class="mt-6 lg:mt-0 lg:col-span-2 xl:col-span-3">
-					<h2 id="product-heading" class="sr-only">Products</h2>
-
-					<div
-						class="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:gap-x-8 xl:grid-cols-3"
-					>
-						{#each products.edges as item}
-							<ProductCard
-								product={item.node}
-								collection={item.node.collections.edges[0].node.handle}
-							/>
-						{/each}
-					</div>
-				</section>
+				<!-- <ProductList edges={products.edges} /> -->
 			</div>
 		</main>
 	</div>

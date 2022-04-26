@@ -13,10 +13,11 @@
 </script>
 
 <script lang="ts">
-	import ProductCard from '$lib/components/cards/ProductCard.svelte';
+	import ProductList from '$lib/components/ProductList.svelte';
 
 	export let collection;
 	export let products;
+	const { edges } = products;
 </script>
 
 <!--
@@ -696,17 +697,7 @@
 					</div>
 				</aside>
 
-				<section aria-labelledby="product-heading" class="mt-6 lg:mt-0 lg:col-span-2 xl:col-span-3">
-					<h2 id="product-heading" class="sr-only">Products</h2>
-
-					<div
-						class="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:gap-x-8 xl:grid-cols-3"
-					>
-						{#each products.edges as item}
-							<ProductCard product={item.node} {collection} />
-						{/each}
-					</div>
-				</section>
+				<ProductList {edges} heading={collection} />
 			</div>
 		</main>
 	</div>

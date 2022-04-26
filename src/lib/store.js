@@ -85,6 +85,13 @@ export const getCollectionByHandle = async (handle) => {
               }
             }
           }
+          collections (first:1) {
+            edges {
+              node {
+                  handle
+                }
+              }
+            }
         }
       }
     }
