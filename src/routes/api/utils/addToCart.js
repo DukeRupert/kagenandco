@@ -3,7 +3,6 @@ import { createCartWithItem, addItemToCart } from '$lib/shopify';
 
 export async function post({ request }) {
 	const body = await request.json();
-	console.log(body);
 	let { cartId, itemId, quantity } = body;
 	quantity = parseInt(quantity);
 	if (cartId) {

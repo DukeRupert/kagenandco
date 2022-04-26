@@ -1,9 +1,11 @@
-<script>
+<script lang="ts">
 	import { slide, draw } from 'svelte/transition';
 	import { quartOut } from 'svelte/easing';
 	import { page } from '$app/stores';
 	import { TIMING } from '$lib/constants';
 	import { modal, modalAction, siteData } from '$lib/stores';
+	import { onMount } from 'svelte';
+
 	let isNavOpen = false;
 	let timing = TIMING;
 
@@ -26,6 +28,24 @@
 	function closeModal() {
 		modal.set(false);
 	}
+
+	// Shopping Cart
+	let count: number;
+	let cart;
+
+	onMount(() => {
+		cart = JSON.parse(localStorage.getItem('cart'));
+		if (cart) {
+			let sum = 0;
+			const arr = cart.lines.edges;
+			if (arr.length > 1) {
+				sum = arr.reduce((previous, current) => previous.node.quantity + current.node.quantity);
+			} else {
+				sum = arr[0].node.quantity;
+			}
+			count = sum;
+		}
+	});
 </script>
 
 <div class="bg-white max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
@@ -87,7 +107,7 @@
 				href={$siteData.shop}
 				class="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900"
 			>
-				Shop
+				{count || 0}
 			</a>
 			<button
 				on:click={openOrderModal}
