@@ -260,6 +260,14 @@ export const addItemToCart = async ({ cartId, itemId, quantity }) => {
                         product {
                           title
                           handle
+                          images(first: 1) {
+                            edges {
+                                node {
+                                url
+                                altText
+                              }
+                            }
+                          }
                         }
                       }
                     }
