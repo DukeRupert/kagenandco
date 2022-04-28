@@ -4,7 +4,6 @@ import { createCartWithItem, addItemToCart } from '$lib/shopify';
 export async function post({ request }) {
 	const body = await request.json();
 	let { cartId, itemId, quantity } = body;
-	console.log();
 	quantity = parseInt(quantity);
 	if (cartId) {
 		console.log('Adding item to existing cart...');

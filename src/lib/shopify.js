@@ -338,6 +338,14 @@ export const removeItemFromCart = async ({ cartId, lineId }) => {
                         product {
                           title
                           handle
+                          images(first: 1) {
+                            edges {
+                                node {
+                                url
+                                altText
+                              }
+                            }
+                          }
                         }
                       }
                     }

@@ -3,6 +3,24 @@
 
 	import type { CartItem } from 'src/types/product';
 	export let item: CartItem;
+	console.log(item);
+
+	async function removeItem(lineId) {
+		// remove item from Shopify cart
+		const removeItemFromCart = await fetch('/api/utils/removeFromCart', {
+			method: 'POST',
+			body: JSON.stringify({
+				cartId: localStorage.getItem('cartId'),
+				lineId
+			})
+		})
+			.then((res) => res.json())
+			.then((data) => data);
+		// update localStorage;
+		localStorage.setItem('cartId', removeItemFromCart.id);
+		localStorage.setItem('cart', JSON.stringify(removeItemFromCart));
+		location.reload();
+	}
 </script>
 
 <li class="flex py-6">
@@ -49,7 +67,11 @@
 				<span>In stock</span>
 			</p>
 			<div class="ml-4">
-				<button type="button" class="text-sm font-medium text-indigo-600 hover:text-indigo-500">
+				<button
+					type="button"
+					on:click|preventDefault={() => removeItem(item.id)}
+					class="text-sm font-medium text-indigo-600 hover:text-indigo-500"
+				>
 					<span>Remove</span>
 				</button>
 			</div>
