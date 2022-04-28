@@ -65,8 +65,6 @@ export type CartItem = {
 	};
 };
 
-export type Edges = [
-	{
-		node: CartItem;
-	}
-];
+export type Edges = {
+	node: CartItem;
+};

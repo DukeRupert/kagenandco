@@ -1,9 +1,9 @@
 <script lang="ts">
-	import type { CartItem, Edges } from 'src/types/product';
+	import type { Edges } from 'src/types/product';
 	import LineItem from '$lib/components/cart/LineItem.svelte';
 	import { onMount } from 'svelte';
 	let cart;
-	let cartItems: Edges;
+	let cartItems: Edges[] = [];
 	onMount(() => {
 		// get cart details from localStorage
 		cart = JSON.parse(localStorage.getItem('cart'));
