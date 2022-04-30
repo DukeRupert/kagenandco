@@ -52,13 +52,14 @@
 
 		<div class="border-t border-gray-200 py-6 px-4 space-y-6">
 			<div class="flow-root">
-				<a href="#" class="-m-2 p-2 block font-medium text-gray-900">Create an account</a>
+				<a href="/register" class="-m-2 p-2 block font-medium text-gray-900">Create an account</a>
 			</div>
 
 			<div class="flow-root">
-				<a href="#" class="-m-2 p-2 block font-medium text-gray-900">Sign in</a>
+				<a href="/login" class="-m-2 p-2 block font-medium text-gray-900">Sign in</a>
 			</div>
 		</div>
+		<!-- Social Links -->
 		<div class="w-full mt-2 flex justify-center space-x-6">
 			<div class="w-10 h-10">
 				<a
