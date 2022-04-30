@@ -112,7 +112,7 @@ export const siteData = writable({
 	title: 'Kagen Coffee & Crepes'
 });
 
-export const mobile = writable(false);
+export const isMobileMenuOpen = writable(false);
 
 export const modal = writable(false);
 

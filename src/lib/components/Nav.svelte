@@ -5,29 +5,17 @@
 	import { TIMING } from '$lib/constants';
 	import { modal, modalAction, siteData } from '$lib/stores';
 	import { onMount } from 'svelte';
+	import MobileMenu from './nav/MobileMenu.svelte';
+	import TopMenu from './nav/TopMenu.svelte';
 
-	let isNavOpen = false;
+	let mobileMenu = false;
+	let toggled = false;
 	let timing = TIMING;
 
 	const toggleMenu = () => {
-		isNavOpen = !isNavOpen;
+		mobileMenu = !mobileMenu;
+		console.log(mobileMenu);
 	};
-
-	function openOrderModal() {
-		modalAction.set('order');
-		modal.set(true);
-		isNavOpen = false;
-	}
-
-	function openMenuModal() {
-		modalAction.set('menu');
-		modal.set(true);
-		isNavOpen = false;
-	}
-
-	function closeModal() {
-		modal.set(false);
-	}
 
 	// Shopping Cart
 	let count: number;
@@ -48,14 +36,13 @@
 	});
 </script>
 
-<div class="bg-white max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+<!-- <div class="bg-white max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
 	<div class="relative flex justify-center h-20">
 		<a sveltekit:prefetch href="/" class="flex flex-shrink-0 items-center">
 			<img class="block h-16 w-auto" src="/logoKCC.svg" alt="One Sleep Company logo" />
 		</a>
 		<div class="flex-1 flex items-center justify-center sm:items-stretch lg:justify-start">
 			<div class="hidden lg:ml-6 lg:flex lg:flex-shrink-0 lg:space-x-4">
-				<!-- Current: " text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" -->
 				<button
 					on:click={openMenuModal}
 					class="{$page.url.pathname == '/menu/tri-cities' || $page.url.pathname == '/menu/spokane'
@@ -104,7 +91,7 @@
 		</div>
 		<div class="hidden lg:flex items-center justify-end lg:flex-1 lg:w-0">
 			<a
-				href={$siteData.shop}
+				href="/cart"
 				class="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900"
 			>
 				{count || 0}
@@ -117,7 +104,6 @@
 			</button>
 		</div>
 		<div class="flex items-center ml-auto lg:hidden">
-			<!-- Mobile menu button -->
 			<button
 				type="button"
 				class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-highlight"
@@ -165,10 +151,10 @@
 			</button>
 		</div>
 	</div>
-</div>
+</div> -->
 
 <!-- Mobile menu, show/hide based on menu state. -->
-{#if isNavOpen}
+<!-- {#if isNavOpen}
 	<div transition:slide={{ duration: timing, easing: quartOut }} class="lg:hidden" id="mobile-menu">
 		<div class="pt-2 pb-4 space-y-1">
 			<button
@@ -223,7 +209,11 @@
 			</div>
 		</div>
 	</div>
-{/if}
+{/if} -->
+
+<TopMenu {count}>
+	<MobileMenu />
+</TopMenu>
 
 <style>
 	.default {

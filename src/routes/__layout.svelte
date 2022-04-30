@@ -20,7 +20,6 @@
 	import Modal from '$lib/components/Modal.svelte';
 	import Nav from '$lib/components/Nav.svelte';
 	import Footer from '$lib/components/Footer.svelte';
-	import Banner from '$lib/components/Banner.svelte';
 
 	// Write Sanity content to global store
 	export let data;
