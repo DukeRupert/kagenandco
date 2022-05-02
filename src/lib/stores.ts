@@ -117,3 +117,15 @@ export const isMobileMenuOpen = writable(false);
 export const modal = writable(false);
 
 export const modalAction = writable('order');
+
+function createActiveTopMenu() {
+	const { subscribe, set, update } = writable('');
+
+	return {
+		subscribe,
+		set,
+		close: () => set('')
+	};
+}
+
+export const activeTopMenu = createActiveTopMenu();

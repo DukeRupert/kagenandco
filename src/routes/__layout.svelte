@@ -16,7 +16,7 @@
 
 <script lang="ts">
 	import '../app.css';
-	import { siteData } from '$lib/stores';
+	import { siteData, activeTopMenu } from '$lib/stores';
 	import Modal from '$lib/components/Modal.svelte';
 	import Nav from '$lib/components/Nav.svelte';
 	import Footer from '$lib/components/Footer.svelte';
@@ -30,7 +30,7 @@
 	<nav class="bg-white shadow">
 		<Nav />
 	</nav>
-	<main class="bg-white">
+	<main class="bg-white" on:click={() => activeTopMenu.set('')}>
 		<Modal />
 		<slot />
 	</main>

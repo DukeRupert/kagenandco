@@ -1,6 +1,41 @@
 <script lang="ts">
 	import { isMobileMenuOpen } from '$lib/stores';
+	import TopMenuItem from './TopMenuItem.svelte';
 	export let count: number;
+
+	const coffee = [
+		{
+			title: 'Coffee',
+			links: [
+				{ title: '1 lb', href: '#' },
+				{ title: '2 lb', href: '#' },
+				{ title: '5 lb', href: '#' }
+			]
+		},
+		{
+			title: 'Gift Cards',
+			links: [
+				{ title: '10$', href: '#' },
+				{ title: '25$', href: '#' },
+				{ title: '50$', href: '#' }
+			]
+		}
+	];
+	const subscriptions = [{ title: 'coffee', href: '/' }];
+	const menu = [
+		{ title: 'tri-cities', href: '/menu/tri-cities' },
+		{ title: 'spokane', href: '/menu/spokane' }
+	];
+	const about = [
+		{ title: 'Learn More', links: [{ title: 'about us', href: '/about-us' }] },
+		{
+			title: 'Contact',
+			links: [
+				{ title: 'contact us', href: '/contact-us' },
+				{ title: 'join our team', href: '/join-our-team' }
+			]
+		}
+	];
 </script>
 
 <div class="bg-white">
@@ -14,7 +49,7 @@
 					</p>
 
 					<div class="hidden lg:flex lg:flex-shrink lg:items-center lg:justify-end lg:space-x-6">
-						<a href="#" class="text-sm font-medium text-white hover:text-gray-100">Sign in</a>
+						<a href="/login" class="text-sm font-medium text-white hover:text-gray-100">Sign in</a>
 					</div>
 				</div>
 			</div>
@@ -36,334 +71,17 @@
 								</a>
 							</div>
 
-							<div class="hidden h-full lg:flex">
+							<div class="hidden z-1 h-full lg:flex">
 								<!-- Mega menus -->
 								<div class="ml-8">
 									<div class="h-full flex justify-center space-x-8">
-										<div class="flex">
-											<div class="relative flex">
-												<!-- Item active: "border-indigo-600 text-indigo-600", Item inactive: "border-transparent text-gray-700 hover:text-gray-800" -->
-												<button
-													type="button"
-													class="border-transparent text-gray-700 hover:text-gray-800 relative z-10 flex items-center transition-colors ease-out duration-200 text-sm font-medium border-b-2 -mb-px pt-px"
-													aria-expanded="false">Women</button
-												>
-											</div>
-
-											<!--
-                        'Women' mega menu, show/hide based on flyout menu state.
-
-                        Entering: "transition ease-out duration-200"
-                          From: "opacity-0"
-                          To: "opacity-100"
-                        Leaving: "transition ease-in duration-150"
-                          From: "opacity-100"
-                          To: "opacity-0"
-                      -->
-											<div class="absolute top-full inset-x-0 text-gray-500 sm:text-sm">
-												<!-- Presentational element used to render the bottom shadow, if we put the shadow on the actual panel it pokes out the top, so we use this shorter element to hide the top of the shadow -->
-												<div class="absolute inset-0 top-1/2 bg-white shadow" aria-hidden="true" />
-
-												<div class="relative bg-white">
-													<div class="max-w-7xl mx-auto px-8">
-														<div class="grid grid-cols-2 items-start gap-y-10 gap-x-8 pt-10 pb-12">
-															<div class="grid grid-cols-2 gap-y-10 gap-x-8">
-																<div>
-																	<p
-																		id="desktop-featured-heading-0"
-																		class="font-medium text-gray-900"
-																	>
-																		Featured
-																	</p>
-																	<ul
-																		role="list"
-																		aria-labelledby="desktop-featured-heading-0"
-																		class="mt-6 space-y-6 sm:mt-4 sm:space-y-4"
-																	>
-																		<li class="flex">
-																			<a href="#" class="hover:text-gray-800"> Sleep </a>
-																		</li>
-
-																		<li class="flex">
-																			<a href="#" class="hover:text-gray-800"> Swimwear </a>
-																		</li>
-
-																		<li class="flex">
-																			<a href="#" class="hover:text-gray-800"> Underwear </a>
-																		</li>
-																	</ul>
-																</div>
-																<div>
-																	<p
-																		id="desktop-categories-heading"
-																		class="font-medium text-gray-900"
-																	>
-																		Categories
-																	</p>
-																	<ul
-																		role="list"
-																		aria-labelledby="desktop-categories-heading"
-																		class="mt-6 space-y-6 sm:mt-4 sm:space-y-4"
-																	>
-																		<li class="flex">
-																			<a href="#" class="hover:text-gray-800"> Basic Tees </a>
-																		</li>
-
-																		<li class="flex">
-																			<a href="#" class="hover:text-gray-800"> Artwork Tees </a>
-																		</li>
-
-																		<li class="flex">
-																			<a href="#" class="hover:text-gray-800"> Bottoms </a>
-																		</li>
-
-																		<li class="flex">
-																			<a href="#" class="hover:text-gray-800"> Underwear </a>
-																		</li>
-
-																		<li class="flex">
-																			<a href="#" class="hover:text-gray-800"> Accessories </a>
-																		</li>
-																	</ul>
-																</div>
-															</div>
-															<div class="grid grid-cols-2 gap-y-10 gap-x-8">
-																<div>
-																	<p
-																		id="desktop-collection-heading"
-																		class="font-medium text-gray-900"
-																	>
-																		Collection
-																	</p>
-																	<ul
-																		role="list"
-																		aria-labelledby="desktop-collection-heading"
-																		class="mt-6 space-y-6 sm:mt-4 sm:space-y-4"
-																	>
-																		<li class="flex">
-																			<a href="#" class="hover:text-gray-800"> Everything </a>
-																		</li>
-
-																		<li class="flex">
-																			<a href="#" class="hover:text-gray-800"> Core </a>
-																		</li>
-
-																		<li class="flex">
-																			<a href="#" class="hover:text-gray-800"> New Arrivals </a>
-																		</li>
-
-																		<li class="flex">
-																			<a href="#" class="hover:text-gray-800"> Sale </a>
-																		</li>
-																	</ul>
-																</div>
-
-																<div>
-																	<p id="desktop-brand-heading" class="font-medium text-gray-900">
-																		Brands
-																	</p>
-																	<ul
-																		role="list"
-																		aria-labelledby="desktop-brand-heading"
-																		class="mt-6 space-y-6 sm:mt-4 sm:space-y-4"
-																	>
-																		<li class="flex">
-																			<a href="#" class="hover:text-gray-800"> Full Nelson </a>
-																		</li>
-
-																		<li class="flex">
-																			<a href="#" class="hover:text-gray-800"> My Way </a>
-																		</li>
-
-																		<li class="flex">
-																			<a href="#" class="hover:text-gray-800"> Re-Arranged </a>
-																		</li>
-
-																		<li class="flex">
-																			<a href="#" class="hover:text-gray-800"> Counterfeit </a>
-																		</li>
-
-																		<li class="flex">
-																			<a href="#" class="hover:text-gray-800">
-																				Significant Other
-																			</a>
-																		</li>
-																	</ul>
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-
-										<div class="flex">
-											<div class="relative flex">
-												<!-- Item active: "border-indigo-600 text-indigo-600", Item inactive: "border-transparent text-gray-700 hover:text-gray-800" -->
-												<button
-													type="button"
-													class="border-transparent text-gray-700 hover:text-gray-800 relative z-10 flex items-center transition-colors ease-out duration-200 text-sm font-medium border-b-2 -mb-px pt-px"
-													aria-expanded="false">Men</button
-												>
-											</div>
-
-											<!--
-                        'Men' mega menu, show/hide based on flyout menu state.
-
-                        Entering: "transition ease-out duration-200"
-                          From: "opacity-0"
-                          To: "opacity-100"
-                        Leaving: "transition ease-in duration-150"
-                          From: "opacity-100"
-                          To: "opacity-0"
-                      -->
-											<div class="absolute top-full inset-x-0 text-gray-500 sm:text-sm">
-												<!-- Presentational element used to render the bottom shadow, if we put the shadow on the actual panel it pokes out the top, so we use this shorter element to hide the top of the shadow -->
-												<div class="absolute inset-0 top-1/2 bg-white shadow" aria-hidden="true" />
-
-												<div class="relative bg-white">
-													<div class="max-w-7xl mx-auto px-8">
-														<div class="grid grid-cols-2 items-start gap-y-10 gap-x-8 pt-10 pb-12">
-															<div class="grid grid-cols-2 gap-y-10 gap-x-8">
-																<div>
-																	<p
-																		id="desktop-featured-heading-1"
-																		class="font-medium text-gray-900"
-																	>
-																		Featured
-																	</p>
-																	<ul
-																		role="list"
-																		aria-labelledby="desktop-featured-heading-1"
-																		class="mt-6 space-y-6 sm:mt-4 sm:space-y-4"
-																	>
-																		<li class="flex">
-																			<a href="#" class="hover:text-gray-800"> Casual </a>
-																		</li>
-
-																		<li class="flex">
-																			<a href="#" class="hover:text-gray-800"> Boxers </a>
-																		</li>
-
-																		<li class="flex">
-																			<a href="#" class="hover:text-gray-800"> Outdoor </a>
-																		</li>
-																	</ul>
-																</div>
-																<div>
-																	<p
-																		id="desktop-categories-heading"
-																		class="font-medium text-gray-900"
-																	>
-																		Categories
-																	</p>
-																	<ul
-																		role="list"
-																		aria-labelledby="desktop-categories-heading"
-																		class="mt-6 space-y-6 sm:mt-4 sm:space-y-4"
-																	>
-																		<li class="flex">
-																			<a href="#" class="hover:text-gray-800"> Artwork Tees </a>
-																		</li>
-
-																		<li class="flex">
-																			<a href="#" class="hover:text-gray-800"> Pants </a>
-																		</li>
-
-																		<li class="flex">
-																			<a href="#" class="hover:text-gray-800"> Accessories </a>
-																		</li>
-
-																		<li class="flex">
-																			<a href="#" class="hover:text-gray-800"> Boxers </a>
-																		</li>
-
-																		<li class="flex">
-																			<a href="#" class="hover:text-gray-800"> Basic Tees </a>
-																		</li>
-																	</ul>
-																</div>
-															</div>
-															<div class="grid grid-cols-2 gap-y-10 gap-x-8">
-																<div>
-																	<p
-																		id="desktop-collection-heading"
-																		class="font-medium text-gray-900"
-																	>
-																		Collection
-																	</p>
-																	<ul
-																		role="list"
-																		aria-labelledby="desktop-collection-heading"
-																		class="mt-6 space-y-6 sm:mt-4 sm:space-y-4"
-																	>
-																		<li class="flex">
-																			<a href="#" class="hover:text-gray-800"> Everything </a>
-																		</li>
-
-																		<li class="flex">
-																			<a href="#" class="hover:text-gray-800"> Core </a>
-																		</li>
-
-																		<li class="flex">
-																			<a href="#" class="hover:text-gray-800"> New Arrivals </a>
-																		</li>
-
-																		<li class="flex">
-																			<a href="#" class="hover:text-gray-800"> Sale </a>
-																		</li>
-																	</ul>
-																</div>
-
-																<div>
-																	<p id="desktop-brand-heading" class="font-medium text-gray-900">
-																		Brands
-																	</p>
-																	<ul
-																		role="list"
-																		aria-labelledby="desktop-brand-heading"
-																		class="mt-6 space-y-6 sm:mt-4 sm:space-y-4"
-																	>
-																		<li class="flex">
-																			<a href="#" class="hover:text-gray-800">
-																				Significant Other
-																			</a>
-																		</li>
-
-																		<li class="flex">
-																			<a href="#" class="hover:text-gray-800"> My Way </a>
-																		</li>
-
-																		<li class="flex">
-																			<a href="#" class="hover:text-gray-800"> Counterfeit </a>
-																		</li>
-
-																		<li class="flex">
-																			<a href="#" class="hover:text-gray-800"> Re-Arranged </a>
-																		</li>
-
-																		<li class="flex">
-																			<a href="#" class="hover:text-gray-800"> Full Nelson </a>
-																		</li>
-																	</ul>
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
+										<TopMenuItem title="Coffee" subItems={coffee} />
+										<TopMenuItem title="About" subItems={about} />
 
 										<a
-											href="#"
+											href="/locations"
 											class="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800"
-											>Company</a
-										>
-
-										<a
-											href="#"
-											class="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800"
-											>Stores</a
+											>Locations</a
 										>
 									</div>
 								</div>
