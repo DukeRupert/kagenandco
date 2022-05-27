@@ -1,16 +1,18 @@
 <script lang="ts">
-	import { isMobileMenuOpen } from '$lib/stores';
+	import { navigating } from '$app/stores';
+	import { isMobileMenuOpen, activeTopMenu } from '$lib/stores';
 	import TopMenuItem from './TopMenuItem.svelte';
 	export let count: number;
+
+	// Close navigation menu if navigating
+	$: if ($navigating) {
+		activeTopMenu.close();
+	}
 
 	const coffee = [
 		{
 			title: 'Coffee',
-			links: [
-				{ title: '1 lb', href: '#' },
-				{ title: '2 lb', href: '#' },
-				{ title: '5 lb', href: '#' }
-			]
+			links: [{ title: 'The Rooster', href: '/collections/coffee/products/the-rooster' }]
 		},
 		{
 			title: 'Gift Cards',

@@ -4,6 +4,7 @@
 
 	export async function load({ params }) {
 		const { collection } = params;
+		console.log(`Query param : ${collection}`);
 		await getCollectionByHandle(collection);
 		return { props: { collection } };
 	}
@@ -14,6 +15,7 @@
 	import { products } from '$lib/store';
 
 	export let collection;
+	console.log($products);
 </script>
 
 <!--

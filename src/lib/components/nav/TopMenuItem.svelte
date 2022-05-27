@@ -58,9 +58,13 @@
 						</div>
 						{#each subItems as item}
 							<div>
-								<p id="desktop-categories-heading" class="font-medium text-gray-900">
+								<a
+									href="/collections/{item.title}"
+									id="desktop-categories-heading"
+									class="font-medium text-gray-900"
+								>
 									{item.title}
-								</p>
+								</a>
 								<ul
 									role="list"
 									aria-labelledby="desktop-categories-heading"
