@@ -26,6 +26,31 @@ export type ProductType = {
 			currencyCode: string;
 		};
 	};
+	sellingPlanGroups: {
+		edges: [
+			{
+				node: {
+					sellingPlans: {
+						edges: [
+							{
+								node: {
+									id: string;
+									description: string;
+									priceAdjustments: [
+										{
+											adjustmentValue: {
+												adjustmentPercentage: number;
+											};
+										}
+									];
+								};
+							}
+						];
+					};
+				};
+			}
+		];
+	};
 	images: {
 		edges: [
 			{

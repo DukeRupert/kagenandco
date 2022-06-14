@@ -13,14 +13,6 @@
 		{
 			title: 'Coffee',
 			links: [{ title: 'The Rooster', href: '/collections/coffee/products/the-rooster' }]
-		},
-		{
-			title: 'Gift Cards',
-			links: [
-				{ title: '10$', href: '#' },
-				{ title: '25$', href: '#' },
-				{ title: '50$', href: '#' }
-			]
 		}
 	];
 	const subscriptions = [{ title: 'coffee', href: '/' }];

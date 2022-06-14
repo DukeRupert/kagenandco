@@ -114,42 +114,64 @@ export const getCollectionByHandle = async (handle) => {
 export const getProductByHandle = async (handle) => {
 	const query = `
     query getProduct($handle: String!) {
-      productByHandle(handle: $handle) {
-        id
-        handle
-        description
-        title
-        totalInventory
-        productType
-        variants(first: 5) {
-          edges {
-            node {
-              id
-              title
-              price
-            }
-          }
+  productByHandle(handle: $handle) {
+    id
+    handle
+    description
+    title
+    totalInventory
+    productType
+    variants(first: 5) {
+      edges {
+        node {
+          id
+          title
+          price
         }
-        priceRange {
-          maxVariantPrice {
-            amount
-            currencyCode
-          }
-          minVariantPrice {
-            amount
-            currencyCode
-          }
-        }
-        images(first: 4) {
-          edges {
-            node {
-              url
-              altText
+      }
+    }
+    priceRange {
+      maxVariantPrice {
+        amount
+        currencyCode
+      }
+      minVariantPrice {
+        amount
+        currencyCode
+      }
+    }
+    sellingPlanGroups(first: 5) {
+      edges {
+        node {
+          sellingPlans(first: 5) {
+            edges {
+              node {
+                id
+                description
+                priceAdjustments {
+                  adjustmentValue {
+                    ...on SellingPlanPercentagePriceAdjustment {
+                      adjustmentPercentage
+                    }
+                  }
+                }
+                
+              }
             }
           }
         }
       }
     }
+    images(first: 4) {
+      edges {
+        node {
+          url
+          altText
+        }
+      }
+    }
+  }
+}
   `;
 
 	const variables = { handle: handle };

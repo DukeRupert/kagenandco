@@ -12,11 +12,19 @@
 
 <script lang="ts">
 	import { productDetails } from '$lib/store';
+	import { schedule_update } from 'svelte/internal';
 
 	console.log($productDetails);
 
 	let mainImage = 0;
+	let type = 0;
 	let variant = 0;
+	$: price = parseFloat($productDetails.variants.edges[variant].node.price);
+	$: reduction =
+		$productDetails.sellingPlanGroups.edges[0].node.sellingPlans.edges[0].node.priceAdjustments[0]
+			.adjustmentValue.adjustmentPercentage *
+		(price / 100);
+	$: subscribePrice = price - reduction;
 
 	function setActiveVariant(num) {
 		variant = num;
@@ -121,6 +129,39 @@
 					</div>
 				</div>
 
+				<form class="mt-10 grid grid-cols-2 gap-3 sm:flex-col">
+					<label
+						class="flex-1 border rounded-md py-3 px-8 flex items-center justify-center text-base font-small text-gray-700 hover:bg-custard-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500 sm:w-full"
+					>
+						<input
+							type="radio"
+							name="variant"
+							bind:group={type}
+							value={0}
+							class="sr-only"
+							aria-labelledby="size-choice-0-label"
+						/>
+						<span id="size-choice-0-label" class="text-center">
+							Single purchase - ${price.toFixed(2)}</span
+						>
+					</label>
+					<label
+						class="max-w-xs flex-1 bg-custard-400 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-small text-gray-900 hover:bg-custard-500 hover:text-oldGrey focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500 sm:w-full"
+					>
+						<input
+							type="radio"
+							name="variant"
+							bind:group={type}
+							value={1}
+							class="sr-only"
+							aria-labelledby="size-choice-0-label"
+						/>
+						<span id="size-choice-0-label" class="text-center">
+							Subscribe & Save - ${subscribePrice.toFixed(2)}</span
+						>
+					</label>
+				</form>
+
 				<form class="mt-6">
 					{#if $productDetails.variants.edges.length > 0}
 						<!-- Variant picker -->
@@ -160,7 +201,7 @@
 						</div>
 					{/if}
 
-					<div class="mt-10 flex sm:flex-col1">
+					<div class="mt-10 flex sm:flex-col">
 						<button
 							type="submit"
 							on:click|preventDefault={addToCart}
@@ -169,88 +210,6 @@
 						>
 					</div>
 				</form>
-
-				<section aria-labelledby="details-heading" class="mt-12">
-					<h2 id="details-heading" class="sr-only">Additional details</h2>
-
-					<div class="border-t divide-y divide-gray-200">
-						<div>
-							<h3>
-								<!-- Expand/collapse question button -->
-								<button
-									type="button"
-									class="group relative w-full py-6 flex justify-between items-center text-left"
-									aria-controls="disclosure-1"
-									aria-expanded="false"
-								>
-									<!-- Open: "text-indigo-600", Closed: "text-gray-900" -->
-									<span class="text-gray-900 text-sm font-medium"> Features </span>
-									<span class="ml-6 flex items-center">
-										<!--
-                      Heroicon name: outline/plus-sm
-
-                      Open: "hidden", Closed: "block"
-                    -->
-										<svg
-											class="block h-6 w-6 text-gray-400 group-hover:text-gray-500"
-											xmlns="http://www.w3.org/2000/svg"
-											fill="none"
-											viewBox="0 0 24 24"
-											stroke="currentColor"
-											aria-hidden="true"
-										>
-											<path
-												stroke-linecap="round"
-												stroke-linejoin="round"
-												stroke-width="2"
-												d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-											/>
-										</svg>
-										<!--
-                      Heroicon name: outline/minus-sm
-
-                      Open: "block", Closed: "hidden"
-                    -->
-										<svg
-											class="hidden h-6 w-6 text-indigo-400 group-hover:text-indigo-500"
-											xmlns="http://www.w3.org/2000/svg"
-											fill="none"
-											viewBox="0 0 24 24"
-											stroke="currentColor"
-											aria-hidden="true"
-										>
-											<path
-												stroke-linecap="round"
-												stroke-linejoin="round"
-												stroke-width="2"
-												d="M18 12H6"
-											/>
-										</svg>
-									</span>
-								</button>
-							</h3>
-							<div class="pb-6 prose prose-sm" id="disclosure-1">
-								<ul role="list">
-									<li>Multiple strap configurations</li>
-
-									<li>Spacious interior with top zip</li>
-
-									<li>Leather handle and tabs</li>
-
-									<li>Interior dividers</li>
-
-									<li>Stainless strap loops</li>
-
-									<li>Double stitched construction</li>
-
-									<li>Water-resistant</li>
-								</ul>
-							</div>
-						</div>
-
-						<!-- More sections... -->
-					</div>
-				</section>
 			</div>
 		</div>
 	</div>

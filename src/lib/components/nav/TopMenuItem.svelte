@@ -9,7 +9,7 @@
 		{
 			title: 'Coffee',
 			links: [
-				{ title: '1 lb', href: '#' },
+				{ title: 'The Rooster', href: '/collections/coffee/products/the rooster' },
 				{ title: '2 lb', href: '#' }
 			]
 		}

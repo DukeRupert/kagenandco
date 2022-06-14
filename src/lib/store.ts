@@ -31,6 +31,31 @@ export const productDetails: Writable<ProductType> = writable({
 			currencyCode: ''
 		}
 	},
+	sellingPlanGroups: {
+		edges: [
+			{
+				node: {
+					sellingPlans: {
+						edges: [
+							{
+								node: {
+									id: 'gid://shopify/SellingPlan/2961113314',
+									description: 'This is the basic monthly plan',
+									priceAdjustments: [
+										{
+											adjustmentValue: {
+												adjustmentPercentage: 10
+											}
+										}
+									]
+								}
+							}
+						]
+					}
+				}
+			}
+		]
+	},
 	images: {
 		edges: [
 			{
