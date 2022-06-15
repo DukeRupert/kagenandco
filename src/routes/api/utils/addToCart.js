@@ -36,28 +36,28 @@ export async function post({ request }) {
 			statusCode: 200,
 			body: JSON.stringify(shopifyResponse.cartLinesAdd.cart)
 		};
-	} else {
-		console.log('Creating new cart with item...');
-		// If this is a subscription
-		if (sellingPlanId) {
-			const createCartResponse = await createCartWithSubscription({
-				itemId,
-				quantity,
-				sellingPlanId
-			});
-			return {
-				statusCode: 200,
-				body: JSON.stringify(createCartResponse.cartCreate.cart)
-			};
-		}
-		// Else create cart with single purchase item
-		const createCartResponse = await createCartWithItem({
+	}
+
+	console.log('Creating new cart with item...');
+	// If this is a subscription
+	if (sellingPlanId) {
+		const createCartResponse = await createCartWithSubscription({
 			itemId,
-			quantity
+			quantity,
+			sellingPlanId
 		});
 		return {
 			statusCode: 200,
 			body: JSON.stringify(createCartResponse.cartCreate.cart)
 		};
 	}
+	// Else create cart with single purchase item
+	const createCartResponse = await createCartWithItem({
+		itemId,
+		quantity
+	});
+	return {
+		statusCode: 200,
+		body: JSON.stringify(createCartResponse.cartCreate.cart)
+	};
 }
