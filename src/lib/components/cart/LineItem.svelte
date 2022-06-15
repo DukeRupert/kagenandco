@@ -71,7 +71,7 @@
 				<button
 					type="button"
 					on:click|preventDefault={() => removeItem(item.id)}
-					class="text-sm font-medium text-indigo-600 hover:text-indigo-500"
+					class="text-sm font-medium text-oldGrey hover:text-custard-600"
 				>
 					<span>Remove</span>
 				</button>
