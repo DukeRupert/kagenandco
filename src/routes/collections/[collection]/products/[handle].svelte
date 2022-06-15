@@ -16,7 +16,10 @@
 
 	console.log($productDetails);
 
+	// Track active Main Image
 	let mainImage = 0;
+
+	// Track active variant, reactively update pricing
 	let variant = 0;
 	$: price = parseFloat($productDetails.variants.edges[variant].node.price);
 	$: reduction =
@@ -25,7 +28,7 @@
 		(price / 100);
 	$: subscribePrice = price - reduction;
 
-	// Quantity of product to add to cart
+	// Track quantity of product to add to cart
 	let quantity = 0;
 	function decreaseQuantity() {
 		if (quantity > 0) {
@@ -105,9 +108,9 @@
 										class="w-full h-full object-center object-cover"
 									/>
 								</span>
-								<!-- Selected: "ring-indigo-500", Not Selected: "ring-transparent" -->
+
 								<span
-									class="ring-transparent absolute inset-0 rounded-md ring-2 ring-offset-2 pointer-events-none"
+									class="ring-transparent absolute inset-0 rounded-md selection:ring-custard-500 ring-2 ring-offset-2 pointer-events-none"
 									aria-hidden="true"
 								/>
 							</button>
@@ -151,7 +154,7 @@
 
 				<form class="mt-10 grid grid-cols-2 gap-3 sm:flex-col">
 					<label
-						class="flex-1 border rounded-md py-3 px-8 flex items-center justify-center text-base font-small text-gray-900 hover:bg-custard-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500 sm:w-full {type ===
+						class="flex-1 border rounded-md py-3 px-8 flex items-center justify-center text-base font-small text-gray-900 hover:bg-custard-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-custard-500 sm:w-full {type ===
 						0
 							? 'bg-oldGrey text-custard-400'
 							: ''}"
@@ -169,7 +172,7 @@
 						>
 					</label>
 					<label
-						class="max-w-xs flex-1 border rounded-md py-3 px-8 flex items-center justify-center text-base font-small text-gray-900 hover:bg-custard-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500 sm:w-full {type ===
+						class="max-w-xs flex-1 border rounded-md py-3 px-8 flex items-center justify-center text-base font-small text-gray-900 hover:bg-custard-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-custard-500 sm:w-full {type ===
 						1
 							? 'bg-oldGrey text-custard-400'
 							: ''}"
@@ -201,12 +204,12 @@
 								<div class="grid grid-cols-3 gap-3 sm:grid-cols-6">
 									<!--
                     In Stock: "cursor-pointer", Out of Stock: "opacity-25 cursor-not-allowed"
-                    Active: "ring-2 ring-offset-2 ring-indigo-500"
+                    Active: "ring-2 ring-offset-2 ring-custard-500"
                     Checked: "bg-indigo-600 border-transparent text-white hover:bg-indigo-700", Not Checked: "bg-white border-gray-200 text-gray-900 hover:bg-gray-50"
                   -->
 									{#each $productDetails.variants.edges as { node: { id, title, price } }, i}
 										<label
-											class="border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium uppercase sm:flex-1 cursor-pointer focus:outline-none {variant ===
+											class="border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium text-gray-900 hover:bg-custard-500 hover:text-gray-900 uppercase sm:flex-1 cursor-pointer focus:outline-none {variant ===
 											i
 												? 'bg-oldGrey border-transparent text-custard-400'
 												: ''}"
@@ -232,7 +235,7 @@
 						<button
 							type="submit"
 							on:click|preventDefault={addToCart}
-							class="basis-3/4 bg-oldGrey border border-transparent rounded-md md:ml-3 mt-3 py-3 px-8 flex items-center justify-center text-base font-medium text-custard-400 hover:bg-custard-500 hover:text-oldGrey focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500 sm:w-full"
+							class="basis-3/4 bg-oldGrey border border-transparent rounded-md md:ml-3 mt-3 py-3 px-8 flex items-center justify-center text-base font-medium text-custard-400 hover:bg-custard-500 hover:text-oldGrey focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-custard-500 sm:w-full"
 							>Add to cart</button
 						>
 					</div>

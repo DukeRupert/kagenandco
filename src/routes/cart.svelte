@@ -8,6 +8,7 @@
 		// get cart details from localStorage
 		cart = JSON.parse(localStorage.getItem('cart'));
 		cartItems = cart.lines.edges;
+		console.log(cartItems);
 	});
 </script>
 

@@ -258,7 +258,7 @@ export const createCartWithItem = async ({ itemId, quantity }) => {
 };
 
 // Adds item to existing cart
-export const addItemToCart = async ({ cartId, quantity, itemId, sellingPlanId }) => {
+export const addItemToCart = async ({ cartId, quantity, itemId }) => {
 	try {
 		const shopifyResponse = postToShopify({
 			query: `
@@ -271,6 +271,95 @@ export const addItemToCart = async ({ cartId, quantity, itemId, sellingPlanId })
                   node {
                     id
                     quantity
+                    merchandise {
+                      ... on ProductVariant {
+                        id
+                        title
+                        priceV2 {
+                          amount
+                          currencyCode
+                        }
+                        product {
+                          title
+                          handle
+                          images(first: 1) {
+                            edges {
+                                node {
+                                url
+                                altText
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+              estimatedCost {
+                totalAmount {
+                  amount
+                  currencyCode
+                }
+                subtotalAmount {
+                  amount
+                  currencyCode
+                }
+                totalTaxAmount {
+                  amount
+                  currencyCode
+                }
+                totalDutyAmount {
+                  amount
+                  currencyCode
+                }
+              }
+            }
+          }
+        }
+      `,
+			variables: {
+				cartId,
+				lines: [
+					{
+						merchandiseId: itemId,
+						quantity
+					}
+				]
+			}
+		});
+
+		return shopifyResponse;
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+// Add sub
+export const addSubscriptionToCart = async ({ cartId, quantity, itemId, sellingPlanId }) => {
+	try {
+		const shopifyResponse = postToShopify({
+			query: `
+        mutation addItemToCart($cartId: ID!, $lines: [CartLineInput!]!) {
+          cartLinesAdd(cartId: $cartId, lines: $lines) {
+            cart {
+              id
+              lines(first: 10) {
+                edges {
+                  node {
+                    id
+                    quantity
+                    sellingPlanAllocation {
+                      priceAdjustments {
+                        price {
+                          amount
+                        }
+                      }
+                      sellingPlan {
+                        id,
+                        name
+                      }
+                    }
                     merchandise {
                       ... on ProductVariant {
                         id
