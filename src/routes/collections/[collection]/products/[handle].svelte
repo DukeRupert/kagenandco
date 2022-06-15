@@ -11,8 +11,8 @@
 </script>
 
 <script lang="ts">
+	import Counter from '$lib/components/Counter.svelte';
 	import { productDetails } from '$lib/store';
-	import { schedule_update } from 'svelte/internal';
 
 	console.log($productDetails);
 
@@ -209,13 +209,7 @@
 					{/if}
 
 					<div class="mt-10 flex flex-col md:flex-row">
-						<div
-							class="basis-1/4 border rounded-md mt-3 flex items-center justify-center text-base font-medium text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500 sm:w-full"
-						>
-							<button on:click|preventDefault={decreaseQty} class="basis-1/4 h-full"> - </button>
-							<p class="basis-1/2 h-full flex justify-center items-center text-center">{qty}</p>
-							<button on:click|preventDefault={increaseQty} class="basis-1/4 h-full"> + </button>
-						</div>
+						<Counter on:decrement={decreaseQty} on:increment={increaseQty} quantity={qty} />
 						<button
 							type="submit"
 							on:click|preventDefault={addToCart}
