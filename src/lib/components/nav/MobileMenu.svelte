@@ -17,7 +17,7 @@
 		{ title: 'coffee', href: '/collections/coffee' },
 		{ title: 'gift cards', href: '/collections/gift-cards' }
 	];
-	const subscriptions = [{ title: 'coffee', href: '/' }];
+	const subscriptions = [{ title: 'coffee', href: '/collections/coffee' }];
 	const menu = [
 		{ title: 'tri-cities', href: '/menu/tri-cities' },
 		{ title: 'spokane', href: '/menu/spokane' }
