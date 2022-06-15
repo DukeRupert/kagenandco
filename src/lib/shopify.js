@@ -258,7 +258,7 @@ export const createCartWithItem = async ({ itemId, quantity }) => {
 };
 
 // Adds item to existing cart
-export const addItemToCart = async ({ cartId, itemId, quantity }) => {
+export const addItemToCart = async ({ cartId, quantity, itemId, sellingPlanId }) => {
 	try {
 		const shopifyResponse = postToShopify({
 			query: `
@@ -323,7 +323,8 @@ export const addItemToCart = async ({ cartId, itemId, quantity }) => {
 				lines: [
 					{
 						merchandiseId: itemId,
-						quantity
+						quantity,
+						sellingPlanId
 					}
 				]
 			}

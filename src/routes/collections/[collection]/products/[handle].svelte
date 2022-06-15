@@ -17,7 +17,6 @@
 	console.log($productDetails);
 
 	let mainImage = 0;
-	let type = 0;
 	let variant = 0;
 	$: price = parseFloat($productDetails.variants.edges[variant].node.price);
 	$: reduction =
@@ -27,19 +26,32 @@
 	$: subscribePrice = price - reduction;
 
 	// Quantity of product to add to cart
-	let qty = 0;
-	function decreaseQty() {
-		if (qty > 0) {
-			return qty--;
+	let quantity = 0;
+	function decreaseQuantity() {
+		if (quantity > 0) {
+			return quantity--;
 		}
 		return 0;
 	}
-	function increaseQty() {
-		return qty++;
+	function increaseQuantity() {
+		return quantity++;
+	}
+
+	// Default to active subscription, change to single purchase by setting sellingPlanId to empty string
+	let type = 1;
+	let sellingPlanId = $productDetails.sellingPlanGroups.edges[0].node.sellingPlans.edges[0].node.id;
+
+	$: if (type === 0) {
+		sellingPlanId = '';
+		console.log(sellingPlanId);
+	}
+
+	$: if (type === 1) {
+		sellingPlanId = $productDetails.sellingPlanGroups.edges[0].node.sellingPlans.edges[0].node.id;
+		console.log(sellingPlanId);
 	}
 
 	// Cart operations
-	let quantity = 1;
 	let selectedProduct = $productDetails.variants.edges[0].node.id;
 	const addToCart = async () => {
 		// add selected product to cart
@@ -52,7 +64,8 @@
 				body: JSON.stringify({
 					cartId: localStorage.getItem('cartId'),
 					itemId: selectedProduct,
-					quantity: quantity
+					quantity: quantity,
+					sellingPlanId: sellingPlanId
 				})
 			});
 			const data = await addToCartResponse.json();
@@ -138,7 +151,10 @@
 
 				<form class="mt-10 grid grid-cols-2 gap-3 sm:flex-col">
 					<label
-						class="flex-1 border rounded-md py-3 px-8 flex items-center justify-center text-base font-small text-gray-700 hover:bg-custard-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500 sm:w-full"
+						class="flex-1 border rounded-md py-3 px-8 flex items-center justify-center text-base font-small text-gray-900 hover:bg-custard-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500 sm:w-full {type ===
+						0
+							? 'bg-oldGrey text-custard-400'
+							: ''}"
 					>
 						<input
 							type="radio"
@@ -153,7 +169,10 @@
 						>
 					</label>
 					<label
-						class="max-w-xs flex-1 bg-custard-500 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-small text-gray-900 hover:bg-custard-500 hover:text-oldGrey focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500 sm:w-full"
+						class="max-w-xs flex-1 border rounded-md py-3 px-8 flex items-center justify-center text-base font-small text-gray-900 hover:bg-custard-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500 sm:w-full {type ===
+						1
+							? 'bg-oldGrey text-custard-400'
+							: ''}"
 					>
 						<input
 							type="radio"
@@ -209,7 +228,7 @@
 					{/if}
 
 					<div class="mt-10 flex flex-col md:flex-row">
-						<Counter on:decrement={decreaseQty} on:increment={increaseQty} quantity={qty} />
+						<Counter on:decrement={decreaseQuantity} on:increment={increaseQuantity} {quantity} />
 						<button
 							type="submit"
 							on:click|preventDefault={addToCart}
