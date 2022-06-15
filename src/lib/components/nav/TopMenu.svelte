@@ -148,7 +148,7 @@
 									<span class="mx-4 h-6 w-px bg-gray-200 lg:mx-6" aria-hidden="true" />
 
 									<div class="flow-root">
-										<a href="#" class="group -m-2 p-2 flex items-center">
+										<a href="/cart" class="group -m-2 p-2 flex items-center">
 											<!-- Heroicon name: outline/shopping-cart -->
 											<svg
 												class="flex-shrink-0 h-6 w-6 text-gray-400 group-hover:text-gray-500"
