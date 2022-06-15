@@ -257,6 +257,91 @@ export const createCartWithItem = async ({ itemId, quantity }) => {
 	}
 };
 
+// Creates a cart with a single item
+export const createCartWithSubscription = async ({ itemId, quantity, sellingPlanId }) => {
+	try {
+		const response = await postToShopify({
+			query: `
+        mutation createCart($cartInput: CartInput) {
+          cartCreate(input: $cartInput) {
+            cart {
+              id
+              createdAt
+              updatedAt
+              lines(first:10) {
+                edges {
+                  node {
+                    id
+                    quantity
+                    sellingPlanAllocation {
+                      priceAdjustments {
+                        price {
+                          amount
+                        }
+                      }
+                      sellingPlan {
+                        id,
+                        name
+                      }
+                    }
+                    merchandise {
+                      ... on ProductVariant {
+                        id
+                        title
+                        priceV2 {
+                          amount
+                          currencyCode
+                        }
+                        product {
+                          id
+                          title
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+              estimatedCost {
+                totalAmount {
+                  amount
+                  currencyCode
+                }
+                subtotalAmount {
+                  amount
+                  currencyCode
+                }
+                totalTaxAmount {
+                  amount
+                  currencyCode
+                }
+                totalDutyAmount {
+                  amount
+                  currencyCode
+                }
+              }
+            }
+          }
+        }
+      `,
+			variables: {
+				cartInput: {
+					lines: [
+						{
+							merchandiseId: itemId,
+							quantity,
+							sellingPlanId
+						}
+					]
+				}
+			}
+		});
+
+		return response;
+	} catch (error) {
+		console.log(error);
+	}
+};
+
 // Adds item to existing cart
 export const addItemToCart = async ({ cartId, quantity, itemId }) => {
 	try {
