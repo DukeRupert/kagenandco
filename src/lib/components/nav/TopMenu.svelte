@@ -12,7 +12,7 @@
 	const coffee = [
 		{
 			title: 'Coffee',
-			links: [{ title: 'The Rooster', href: '/collections/coffee/products/the-rooster' }]
+			links: [{ title: 'The Rooster', href: '/products/the-rooster' }]
 		}
 	];
 	const subscriptions = [{ title: 'coffee', href: '/' }];

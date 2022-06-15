@@ -11,10 +11,7 @@
 		class="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:gap-x-8 xl:grid-cols-3"
 	>
 		{#each products as product}
-			<ProductCard
-				product={product.node}
-				collection={product.node.collections.edges[0].node.handle}
-			/>
+			<ProductCard product={product.node} />
 		{/each}
 	</div>
 </section>

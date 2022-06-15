@@ -88,6 +88,19 @@ export type CartItem = {
 			};
 		};
 	};
+	sellingPlanAllocation?: {
+		priceAdjustments: [
+			{
+				price: {
+					amount: string;
+				};
+			}
+		];
+		sellingPlan: {
+			id: string;
+			name: string;
+		};
+	};
 };
 
 export type Edges = {

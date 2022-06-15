@@ -695,7 +695,7 @@
 					</div>
 				</aside>
 
-				<ProductList products={$products} heading={collection} />
+				<ProductList products={$products} />
 			</div>
 		</main>
 	</div>

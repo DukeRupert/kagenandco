@@ -36,7 +36,10 @@
 		<div>
 			<div class="flex justify-between">
 				<h4 class="text-sm">
-					<a href="#" class="font-medium text-gray-700 hover:text-gray-800">
+					<a
+						href="/products/{item.merchandise.product.handle}"
+						class="font-medium text-gray-700 hover:text-gray-800"
+					>
 						{item.merchandise.product.title}
 					</a>
 				</h4>

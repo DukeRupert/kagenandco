@@ -7,8 +7,6 @@
 	const { url, altText } = product.images.edges[0].node;
 	const { title, description, handle } = product;
 	const { amount } = product.priceRange.maxVariantPrice;
-
-	export let collection = 'coffee';
 </script>
 
 <div
@@ -23,7 +21,7 @@
 	</div>
 	<div class="flex-1 p-4 space-y-2 flex flex-col">
 		<h3 class="text-sm font-medium text-gray-900">
-			<a href="/collections/{collection}/products/{handle}">
+			<a href="/products/{handle}">
 				<span aria-hidden="true" class="absolute inset-0" />
 				{$productDetails.title}
 			</a>
