@@ -200,6 +200,17 @@ export const createCartWithItem = async ({ itemId, quantity }) => {
                   node {
                     id
                     quantity
+                    sellingPlanAllocation {
+                      priceAdjustments {
+                        price {
+                          amount
+                        }
+                      }
+                      sellingPlan {
+                        id,
+                        name
+                      }
+                    }
                     merchandise {
                       ... on ProductVariant {
                         id
@@ -372,6 +383,17 @@ export const addItemToCart = async ({ cartId, quantity, itemId }) => {
                   node {
                     id
                     quantity
+                    sellingPlanAllocation {
+                      priceAdjustments {
+                        price {
+                          amount
+                        }
+                      }
+                      sellingPlan {
+                        id,
+                        name
+                      }
+                    }
                     merchandise {
                       ... on ProductVariant {
                         id

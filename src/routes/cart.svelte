@@ -1,8 +1,9 @@
 <script lang="ts">
 	import type { Edges } from 'src/types/product';
+	import type { Cart } from 'src/types/cart';
 	import CartList from '$lib/components/cart/CartList.svelte';
 	import { onMount } from 'svelte';
-	let cart;
+	let cart: Cart;
 	let cartItems: Edges[] = [];
 	onMount(() => {
 		// get cart details from localStorage
@@ -29,7 +30,11 @@
 				<dl class="space-y-4">
 					<div class="flex items-center justify-between">
 						<dt class="text-base font-medium text-gray-900">Subtotal</dt>
-						<dd class="ml-4 text-base font-medium text-gray-900">$96.00</dd>
+						{#if cart}
+							<dd class="ml-4 text-base font-medium text-gray-900">
+								${cart.estimatedCost.subtotalAmount.amount}
+							</dd>
+						{/if}
 					</div>
 				</dl>
 				<p class="mt-1 text-sm text-gray-500">Shipping and taxes will be calculated at checkout.</p>
@@ -45,7 +50,7 @@
 
 			<div class="mt-6 text-sm text-center text-gray-500">
 				<p>
-					or <a href="#" class="text-indigo-600 font-medium hover:text-indigo-500"
+					or <a href="/collections" class="text-indigo-600 font-medium hover:text-indigo-500"
 						>Continue Shopping<span aria-hidden="true"> &rarr;</span></a
 					>
 				</p>

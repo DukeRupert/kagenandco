@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { price } from '$lib/utils';
+	import Counter from '../Counter.svelte';
 
 	import type { CartItem } from 'src/types/product';
 	export let item: CartItem;
-	console.log(item);
+	const { id, quantity, merchandise, sellingPlanAllocation } = item;
 
 	async function removeItem(lineId) {
 		// remove item from Shopify cart
@@ -20,6 +21,13 @@
 		localStorage.setItem('cartId', removeItemFromCart.id);
 		localStorage.setItem('cart', JSON.stringify(removeItemFromCart));
 		location.reload();
+	}
+
+	function handleIncrement() {
+		console.log('Increment');
+	}
+	function handleDecrement() {
+		console.log('Decrement');
 	}
 </script>
 
@@ -40,35 +48,25 @@
 						href="/products/{item.merchandise.product.handle}"
 						class="font-medium text-gray-700 hover:text-gray-800"
 					>
-						{item.merchandise.product.title}
+						{#if sellingPlanAllocation}
+							Coffee Club - {item.merchandise.product.title}
+						{:else}
+							{item.merchandise.product.title}
+						{/if}
 					</a>
 				</h4>
 				<p class="ml-4 text-sm font-medium text-gray-900">
 					{price(parseFloat(item.merchandise.priceV2.amount))}
 				</p>
 			</div>
-			<p class="mt-1 text-sm text-gray-500">Mint</p>
-			<p class="mt-1 text-sm text-gray-500">Medium</p>
+			<p class="mt-1 text-sm text-gray-500">{item.merchandise.title}</p>
+			{#if sellingPlanAllocation}
+				<p class="mt-1 text-sm text-gray-500">{sellingPlanAllocation.sellingPlan.name}</p>
+			{/if}
 		</div>
 
 		<div class="mt-4 flex-1 flex items-end justify-between">
-			<p class="flex items-center text-sm text-gray-700 space-x-2">
-				<!-- Heroicon name: solid/check -->
-				<svg
-					class="flex-shrink-0 h-5 w-5 text-green-500"
-					xmlns="http://www.w3.org/2000/svg"
-					viewBox="0 0 20 20"
-					fill="currentColor"
-					aria-hidden="true"
-				>
-					<path
-						fill-rule="evenodd"
-						d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-						clip-rule="evenodd"
-					/>
-				</svg>
-				<span>In stock</span>
-			</p>
+			<Counter {quantity} on:increment={handleIncrement} on:decrement={handleDecrement} />
 			<div class="ml-4">
 				<button
 					type="button"

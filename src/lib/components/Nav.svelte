@@ -26,12 +26,8 @@
 		if (cart) {
 			let sum = 0;
 			const arr = cart.lines.edges;
-			if (arr.length > 1) {
-				sum = arr.reduce((previous, current) => previous.node.quantity + current.node.quantity);
-			} else {
-				sum = arr[0].node.quantity;
-			}
-			count = sum;
+
+			count = arr.length;
 		}
 	});
 </script>

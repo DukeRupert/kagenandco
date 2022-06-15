@@ -9,6 +9,10 @@ import {
 export async function post({ request }) {
 	const body = await request.json();
 	let { cartId, itemId, quantity, sellingPlanId } = body;
+	console.log(`Adding to cart : 
+	id - ${itemId}
+	quantity - ${quantity}
+	sellingPlanId - ${sellingPlanId}`);
 	quantity = parseInt(quantity);
 	// Is there an existing cart?
 	if (cartId) {

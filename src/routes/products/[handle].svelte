@@ -51,7 +51,8 @@
 	}
 
 	// Cart operations
-	let selectedProduct = $productDetails.variants.edges[0].node.id;
+	$: selectedProduct = $productDetails.variants.edges[variant].node.id;
+	$: console.log(selectedProduct);
 	const addToCart = async () => {
 		// add selected product to cart
 		try {
