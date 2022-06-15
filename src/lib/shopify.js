@@ -209,8 +209,16 @@ export const createCartWithItem = async ({ itemId, quantity }) => {
                           currencyCode
                         }
                         product {
-                          id
                           title
+                          handle
+                          images(first: 1) {
+                            edges {
+                                node {
+                                url
+                                altText
+                              }
+                            }
+                          }
                         }
                       }
                     }
@@ -293,8 +301,16 @@ export const createCartWithSubscription = async ({ itemId, quantity, sellingPlan
                           currencyCode
                         }
                         product {
-                          id
                           title
+                          handle
+                          images(first: 1) {
+                            edges {
+                                node {
+                                url
+                                altText
+                              }
+                            }
+                          }
                         }
                       }
                     }
