@@ -37,8 +37,8 @@
 		<!-- Links -->
 		<div class="mt-2 px-4 pt-10 pb-6 space-y-12">
 			<div class="grid grid-cols-1 items-start gap-y-10 gap-x-6">
-				<MobileMenuItem title="Shop" href="/collections" subItems={coffee} />
-				<MobileMenuItem title="Coffee Club" href="/collections" subItems={subscriptions} />
+				<!-- <MobileMenuItem title="Shop" href="/collections" subItems={coffee} /> -->
+				<MobileMenuItem title="Coffee Club" href="/collections/coffee" subItems={subscriptions} />
 				<MobileMenuItem title="Menu" href="/menu/tri-cities" subItems={menu} />
 				<MobileMenuItem title="About" href="/about-us" subItems={about} />
 			</div>

@@ -26,35 +26,21 @@
 	siteData.set(data);
 </script>
 
-<div class="parent">
-	<nav class="bg-white shadow">
+<div class="parent h-screen">
+	<nav class="bg-white shadow" aria-label="Top">
 		<Nav />
 	</nav>
-	<main class="bg-white" on:click={() => activeTopMenu.set('')}>
+	<main class="bg-white overflow-y-auto" on:click={() => activeTopMenu.set('')}>
 		<Modal />
 		<slot />
-	</main>
-	<footer>
 		<Footer />
-	</footer>
+	</main>
 </div>
 
 <style>
 	.parent {
 		display: grid;
-		grid-template-rows: auto 1fr auto;
-		min-height: 100vh;
-	}
-	nav {
-		grid-row-start: 1;
-		grid-row-end: 2;
-	}
-	main {
-		grid-row-start: 2;
-		grid-row-end: 3;
-	}
-	footer {
-		grid-row-start: 3;
-		grid-row-end: 4;
+		grid-template-rows: 140px 1fr;
+		grid-template-columns: 1fr;
 	}
 </style>

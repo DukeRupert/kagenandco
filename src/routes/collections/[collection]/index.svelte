@@ -36,7 +36,7 @@
 -->
 <div class="bg-white">
 	<!-- Breadcrumbs -->
-	<div class="border-b border-gray-200">
+	<!-- <div class="border-b border-gray-200">
 		<nav aria-label="Breadcrumb" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 			<ol role="list" class="flex items-center space-x-4 py-4">
 				<li>
@@ -60,7 +60,7 @@
 				</li>
 			</ol>
 		</nav>
-	</div>
+	</div> -->
 
 	<main class="max-w-2xl mx-auto px-4 lg:max-w-7xl lg:px-8">
 		<div class="border-b border-gray-200 pt-24 pb-10">

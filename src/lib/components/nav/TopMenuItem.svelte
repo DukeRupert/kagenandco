@@ -37,7 +37,7 @@
 
 	{#if $activeTopMenu === title}
 		<div
-			class="absolute top-full inset-x-0 text-gray-500 sm:text-sm"
+			class="absolute top-[140px] left-0 w-full z-10 text-gray-500 sm:text-sm"
 			transition:slide={{ delay: 250, duration: 300, easing: quintOut }}
 		>
 			<!-- Presentational element used to render the bottom shadow, if we put the shadow on the actual panel it pokes out the top, so we use this shorter element to hide the top of the shadow -->
