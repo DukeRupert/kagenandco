@@ -7,6 +7,7 @@
 	onMount(() => {
 		// get cart details from localStorage
 		cart = JSON.parse(localStorage.getItem('cart'));
+		console.log(cart);
 		cartItems = cart.lines.edges;
 		console.log(cartItems);
 	});

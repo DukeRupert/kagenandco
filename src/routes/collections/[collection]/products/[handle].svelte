@@ -14,8 +14,6 @@
 	import Counter from '$lib/components/Counter.svelte';
 	import { productDetails } from '$lib/store';
 
-	console.log($productDetails);
-
 	// Track active Main Image
 	let mainImage = 0;
 
@@ -46,12 +44,10 @@
 
 	$: if (type === 0) {
 		sellingPlanId = '';
-		console.log(sellingPlanId);
 	}
 
 	$: if (type === 1) {
 		sellingPlanId = $productDetails.sellingPlanGroups.edges[0].node.sellingPlans.edges[0].node.id;
-		console.log(sellingPlanId);
 	}
 
 	// Cart operations
@@ -75,7 +71,6 @@
 			// save cart to localStorage
 			localStorage.setItem('cartId', data.id);
 			localStorage.setItem('cart', JSON.stringify(data));
-			console.log(JSON.stringify(data));
 			location.reload();
 		} catch (e) {
 			console.log(e);
