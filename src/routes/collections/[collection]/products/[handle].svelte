@@ -26,9 +26,16 @@
 		(price / 100);
 	$: subscribePrice = price - reduction;
 
-	function setActiveVariant(num) {
-		variant = num;
-		console.log(variant);
+	// Quantity of product to add to cart
+	let qty = 0;
+	function decreaseQty() {
+		if (qty > 0) {
+			return qty--;
+		}
+		return 0;
+	}
+	function increaseQty() {
+		return qty++;
 	}
 
 	// Cart operations
@@ -146,7 +153,7 @@
 						>
 					</label>
 					<label
-						class="max-w-xs flex-1 bg-custard-400 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-small text-gray-900 hover:bg-custard-500 hover:text-oldGrey focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500 sm:w-full"
+						class="max-w-xs flex-1 bg-custard-500 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-small text-gray-900 hover:bg-custard-500 hover:text-oldGrey focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500 sm:w-full"
 					>
 						<input
 							type="radio"
@@ -201,11 +208,18 @@
 						</div>
 					{/if}
 
-					<div class="mt-10 flex sm:flex-col">
+					<div class="mt-10 flex flex-col md:flex-row">
+						<div
+							class="basis-1/4 border rounded-md mt-3 flex items-center justify-center text-base font-medium text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500 sm:w-full"
+						>
+							<button on:click|preventDefault={decreaseQty} class="basis-1/4 h-full"> - </button>
+							<p class="basis-1/2 h-full flex justify-center items-center text-center">{qty}</p>
+							<button on:click|preventDefault={increaseQty} class="basis-1/4 h-full"> + </button>
+						</div>
 						<button
 							type="submit"
 							on:click|preventDefault={addToCart}
-							class="max-w-xs flex-1 bg-oldGrey border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-custard-400 hover:bg-custard-500 hover:text-oldGrey focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500 sm:w-full"
+							class="basis-3/4 bg-oldGrey border border-transparent rounded-md md:ml-3 mt-3 py-3 px-8 flex items-center justify-center text-base font-medium text-custard-400 hover:bg-custard-500 hover:text-oldGrey focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500 sm:w-full"
 							>Add to cart</button
 						>
 					</div>
