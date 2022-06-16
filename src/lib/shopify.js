@@ -1,5 +1,5 @@
 import { products, productDetails } from './store';
-import { postToShopify } from 'src/routes/api/utils/postToShopify';
+import { postToShopify } from '../../src/routes/api/utils/postToShopify.js';
 
 // Get all products
 export const getProducts = async () => {

@@ -1,6 +1,6 @@
 export const postToShopify = async ({ query, variables }) => {
 	try {
-		const result = await fetch(process.env.VITE_SHOPIFY_API_ENDPOINT, {
+		const result = await fetch(process.env.SHOPIFY_API_ENDPOINT, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
