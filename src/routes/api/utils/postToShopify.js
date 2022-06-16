@@ -1,4 +1,4 @@
-export const postToShopify = async ({ query, variables }) => {
+export async function postToShopify({ query, variables }) {
 	try {
 		const result = await fetch(
 			'https://kagens-coffee-and-crepes.myshopify.com/api/2022-04/graphql.json',
@@ -21,4 +21,4 @@ export const postToShopify = async ({ query, variables }) => {
 	} catch (error) {
 		console.log(error);
 	}
-};
+}
