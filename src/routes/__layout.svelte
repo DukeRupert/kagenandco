@@ -26,13 +26,15 @@
 	siteData.set(data);
 </script>
 
-<div class="parent h-screen">
+<div class="parent min-h-screen">
 	<nav class="bg-white shadow" aria-label="Top">
 		<Nav />
 	</nav>
-	<main class="bg-white overflow-y-auto" on:click={() => activeTopMenu.set('')}>
+	<main class="bg-white flex flex-col overflow-y-auto" on:click={() => activeTopMenu.set('')}>
 		<Modal />
-		<slot />
+		<div class="h-full">
+			<slot />
+		</div>
 		<Footer />
 	</main>
 </div>
