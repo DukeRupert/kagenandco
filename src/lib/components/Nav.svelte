@@ -2,6 +2,7 @@
 	import { onMount } from 'svelte';
 	import MobileMenu from './nav/MobileMenu.svelte';
 	import TopMenu from './nav/TopMenu.svelte';
+	import type { Cart } from 'src/types/cart';
 
 	let mobileMenu = false;
 
@@ -11,17 +12,15 @@
 	};
 
 	// Shopping Cart
-	let count: number;
-	let cart;
+	let count = 0;
+	let cart: Cart;
 
 	onMount(() => {
 		cart = JSON.parse(localStorage.getItem('cart'));
-		if (cart) {
-			let sum = 0;
-			const arr = cart.lines.edges;
+		const arr = cart.lines.edges;
 
-			count = arr.length;
-		}
+		let sum = arr.map((n) => n.node.quantity);
+		count = sum.reduce((pre, cur) => pre + cur);
 	});
 </script>
 
