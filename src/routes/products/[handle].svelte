@@ -11,6 +11,7 @@
 </script>
 
 <script lang="ts">
+	import Button from '$lib/components/Button.svelte';
 	import Counter from '$lib/components/Counter.svelte';
 	import { productDetails } from '$lib/store';
 
@@ -52,7 +53,7 @@
 
 	// Cart operations
 	$: selectedProduct = $productDetails.variants.edges[variant].node.id;
-	$: console.log(selectedProduct);
+
 	const addToCart = async () => {
 		// add selected product to cart
 		try {
@@ -228,12 +229,7 @@
 
 					<div class="mt-10 flex flex-col md:flex-row">
 						<Counter on:decrement={decreaseQuantity} on:increment={increaseQuantity} {quantity} />
-						<button
-							type="submit"
-							on:click|preventDefault={addToCart}
-							class="basis-3/4 bg-oldGrey border border-transparent rounded-md md:ml-3 mt-3 py-3 px-8 flex items-center justify-center text-base font-medium text-custard-400 hover:bg-custard-500 hover:text-oldGrey focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-custard-500 sm:w-full"
-							>Add to cart</button
-						>
+						<Button label="Add to Cart" handle={addToCart} />
 					</div>
 				</form>
 			</div>

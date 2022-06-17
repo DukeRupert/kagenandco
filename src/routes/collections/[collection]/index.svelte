@@ -67,8 +67,8 @@
 			<h1 class="text-4xl font-extrabold tracking-tight text-gray-900">
 				{collection.toUpperCase()}
 			</h1>
-			<p class="mt-4 text-base text-gray-500">
-				Checkout out the latest release of Basic Tees, new and improved with four openings!
+			<p class="mt-4 text-base text-gray-600">
+				Start your day off right with a strong cup of Kagen's coffee!
 			</p>
 		</div>
 
