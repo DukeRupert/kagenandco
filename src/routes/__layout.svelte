@@ -16,7 +16,7 @@
 
 <script lang="ts">
 	import '../app.css';
-	import { siteData, activeTopMenu } from '$lib/stores';
+	import { siteData, activeTopMenu, isCartOpen } from '$lib/stores';
 	import Modal from '$lib/components/Modal.svelte';
 	import Nav from '$lib/components/Nav.svelte';
 	import Footer from '$lib/components/Footer.svelte';
@@ -31,7 +31,11 @@
 	}
 </script>
 
-<div class="parent flex flex-col h-full w-full min-h-screen scroll-smooth}">
+<div
+	class="parent flex flex-col h-full w-full min-h-screen scroll-smooth {$isCartOpen
+		? 'overflow-hidden'
+		: ''}}"
+>
 	<Nav />
 	<main
 		class="bg-white flex flex-col min-h-screen overflow-y-auto"
