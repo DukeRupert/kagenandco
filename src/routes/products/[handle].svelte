@@ -30,10 +30,10 @@
 	// Track quantity of product to add to cart
 	let quantity = 1;
 	function decreaseQuantity() {
-		if (quantity > 0) {
+		if (quantity > 1) {
 			return quantity--;
 		}
-		return 0;
+		return 1;
 	}
 	function increaseQuantity() {
 		return quantity++;
@@ -243,7 +243,7 @@
 							>{#if addingItemToCart}
 								<LoadingSpinner />
 							{:else}
-								Add To Cart
+								Add to Cart
 							{/if}</button
 						>
 					</div>
