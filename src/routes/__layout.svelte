@@ -16,33 +16,38 @@
 
 <script lang="ts">
 	import '../app.css';
-	import { siteData, activeTopMenu } from '$lib/stores';
+	import { siteData, activeTopMenu, isCartOpen } from '$lib/stores';
 	import Modal from '$lib/components/Modal.svelte';
 	import Nav from '$lib/components/Nav.svelte';
 	import Footer from '$lib/components/Footer.svelte';
+	import SlideOver from '$lib/components/SlideOver.svelte';
 
 	// Write Sanity content to global store
 	export let data;
 	siteData.set(data);
+
+	function closeActiveTopMenu() {
+		activeTopMenu.set('');
+	}
+
+	function handleClick() {
+		isCartOpen.set(true);
+	}
 </script>
 
-<div class="parent min-h-screen">
-	<nav class="bg-white shadow" aria-label="Top">
-		<Nav />
-	</nav>
-	<main class="bg-white flex flex-col overflow-y-auto" on:click={() => activeTopMenu.set('')}>
+<div class="parent flex flex-col h-full w-full min-h-screen">
+	<Nav />
+	<main
+		class="bg-white flex flex-col min-h-screen overflow-y-auto"
+		on:click={closeActiveTopMenu}
+		on:mouseenter={closeActiveTopMenu}
+	>
 		<Modal />
-		<div class="h-full">
+		<SlideOver />
+		<div class="h-full mt-[96px]">
 			<slot />
+			<button on:click={handleClick}>Test</button>
 		</div>
-		<Footer />
 	</main>
+	<Footer />
 </div>
-
-<style>
-	.parent {
-		display: grid;
-		grid-template-rows: 140px 1fr;
-		grid-template-columns: 1fr;
-	}
-</style>

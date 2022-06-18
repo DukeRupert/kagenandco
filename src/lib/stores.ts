@@ -129,3 +129,5 @@ function createActiveTopMenu() {
 }
 
 export const activeTopMenu = createActiveTopMenu();
+
+export const isCartOpen = writable(false);

@@ -4,13 +4,6 @@
 	import TopMenu from './nav/TopMenu.svelte';
 	import type { Cart } from 'src/types/cart';
 
-	let mobileMenu = false;
-
-	const toggleMenu = () => {
-		mobileMenu = !mobileMenu;
-		console.log(mobileMenu);
-	};
-
 	// Shopping Cart
 	let count = 0;
 	let cart: Cart;

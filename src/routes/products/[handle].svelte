@@ -229,7 +229,7 @@
 
 					<div class="mt-10 flex flex-col md:flex-row">
 						<Counter on:decrement={decreaseQuantity} on:increment={increaseQuantity} {quantity} />
-						<Button label="Add to Cart" handle={addToCart} />
+						<Button label="Add to Cart" action={addToCart} />
 					</div>
 				</form>
 			</div>

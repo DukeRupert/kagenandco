@@ -25,19 +25,18 @@
 </script>
 
 <div class="flex">
-	<div class="relative flex">
-		<!-- Item active: "border-indigo-600 text-indigo-600", Item inactive: "border-transparent text-gray-700 hover:text-gray-800" -->
+	<div on:mouseover={toggleActive} on:focus={toggleActive} class="relative flex">
 		<button
 			on:click={toggleActive}
 			type="button"
-			class="focus:border-custard-600 focus:text-custard-600 border-transparent text-gray-700 hover:text-gray-800 relative z-10 flex items-center transition-colors ease-out duration-200 text-sm font-medium border-b-2 -mb-px pt-px"
+			class="focus:border-custard-600 focus:text-custard-600 border-transparent text-gray-700 hover:text-gray-900 relative z-10 flex items-center transition-colors ease-out duration-200 text-sm font-medium border-b-2 -mb-px pt-px"
 			aria-expanded="false">{title}</button
 		>
 	</div>
 
 	{#if $activeTopMenu === title}
 		<div
-			class="absolute top-[140px] left-0 w-full z-10 text-gray-500 sm:text-sm"
+			class="absolute top-[96px] left-0 w-full z-10 text-gray-500 sm:text-sm"
 			transition:slide={{ delay: 250, duration: 300, easing: quintOut }}
 		>
 			<!-- Presentational element used to render the bottom shadow, if we put the shadow on the actual panel it pokes out the top, so we use this shorter element to hide the top of the shadow -->
@@ -46,7 +45,6 @@
 			<div class="relative bg-white">
 				<div class="max-w-7xl mx-auto px-8">
 					<div class="grid grid-cols-4 items-start gap-y-10 gap-x-8 pt-10 pb-12">
-						<!-- <div class="grid grid-cols-3 gap-y-10 gap-x-8"> -->
 						<div class="flex flex-col items-center">
 							<img class="h-40 mx-auto" src="/logoRooster.svg" alt="Kagen rooster logo" />
 							<a
@@ -79,7 +77,6 @@
 								</ul>
 							</div>
 						{/each}
-						<!-- </div> -->
 					</div>
 				</div>
 			</div>

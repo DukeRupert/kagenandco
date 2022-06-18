@@ -21,8 +21,6 @@
 	import PrimaryBanner from '$lib/components/PrimaryBanner.svelte';
 	import LocationsBanner from '$lib/components/LocationsBanner.svelte';
 
-	console.log(process.env.SHOPIFY_API_ENDPOINT);
-
 	// SEO
 	const pageUrl = `https://${$page.url.hostname}${$page.url.pathname}`;
 
