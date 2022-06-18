@@ -177,7 +177,6 @@ export const getProductByHandle = async (handle) => {
 	const variables = { handle: handle };
 	try {
 		const shopifyResponse = await postToShopify({ query, variables });
-		productDetails.set(shopifyResponse.productByHandle);
 		return shopifyResponse.productByHandle;
 	} catch (error) {
 		console.log(error);

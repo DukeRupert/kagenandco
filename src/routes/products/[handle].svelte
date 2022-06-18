@@ -5,24 +5,26 @@
 
 	export async function load({ params }) {
 		const { handle } = params;
-		await getProductByHandle(handle);
-		return { props: {} };
+		const product = await getProductByHandle(handle);
+		return { props: { product } };
 	}
 </script>
 
 <script lang="ts">
 	import Counter from '$lib/components/Counter.svelte';
 	import LoadingSpinner from '$lib/components/LoadingSpinner.svelte';
-	import { productDetails } from '$lib/store';
+	import type { Product } from 'src/types/product';
+
+	export let product: Product;
 
 	// Track active Main Image
 	let mainImage = 0;
 
 	// Track active variant, reactively update pricing
 	let variant = 0;
-	$: price = parseFloat($productDetails.variants.edges[variant].node.price);
+	$: price = parseFloat(product.variants.edges[variant].node.price);
 	$: reduction =
-		$productDetails.sellingPlanGroups.edges[0].node.sellingPlans.edges[0].node.priceAdjustments[0]
+		product.sellingPlanGroups.edges[0].node.sellingPlans.edges[0].node.priceAdjustments[0]
 			.adjustmentValue.adjustmentPercentage *
 		(price / 100);
 	$: subscribePrice = price - reduction;
@@ -41,18 +43,18 @@
 
 	// Default to active subscription, change to single purchase by setting sellingPlanId to empty string
 	let type = 1;
-	let sellingPlanId = $productDetails.sellingPlanGroups.edges[0].node.sellingPlans.edges[0].node.id;
+	let sellingPlanId = product.sellingPlanGroups.edges[0].node.sellingPlans.edges[0].node.id;
 
 	$: if (type === 0) {
 		sellingPlanId = '';
 	}
 
 	$: if (type === 1) {
-		sellingPlanId = $productDetails.sellingPlanGroups.edges[0].node.sellingPlans.edges[0].node.id;
+		sellingPlanId = product.sellingPlanGroups.edges[0].node.sellingPlans.edges[0].node.id;
 	}
 
 	// Cart operations
-	$: selectedProduct = $productDetails.variants.edges[variant].node.id;
+	$: selectedProduct = product.variants.edges[variant].node.id;
 
 	const addToCart = async () => {
 		// add selected product to cart
@@ -95,7 +97,7 @@
 				<!-- Image selector -->
 				<div class="hidden mt-6 w-full max-w-2xl mx-auto sm:block lg:max-w-none">
 					<div class="grid grid-cols-4 gap-6" aria-orientation="horizontal" role="tablist">
-						{#each $productDetails.images.edges as image, index}
+						{#each product.images.edges as image, index}
 							<button
 								id="tab-{index}"
 								class="relative h-24 bg-white rounded-md flex items-center justify-center text-sm font-medium uppercase text-gray-900 cursor-pointer hover:bg-gray-50 focus:outline-none focus:ring focus:ring-offset-4 focus:ring-opacity-50"
@@ -108,7 +110,7 @@
 								<span class="absolute inset-0 rounded-md overflow-hidden">
 									<img
 										src={image.node.url}
-										alt={image.node.altText ? image.node.altText : $productDetails.title}
+										alt={image.node.altText ? image.node.altText : product.title}
 										class="w-full h-full object-center object-cover"
 									/>
 								</span>
@@ -126,7 +128,7 @@
 					<!-- Tab panel, show/hide based on tab state. -->
 					<div id="tabs-1-panel-1" aria-labelledby="tabs-1-tab-1" role="tabpanel" tabindex="0">
 						<img
-							src={$productDetails.images.edges[mainImage].node.url}
+							src={product.images.edges[mainImage].node.url}
 							alt="Angled front view with bag zipped and handles upright."
 							class="w-full h-full object-center object-cover sm:rounded-lg"
 						/>
@@ -136,13 +138,13 @@
 			<!-- Product info -->
 			<div class="mt-10 px-4 sm:px-0 sm:mt-16 lg:mt-0">
 				<h1 class="text-3xl font-extrabold tracking-tight text-gray-900">
-					{$productDetails.title}
+					{product.title}
 				</h1>
 
 				<div class="mt-3">
 					<h2 class="sr-only">Product information</h2>
 					<p class="text-3xl text-gray-900">
-						${$productDetails.variants.edges[variant].node.price}
+						${product.variants.edges[variant].node.price}
 					</p>
 				</div>
 
@@ -151,7 +153,7 @@
 
 					<div class="text-base text-gray-700 space-y-6">
 						<p>
-							{$productDetails.description}
+							{product.description}
 						</p>
 					</div>
 				</div>
@@ -196,7 +198,7 @@
 				</form>
 
 				<form class="mt-6">
-					{#if $productDetails.variants.edges.length > 0}
+					{#if product.variants.edges.length > 0}
 						<!-- Variant picker -->
 						<div class="mt-8">
 							<div class="flex items-center justify-between">
@@ -211,7 +213,7 @@
                     Active: "ring-2 ring-offset-2 ring-custard-500"
                     Checked: "bg-indigo-600 border-transparent text-white hover:bg-indigo-700", Not Checked: "bg-white border-gray-200 text-gray-900 hover:bg-gray-50"
                   -->
-									{#each $productDetails.variants.edges as { node: { id, title, price } }, i}
+									{#each product.variants.edges as { node: { id, title, price } }, i}
 										<label
 											class="border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium text-gray-900 hover:bg-custard-500 hover:text-gray-900 uppercase sm:flex-1 cursor-pointer focus:outline-none {variant ===
 											i

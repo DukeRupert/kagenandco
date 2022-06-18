@@ -1,9 +1,9 @@
 // store.js
 import { writable } from 'svelte/store';
 import type { Writable } from 'svelte/store';
-import type { ProductType } from 'src/types/product';
+import type { Product } from 'src/types/product';
 
-export const productDetails: Writable<ProductType> = writable({
+export const productDetails: Writable<Product> = writable({
 	id: '',
 	handle: '',
 	description: '',
@@ -68,7 +68,7 @@ export const productDetails: Writable<ProductType> = writable({
 	}
 });
 
-export const products: Writable<Array<ProductType>> = writable([
+export const products: Writable<Array<Product>> = writable([
 	{
 		id: '',
 		handle: '',

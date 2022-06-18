@@ -1,8 +1,8 @@
 <script lang="ts">
-	import type { ProductType } from 'src/types/product';
+	import type { Product } from 'src/types/product';
 	import { price } from '$lib/utils';
 
-	export let product: ProductType;
+	export let product: Product;
 	console.log(product);
 
 	const { url, altText } = product.images.edges[0].node;
