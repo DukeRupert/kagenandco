@@ -16,7 +16,10 @@
 	onMount(() => {
 		// get cart details from localStorage
 		cart = JSON.parse(localStorage.getItem('cart'));
-		cartItems = cart.lines.edges;
+
+		if (cart) {
+			cartItems = cart.lines.edges;
+		}
 
 		if (cartItems.length > 0) {
 			let sum = cartItems.map((n) => n.node.quantity);

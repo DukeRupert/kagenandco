@@ -31,7 +31,7 @@
 	}
 </script>
 
-<div class="parent flex flex-col h-full w-full min-h-screen">
+<div class="parent flex flex-col h-full w-full min-h-screen scroll-smooth}">
 	<Nav />
 	<main
 		class="bg-white flex flex-col min-h-screen overflow-y-auto"

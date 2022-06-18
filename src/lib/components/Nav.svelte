@@ -4,14 +4,19 @@
 	import TopMenu from './nav/TopMenu.svelte';
 	import type { Cart } from 'src/types/cart';
 	import { cartValue, isCartOpen } from '$lib/stores';
+	import type { Edges } from 'src/types/product';
 
 	// Shopping Cart
 	let count = 0;
 	let cart: Cart;
+	let cartItems: Edges[] = [];
 
 	onMount(() => {
 		cart = JSON.parse(localStorage.getItem('cart'));
-		const cartItems = cart.lines.edges;
+
+		if (cart) {
+			cartItems = cart.lines.edges;
+		}
 
 		// If cartItems isn't empty update cart count
 		if (cartItems.length > 0) {

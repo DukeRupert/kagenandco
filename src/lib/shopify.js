@@ -1,4 +1,4 @@
-import { products, productDetails } from './store';
+import { products } from './store';
 import { postToShopify } from '../../src/routes/api/utils/postToShopify';
 
 // Get all products

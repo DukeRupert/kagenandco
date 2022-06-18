@@ -64,6 +64,7 @@
 		<!-- Order summary -->
 		<section aria-labelledby="summary-heading" class="mt-10">
 			<h2 id="summary-heading" class="sr-only">Continue Shopping</h2>
+			<p class="mt-10 text-base text-gray-700">This cart is empty.</p>
 
 			<div class="mt-10">
 				<button
