@@ -14,6 +14,7 @@
 	import Button from '$lib/components/Button.svelte';
 	import Counter from '$lib/components/Counter.svelte';
 	import { productDetails } from '$lib/store';
+	import { isCartOpen } from '$lib/stores';
 
 	// Track active Main Image
 	let mainImage = 0;

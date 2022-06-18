@@ -3,6 +3,7 @@
 	import MobileMenu from './nav/MobileMenu.svelte';
 	import TopMenu from './nav/TopMenu.svelte';
 	import type { Cart } from 'src/types/cart';
+	import { cartValue, isCartOpen } from '$lib/stores';
 
 	// Shopping Cart
 	let count = 0;
@@ -10,11 +11,21 @@
 
 	onMount(() => {
 		cart = JSON.parse(localStorage.getItem('cart'));
-		const arr = cart.lines.edges;
+		const cartItems = cart.lines.edges;
 
-		if (arr.length > 0) {
-			let sum = arr.map((n) => n.node.quantity);
+		// If cartItems isn't empty update cart count
+		if (cartItems.length > 0) {
+			let sum = cartItems.map((n) => n.node.quantity);
 			count = sum.reduce((pre, cur) => pre + cur);
+		}
+
+		// If an item has been added to the cart, open the SlideOver
+		if (count !== $cartValue) {
+			// Update value for future evaluations
+			cartValue.set(count);
+
+			// Open the cart
+			isCartOpen.set(true);
 		}
 	});
 </script>
