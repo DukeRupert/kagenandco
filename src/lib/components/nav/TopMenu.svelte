@@ -30,7 +30,7 @@
 	];
 </script>
 
-<header class="w-full z-[5] fixed bg-white shadow {$isMobileMenuOpen ? 'fixed' : ''}">
+<header class="w-full z-30 fixed bg-white shadow {$isMobileMenuOpen ? 'fixed' : ''}">
 	<nav aria-label="Top">
 		<!-- Main navigation -->
 		<div class="bg-white">

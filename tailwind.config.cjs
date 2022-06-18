@@ -4,6 +4,9 @@ const config = {
 	content: ['./src/**/*.{html,js,svelte,ts}'],
 	theme: {
 		extend: {
+			animation: {
+				wiggle: 'wiggle 1s ease-in-out infinite'
+			},
 			colors: {
 				maxWidth: {
 					'8xl': '92rem'
@@ -31,6 +34,12 @@ const config = {
 				},
 				coffee: '#3D2F12',
 				oldGrey: '#404040'
+			},
+			keyframes: {
+				wiggle: {
+					'0%, 100%': { transform: 'rotate(-3deg)' },
+					'50%': { transform: 'rotate(3deg)' }
+				}
 			}
 		}
 	},

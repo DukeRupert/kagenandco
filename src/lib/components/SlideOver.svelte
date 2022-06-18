@@ -18,16 +18,16 @@
 		cart = JSON.parse(localStorage.getItem('cart'));
 		cartItems = cart.lines.edges;
 
-		let sum = cartItems.map((n) => n.node.quantity);
-		count = sum.reduce((pre, cur) => pre + cur);
+		if (cartItems.length > 0) {
+			let sum = cartItems.map((n) => n.node.quantity);
+			count = sum.reduce((pre, cur) => pre + cur);
+		}
 	});
 </script>
 
 <!-- This example requires Tailwind CSS v2.0+ -->
 <div
-	class="relative transition-all ease-in-out duration-500 sm:duration-700 {$isCartOpen
-		? 'z-[100]'
-		: '-z-10'}"
+	class="relative {$isCartOpen ? 'z-[100]' : '-z-10 '}"
 	on:click={handleClick}
 	aria-labelledby="slide-over-title"
 	role="dialog"
@@ -57,7 +57,7 @@
 									<button
 										on:click|preventDefault={handleClick}
 										type="button"
-										class="rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+										class="rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 hover:animate-wiggle"
 									>
 										<span class="sr-only">Close panel</span>
 										<!-- Heroicon name: outline/x -->
@@ -89,3 +89,8 @@
 		</div>
 	</div>
 </div>
+
+<style>
+	@keyframes onTop {
+	}
+</style>

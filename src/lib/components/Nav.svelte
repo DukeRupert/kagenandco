@@ -12,8 +12,10 @@
 		cart = JSON.parse(localStorage.getItem('cart'));
 		const arr = cart.lines.edges;
 
-		let sum = arr.map((n) => n.node.quantity);
-		count = sum.reduce((pre, cur) => pre + cur);
+		if (arr.length > 0) {
+			let sum = arr.map((n) => n.node.quantity);
+			count = sum.reduce((pre, cur) => pre + cur);
+		}
 	});
 </script>
 
