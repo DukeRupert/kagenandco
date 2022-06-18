@@ -6,13 +6,13 @@
 	export let item: CartItem;
 	const { id, quantity, merchandise, sellingPlanAllocation } = item;
 
-	async function removeItem(lineId) {
+	const removeItem = async () => {
 		// remove item from Shopify cart
 		const removeItemFromCart = await fetch('/api/utils/removeFromCart', {
 			method: 'POST',
 			body: JSON.stringify({
 				cartId: localStorage.getItem('cartId'),
-				lineId
+				lineId: item.id
 			})
 		})
 			.then((res) => res.json())
@@ -21,13 +21,20 @@
 		localStorage.setItem('cartId', removeItemFromCart.id);
 		localStorage.setItem('cart', JSON.stringify(removeItemFromCart));
 		location.reload();
-	}
+	};
 
 	function handleIncrement() {
 		console.log('Increment');
 	}
 	function handleDecrement() {
 		console.log('Decrement');
+	}
+
+	// To trigger loading spinner
+	let removingItemFromCart: Promise<void>;
+
+	function handleClick() {
+		removingItemFromCart = removeItem();
 	}
 </script>
 
@@ -70,7 +77,7 @@
 			<div class="ml-4">
 				<button
 					type="button"
-					on:click|preventDefault={() => removeItem(item.id)}
+					on:click|preventDefault={handleClick}
 					class="text-sm font-medium text-oldGrey hover:text-custard-600"
 				>
 					<span>Remove</span>

@@ -16,7 +16,7 @@
 
 <script lang="ts">
 	import '../app.css';
-	import { siteData, activeTopMenu, isCartOpen } from '$lib/stores';
+	import { siteData, activeTopMenu } from '$lib/stores';
 	import Modal from '$lib/components/Modal.svelte';
 	import Nav from '$lib/components/Nav.svelte';
 	import Footer from '$lib/components/Footer.svelte';
@@ -28,10 +28,6 @@
 
 	function closeActiveTopMenu() {
 		activeTopMenu.set('');
-	}
-
-	function handleClick() {
-		isCartOpen.set(true);
 	}
 </script>
 
@@ -46,7 +42,6 @@
 		<SlideOver />
 		<div class="h-full mt-[96px]">
 			<slot />
-			<button on:click={handleClick}>Test</button>
 		</div>
 	</main>
 	<Footer />

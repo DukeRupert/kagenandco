@@ -11,10 +11,9 @@
 </script>
 
 <script lang="ts">
-	import Button from '$lib/components/Button.svelte';
 	import Counter from '$lib/components/Counter.svelte';
+	import LoadingSpinner from '$lib/components/LoadingSpinner.svelte';
 	import { productDetails } from '$lib/store';
-	import { isCartOpen } from '$lib/stores';
 
 	// Track active Main Image
 	let mainImage = 0;
@@ -29,7 +28,7 @@
 	$: subscribePrice = price - reduction;
 
 	// Track quantity of product to add to cart
-	let quantity = 0;
+	let quantity = 1;
 	function decreaseQuantity() {
 		if (quantity > 0) {
 			return quantity--;
@@ -79,6 +78,13 @@
 			console.log(e);
 		}
 	};
+
+	// To trigger loading spinner
+	let addingItemToCart: Promise<void>;
+
+	function handleClick() {
+		addingItemToCart = addToCart();
+	}
 </script>
 
 <div class="bg-white">
@@ -230,7 +236,16 @@
 
 					<div class="mt-10 flex flex-col md:flex-row">
 						<Counter on:decrement={decreaseQuantity} on:increment={increaseQuantity} {quantity} />
-						<Button label="Add to Cart" action={addToCart} />
+						<button
+							type="submit"
+							on:click|preventDefault={handleClick}
+							class="basis-3/4 bg-custard-500 border border-transparent rounded-md md:ml-3 mt-3 py-3 px-8 flex items-center justify-center text-base font-medium text-gray-900 hover:bg-oldGrey hover:text-custard-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-custard-500 sm:w-full"
+							>{#if addingItemToCart}
+								<LoadingSpinner />
+							{:else}
+								Add To Cart
+							{/if}</button
+						>
 					</div>
 				</form>
 			</div>
