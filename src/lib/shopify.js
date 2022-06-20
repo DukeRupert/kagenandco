@@ -183,6 +183,24 @@ export const getProductByHandle = async (handle) => {
 	}
 };
 
+// Check if cart exists
+export const checkIfCartExists = async (cartId) => {
+	const query = `query ($id : ID!){
+  cart (id : $id) {
+    id
+  }
+}`;
+
+	const variables = { id: cartId };
+	try {
+		const shopifyResponse = await postToShopify({ query, variables });
+		console.log(JSON.stringify(shopifyResponse));
+		return shopifyResponse;
+	} catch (error) {
+		console.log(error);
+	}
+};
+
 // Creates a cart with a single item
 export const createCartWithItem = async ({ itemId, quantity }) => {
 	try {
@@ -194,6 +212,7 @@ export const createCartWithItem = async ({ itemId, quantity }) => {
               id
               createdAt
               updatedAt
+              checkoutUrl
               lines(first:10) {
                 edges {
                   node {
@@ -286,6 +305,7 @@ export const createCartWithSubscription = async ({ itemId, quantity, sellingPlan
               id
               createdAt
               updatedAt
+              checkoutUrl
               lines(first:10) {
                 edges {
                   node {
@@ -377,6 +397,9 @@ export const addItemToCart = async ({ cartId, quantity, itemId }) => {
           cartLinesAdd(cartId: $cartId, lines: $lines) {
             cart {
               id
+              createdAt
+              updatedAt
+              checkoutUrl
               lines(first: 10) {
                 edges {
                   node {
@@ -466,6 +489,9 @@ export const addSubscriptionToCart = async ({ cartId, quantity, itemId, sellingP
           cartLinesAdd(cartId: $cartId, lines: $lines) {
             cart {
               id
+              createdAt
+              updatedAt
+              checkoutUrl
               lines(first: 10) {
                 edges {
                   node {

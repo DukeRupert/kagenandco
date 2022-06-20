@@ -44,8 +44,6 @@
 	"type": "module",
 	"dependencies": {
 		"@felte/reporter-svelte": "^1.0.5",
-		"@sveltestack/svelte-query": "^1.6.0",
-		"broadcast-channel": "^4.13.0",
 		"felte": "^1.1.7",
 		"postmark": "^3.0.1"
 	}

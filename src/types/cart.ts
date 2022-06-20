@@ -2,6 +2,7 @@ export type Cart = {
 	id: string;
 	createdAt: string;
 	updatedAt: string;
+	checkoutUrl: string;
 	lines: {
 		edges: [
 			{

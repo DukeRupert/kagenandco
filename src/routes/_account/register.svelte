@@ -1,7 +1,4 @@
 <!-- routes/account/register.svelte -->
-<script lang="ts">
-</script>
-
 <div class="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
 	<div class="sm:mx-auto sm:w-full sm:max-w-md">
 		<img
