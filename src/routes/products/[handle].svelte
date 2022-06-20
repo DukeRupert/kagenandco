@@ -16,6 +16,7 @@
 	import type { Product } from 'src/types/product';
 
 	export let product: Product;
+	console.log(product);
 
 	// Track active Main Image
 	let mainImage = 0;
@@ -87,6 +88,8 @@
 	function handleClick() {
 		addingItemToCart = addToCart();
 	}
+
+	const testValue = 0;
 </script>
 
 <div class="bg-white">
@@ -143,15 +146,21 @@
 
 				<div class="mt-3 flex flex-wrap">
 					<h2 class="sr-only">Product information</h2>
-					<p
-						class="text-2xl text-gray-900 mr-4 {isSubscription ? 'text-gray-500 line-through' : ''}"
-					>
-						${product.variants.edges[variant].node.price}
-					</p>
-					{#if isSubscription}
-						<p class="text-2xl text-gray-900">
-							${subscribePrice.toFixed(2)}
+					{#if product.totalInventory !== 0}
+						<p
+							class="text-2xl text-gray-900 mr-4 {isSubscription
+								? 'text-gray-500 line-through'
+								: ''}"
+						>
+							${product.variants.edges[variant].node.price}
 						</p>
+						{#if isSubscription}
+							<p class="text-2xl text-gray-900">
+								${subscribePrice.toFixed(2)}
+							</p>
+						{/if}
+					{:else}
+						<p class="text-2xl text-red-500">Sold Out</p>
 					{/if}
 				</div>
 
@@ -246,7 +255,8 @@
 						<button
 							type="submit"
 							on:click|preventDefault={handleClick}
-							class="basis-3/4 bg-custard-500 border border-transparent rounded-md md:ml-3 mt-3 py-3 px-8 flex items-center justify-center text-base font-medium text-gray-900 hover:bg-oldGrey hover:text-custard-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-custard-500 sm:w-full"
+							disabled={product.totalInventory == 0 ? true : false}
+							class="basis-3/4 bg-custard-500 disabled:bg-gray-300 disabled:text-gray-900 border border-transparent rounded-md md:ml-3 mt-3 py-3 px-8 flex items-center justify-center text-base font-medium text-gray-900 hover:bg-oldGrey hover:text-custard-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-custard-500 sm:w-full"
 							>{#if addingItemToCart}
 								<LoadingSpinner />
 							{:else}
