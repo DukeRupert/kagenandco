@@ -39,7 +39,10 @@
 		return 1;
 	}
 	function increaseQuantity() {
-		return quantity++;
+		if (quantity < selectedProduct.quantityAvailable) {
+			return quantity++;
+		}
+		return quantity;
 	}
 
 	// Default to active subscription, change to single purchase by setting sellingPlanId to empty string
@@ -55,7 +58,7 @@
 	}
 
 	// Cart operations
-	$: selectedProduct = product.variants.edges[variant].node.id;
+	$: selectedProduct = product.variants.edges[variant].node;
 
 	const addToCart = async () => {
 		// add selected product to cart
@@ -67,7 +70,7 @@
 				},
 				body: JSON.stringify({
 					cartId: localStorage.getItem('cartId'),
-					itemId: selectedProduct,
+					itemId: selectedProduct.id,
 					quantity: quantity,
 					sellingPlanId: sellingPlanId
 				})
@@ -242,7 +245,6 @@
 													bind:group={variant}
 													value={i}
 													class="sr-only"
-													disabled={true}
 													aria-labelledby="size-choice-0-label"
 												/>
 												<span id="size-choice-0-label"> {title} </span>
