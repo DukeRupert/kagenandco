@@ -12,6 +12,7 @@ export type Product = {
 					id: string;
 					title: string;
 					price: string;
+					quantityAvailable: number;
 				};
 			}
 		];

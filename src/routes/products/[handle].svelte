@@ -227,23 +227,27 @@
                     Active: "ring-2 ring-offset-2 ring-custard-500"
                     Checked: "bg-indigo-600 border-transparent text-white hover:bg-indigo-700", Not Checked: "bg-white border-gray-200 text-gray-900 hover:bg-gray-50"
                   -->
-									{#each product.variants.edges as { node: { id, title, price } }, i}
-										<label
-											class="border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium text-gray-900 hover:bg-custard-500 hover:text-gray-900 uppercase sm:flex-1 cursor-pointer focus:outline-none {variant ===
-											i
-												? 'bg-oldGrey border-transparent text-custard-400'
-												: ''}"
-										>
-											<input
-												type="radio"
-												name="variant"
-												bind:group={variant}
-												value={i}
-												class="sr-only"
-												aria-labelledby="size-choice-0-label"
-											/>
-											<span id="size-choice-0-label"> {title} </span>
-										</label>
+									{#each product.variants.edges as { node: { id, title, price, quantityAvailable } }, i}
+										{#if quantityAvailable !== 0}
+											<!-- content here -->
+											<label
+												class="border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium text-gray-900 hover:bg-custard-500 hover:text-gray-900 uppercase sm:flex-1 cursor-pointer focus:outline-none {variant ===
+												i
+													? 'bg-oldGrey border-transparent text-custard-400'
+													: ''}"
+											>
+												<input
+													type="radio"
+													name="variant"
+													bind:group={variant}
+													value={i}
+													class="sr-only"
+													disabled={true}
+													aria-labelledby="size-choice-0-label"
+												/>
+												<span id="size-choice-0-label"> {title} </span>
+											</label>
+										{/if}
 									{/each}
 								</div>
 							</fieldset>

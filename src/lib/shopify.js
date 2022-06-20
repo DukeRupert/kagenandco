@@ -127,6 +127,7 @@ export const getProductByHandle = async (handle) => {
           id
           title
           price
+          quantityAvailable
         }
       }
     }
