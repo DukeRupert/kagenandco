@@ -126,7 +126,10 @@ export const getProductByHandle = async (handle) => {
         node {
           id
           title
-          price
+          priceV2 {
+            amount
+            currencyCode
+          }
           quantityAvailable
         }
       }

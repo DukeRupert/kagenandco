@@ -11,7 +11,10 @@ export type Product = {
 				node: {
 					id: string;
 					title: string;
-					price: string;
+					priceV2: {
+						amount: string;
+						currencyCode: string;
+					};
 					quantityAvailable: number;
 				};
 			}

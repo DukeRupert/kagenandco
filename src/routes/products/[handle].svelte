@@ -17,13 +17,12 @@
 
 	export let product: Product;
 	console.log(product);
-
 	// Track active Main Image
 	let mainImage = 0;
 
 	// Track active variant, reactively update pricing
 	let variant = 0;
-	$: price = parseFloat(product.variants.edges[variant].node.price);
+	$: price = parseFloat(product.variants.edges[variant].node.priceV2.amount);
 	$: reduction =
 		product.sellingPlanGroups.edges[0].node.sellingPlans.edges[0].node.priceAdjustments[0]
 			.adjustmentValue.adjustmentPercentage *
@@ -91,8 +90,6 @@
 	function handleClick() {
 		addingItemToCart = addToCart();
 	}
-
-	const testValue = 0;
 </script>
 
 <div class="bg-white">
@@ -155,7 +152,7 @@
 								? 'text-gray-500 line-through'
 								: ''}"
 						>
-							${product.variants.edges[variant].node.price}
+							${product.variants.edges[variant].node.priceV2.amount}
 						</p>
 						{#if isSubscription}
 							<p class="text-2xl text-gray-900">
@@ -230,7 +227,7 @@
                     Active: "ring-2 ring-offset-2 ring-custard-500"
                     Checked: "bg-indigo-600 border-transparent text-white hover:bg-indigo-700", Not Checked: "bg-white border-gray-200 text-gray-900 hover:bg-gray-50"
                   -->
-									{#each product.variants.edges as { node: { id, title, price, quantityAvailable } }, i}
+									{#each product.variants.edges as { node: { title, quantityAvailable } }, i}
 										{#if quantityAvailable !== 0}
 											<!-- content here -->
 											<label
