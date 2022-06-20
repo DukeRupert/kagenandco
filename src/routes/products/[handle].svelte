@@ -42,15 +42,15 @@
 	}
 
 	// Default to active subscription, change to single purchase by setting sellingPlanId to empty string
-	let type = 1;
+	let isSubscription = true;
 	let sellingPlanId = product.sellingPlanGroups.edges[0].node.sellingPlans.edges[0].node.id;
 
-	$: if (type === 0) {
-		sellingPlanId = '';
-	}
-
-	$: if (type === 1) {
+	$: if (isSubscription) {
 		sellingPlanId = product.sellingPlanGroups.edges[0].node.sellingPlans.edges[0].node.id;
+		console.log(sellingPlanId);
+	} else {
+		sellingPlanId = '';
+		console.log(sellingPlanId);
 	}
 
 	// Cart operations
@@ -141,11 +141,18 @@
 					{product.title}
 				</h1>
 
-				<div class="mt-3">
+				<div class="mt-3 flex flex-wrap">
 					<h2 class="sr-only">Product information</h2>
-					<p class="text-3xl text-gray-900">
+					<p
+						class="text-2xl text-gray-900 mr-4 {isSubscription ? 'text-gray-500 line-through' : ''}"
+					>
 						${product.variants.edges[variant].node.price}
 					</p>
+					{#if isSubscription}
+						<p class="text-2xl text-gray-900">
+							${subscribePrice.toFixed(2)}
+						</p>
+					{/if}
 				</div>
 
 				<div class="mt-6">
@@ -160,16 +167,15 @@
 
 				<form class="mt-10 grid grid-cols-2 gap-3 sm:flex-col">
 					<label
-						class="flex-1 border rounded-md py-3 px-8 flex items-center justify-center text-base font-small text-gray-900 hover:bg-custard-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-custard-500 sm:w-full {type ===
-						0
-							? 'bg-oldGrey text-custard-400'
-							: ''}"
+						class="flex-1 border rounded-md py-3 px-8 flex items-center justify-center text-base font-small text-gray-900 hover:bg-custard-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-custard-500 sm:w-full {isSubscription
+							? ''
+							: 'bg-oldGrey text-custard-400'}"
 					>
 						<input
 							type="radio"
 							name="variant"
-							bind:group={type}
-							value={0}
+							bind:group={isSubscription}
+							value={false}
 							class="sr-only"
 							aria-labelledby="size-choice-0-label"
 						/>
@@ -178,16 +184,15 @@
 						>
 					</label>
 					<label
-						class="max-w-xs flex-1 border rounded-md py-3 px-8 flex items-center justify-center text-base font-small text-gray-900 hover:bg-custard-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-custard-500 sm:w-full {type ===
-						1
+						class="max-w-xs flex-1 border rounded-md py-3 px-8 flex items-center justify-center text-base font-small text-gray-900 hover:bg-custard-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-custard-500 sm:w-full {isSubscription
 							? 'bg-oldGrey text-custard-400'
 							: ''}"
 					>
 						<input
 							type="radio"
 							name="variant"
-							bind:group={type}
-							value={1}
+							bind:group={isSubscription}
+							value={true}
 							class="sr-only"
 							aria-labelledby="size-choice-0-label"
 						/>
