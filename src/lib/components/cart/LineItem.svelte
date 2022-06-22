@@ -1,10 +1,55 @@
 <script lang="ts">
 	import { price } from '$lib/utils';
 	import Counter from '../Counter.svelte';
-
 	import type { CartItem } from 'src/types/product';
 	export let item: CartItem;
-	const { id, quantity, merchandise, sellingPlanAllocation } = item;
+	const { id, sellingPlanAllocation } = item;
+	let sellingPlanId = '';
+
+	// Change quantity of an item in the cart
+	let quantity = item.quantity;
+	if (sellingPlanAllocation) {
+		sellingPlanId = sellingPlanAllocation.sellingPlan.id;
+	}
+	const quantityAvailable = item.merchandise.quantityAvailable;
+
+	let timer;
+	const debounceUpdate = async () => {
+		clearTimeout(timer);
+		timer = setTimeout(updateItem, 2000);
+	};
+
+	function handleIncrement() {
+		if (quantity < quantityAvailable) {
+			quantity++;
+		}
+		debounceUpdate();
+	}
+
+	function handleDecrement() {
+		if (quantity > 1) {
+			quantity--;
+		}
+		debounceUpdate();
+	}
+
+	const updateItem = async () => {
+		// remove item from Shopify cart
+		const updatedCart = await fetch('/api/utils/updateCart', {
+			method: 'POST',
+			body: JSON.stringify({
+				cartId: localStorage.getItem('cartId'),
+				lines: [{ id, quantity, sellingPlanId }]
+			})
+		})
+			.then((res) => res.json())
+			.then((data) => data);
+		// update localStorage;
+		console.log(`Updating localStorage`);
+		localStorage.setItem('cartId', updatedCart.id);
+		localStorage.setItem('cart', JSON.stringify(updatedCart));
+		location.reload();
+	};
 
 	const removeItem = async () => {
 		// remove item from Shopify cart
@@ -22,23 +67,9 @@
 		localStorage.setItem('cart', JSON.stringify(removeItemFromCart));
 		location.reload();
 	};
-
-	function handleIncrement() {
-		console.log('Increment');
-	}
-	function handleDecrement() {
-		console.log('Decrement');
-	}
-
-	// To trigger loading spinner
-	let removingItemFromCart: Promise<void>;
-
-	function handleClick() {
-		removingItemFromCart = removeItem();
-	}
 </script>
 
-<li class="flex py-6">
+<li class="flex py-6 z-50">
 	<div class="flex-shrink-0">
 		<img
 			src={item.merchandise.product.images.edges[0].node.url}
@@ -77,7 +108,7 @@
 			<div class="ml-4">
 				<button
 					type="button"
-					on:click|preventDefault={handleClick}
+					on:click|preventDefault={removeItem}
 					class="text-sm font-medium text-oldGrey hover:text-custard-600"
 				>
 					<span>Remove</span>

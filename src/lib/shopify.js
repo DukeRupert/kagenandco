@@ -198,7 +198,6 @@ export const checkIfCartExists = async (cartId) => {
 	const variables = { id: cartId };
 	try {
 		const shopifyResponse = await postToShopify({ query, variables });
-		console.log(JSON.stringify(shopifyResponse));
 		return shopifyResponse;
 	} catch (error) {
 		console.log(error);
@@ -241,6 +240,7 @@ export const createCartWithItem = async ({ itemId, quantity }) => {
                           amount
                           currencyCode
                         }
+                        quantityAvailable
                         product {
                           title
                           handle
@@ -334,6 +334,7 @@ export const createCartWithSubscription = async ({ itemId, quantity, sellingPlan
                           amount
                           currencyCode
                         }
+                        quantityAvailable
                         product {
                           title
                           handle
@@ -428,6 +429,7 @@ export const addItemToCart = async ({ cartId, quantity, itemId }) => {
                           amount
                           currencyCode
                         }
+                        quantityAvailable
                         product {
                           title
                           handle
@@ -520,6 +522,7 @@ export const addSubscriptionToCart = async ({ cartId, quantity, itemId, sellingP
                           amount
                           currencyCode
                         }
+                        quantityAvailable
                         product {
                           title
                           handle
@@ -641,6 +644,94 @@ export const removeItemFromCart = async ({ cartId, lineId }) => {
 			variables: {
 				cartId,
 				lineIds: [lineId]
+			}
+		});
+
+		return shopifyResponse;
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+// Update subscription item in cart
+export const updateItemInCart = async ({ cartId, lines }) => {
+	try {
+		const shopifyResponse = await postToShopify({
+			query: `
+  mutation addItemToCart($cartId: ID!, $lines: [CartLineUpdateInput!]!) {
+    cartLinesUpdate(cartId: $cartId, lines: $lines) {
+      cart {
+        id
+        createdAt
+        updatedAt
+        checkoutUrl
+        lines(first: 10) {
+          edges {
+            node {
+              id
+              quantity
+              sellingPlanAllocation {
+                priceAdjustments {
+                  price {
+                    amount
+                  }
+                }
+                sellingPlan {
+                  id
+                  name
+                }
+              }
+              merchandise {
+                ... on ProductVariant {
+                  id
+                  title
+                  priceV2 {
+                    amount
+                    currencyCode
+                  }
+                  quantityAvailable
+                  product {
+                    title
+                    handle
+                    images(first: 1) {
+                      edges {
+                        node {
+                          url
+                          altText
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      estimatedCost {
+        totalAmount {
+          amount
+          currencyCode
+        }
+        subtotalAmount {
+          amount
+          currencyCode
+        }
+        totalTaxAmount {
+          amount
+          currencyCode
+        }
+        totalDutyAmount {
+          amount
+          currencyCode
+        }
+      }
+    }
+  }
+}
+      `,
+			variables: {
+				cartId,
+				lines
 			}
 		});
 

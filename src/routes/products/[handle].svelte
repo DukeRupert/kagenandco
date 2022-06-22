@@ -16,7 +16,6 @@
 	import type { Product } from 'src/types/product';
 
 	export let product: Product;
-	console.log(product);
 	// Track active Main Image
 	let mainImage = 0;
 
@@ -50,10 +49,8 @@
 
 	$: if (isSubscription) {
 		sellingPlanId = product.sellingPlanGroups.edges[0].node.sellingPlans.edges[0].node.id;
-		console.log(sellingPlanId);
 	} else {
 		sellingPlanId = '';
-		console.log(sellingPlanId);
 	}
 
 	// Cart operations

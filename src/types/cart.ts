@@ -17,6 +17,7 @@ export type Cart = {
 						id: string;
 						title: string;
 						priceV2: { amount: string; currencyCode: string };
+						quantityAvailable: number;
 						product: {
 							title: string;
 							handle: string;

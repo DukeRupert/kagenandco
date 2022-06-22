@@ -13,7 +13,7 @@
 	}
 </script>
 
-<section aria-labelledby="cart-heading">
+<section aria-labelledby="cart-heading h-full">
 	{#if cartItems.length > 0}
 		<h2 id="cart-heading" class="sr-only">Items in your shopping cart</h2>
 
@@ -40,7 +40,7 @@
 				<p class="mt-1 text-sm text-gray-500">Shipping and taxes will be calculated at checkout.</p>
 			</div>
 
-			<div class="mt-10">
+			<div class="mt-10 flex items-center text-center">
 				<a
 					href={cart.checkoutUrl}
 					class="w-full bg-oldGrey border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-custard-500 hover:bg-custard-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500"

@@ -19,20 +19,15 @@
 	}
 
 	onMount(async () => {
-		console.log('Made it to mount');
 		try {
 			cartId = localStorage.getItem('cartId');
-			console.log(`cartId : ${cartId}`);
 		} catch (error) {
 			console.log(error);
 		}
 
-		if (cartId) {
-			console.log('Checking if cart is valid...');
+		if (cartId !== undefined) {
 			const validCart = await checkIfCartExists(cartId);
-			console.log(validCart);
 			if (validCart.cart !== null) {
-				console.log('Cart is valid.');
 				cart = JSON.parse(localStorage.getItem('cart'));
 
 				if (cart) {
@@ -54,9 +49,7 @@
 					isCartOpen.set(true);
 				}
 			} else {
-				console.log('Cart is invalid.');
 				purgeCart();
-				console.log('Cart is purged from local storage.');
 			}
 		}
 	});

@@ -77,6 +77,7 @@ export type CartItem = {
 			amount: string;
 			currencyCode: string;
 		};
+		quantityAvailable: number;
 		product: {
 			title: string;
 			handle: string;
@@ -93,14 +94,14 @@ export type CartItem = {
 		};
 	};
 	sellingPlanAllocation?: {
-		priceAdjustments: [
+		priceAdjustments?: [
 			{
 				price: {
 					amount: string;
 				};
 			}
 		];
-		sellingPlan: {
+		sellingPlan?: {
 			id: string;
 			name: string;
 		};
