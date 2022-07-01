@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { clickOutside, touchOutside } from '$lib/clickOutside';
-	import { modal, modalAction, siteData } from '$lib/stores';
+	import { modal } from '$lib/stores';
 
 	function closeModal() {
 		modal.set(false);
@@ -35,25 +35,7 @@
 			use:touchOutside
 			on:click_outside={closeModal}
 		>
-			<div>
-				<div class="mt-3 text-center sm:mt-5">
-					<h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
-						Select a location
-					</h3>
-				</div>
-			</div>
-
-			{#each $siteData.order as order}
-				<div class="mt-5 sm:mt-6">
-					<a
-						href={$modalAction == 'order' ? order.url : `/menu/${order.name.toLowerCase()}`}
-						on:click={closeModal}
-						class="inline-flex justify-center w-full rounded-3xl border border-transparent shadow-sm px-4 py-2 bg-custard-500 text-base font-medium text-black hover:bg-custard-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-custard-300 sm:text-sm"
-					>
-						{order.name}
-					</a>
-				</div>
-			{/each}
+			<!-- Place Modal content here -->
 		</div>
 	</div>
 </div>

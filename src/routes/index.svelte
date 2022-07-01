@@ -20,6 +20,7 @@
 	import { urlFor } from '$lib/image-url';
 	import PrimaryBanner from '$lib/components/PrimaryBanner.svelte';
 	import LocationsBanner from '$lib/components/LocationsBanner.svelte';
+	import Hero from '$lib/components/Hero.svelte';
 
 	// SEO
 	const pageUrl = `https://${$page.url.hostname}${$page.url.pathname}`;

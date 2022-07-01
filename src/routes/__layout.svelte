@@ -17,7 +17,7 @@
 <script lang="ts">
 	import '../app.css';
 	import { siteData, activeTopMenu, isCartOpen } from '$lib/stores';
-	import Modal from '$lib/components/Modal.svelte';
+	// import Modal from '$lib/components/Modal.svelte';
 	import Nav from '$lib/components/Nav.svelte';
 	import Footer from '$lib/components/Footer.svelte';
 	import SlideOver from '$lib/components/SlideOver.svelte';
@@ -32,7 +32,7 @@
 </script>
 
 <div
-	class="parent flex flex-col h-full w-full min-h-screen scroll-smooth {$isCartOpen
+	class="flex flex-col h-full w-full min-h-screen scroll-smooth {$isCartOpen
 		? 'overflow-hidden'
 		: ''}}"
 >
@@ -42,7 +42,7 @@
 		on:click={closeActiveTopMenu}
 		on:mouseenter={closeActiveTopMenu}
 	>
-		<Modal />
+		<!-- <Modal /> -->
 		<SlideOver />
 		<div class="h-full mt-[96px]">
 			<slot />
