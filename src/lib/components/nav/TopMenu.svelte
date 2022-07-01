@@ -14,10 +14,6 @@
 		isCartOpen.set(true);
 	}
 
-	const menu = [
-		{ title: 'tri-cities', href: '/menu/tri-cities' },
-		{ title: 'spokane', href: '/menu/spokane' }
-	];
 	const about = [
 		{ title: 'Learn More', links: [{ title: 'about us', href: '/about-us' }] },
 		{
@@ -107,11 +103,11 @@
 
 					<div class="flex-1 flex items-center justify-end">
 						<div class="flex items-center lg:ml-8">
-							<div class="flex space-x-8">
+							<!-- <div class="flex space-x-8">
 								<div class="flex">
 									<a href="#" class="-m-2 p-2 text-gray-400 hover:text-gray-500">
 										<span class="sr-only">Account</span>
-										<!-- Heroicon name: outline/user -->
+									
 										<svg
 											class="w-6 h-6"
 											xmlns="http://www.w3.org/2000/svg"
@@ -129,9 +125,9 @@
 										</svg>
 									</a>
 								</div>
-							</div>
+							</div> -->
 
-							<span class="mx-4 h-6 w-px bg-gray-200 lg:mx-6" aria-hidden="true" />
+							<!-- <span class="mx-4 h-6 w-px bg-gray-200 lg:mx-6" aria-hidden="true" /> -->
 
 							<div class="flow-root">
 								<button

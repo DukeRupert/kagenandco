@@ -13,10 +13,6 @@
 	// Close the mobile menu when navigating
 	$: if ($navigating) close();
 
-	const menu = [
-		{ title: 'tri-cities', href: '/menu/tri-cities' },
-		{ title: 'spokane', href: '/menu/spokane' }
-	];
 	const about = [
 		{ title: 'about us', href: '/about-us' },
 		{ title: 'contact us', href: '/contact-us' },
@@ -35,7 +31,7 @@
 		<div class="grid grid-cols-1 items-start gap-y-10 gap-x-6">
 			<MobileMenuItem title="Coffee Club" href="/products/the-rooster" />
 			<MobileMenuItem title="Locations" href="/locations" />
-			<MobileMenuItem title="Menu" href="/menu/tri-cities" subItems={menu} />
+			<MobileMenuItem title="Menu" href="/menu/tri-cities" />
 			<MobileMenuItem title="About" href="/about-us" subItems={about} />
 		</div>
 	</div>
