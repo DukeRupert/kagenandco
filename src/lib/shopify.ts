@@ -1,5 +1,5 @@
-import { products } from './store';
-import { postToShopify } from '../../src/routes/api/utils/postToShopify';
+import { products } from './stores';
+import { postToShopify } from '../routes/api/utils/postToShopify';
 
 // Get all products
 export const getProducts = async () => {
@@ -182,6 +182,102 @@ export const getProductByHandle = async (handle) => {
 	try {
 		const shopifyResponse = await postToShopify({ query, variables });
 		return shopifyResponse.productByHandle;
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+export const createCart = async () => {
+	console.log('Executing createCart');
+	const query = `mutation CreateCart {
+                    cartCreate {
+                      cart {
+                        checkoutUrl
+                        id
+                      }
+                    }
+                  }`;
+
+	try {
+		return await postToShopify({ query });
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+export const initializeCart = async (cartId: string) => {
+	const query = `query ($id: ID!) {
+                  cart (id: $id) {
+                    id
+                    createdAt
+                    updatedAt
+                    checkoutUrl
+                    lines(first: 10) {
+                      edges {
+                        node {
+                          id
+                          quantity
+                          sellingPlanAllocation {
+                            priceAdjustments {
+                              price {
+                                amount
+                              }
+                            }
+                            sellingPlan {
+                              id
+                              name
+                            }
+                          }
+                          merchandise {
+                            ... on ProductVariant {
+                              id
+                              title
+                              priceV2 {
+                                amount
+                                currencyCode
+                              }
+                              quantityAvailable
+                              product {
+                                title
+                                handle
+                                images(first: 1) {
+                                  edges {
+                                    node {
+                                      url
+                                      altText
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                    estimatedCost {
+                      totalAmount {
+                        amount
+                        currencyCode
+                      }
+                      subtotalAmount {
+                        amount
+                        currencyCode
+                      }
+                      totalTaxAmount {
+                        amount
+                        currencyCode
+                      }
+                      totalDutyAmount {
+                        amount
+                        currencyCode
+                      }
+                    }
+                  }
+                }`;
+	const variables = { id: cartId };
+
+	try {
+		return await postToShopify({ query, variables });
 	} catch (error) {
 		console.log(error);
 	}

@@ -1,31 +1,10 @@
 <script lang="ts">
-	import type { Cart } from 'src/types/cart';
-	import type { Edges } from 'src/types/product';
-	import { isCartOpen } from '$lib/stores';
-	import { onMount } from 'svelte';
+	import { isCartOpen, cartItems, itemCount } from '$lib/stores';
 	import CartList from './cart/CartList.svelte';
 
 	function handleClick() {
 		isCartOpen.set(false);
 	}
-
-	let cart: Cart;
-	let cartItems: Edges[] = [];
-	let count = 0;
-
-	onMount(() => {
-		// get cart details from localStorage
-		cart = JSON.parse(localStorage.getItem('cart'));
-
-		if (cart) {
-			cartItems = cart.lines.edges;
-		}
-
-		if (cartItems.length > 0) {
-			let sum = cartItems.map((n) => n.node.quantity);
-			count = sum.reduce((pre, cur) => pre + cur);
-		}
-	});
 </script>
 
 <!-- This example requires Tailwind CSS v2.0+ -->
@@ -54,7 +33,7 @@
 						<div class="px-4 sm:px-6">
 							<div class="flex items-start justify-between">
 								<h2 class="text-lg font-medium text-gray-900" id="slide-over-title">
-									Shopping Cart ({count})
+									Shopping Cart ({$itemCount})
 								</h2>
 								<div class="ml-3 flex h-7 items-center">
 									<button
@@ -84,7 +63,7 @@
 							</div>
 						</div>
 						<div class="relative mt-6 flex-1 px-4 sm:px-6">
-							<CartList {cart} {cartItems} />
+							<CartList {cartItems} />
 						</div>
 					</div>
 				</div>

@@ -3,7 +3,7 @@
 	import type { Edges } from 'src/types/product';
 	import type { Cart } from 'src/types/cart';
 	import LineItem from './LineItem.svelte';
-	import { isCartOpen } from '$lib/stores';
+	import { isCartOpen, checkoutUrl } from '$lib/stores';
 
 	export let cart: Cart;
 	export let cartItems: Edges[] = [];
@@ -42,7 +42,7 @@
 
 			<div class="mt-10 flex items-center text-center">
 				<a
-					href={cart.checkoutUrl}
+					href={$checkoutUrl}
 					class="w-full bg-oldGrey border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-custard-500 hover:bg-custard-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500"
 					>Checkout</a
 				>

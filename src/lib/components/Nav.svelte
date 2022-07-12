@@ -9,50 +9,50 @@
 
 	// Shopping Cart
 	let count = 0;
-	let cart: Cart;
-	let cartId: string = '';
-	let cartItems: Edges[] = [];
+	// let cart: Cart;
+	// let cartId: string = '';
+	// let cartItems: Edges[] = [];
 
-	function purgeCart() {
-		localStorage.removeItem('cartId');
-		localStorage.removeItem('cart');
-	}
+	// function purgeCart() {
+	// 	localStorage.removeItem('cartId');
+	// 	localStorage.removeItem('cart');
+	// }
 
-	onMount(async () => {
-		try {
-			cartId = localStorage.getItem('cartId');
-		} catch (error) {
-			console.log(error);
-		}
+	// onMount(async () => {
+	// 	try {
+	// 		cartId = localStorage.getItem('cartId');
+	// 	} catch (error) {
+	// 		console.log(error);
+	// 	}
 
-		if (cartId !== undefined) {
-			const validCart = await checkIfCartExists(cartId);
-			if (validCart.cart !== null) {
-				cart = JSON.parse(localStorage.getItem('cart'));
+	// 	if (cartId !== undefined) {
+	// 		const validCart = await checkIfCartExists(cartId);
+	// 		if (validCart.cart !== null) {
+	// 			cart = JSON.parse(localStorage.getItem('cart'));
 
-				if (cart) {
-					cartItems = cart.lines.edges;
-				}
+	// 			if (cart) {
+	// 				cartItems = cart.lines.edges;
+	// 			}
 
-				// If cartItems isn't empty update cart count
-				if (cartItems.length > 0) {
-					let sum = cartItems.map((n) => n.node.quantity);
-					count = sum.reduce((pre, cur) => pre + cur);
-				}
+	// 			// If cartItems isn't empty update cart count
+	// 			if (cartItems.length > 0) {
+	// 				let sum = cartItems.map((n) => n.node.quantity);
+	// 				count = sum.reduce((pre, cur) => pre + cur);
+	// 			}
 
-				// If an item has been added to the cart, open the SlideOver
-				if (count !== $cartValue) {
-					// Update value for future evaluations
-					cartValue.set(count);
+	// 			// If an item has been added to the cart, open the SlideOver
+	// 			if (count !== $cartValue) {
+	// 				// Update value for future evaluations
+	// 				cartValue.set(count);
 
-					// Open the cart
-					isCartOpen.set(true);
-				}
-			} else {
-				purgeCart();
-			}
-		}
-	});
+	// 				// Open the cart
+	// 				isCartOpen.set(true);
+	// 			}
+	// 		} else {
+	// 			purgeCart();
+	// 		}
+	// 	}
+	// });
 </script>
 
 <TopMenu {count}>

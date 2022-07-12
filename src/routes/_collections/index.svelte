@@ -9,7 +9,7 @@
 </script>
 
 <script lang="ts">
-	import { products } from '$lib/store';
+	import { products } from '$lib/stores';
 	import ProductList from '$lib/components/ProductList.svelte';
 </script>
 
