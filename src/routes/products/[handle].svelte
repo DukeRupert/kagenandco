@@ -80,9 +80,6 @@
 		}
 	};
 
-	// To trigger loading spinner
-	// let addingItemToCart: Promise<void>;
-
 	async function handleClick() {
 		const newCart = await addToCart();
 		console.log(`Added item to cart`);

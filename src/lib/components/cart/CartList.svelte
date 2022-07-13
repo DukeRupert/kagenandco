@@ -15,7 +15,7 @@
 	{#if items.length > 0}
 		<h2 id="cart-heading" class="sr-only">Items in your shopping cart</h2>
 
-		<ul role="list" class="border-t border-b border-gray-200 divide-y divide-gray-200">
+		<ul class="border-t border-b border-gray-200 divide-y divide-gray-200">
 			{#each items as item (item.node.id)}
 				<LineItem item={item.node} />
 			{/each}

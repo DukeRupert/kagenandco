@@ -2,6 +2,7 @@
 	import { price } from '$lib/utils';
 	import Counter from '../Counter.svelte';
 	import type { CartItem } from 'src/types/product';
+	import { cart, cartId, isCartOpen } from '$lib/stores';
 	export let item: CartItem;
 	const { id, sellingPlanAllocation } = item;
 	let sellingPlanId = '';
@@ -16,7 +17,7 @@
 	let timer;
 	const debounceUpdate = async () => {
 		clearTimeout(timer);
-		timer = setTimeout(updateItem, 2000);
+		timer = setTimeout(updateItem, 1000);
 	};
 
 	function handleIncrement() {
@@ -35,37 +36,33 @@
 
 	const updateItem = async () => {
 		// remove item from Shopify cart
-		const updatedCart = await fetch('/api/utils/updateCart', {
+		const newCart = await fetch('/api/utils/updateCart', {
 			method: 'POST',
 			body: JSON.stringify({
-				cartId: localStorage.getItem('cartId'),
+				cartId: $cartId,
 				lines: [{ id, quantity, sellingPlanId }]
 			})
 		})
 			.then((res) => res.json())
 			.then((data) => data);
-		// update localStorage;
-		console.log(`Updating localStorage`);
-		localStorage.setItem('cartId', updatedCart.id);
-		localStorage.setItem('cart', JSON.stringify(updatedCart));
-		location.reload();
+		// update cart
+		cart.set(newCart);
 	};
 
 	const removeItem = async () => {
 		// remove item from Shopify cart
-		const removeItemFromCart = await fetch('/api/utils/removeFromCart', {
+		const newCart = await fetch('/api/utils/removeFromCart', {
 			method: 'POST',
 			body: JSON.stringify({
-				cartId: localStorage.getItem('cartId'),
+				cartId: $cartId,
 				lineId: item.id
 			})
 		})
 			.then((res) => res.json())
 			.then((data) => data);
-		// update localStorage;
-		localStorage.setItem('cartId', removeItemFromCart.id);
-		localStorage.setItem('cart', JSON.stringify(removeItemFromCart));
-		location.reload();
+		// update cart;
+		cart.set(newCart);
+		isCartOpen.set(true);
 	};
 </script>
 
