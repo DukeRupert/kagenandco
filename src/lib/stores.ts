@@ -267,7 +267,9 @@ export const checkoutUrl: Readable<string> = derived(
 export const cartItems: Readable<Edges[] | any[]> = derived(
 	cart,
 	($cart) => {
-		return $cart?.lines?.edges ?? [];
+		const items = $cart?.lines?.edges ?? [];
+		const newItems = [...items];
+		return newItems;
 	},
 	[]
 );

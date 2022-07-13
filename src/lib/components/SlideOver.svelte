@@ -2,6 +2,8 @@
 	import { isCartOpen, cartItems, itemCount } from '$lib/stores';
 	import CartList from './cart/CartList.svelte';
 
+	$: items = [...$cartItems];
+
 	function handleClick() {
 		isCartOpen.set(false);
 	}
@@ -63,7 +65,7 @@
 							</div>
 						</div>
 						<div class="relative mt-6 flex-1 px-4 sm:px-6">
-							<CartList {cartItems} />
+							<CartList {items} />
 						</div>
 					</div>
 				</div>

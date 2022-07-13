@@ -7,7 +7,7 @@
 	let sellingPlanId = '';
 
 	// Change quantity of an item in the cart
-	let quantity = item.quantity;
+	$: quantity = item.quantity;
 	if (sellingPlanAllocation) {
 		sellingPlanId = sellingPlanAllocation.sellingPlan.id;
 	}

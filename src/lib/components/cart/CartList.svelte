@@ -1,12 +1,10 @@
 <!-- CartList.svelte -->
 <script lang="ts">
-	import type { Edges } from 'src/types/product';
-	import type { Cart } from 'src/types/cart';
+	import type { Edges } from 'src/types/cart';
 	import LineItem from './LineItem.svelte';
-	import { isCartOpen, checkoutUrl } from '$lib/stores';
+	import { isCartOpen, checkoutUrl, subtotal } from '$lib/stores';
 
-	export let cart: Cart;
-	export let cartItems: Edges[] = [];
+	export let items: Edges | [] = [];
 
 	function closeCart() {
 		isCartOpen.set(false);
@@ -14,11 +12,11 @@
 </script>
 
 <section aria-labelledby="cart-heading h-full">
-	{#if cartItems.length > 0}
+	{#if items.length > 0}
 		<h2 id="cart-heading" class="sr-only">Items in your shopping cart</h2>
 
 		<ul role="list" class="border-t border-b border-gray-200 divide-y divide-gray-200">
-			{#each cartItems as item}
+			{#each items as item (item.node.id)}
 				<LineItem item={item.node} />
 			{/each}
 		</ul>
@@ -30,11 +28,9 @@
 				<dl class="space-y-4">
 					<div class="flex items-center justify-between">
 						<dt class="text-base font-medium text-gray-900">Subtotal</dt>
-						{#if cart}
-							<dd class="ml-4 text-base font-medium text-gray-900">
-								${cart.estimatedCost.subtotalAmount.amount}
-							</dd>
-						{/if}
+						<dd class="ml-4 text-base font-medium text-gray-900">
+							${$subtotal.amount}
+						</dd>
 					</div>
 				</dl>
 				<p class="mt-1 text-sm text-gray-500">Shipping and taxes will be calculated at checkout.</p>

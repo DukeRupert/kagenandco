@@ -14,6 +14,7 @@
 	import Counter from '$lib/components/Counter.svelte';
 	import LoadingSpinner from '$lib/components/LoadingSpinner.svelte';
 	import type { Product } from 'src/types/product';
+	import { cart, cartId, isCartOpen } from '$lib/stores';
 
 	export let product: Product;
 	// Track active Main Image
@@ -65,27 +66,28 @@
 					'Content-Type': 'application/json'
 				},
 				body: JSON.stringify({
-					cartId: localStorage.getItem('cartId'),
+					cartId: $cartId,
 					itemId: selectedProduct.id,
 					quantity: quantity,
 					sellingPlanId: sellingPlanId
 				})
 			});
-			const data = await addToCartResponse.json();
-			// save cart to localStorage
-			localStorage.setItem('cartId', data.id);
-			localStorage.setItem('cart', JSON.stringify(data));
-			location.reload();
+			const cart = await addToCartResponse.json();
+			// update cart
+			return cart;
 		} catch (e) {
 			console.log(e);
 		}
 	};
 
 	// To trigger loading spinner
-	let addingItemToCart: Promise<void>;
+	// let addingItemToCart: Promise<void>;
 
-	function handleClick() {
-		addingItemToCart = addToCart();
+	async function handleClick() {
+		const newCart = await addToCart();
+		console.log(`Added item to cart`);
+		cart.set(newCart);
+		isCartOpen.set(true);
 	}
 </script>
 
@@ -257,12 +259,9 @@
 							on:click|preventDefault={handleClick}
 							disabled={product.totalInventory == 0 ? true : false}
 							class="basis-3/4 bg-custard-500 disabled:bg-gray-300 disabled:text-gray-900 border border-transparent rounded-md md:ml-3 mt-3 py-3 px-8 flex items-center justify-center text-base font-medium text-gray-900 hover:bg-oldGrey hover:text-custard-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-custard-500 sm:w-full"
-							>{#if addingItemToCart}
-								<LoadingSpinner />
-							{:else}
-								Add to Cart
-							{/if}</button
 						>
+							Add to Cart
+						</button>
 					</div>
 				</form>
 			</div>
