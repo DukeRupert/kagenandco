@@ -12,50 +12,108 @@
 
 <script lang="ts">
 	import Counter from '$lib/components/Counter.svelte';
-	import LoadingSpinner from '$lib/components/LoadingSpinner.svelte';
-	import type { Product } from 'src/types/product';
+	import OptionPicker from '$lib/components/OptionPicker.svelte';
+	import type { Product, Option } from 'src/types/product';
 	import { cart, cartId, isCartOpen } from '$lib/stores';
 
+	interface Choice {
+		name: string;
+		value: string;
+	}
+	interface Variant {
+		id: string;
+		title: string;
+		selectedOptions: Choice[];
+		priceV2: {
+			amount: string;
+			currencyCode: string;
+		};
+		quantityAvailable: number;
+		options: string[];
+	}
+
+	interface SelectedOptions {
+		Size: string;
+		Texture: string;
+		Type: string;
+	}
+
 	export let product: Product;
+
 	// Track active Main Image
 	let mainImage = 0;
 
+	// Options
+	const options: Option[] = [...product.options];
+
+	function setDefaults(arr: Option[]): SelectedOptions {
+		let object = {};
+		arr.forEach((v) => (object[v.name] = v.values[0]));
+		return object;
+	}
+
+	function updateOptions(choice: Choice, selectedOptions: SelectedOptions) {
+		const { name, value } = choice;
+
+		let newOptions = selectedOptions;
+
+		Object.keys(selectedOptions).map((key) => {
+			if (key === name) {
+				newOptions[key] = value;
+			} else {
+				newOptions[key] = selectedOptions[key];
+			}
+		});
+
+		return newOptions;
+	}
+
+	// Set default options
+	let selectedOptions = setDefaults(options);
+
+	// Refactor variants for easier filtering
+	const variants: Variant[] = [...product.variants.edges].map((variant) => {
+		let obj = Object.assign({}, variant.node);
+		obj['id'] = variant.node.id;
+		let options = [];
+		variant.node.selectedOptions.forEach((element) => {
+			options.push(element.value);
+		});
+		obj['options'] = options;
+
+		return obj;
+	});
+
 	// Track active variant, reactively update pricing
-	let variant = 0;
-	$: price = parseFloat(product.variants.edges[variant].node.priceV2.amount);
+	function selectVariant(arr: Variant[], options: SelectedOptions): Variant {
+		const filters: Variant[] = Object.values(options);
+		let filteredArray = [...arr];
+
+		filters.forEach((el) => {
+			filteredArray = filteredArray.filter((v) => v.options.includes(el));
+		});
+
+		return filteredArray[0] as Variant;
+	}
+
+	$: activeVariant = selectVariant(variants, selectedOptions);
+	$: price = parseFloat(activeVariant.priceV2.amount);
 	$: reduction =
 		product.sellingPlanGroups.edges[0].node.sellingPlans.edges[0].node.priceAdjustments[0]
 			.adjustmentValue.adjustmentPercentage *
 		(price / 100);
-	$: subscribePrice = price - reduction;
+	$: subscriptionPrice = price - reduction;
 
 	// Track quantity of product to add to cart
 	let quantity = 1;
-	function decreaseQuantity() {
-		if (quantity > 1) {
-			return quantity--;
-		}
-		return 1;
-	}
-	function increaseQuantity() {
-		if (quantity < selectedProduct.quantityAvailable) {
-			return quantity++;
-		}
-		return quantity;
-	}
+	$: maxQuantity = activeVariant.quantityAvailable;
+	const decreaseQuantity = () => (quantity > 1 ? quantity-- : 1);
+	const increaseQuantity = () => (quantity < maxQuantity ? quantity++ : quantity);
 
 	// Default to active subscription, change to single purchase by setting sellingPlanId to empty string
 	let isSubscription = true;
-	let sellingPlanId = product.sellingPlanGroups.edges[0].node.sellingPlans.edges[0].node.id;
-
-	$: if (isSubscription) {
-		sellingPlanId = product.sellingPlanGroups.edges[0].node.sellingPlans.edges[0].node.id;
-	} else {
-		sellingPlanId = '';
-	}
-
-	// Cart operations
-	$: selectedProduct = product.variants.edges[variant].node;
+	const sellingPlanId = product.sellingPlanGroups.edges[0].node.sellingPlans.edges[0].node.id;
+	$: monthlySubscription = isSubscription ? sellingPlanId : '';
 
 	const addToCart = async () => {
 		// add selected product to cart
@@ -67,9 +125,9 @@
 				},
 				body: JSON.stringify({
 					cartId: $cartId,
-					itemId: selectedProduct.id,
+					itemId: activeVariant.id,
 					quantity: quantity,
-					sellingPlanId: sellingPlanId
+					sellingPlanId: monthlySubscription
 				})
 			});
 			const cart = await addToCartResponse.json();
@@ -80,11 +138,19 @@
 		}
 	};
 
+	// Add item to cart
 	async function handleClick() {
 		const newCart = await addToCart();
 		console.log(`Added item to cart`);
 		cart.set(newCart);
 		isCartOpen.set(true);
+	}
+
+	// Update selectedOptions array with user input
+	function handleOption(event) {
+		const choice = event.detail;
+
+		selectedOptions = updateOptions(choice, selectedOptions);
 	}
 </script>
 
@@ -148,11 +214,11 @@
 								? 'text-gray-500 line-through'
 								: ''}"
 						>
-							${product.variants.edges[variant].node.priceV2.amount}
+							${price}
 						</p>
 						{#if isSubscription}
 							<p class="text-2xl text-gray-900">
-								${subscribePrice.toFixed(2)}
+								${subscriptionPrice.toFixed(2)}
 							</p>
 						{/if}
 					{:else}
@@ -202,52 +268,16 @@
 							aria-labelledby="size-choice-0-label"
 						/>
 						<span id="size-choice-0-label" class="text-center">
-							Subscribe & Save - ${subscribePrice.toFixed(2)}</span
+							Subscribe & Save - ${subscriptionPrice.toFixed(2)}</span
 						>
 					</label>
 				</form>
 
+				<!-- Options -->
 				<form class="mt-6">
-					{#if product.variants.edges.length > 0}
-						<!-- Variant picker -->
-						<div class="mt-8">
-							<div class="flex items-center justify-between">
-								<h2 class="text-sm font-medium text-gray-900">Size</h2>
-							</div>
-
-							<fieldset class="mt-2">
-								<legend class="sr-only">Choose a size</legend>
-								<div class="grid grid-cols-3 gap-3 sm:grid-cols-6">
-									<!--
-                    In Stock: "cursor-pointer", Out of Stock: "opacity-25 cursor-not-allowed"
-                    Active: "ring-2 ring-offset-2 ring-custard-500"
-                    Checked: "bg-indigo-600 border-transparent text-white hover:bg-indigo-700", Not Checked: "bg-white border-gray-200 text-gray-900 hover:bg-gray-50"
-                  -->
-									{#each product.variants.edges as { node: { title, quantityAvailable } }, i}
-										{#if quantityAvailable !== 0}
-											<!-- content here -->
-											<label
-												class="border rounded-md py-3 px-3 flex items-center justify-center text-sm font-medium text-gray-900 hover:bg-custard-500 hover:text-gray-900 uppercase sm:flex-1 cursor-pointer focus:outline-none {variant ===
-												i
-													? 'bg-oldGrey border-transparent text-custard-400'
-													: ''}"
-											>
-												<input
-													type="radio"
-													name="variant"
-													bind:group={variant}
-													value={i}
-													class="sr-only"
-													aria-labelledby="size-choice-0-label"
-												/>
-												<span id="size-choice-0-label"> {title} </span>
-											</label>
-										{/if}
-									{/each}
-								</div>
-							</fieldset>
-						</div>
-					{/if}
+					{#each options as option}
+						<OptionPicker {option} on:option={handleOption} />
+					{/each}
 
 					<div class="mt-10 flex flex-col md:flex-row">
 						<Counter on:decrement={decreaseQuantity} on:increment={increaseQuantity} {quantity} />

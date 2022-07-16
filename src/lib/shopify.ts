@@ -121,11 +121,15 @@ export const getProductByHandle = async (handle) => {
     title
     totalInventory
     productType
-    variants(first: 5) {
+    variants(first: 15) {
       edges {
         node {
           id
           title
+          selectedOptions {
+            name,
+            value
+          }
           priceV2 {
             amount
             currencyCode
@@ -133,6 +137,10 @@ export const getProductByHandle = async (handle) => {
           quantityAvailable
         }
       }
+    }
+    options {
+      name,
+      values
     }
     priceRange {
       maxVariantPrice {

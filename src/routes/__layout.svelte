@@ -26,7 +26,6 @@
 		subtotal,
 		itemCount
 	} from '$lib/stores';
-	import type { Cart } from 'src/types/cart';
 	import { createCart, initializeCart } from '$lib/shopify';
 	import Nav from '$lib/components/Nav.svelte';
 	import Footer from '$lib/components/Footer.svelte';

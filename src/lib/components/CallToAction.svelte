@@ -6,7 +6,7 @@
 				<a
 					sveltekit:prefetch
 					href="/locations"
-					class="inline-flex items-center justify-center px-5 py-3 border text-base font-medium rounded-3xl text-black bg-custard-500 hover:bg-custard-400"
+					class="inline-flex items-center justify-center px-5 py-3 border text-base font-medium rounded-3xl text-black bg-oldGrey hover:bg-custard-400"
 				>
 					Find a Store
 				</a>

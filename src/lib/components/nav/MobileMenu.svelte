@@ -1,8 +1,6 @@
 <!-- src/lib/components/nav/MobileMenu.svelte -->
 <script lang="ts">
 	import { navigating } from '$app/stores';
-	import { fly } from 'svelte/transition';
-	import { quartOut } from 'svelte/easing';
 	import MobileMenuItem from './MobileMenuItem.svelte';
 	import { isMobileMenuOpen, siteData } from '$lib/stores';
 

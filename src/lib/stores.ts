@@ -1,7 +1,6 @@
 import { writable, derived, type Writable, type Readable } from 'svelte/store';
 import type { Product } from 'src/types/product';
 import type { Cart, Edges, Subtotal } from '../types/cart';
-import { browser } from '$app/env';
 
 export const siteData = writable({
 	_createdAt: '2019-03-29T10:09:19Z',
