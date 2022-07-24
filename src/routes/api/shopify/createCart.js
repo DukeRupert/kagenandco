@@ -1,6 +1,6 @@
 import { postToShopify } from '../utils/postToShopify';
 
-export async function get() {
+export async function GET() {
 	console.log('Running createCart endpoint');
 
 	const response = await postToShopify({ query });

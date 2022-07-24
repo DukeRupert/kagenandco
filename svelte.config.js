@@ -12,12 +12,7 @@ const config = {
 	],
 
 	kit: {
-		adapter: vercel(),
-		vite: {
-			define: {
-				'process.env': process.env
-			}
-		}
+		adapter: vercel()
 	}
 };
 

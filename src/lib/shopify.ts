@@ -844,3 +844,57 @@ export const updateItemInCart = async ({ cartId, lines }) => {
 		console.log(error);
 	}
 };
+
+export const addToCart = async (
+	cartId: string,
+	itemId: string,
+	quantity: number,
+	monthlySubscription: string
+) => {
+	console.log(`monthly subscription : ${monthlySubscription}`);
+	if (monthlySubscription) {
+		console.log('monthly subscription is true');
+	} else {
+		console.log('monthly subscription is false');
+	}
+	if (monthlySubscription) {
+		try {
+			const res = await fetch('/api/utils/addSubscriptionToCart', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					cartId,
+					itemId,
+					quantity,
+					monthlySubscription
+				})
+			});
+			const cart = await res.json();
+			// update cart
+			return cart;
+		} catch (e) {
+			console.log(e);
+		}
+	}
+
+	try {
+		const res = await fetch('/api/utils/addItemToCart', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				cartId,
+				itemId,
+				quantity
+			})
+		});
+		const cart = await res.json();
+		// update cart
+		return cart;
+	} catch (e) {
+		console.log(e);
+	}
+};

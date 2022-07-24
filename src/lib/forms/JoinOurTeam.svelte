@@ -81,7 +81,7 @@
 <form
 	use:form
 	action="/api/applicant"
-	method="post"
+	method="POST"
 	on:feltesuccess={handleSuccess}
 	on:felteerror={handleError}
 	class="space-y-8 divide-y divide-gray-200"

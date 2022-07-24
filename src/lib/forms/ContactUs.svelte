@@ -88,7 +88,7 @@
 <form
 	use:form
 	action="/api/contact-us"
-	method="post"
+	method="POST"
 	on:feltesuccess={handleSuccess}
 	on:felteerror={handleError}
 	class="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8"

@@ -3,7 +3,7 @@ import postmark from 'postmark';
 // Send an email:
 const client = new postmark.ServerClient(process.env.POSTMARK_API_KEY);
 
-export async function post({ request }) {
+export async function POST({ request }) {
 	const body = await request.formData();
 
 	// Convert formData to JSON

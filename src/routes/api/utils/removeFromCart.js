@@ -1,7 +1,7 @@
 // api/utils/removeFromCart.js
 
 import { removeItemFromCart } from '$lib/shopify';
-export async function post({ request }) {
+export async function POST({ request }) {
 	const body = await request.json();
 	console.log(body);
 	const { cartId, lineId } = body;

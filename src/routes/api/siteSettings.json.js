@@ -1,6 +1,6 @@
 import client from '$lib/sanity-client';
 
-export async function get() {
+export async function GET() {
 	// Build query
 	const filter = `*[_type == "siteSettings"]`;
 	const projection = `{..., logo{..., asset->}, "order" : *[_type=="location"]{name, "url" : orderUrl}}`;

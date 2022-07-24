@@ -15,6 +15,7 @@
 	import OptionPicker from '$lib/components/OptionPicker.svelte';
 	import type { Product, Option } from 'src/types/product';
 	import { cart, cartId, isCartOpen } from '$lib/stores';
+	import { addToCart } from '$lib/shopify';
 
 	interface Choice {
 		name: string;
@@ -115,32 +116,14 @@
 	const sellingPlanId = product.sellingPlanGroups.edges[0].node.sellingPlans.edges[0].node.id;
 	$: monthlySubscription = isSubscription ? sellingPlanId : '';
 
-	const addToCart = async () => {
-		// add selected product to cart
-		try {
-			const addToCartResponse = await fetch('/api/utils/addToCart', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify({
-					cartId: $cartId,
-					itemId: activeVariant.id,
-					quantity: quantity,
-					sellingPlanId: monthlySubscription
-				})
-			});
-			const cart = await addToCartResponse.json();
-			// update cart
-			return cart;
-		} catch (e) {
-			console.log(e);
-		}
-	};
+	// cartId: $cartId,
+	// itemId: activeVariant.id,
+	// quantity: quantity,
+	// sellingPlanId: monthlySubscription
 
 	// Add item to cart
 	async function handleClick() {
-		const newCart = await addToCart();
+		const newCart = await addToCart($cartId, activeVariant.id, quantity, monthlySubscription);
 		console.log(`Added item to cart`);
 		cart.set(newCart);
 		isCartOpen.set(true);

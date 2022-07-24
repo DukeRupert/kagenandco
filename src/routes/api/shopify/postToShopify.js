@@ -1,6 +1,6 @@
 import { dev } from '$app/env';
 
-export async function post({ query, variables }) {
+export async function POST({ query, variables }) {
 	// Run in dev mode
 	if (dev) {
 		try {

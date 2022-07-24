@@ -1,6 +1,6 @@
 import client from '$lib/sanity-client';
 
-export async function get() {
+export async function GET() {
 	// You must be on the home page if you reached this endpoint
 	const slug = '/';
 
