@@ -19,8 +19,8 @@
 	import { page } from '$app/stores';
 	import { urlFor } from '$lib/image-url';
 	import PrimaryBanner from '$lib/components/PrimaryBanner.svelte';
-	import LocationsBanner from '$lib/components/LocationsBanner.svelte';
-	import Hero from '$lib/components/Hero.svelte';
+	import MenuBanner from '$lib/components/MenuBanner.svelte';
+	import SubscriptionBanner from '$lib/components/SubscriptionBanner.svelte';
 
 	// SEO
 	const pageUrl = `https://${$page.url.hostname}${$page.url.pathname}`;
@@ -49,4 +49,5 @@
 	}}
 />
 <PrimaryBanner />
-<LocationsBanner />
+<SubscriptionBanner />
+<MenuBanner />
