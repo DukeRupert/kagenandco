@@ -4,7 +4,6 @@
 
 	export async function load({ params }) {
 		const { collection } = params;
-		console.log(`Query param : ${collection}`);
 		await getCollectionByHandle(collection);
 		return { props: { collection } };
 	}

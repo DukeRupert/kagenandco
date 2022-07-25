@@ -42,7 +42,6 @@
 
 	async function createNewCart() {
 		const res = await createCart();
-		console.log(`Response from createCart : ${JSON.stringify(res)}`);
 		const newCart = res?.cartCreate?.cart || {};
 		const id = res?.cartCreate?.cart?.id ?? '';
 		const url = res?.cartCreate?.cart?.checkoutUrl ?? '';
@@ -57,34 +56,20 @@
 	onMount(async () => {
 		// get cart details from localStorage
 		const storedCartId = localStorage.getItem('cartId');
-		console.log(`Stored cartId : ${storedCartId}`);
 		if (!storedCartId) {
-			console.log(`Stored cartId does not exist -> Create new cart`);
 			// create a new cart
 			createNewCart();
 		} else {
-			console.log('Stored cartId exists -> refreshing cart');
 			// validate cartId with shopify
 			const res = await initializeCart(storedCartId);
 
 			// If the cart is not valid, create a new cart
 			if (res.cart == null) {
-				console.log('Refreshed cart is null -> Create new cart');
 				createNewCart();
 			} else {
 				// Cart is valid. Destructure and assign to stores.
 				const freshCart = res?.cart ?? {};
 				cart.set(freshCart);
-
-				console.log(`cartId : ${$cartId}`);
-
-				console.log(`checkoutUrl : ${$checkoutUrl}`);
-
-				console.log(`cartItems : ${JSON.stringify($cartItems)}`);
-
-				console.log(`itemCount: ${JSON.stringify($itemCount)}`);
-
-				console.log(`subtotal : ${JSON.stringify($subtotal)}`);
 			}
 		}
 	});

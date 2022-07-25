@@ -124,7 +124,6 @@
 	// Add item to cart
 	async function handleClick() {
 		const newCart = await addToCart($cartId, activeVariant.id, quantity, monthlySubscription);
-		console.log(`Added item to cart`);
 		cart.set(newCart);
 		isCartOpen.set(true);
 	}

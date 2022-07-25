@@ -3,7 +3,6 @@
 import { removeItemFromCart } from '$lib/shopify';
 export async function POST({ request }) {
 	const body = await request.json();
-	console.log(body);
 	const { cartId, lineId } = body;
 	try {
 		const shopifyResponse = await removeItemFromCart({
