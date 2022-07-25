@@ -197,7 +197,7 @@
 								? 'text-gray-500 line-through'
 								: ''}"
 						>
-							${price}
+							${price.toFixed(2)}
 						</p>
 						{#if isSubscription}
 							<p class="text-2xl text-gray-900">

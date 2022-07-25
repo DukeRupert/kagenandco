@@ -29,7 +29,7 @@
 					<div class="flex items-center justify-between">
 						<dt class="text-base font-medium text-gray-900">Subtotal</dt>
 						<dd class="ml-4 text-base font-medium text-gray-900">
-							${$subtotal.amount}
+							${parseFloat($subtotal.amount).toFixed(2)}
 						</dd>
 					</div>
 				</dl>
