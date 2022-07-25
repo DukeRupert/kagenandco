@@ -28,7 +28,7 @@
 							</p>
 							<a
 								href="/products/the-rooster"
-								class="flex items-center justify-center px-4 py-3 border-2 text-base uppercasefont-medium rounded-3xl shadow-sm text-white hover:bg-custard-500 hover:border-custard-500 transition-all ease-in sm:px-8"
+								class="flex items-center justify-center px-4 py-3 border-2 text-base md:text-xl uppercasefont-medium rounded-3xl shadow-sm text-white hover:bg-custard-500 hover:border-custard-500 transition-all ease-in sm:px-8"
 							>
 								Shop Coffee
 							</a>

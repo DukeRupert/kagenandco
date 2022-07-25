@@ -23,7 +23,7 @@
 					<div class="space-y-4 sm:space-y-0 sm:mx-auto sm:inline-grid sm:grid-cols-2 sm:gap-5">
 						<a
 							href="/menu/tri-cities"
-							class="flex items-center justify-center px-4 py-3 border-2 text-base uppercase font-medium rounded-3xl shadow-sm text-white hover:bg-custard-500 hover:border-custard-500 transition-all ease-in sm:px-8"
+							class="flex items-center justify-center px-4 py-3 border-2 text-base md:text-xl uppercase font-medium rounded-3xl shadow-sm text-white hover:bg-custard-500 hover:border-custard-500 transition-all ease-in sm:px-8"
 						>
 							Our Menu
 						</a>
