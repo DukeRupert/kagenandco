@@ -22,31 +22,21 @@
 <div
 	class="bg-white z-40 fixed w-full h-full pb-12 flex flex-col overflow-y-auto transition-transform ease-out duration-300 {$isMobileMenuOpen
 		? 'translate-x-0'
-		: 'translate-x-full'} "
+		: 'translate-x-full'}"
 >
 	<!-- Links -->
 	<div class="px-4 pt-10 pb-6 space-y-12">
 		<div class="grid grid-cols-1 items-start gap-y-10 gap-x-6">
-			<MobileMenuItem title="Coffee Club" href="/products/the-rooster" />
+			<MobileMenuItem title="Order Online" href={$siteData.order[0].url} primary />
+			<MobileMenuItem title="Shop Coffee" href="/products/the-rooster" primary />
 			<MobileMenuItem title="Locations" href="/locations" />
 			<MobileMenuItem title="Menu" href="/menu/tri-cities" />
 			<MobileMenuItem title="About" href="/about-us" subItems={about} />
 		</div>
 	</div>
 
-	<!-- User Account -->
-	<div class="border-t border-gray-200 py-6 px-4 space-y-6">
-		<div class="flow-root">
-			<a href="/register" class="-m-2 p-2 block font-medium text-gray-900">Create an account</a>
-		</div>
-
-		<div class="flow-root">
-			<a href="/login" class="-m-2 p-2 block font-medium text-gray-900">Sign in</a>
-		</div>
-	</div>
-
 	<!-- Social Links -->
-	<div class="w-full mt-2 flex justify-center space-x-6">
+	<div class="w-full mt-2 flex border-t py-6 border-gray-200 justify-center space-x-6">
 		<div class="w-10 h-10">
 			<a
 				href={$siteData.facebook}

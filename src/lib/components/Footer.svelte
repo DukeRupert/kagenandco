@@ -9,6 +9,24 @@
 			aria-label="Footer"
 		>
 			<div class="px-5 py-2">
+				<a href="/products/the-rooster" class="text-base text-custard-500 hover:text-custard-300">
+					Shop Coffee
+				</a>
+			</div>
+
+			<div class="px-5 py-2">
+				<a href={$siteData.order[0].url} class="text-base text-custard-500 hover:text-custard-300">
+					Order Online
+				</a>
+			</div>
+
+			<div class="px-5 py-2">
+				<a href="/menu/tri-cities" class="text-base text-custard-500 hover:text-custard-300">
+					Menu
+				</a>
+			</div>
+
+			<div class="px-5 py-2">
 				<a href="/about-us" class="text-base text-custard-500 hover:text-custard-300"> About </a>
 			</div>
 
@@ -20,25 +38,13 @@
 
 			<div class="px-5 py-2">
 				<a href="/join-our-team" class="text-base text-custard-500 hover:text-custard-300">
-					Jobs
+					Join Our Team
 				</a>
 			</div>
 
 			<div class="px-5 py-2">
 				<a href="/contact-us" class="text-base text-custard-500 hover:text-custard-300">
 					Contact Us
-				</a>
-			</div>
-
-			<div class="px-5 py-2">
-				<a href="/menu/tri-cities" class="text-base text-custard-500 hover:text-custard-300">
-					Tri-Cities Menu
-				</a>
-			</div>
-
-			<div class="px-5 py-2">
-				<a href="/menu/spokane" class="text-base text-custard-500 hover:text-custard-300">
-					Spokane Menu
 				</a>
 			</div>
 		</nav>

@@ -6,13 +6,19 @@
 	export let title = '';
 	export let href = '';
 	export let subItems = [];
+	export let primary = false;
 	let toggle = false;
 </script>
 
 <div class="grid grid-cols-1 gap-y-10 gap-x-6">
 	<div>
 		<div class="flex">
-			<a {href} class="font-medium text-xl text-gray-900">
+			<a
+				{href}
+				class="{primary
+					? 'rounded-3xl bg-custard-500'
+					: ''} font-medium text-xl px-4 py-2 text-gray-900"
+			>
 				{title.toUpperCase()}
 			</a>
 			{#if subItems.length > 0}

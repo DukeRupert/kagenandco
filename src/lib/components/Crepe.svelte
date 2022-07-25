@@ -10,7 +10,13 @@
 	<div
 		class="w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none"
 	>
-		<img src={url} {alt} class="w-full h-full object-center object-cover lg:w-full lg:h-full" />
+		<img
+			src={url}
+			{alt}
+			class="w-full h-auto object-center object-cover lg:w-full lg:h-full"
+			width="400"
+			height="400"
+		/>
 	</div>
 	<div class="mt-4 flex justify-between">
 		<div>
@@ -19,9 +25,9 @@
 				{name}
 			</h3>
 		</div>
-		<div>
+		<!-- <div>
 			<p class="text-sm font-medium text-gray-500">Full: ${price.full}</p>
 			<p class="text-sm font-medium text-gray-500">Mini: ${price.mini}</p>
-		</div>
+		</div> -->
 	</div>
 </div>

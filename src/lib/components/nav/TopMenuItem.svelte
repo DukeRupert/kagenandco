@@ -46,7 +46,13 @@
 				<div class="max-w-7xl mx-auto px-8">
 					<div class="grid grid-cols-4 items-start gap-y-10 gap-x-8 pt-10 pb-12">
 						<div class="flex flex-col items-center">
-							<img class="h-40 mx-auto" src="/logoRooster.svg" alt="Kagen rooster logo" />
+							<img
+								class="h-40 w-auto mx-auto rounded-md"
+								src="/coffee_front.webp"
+								alt="Kagen rooster logo"
+								width="503"
+								height="568"
+							/>
 							<a
 								href="/"
 								class="inline-flex justify-center mt-2 w-40 rounded-3xl border border-custard-500 bg-custard-500 shadow-sm px-4 py-2 bg-custard-white text-base font-medium text-coffee hover:bg-custard-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-custard-300 sm:text-sm"
@@ -59,19 +65,18 @@
 								<a
 									href="/collections/{item.title}"
 									id="desktop-categories-heading"
-									class="font-medium text-gray-900"
+									class="font-medium text-gray-900 capitalize"
 								>
 									{item.title}
 								</a>
 								<ul
-									role="list"
 									aria-labelledby="desktop-categories-heading"
 									class="mt-6 ml-4 space-y-6 sm:mt-4 sm:space-y-4"
 								>
 									{#each item.links as { title, href }}
 										<!-- content here -->
 										<li class="flex">
-											<a {href} class="hover:text-gray-800">{title}</a>
+											<a {href} class="hover:text-gray-800 capitalize">{title}</a>
 										</li>
 									{/each}
 								</ul>
