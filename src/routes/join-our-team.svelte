@@ -19,22 +19,19 @@
 	import { urlFor } from '$lib/image-url';
 	import JoinOurTeam from '$lib/forms/JoinOurTeam.svelte';
 
-	// SEO
-	const pageUrl = `https://${$page.url.hostname}${$page.url.pathname}`;
-
 	// Sanity Content
 	export let data;
-	const { title, excerpt, mainImage } = data;
+	const { title, description, mainImage } = data;
 </script>
 
 <SvelteSeo
 	{title}
-	description={data.description}
-	canonical={$page.url.href}
+	{description}
+	canonical={$page.url.toString()}
 	openGraph={{
 		title: title,
-		description: excerpt,
-		url: $page.url.href,
+		description: description,
+		url: $page.url.toString(),
 		type: 'website',
 		images: [
 			{

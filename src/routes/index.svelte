@@ -24,15 +24,16 @@
 
 	// Sanity Content
 	export let data;
+	const { title, description, mainImage } = data;
 </script>
 
 <SvelteSeo
-	title={data.title}
-	description={data.description}
+	{title}
+	{description}
 	canonical={$page.url.toString()}
 	openGraph={{
-		title: data.title,
-		description: data.excerpt,
+		title: title,
+		description: description,
 		url: $page.url.toString(),
 		type: 'website',
 		images: [

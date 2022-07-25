@@ -18,24 +18,23 @@
 	import { page } from '$app/stores';
 	import { urlFor } from '$lib/image-url';
 	import PortableText from '@portabletext/svelte';
-	import serializers from '$lib/serializers';
 	import CallToAction from '$lib/components/CallToAction.svelte';
 	import Link from '$lib/components/Link.svelte';
 	import TextSection from '$lib/components/TextSection.svelte';
 
 	// Sanity Content
 	export let data;
-	const { asset, alt, caption } = data.mainImage;
+	const { title, description, asset, alt, caption } = data.mainImage;
 </script>
 
 <SvelteSeo
-	title={data.title}
-	description={data.description}
-	canonical={$page.url.href}
+	{title}
+	{description}
+	canonical={$page.url.toString()}
 	openGraph={{
-		title: data.title,
-		description: data.excerpt,
-		url: $page.url.href,
+		title: title,
+		description: description,
+		url: $page.url.toString(),
 		type: 'website',
 		images: [
 			{
