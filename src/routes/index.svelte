@@ -22,9 +22,6 @@
 	import MenuBanner from '$lib/components/MenuBanner.svelte';
 	import SubscriptionBanner from '$lib/components/SubscriptionBanner.svelte';
 
-	// SEO
-	const pageUrl = `https://${$page.url.hostname}${$page.url.pathname}`;
-
 	// Sanity Content
 	export let data;
 </script>
@@ -32,11 +29,11 @@
 <SvelteSeo
 	title={data.title}
 	description={data.description}
-	canonical={$page.url.hostname + $page.url.pathname}
+	canonical={$page.url.toString()}
 	openGraph={{
 		title: data.title,
 		description: data.excerpt,
-		url: pageUrl,
+		url: $page.url.toString(),
 		type: 'website',
 		images: [
 			{
