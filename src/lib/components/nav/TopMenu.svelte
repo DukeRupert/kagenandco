@@ -69,7 +69,6 @@
 
 					<!-- Mobile menu  -->
 					<div class="flex-1 flex items-center lg:hidden">
-						<!-- Mobile menu toggle, controls the 'mobileMenuOpen' state. -->
 						<button
 							type="button"
 							on:click={() => isMobileMenuOpen.update((v) => (v = !v))}

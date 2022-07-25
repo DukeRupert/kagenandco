@@ -48,7 +48,7 @@ export async function POST({ request }) {
 			TemplateId: 21027639,
 			TemplateModel: data,
 			From: 'logan@firefly.llc',
-			To: 'kagen.cox@gmail.com',
+			To: 'kagen.cox@gmail.com, cadem.tcsllc@gmail.com',
 			MessageStream: 'outbound',
 			TrackOpens: true
 		});
