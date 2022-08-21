@@ -7,6 +7,10 @@
 	const { id, sellingPlanAllocation } = item;
 	let sellingPlanId = '';
 
+	// prices
+	const fullPrice = item?.merchandise?.priceV2?.amount ?? '0';
+	const subPrice = item?.sellingPlanAllocation?.priceAdjustments[0]?.price?.amount ?? '0';
+
 	// Change quantity of an item in the cart
 	$: quantity = item.quantity;
 	if (sellingPlanAllocation) {
@@ -91,7 +95,11 @@
 					</a>
 				</h4>
 				<p class="ml-4 text-sm font-medium text-gray-900">
-					{price(parseFloat(item.merchandise.priceV2.amount))}
+					{#if subPrice !== '0'}
+						{price(parseFloat(subPrice))}
+					{:else}
+						{price(parseFloat(fullPrice))}
+					{/if}
 				</p>
 			</div>
 			<p class="mt-1 text-sm text-gray-500">{item.merchandise.title}</p>

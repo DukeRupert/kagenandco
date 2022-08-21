@@ -40,7 +40,7 @@
 	}
 
 	export let product: Product;
-
+	product;
 	// Track active Main Image
 	let mainImage = 0;
 

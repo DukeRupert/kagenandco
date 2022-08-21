@@ -24,7 +24,6 @@
 	// Sanity Content
 	export let data;
 	const { title, description, body, mainImage } = data;
-	console.log(data);
 </script>
 
 <SvelteSeo

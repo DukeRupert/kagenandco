@@ -187,47 +187,63 @@ export interface Product {
 	};
 }
 
+export interface Edges {
+	node: CartItem;
+}
+
 export interface CartItem {
 	id: string;
 	quantity: number;
-	merchandise: {
-		id: string;
-		title: string;
-		priceV2: {
-			amount: string;
-			currencyCode: string;
-		};
-		quantityAvailable: number;
-		product: {
-			title: string;
-			handle: string;
-			images: {
-				edges: [
-					{
-						node: {
-							url: string;
-							altText: string | null;
-						};
-					}
-				];
-			};
-		};
-	};
-	sellingPlanAllocation?: {
-		priceAdjustments?: [
-			{
-				price: {
-					amount: string;
-				};
-			}
-		];
-		sellingPlan?: {
-			id: string;
-			name: string;
-		};
-	};
+	sellingPlanAllocation: SellingPlanAllocation;
+	merchandise: Merchandise;
 }
 
-export interface Edges {
-	node: CartItem;
+export interface Merchandise {
+	id: string;
+	title: string;
+	priceV2: PriceV2;
+	quantityAvailable: number;
+	product: ProductV2;
+}
+
+export interface PriceV2 {
+	amount: string;
+	currencyCode: string;
+}
+
+export interface ProductV2 {
+	title: string;
+	handle: string;
+	images: Images;
+}
+
+export interface Images {
+	edges: Edge[];
+}
+
+export interface Edge {
+	node: Node;
+}
+
+export interface Node {
+	url: string;
+	altText: null;
+}
+
+export interface SellingPlanAllocation {
+	priceAdjustments: PriceAdjustment[];
+	sellingPlan: SellingPlan;
+}
+
+export interface PriceAdjustment {
+	price: Price;
+}
+
+export interface Price {
+	amount: string;
+}
+
+export interface SellingPlan {
+	id: string;
+	name: string;
 }

@@ -677,7 +677,6 @@ export const addSubscriptionToCart = async ({ cartId, quantity, itemId, sellingP
 				]
 			}
 		});
-
 		return shopifyResponse;
 	} catch (error) {
 		console.log(error);
@@ -851,12 +850,6 @@ export const addToCart = async (
 	quantity: number,
 	monthlySubscription: string
 ) => {
-	console.log(`monthly subscription : ${monthlySubscription}`);
-	if (monthlySubscription) {
-		console.log('monthly subscription is true');
-	} else {
-		console.log('monthly subscription is false');
-	}
 	if (monthlySubscription) {
 		try {
 			const res = await fetch('/api/utils/addSubscriptionToCart', {
