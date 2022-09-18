@@ -11,8 +11,5 @@ export async function POST({ request }) {
 		quantity,
 		sellingPlanId: monthlySubscription
 	});
-	return {
-		statusCode: 200,
-		body: JSON.stringify(shopifyResponse.cartLinesAdd.cart)
-	};
+	return new Response(JSON.stringify(shopifyResponse.cartLinesAdd.cart));
 }

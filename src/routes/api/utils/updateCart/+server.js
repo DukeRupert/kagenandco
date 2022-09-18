@@ -17,10 +17,7 @@ export async function POST({ request }) {
 			cartId,
 			lines
 		});
-		return {
-			statusCode: 200,
-			body: JSON.stringify(shopifyResponse.cartLinesUpdate.cart)
-		};
+		return new Response(JSON.stringify(shopifyResponse.cartLinesUpdate.cart));
 	} catch (error) {
 		console.log('There was an error updating an item in the cart');
 		console.log(error);

@@ -9,10 +9,7 @@ export async function POST({ request }) {
 			cartId,
 			lineId
 		});
-		return {
-			statusCode: 200,
-			body: JSON.stringify(shopifyResponse.cartLinesRemove.cart)
-		};
+		return new Response(JSON.stringify(shopifyResponse.cartLinesRemove.cart));
 	} catch (error) {
 		console.log('There was an error removing-item-from-cart');
 		console.log(error);

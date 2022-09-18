@@ -1,20 +1,6 @@
-<script context="module">
-	export async function load({ fetch }) {
-		const res = await fetch(`/api/siteSettings.json`);
-
-		if (res.ok) {
-			const { data } = await res.json();
-			return { props: { data } };
-		}
-
-		return {
-			status: res.status,
-			error: new Error()
-		};
-	}
-</script>
-
 <script lang="ts">
+	throw new Error("@migration task: Add data prop (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292707)");
+
 	import '../app.css';
 	import { siteData, activeTopMenu } from '$lib/stores';
 	import {

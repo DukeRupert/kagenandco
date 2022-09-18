@@ -1,20 +1,6 @@
-<script context="module">
-	export async function load({ params, fetch }) {
-		const { slug } = params;
-
-		const res = await fetch(`/api/menu/${slug}.json`);
-		if (res.ok) {
-			const { data } = await res.json();
-			return { props: { data } };
-		}
-		return {
-			status: res.status,
-			error: new Error()
-		};
-	}
-</script>
-
 <script lang="ts">
+	throw new Error("@migration task: Add data prop (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292707)");
+
 	import SvelteSeo from 'svelte-seo';
 	import { page } from '$app/stores';
 	import { urlFor } from '$lib/image-url';

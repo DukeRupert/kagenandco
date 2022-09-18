@@ -10,8 +10,5 @@ export async function POST({ request }) {
 		itemId,
 		quantity
 	});
-	return {
-		statusCode: 200,
-		body: JSON.stringify(shopifyResponse.cartLinesAdd.cart)
-	};
+	return new Response(JSON.stringify(shopifyResponse.cartLinesAdd.cart));
 }

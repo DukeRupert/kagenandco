@@ -1,3 +1,4 @@
+import { json } from '@sveltejs/kit';
 import client from '$lib/sanity-client';
 
 export async function GET({ params }) {
@@ -20,15 +21,10 @@ export async function GET({ params }) {
 	const [data] = await client.fetch(query);
 
 	if (data) {
-		return {
-			body: {
-				data
-			}
-		};
+		return json({
+			data
+		});
 	}
 
-	return {
-		status: data.status,
-		error: new Error(`Could not fetch ${query}`)
-	};
+	return new Response(undefined, { status: data.status });
 }

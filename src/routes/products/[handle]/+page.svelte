@@ -1,16 +1,20 @@
 <!-- Individual Coffee Product -->
 <script context="module">
-	//** @type {import('./[handle]').Load} */
-	import { getProductByHandle } from '$lib/shopify';
+	throw new Error("@migration task: Check code was safely removed (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292722)");
 
-	export async function load({ params }) {
-		const { handle } = params;
-		const product = await getProductByHandle(handle);
-		return { props: { product } };
-	}
+	// //** @type {import('./[handle]').Load} */
+	// import { getProductByHandle } from '$lib/shopify';
+
+	// export async function load({ params }) {
+	// 	const { handle } = params;
+	// 	const product = await getProductByHandle(handle);
+	// 	return { props: { product } };
+	// }
 </script>
 
 <script lang="ts">
+	throw new Error("@migration task: Add data prop (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292707)");
+
 	import Counter from '$lib/components/Counter.svelte';
 	import OptionPicker from '$lib/components/OptionPicker.svelte';
 	import type { Product, Option } from 'src/types/product';
