@@ -1,64 +1,74 @@
 <script lang="ts">
-	throw new Error("@migration task: Add data prop (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292707)");
-
+	import type { LayoutData } from './$types';
+	import type { Cart } from 'src/types/cart';
 	import '../app.css';
 	import { siteData, activeTopMenu } from '$lib/stores';
-	import {
-		isCartOpen,
-		cart,
-		cartId,
-		checkoutUrl,
-		cartItems,
-		subtotal,
-		itemCount
-	} from '$lib/stores';
-	import { createCart, initializeCart } from '$lib/shopify';
+	import { isCartOpen, cart } from '$lib/stores';
+	import CreateCart from '$lib/shopify/CreateCart';
+	import RetrieveCart from '$lib/shopify/RetrieveCart';
 	import Nav from '$lib/components/Nav.svelte';
 	import Footer from '$lib/components/Footer.svelte';
 	import SlideOver from '$lib/components/SlideOver.svelte';
 	import { onMount } from 'svelte';
+	import { error } from '@sveltejs/kit';
 
 	// Write Sanity content to global store
-	export let data;
-	siteData.set(data);
+	export let data: LayoutData;
+	$siteData = data;
 
 	function closeActiveTopMenu() {
 		activeTopMenu.set('');
 	}
 
 	async function createNewCart() {
-		const res = await createCart();
-		const newCart = res?.cartCreate?.cart || {};
-		const id = res?.cartCreate?.cart?.id ?? '';
-		const url = res?.cartCreate?.cart?.checkoutUrl ?? '';
+		const response = await CreateCart();
+
+		if (!response.ok) {
+			throw error(500);
+		}
+
+		const newCart: Cart = await response.json();
+		const { checkoutUrl, id } = newCart;
+
 		// Update stores
-		cart.set(newCart);
+		$cart = newCart;
 
 		// Persist to localStorage
 		localStorage.setItem('cartId', id);
+		localStorage.setItem('checkoutUrl', checkoutUrl);
 	}
 
 	// Initialize cart status
 	onMount(async () => {
 		// get cart details from localStorage
 		const storedCartId = localStorage.getItem('cartId');
+
+		// No cartId is found, create a new one
 		if (!storedCartId) {
 			// create a new cart
 			createNewCart();
-		} else {
-			// validate cartId with shopify
-			const res = await initializeCart(storedCartId);
+			return;
+		}
 
-			// If the cart is not valid, create a new cart
-			if (res.cart == null) {
-				createNewCart();
-			} else {
-				// Cart is valid. Destructure and assign to stores.
-				const freshCart = res?.cart ?? {};
-				cart.set(freshCart);
-			}
+		// cartId is found, retrieve cart from Shopify
+		const response = await RetrieveCart(storedCartId);
+
+		if (!response.ok) {
+			throw error(500);
+		}
+
+		const newCart: Cart = await response.json();
+
+		// If the cart is not valid, create a new cart
+		if (newCart == null) {
+			createNewCart();
+		} else {
+			// Cart is valid. update store
+			$cart = newCart;
 		}
 	});
+
+	$: console.log($cart);
 </script>
 
 <div

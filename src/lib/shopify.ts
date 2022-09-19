@@ -1,11 +1,17 @@
-import { products } from './stores';
-import { postToShopify } from '../routes/api/utils/postToShopify';
+import { products } from '$lib/stores';
+import { postToShopify } from '../routes/api/utils/postToShopify/+server';
+import { dev } from '$app/environment';
+
+export const SHOPIFY_API_ENDPOINT = dev
+	? import.meta.env.VITE_SHOPIFY_API_ENDPOINT
+	: process.env.SHOPIFY_API_ENDPOINT;
+export const SHOPIFY_STOREFRONT_API_TOKEN = dev
+	? import.meta.env.VITE_SHOPIFY_STOREFRONT_API_TOKEN
+	: process.env.SHOPIFY_STOREFRONT_API_TOKEN;
 
 // Get all products
 export const getProducts = async () => {
-	try {
-		const shopifyResponse = await postToShopify({
-			query: `{
+	const query = `{
         products(sortKey: TITLE, first: 20) {
           edges {
             node {
@@ -38,7 +44,12 @@ export const getProducts = async () => {
             }
           }
         }
-      }`
+      }`;
+	const variables = {};
+	try {
+		const shopifyResponse = await postToShopify({
+			query: query,
+			variables: variables
 		});
 		products.set(shopifyResponse.products.edges);
 		return shopifyResponse;
@@ -105,109 +116,6 @@ export const getCollectionByHandle = async (handle) => {
 		const shopifyResponse = await postToShopify({ query, variables });
 		products.set(shopifyResponse.collectionByHandle.products.edges);
 		return shopifyResponse;
-	} catch (error) {
-		console.log(error);
-	}
-};
-
-// Get details a single product using product handle
-export const getProductByHandle = async (handle) => {
-	const query = `
-    query getProduct($handle: String!) {
-  productByHandle(handle: $handle) {
-    id
-    handle
-    description
-    title
-    totalInventory
-    productType
-    variants(first: 15) {
-      edges {
-        node {
-          id
-          title
-          selectedOptions {
-            name,
-            value
-          }
-          priceV2 {
-            amount
-            currencyCode
-          }
-          quantityAvailable
-        }
-      }
-    }
-    options {
-      name,
-      values
-    }
-    priceRange {
-      maxVariantPrice {
-        amount
-        currencyCode
-      }
-      minVariantPrice {
-        amount
-        currencyCode
-      }
-    }
-    sellingPlanGroups(first: 5) {
-      edges {
-        node {
-          sellingPlans(first: 5) {
-            edges {
-              node {
-                id
-                description
-                priceAdjustments {
-                  adjustmentValue {
-                    ...on SellingPlanPercentagePriceAdjustment {
-                      adjustmentPercentage
-                    }
-                  }
-                }
-                
-              }
-            }
-          }
-        }
-      }
-    }
-    images(first: 4) {
-      edges {
-        node {
-          url
-          altText
-        }
-      }
-    }
-  }
-}
-  `;
-
-	const variables = { handle: handle };
-	try {
-		const shopifyResponse = await postToShopify({ query, variables });
-		return shopifyResponse.productByHandle;
-	} catch (error) {
-		console.log(error);
-	}
-};
-
-export const createCart = async () => {
-	console.log('Executing createCart');
-	const query = `mutation CreateCart {
-                    cartCreate {
-                      cart {
-                        checkoutUrl
-                        id
-                      }
-                    }
-                  }`;
-
-	try {
-		return await postToShopify({ query });
 	} catch (error) {
 		console.log(error);
 	}
@@ -852,7 +760,7 @@ export const addToCart = async (
 ) => {
 	if (monthlySubscription) {
 		try {
-			const res = await fetch('/api/utils/addSubscriptionToCart', {
+			const response = await fetch('/api/utils/addSubscriptionToCart', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
@@ -864,9 +772,15 @@ export const addToCart = async (
 					monthlySubscription
 				})
 			});
-			const cart = await res.json();
-			// update cart
-			return cart;
+
+			if (response.ok) {
+				const { data } = await response.json();
+				console.log(cart);
+				return cart;
+			}
+
+			const { errors } = await response.json();
+			console.log(errors);
 		} catch (e) {
 			console.log(e);
 		}

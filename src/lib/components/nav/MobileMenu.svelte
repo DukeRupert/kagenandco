@@ -18,7 +18,6 @@
 	];
 </script>
 
-<!-- {#if $isMobileMenuOpen} -->
 <div
 	class="bg-white z-40 fixed w-full h-full pb-12 flex flex-col overflow-y-auto transition-transform ease-out duration-300 {$isMobileMenuOpen
 		? 'translate-x-0'
@@ -70,4 +69,3 @@
 		</div>
 	</div>
 </div>
-<!-- {/if} -->

@@ -1,25 +1,13 @@
 <!-- Individual Coffee Product -->
-<script context="module">
-	throw new Error("@migration task: Check code was safely removed (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292722)");
-
-	// //** @type {import('./[handle]').Load} */
-	// import { getProductByHandle } from '$lib/shopify';
-
-	// export async function load({ params }) {
-	// 	const { handle } = params;
-	// 	const product = await getProductByHandle(handle);
-	// 	return { props: { product } };
-	// }
-</script>
-
 <script lang="ts">
-	throw new Error("@migration task: Add data prop (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292707)");
-
+	import type { PageLoad } from './$types';
 	import Counter from '$lib/components/Counter.svelte';
 	import OptionPicker from '$lib/components/OptionPicker.svelte';
 	import type { Product, Option } from 'src/types/product';
 	import { cart, cartId, isCartOpen } from '$lib/stores';
 	import { addToCart } from '$lib/shopify';
+	import AddSubscriptionToCart from '$lib/shopify/AddSubscriptionToCart';
+	import type { Cart } from 'src/types/cart';
 
 	interface Choice {
 		name: string;
@@ -43,7 +31,9 @@
 		Type: string;
 	}
 
-	export let product: Product;
+	export let data: PageLoad;
+	const product = data;
+
 	product;
 	// Track active Main Image
 	let mainImage = 0;
@@ -127,7 +117,27 @@
 
 	// Add item to cart
 	async function handleClick() {
+		if (monthlySubscription) {
+			const variables = {
+				cartId: $cartId,
+				itemId: activeVariant.id,
+				quantity: quantity,
+				sellingPlanId: monthlySubscription
+			};
+			const response = await AddSubscriptionToCart(variables);
+			console.log(response);
+			if (response.ok) {
+				const newCart: Cart = await response.json();
+				console.log(newCart);
+				$cart = newCart;
+				$isCartOpen = true;
+				return;
+			}
+			console.log(`Error: ${response}`);
+			return;
+		}
 		const newCart = await addToCart($cartId, activeVariant.id, quantity, monthlySubscription);
+		console.log(newCart);
 		cart.set(newCart);
 		isCartOpen.set(true);
 	}

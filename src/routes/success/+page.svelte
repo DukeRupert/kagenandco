@@ -10,7 +10,11 @@
 		<div class="flex-shrink-0 flex justify-center">
 			<a href="/" class="inline-flex">
 				<span class="sr-only">{$siteData.title}</span>
-				<img class="h-40 w-auto" src="logoKCC.svg" alt="One Sleep Company logo" />
+				<img
+					class="h-60 w-auto"
+					src={urlFor($siteData.logo.asset).format('webp').width(400).url()}
+					alt={$siteData.logo.alt}
+				/>
 			</a>
 		</div>
 		<div class="py-16">

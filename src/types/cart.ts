@@ -18,14 +18,14 @@ export interface Subtotal {
 
 export interface Cart {
 	id: string;
-	createdAt: string;
-	updatedAt: string;
+	createdAt?: string;
+	updatedAt?: string;
 	checkoutUrl: string;
-	lines: {
+	lines?: {
 		edges: [ProductNode];
 	};
-	options: [Option];
-	estimatedCost: EstimatedCost;
+	options?: [Option];
+	estimatedCost?: EstimatedCost;
 }
 
 export interface CartItem {
