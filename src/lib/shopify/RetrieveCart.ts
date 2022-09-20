@@ -1,21 +1,23 @@
 import { postToShopify } from '../../routes/api/utils/postToShopify/+server';
 import { json } from '@sveltejs/kit';
 import type { Cart } from '$lib/types/cart';
-import { cart } from './mutation';
+import { cartFragment } from './mutation';
 
 export const RetrieveCart = async (cartId: string) => {
 	const query = `
 query ($id: ID!) {
     cart (id: $id) {
-        ${cart}
+        ${cartFragment}
     }
 }`;
 	const variables = { id: cartId };
 
 	try {
 		const response = await postToShopify({ query, variables });
+		console.log(response);
 		if (response.ok) {
 			const data: { data: { cart: Cart } } = await response.json();
+			console.log(data);
 			const {
 				data: { cart }
 			} = data;

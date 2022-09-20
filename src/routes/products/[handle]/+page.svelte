@@ -111,8 +111,12 @@
 	// cartLinesAdd payload
 	let lines = [];
 
+	// Disable submit button and activate spinner
+	let loading = false;
+
 	// Add item to cart
 	async function handleClick() {
+		loading = true;
 		// if this is a subscription
 		if (sellingPlanId) {
 			// Add line
@@ -131,10 +135,12 @@
 				$isCartOpen = true;
 				// Reset lines array
 				lines = [];
+				loading = false;
 				return;
 			}
 			const errors = await response.json();
 			console.log(JSON.stringify(errors, null, ' '));
+			loading = false;
 			return;
 		}
 
@@ -149,10 +155,12 @@
 			$isCartOpen = true;
 			// Reset lines array
 			lines = [];
+			loading = false;
 			return;
 		}
 		const errors = await response.json();
 		console.log(JSON.stringify(errors, null, ' '));
+		loading = false;
 		return;
 	}
 
@@ -294,10 +302,23 @@
 						<button
 							type="submit"
 							on:click|preventDefault={handleClick}
-							disabled={data.totalInventory == 0 ? true : false}
+							disabled={data.totalInventory == 0 ? true : false || loading}
 							class="basis-3/4 bg-custard-500 disabled:bg-gray-300 disabled:text-gray-900 border border-transparent rounded-md md:ml-3 mt-3 py-3 px-8 flex items-center justify-center text-base font-medium text-gray-900 hover:bg-oldGrey hover:text-custard-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-custard-500 sm:w-full"
 						>
-							Add to Cart
+							{#if loading}
+								<svg class="spinner h-6 w-6" viewBox="0 0 50 50">
+									<circle
+										class="path stroke-red-500"
+										cx="25"
+										cy="25"
+										r="20"
+										fill="none"
+										stroke-width="5"
+									/>
+								</svg>
+							{:else}
+								Add to Cart
+							{/if}
 						</button>
 					</div>
 				</form>
@@ -305,3 +326,36 @@
 		</div>
 	</div>
 </div>
+
+<style>
+	.spinner {
+		animation: rotate 2s linear infinite;
+		z-index: 2;
+	}
+
+	.path {
+		stroke-linecap: round;
+		animation: dash 1.5s ease-in-out infinite;
+	}
+
+	@keyframes rotate {
+		100% {
+			transform: rotate(360deg);
+		}
+	}
+
+	@keyframes dash {
+		0% {
+			stroke-dasharray: 1, 150;
+			stroke-dashoffset: 0;
+		}
+		50% {
+			stroke-dasharray: 90, 150;
+			stroke-dashoffset: -35;
+		}
+		100% {
+			stroke-dasharray: 90, 150;
+			stroke-dashoffset: -124;
+		}
+	}
+</style>
