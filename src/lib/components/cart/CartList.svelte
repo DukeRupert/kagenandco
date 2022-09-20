@@ -1,6 +1,6 @@
 <!-- CartList.svelte -->
 <script lang="ts">
-	import type { Edges } from 'src/types/cart';
+	import type { Edges } from '$lib/types/cart';
 	import LineItem from './LineItem.svelte';
 	import { isCartOpen, checkoutUrl, subtotal } from '$lib/stores';
 

@@ -1,6 +1,6 @@
 import { postToShopify } from '../../routes/api/utils/postToShopify/+server';
 import { json } from '@sveltejs/kit';
-import type { Cart } from 'src/types/cart';
+import type { Cart } from '$lib/types/cart';
 
 export const RetrieveCart = async (cartId: string) => {
 	const query = `
@@ -78,7 +78,6 @@ query ($id: ID!) {
 		const response = await postToShopify({ query, variables });
 		if (response.ok) {
 			const data: { data: { cart: Cart } } = await response.json();
-			console.log(data);
 			const {
 				data: { cart }
 			} = data;

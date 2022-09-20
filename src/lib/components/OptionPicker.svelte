@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Option } from 'src/types/product';
+	import type { Option } from '$lib/types/product';
 	import { createEventDispatcher } from 'svelte';
 
 	export let option: Option;

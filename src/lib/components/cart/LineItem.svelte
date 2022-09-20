@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { price } from '$lib/utils';
 	import Counter from '../Counter.svelte';
-	import type { CartItem } from 'src/types/product';
+	import type { CartItem } from '$lib/types/product';
 	import { cart, cartId, isCartOpen } from '$lib/stores';
 	export let item: CartItem;
 	const { id, sellingPlanAllocation } = item;

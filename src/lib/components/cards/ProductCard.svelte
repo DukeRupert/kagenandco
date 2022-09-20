@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Product } from 'src/types/product';
+	import type { Product } from '$lib/types/product';
 	import { price } from '$lib/utils';
 
 	export let product: Product;

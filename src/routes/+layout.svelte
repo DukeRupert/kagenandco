@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { LayoutData } from './$types';
-	import type { Cart } from 'src/types/cart';
+	import type { Cart } from '$lib/types/cart';
 	import '../app.css';
 	import { siteData, activeTopMenu } from '$lib/stores';
 	import { isCartOpen, cart } from '$lib/stores';
@@ -67,8 +67,6 @@
 			$cart = newCart;
 		}
 	});
-
-	$: console.log($cart);
 </script>
 
 <div

@@ -70,3 +70,71 @@ export interface CartItem {
 }
 
 export type Edges = [ProductNode];
+
+export interface CartUserError {
+	code: string;
+	field: string;
+	message: string;
+}
+
+// Api Error response
+
+export interface ErrorLineAdd {
+	errors: Error[];
+}
+
+export interface Error {
+	message: string;
+	locations: Location[];
+	extensions: Extensions;
+}
+
+export interface Extensions {
+	value: Value[];
+	problems: Problem[];
+}
+
+export interface Problem {
+	path: Array<number | string>;
+	explanation: string;
+	message: string;
+}
+
+export interface Value {
+	merchandiseId: string;
+	quantity: number;
+	sellingPlanId: string;
+}
+
+export interface Location {
+	line: number;
+	column: number;
+}
+
+// CartLinesAddPayload
+
+export interface CartLinesAddPayload {
+	data: Data;
+}
+
+export interface Data {
+	cartLinesAdd: CartLinesAdd;
+}
+
+export interface CartLinesAdd {
+	cart: Cart;
+	userErrors: any[];
+}
+
+// CartLineAdd input
+export interface Lines {
+	attributes?: Attribute[];
+	merchandiseId: string;
+	quantity: number;
+	sellingPlanId?: string;
+}
+
+export interface Attribute {
+	key: string;
+	value: string;
+}

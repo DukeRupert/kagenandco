@@ -1,28 +1,19 @@
 <!-- Individual Coffee Product -->
 <script lang="ts">
-	import type { PageLoad } from './$types';
+	import type { PageData } from './$types';
+	import type { VariantNode } from '$lib/types/product';
 	import Counter from '$lib/components/Counter.svelte';
 	import OptionPicker from '$lib/components/OptionPicker.svelte';
-	import type { Product, Option } from 'src/types/product';
+	import type { Product, Option } from '$lib/types/product';
 	import { cart, cartId, isCartOpen } from '$lib/stores';
-	import { addToCart } from '$lib/shopify';
+	import { addItemToCart, addToCart } from '$lib/shopify';
 	import AddSubscriptionToCart from '$lib/shopify/AddSubscriptionToCart';
-	import type { Cart } from 'src/types/cart';
+	import AddItemToCart from '$lib/shopify/AddItemToCart';
+	import type { Cart } from '$lib/types/cart';
 
 	interface Choice {
 		name: string;
 		value: string;
-	}
-	interface Variant {
-		id: string;
-		title: string;
-		selectedOptions: Choice[];
-		priceV2: {
-			amount: string;
-			currencyCode: string;
-		};
-		quantityAvailable: number;
-		options: string[];
 	}
 
 	interface SelectedOptions {
@@ -31,15 +22,14 @@
 		Type: string;
 	}
 
-	export let data: PageLoad;
-	const product = data;
+	export let data: PageData;
+	console.log(data);
 
-	product;
 	// Track active Main Image
 	let mainImage = 0;
 
 	// Options
-	const options: Option[] = [...product.options];
+	const options = [...data.options];
 
 	function setDefaults(arr: Option[]): SelectedOptions {
 		let object = {};
@@ -67,7 +57,7 @@
 	let selectedOptions = setDefaults(options);
 
 	// Refactor variants for easier filtering
-	const variants: Variant[] = [...product.variants.edges].map((variant) => {
+	const variants: VariantNode[] = [...data.variants.edges].map((variant) => {
 		let obj = Object.assign({}, variant.node);
 		obj['id'] = variant.node.id;
 		let options = [];
@@ -80,24 +70,27 @@
 	});
 
 	// Track active variant, reactively update pricing
-	function selectVariant(arr: Variant[], options: SelectedOptions): Variant {
-		const filters: Variant[] = Object.values(options);
+	function selectVariant(arr: VariantNode[], options: SelectedOptions): VariantNode {
+		const filters: VariantNode[] = Object.values(options);
 		let filteredArray = [...arr];
 
 		filters.forEach((el) => {
 			filteredArray = filteredArray.filter((v) => v.options.includes(el));
 		});
 
-		return filteredArray[0] as Variant;
+		return filteredArray[0] as VariantNode;
 	}
 
 	$: activeVariant = selectVariant(variants, selectedOptions);
 	$: price = parseFloat(activeVariant.priceV2.amount);
 	$: reduction =
-		product.sellingPlanGroups.edges[0].node.sellingPlans.edges[0].node.priceAdjustments[0]
+		data.sellingPlanGroups.edges[0].node.sellingPlans.edges[0].node.priceAdjustments[0]
 			.adjustmentValue.adjustmentPercentage *
 		(price / 100);
 	$: subscriptionPrice = price - reduction;
+
+	// Active variant merchandiseId
+	$: merchandiseId = activeVariant.id;
 
 	// Track quantity of product to add to cart
 	let quantity = 1;
@@ -107,39 +100,60 @@
 
 	// Default to active subscription, change to single purchase by setting sellingPlanId to empty string
 	let isSubscription = true;
-	const sellingPlanId = product.sellingPlanGroups.edges[0].node.sellingPlans.edges[0].node.id;
-	$: monthlySubscription = isSubscription ? sellingPlanId : '';
+	const planId = data?.sellingPlanGroups?.edges[0]?.node?.sellingPlans?.edges[0]?.node?.id ?? '';
+	$: sellingPlanId = isSubscription ? planId : '';
 
 	// cartId: $cartId,
 	// itemId: activeVariant.id,
 	// quantity: quantity,
 	// sellingPlanId: monthlySubscription
 
+	// cartLinesAdd payload
+	let lines = [];
+
 	// Add item to cart
 	async function handleClick() {
-		if (monthlySubscription) {
-			const variables = {
-				cartId: $cartId,
-				itemId: activeVariant.id,
-				quantity: quantity,
-				sellingPlanId: monthlySubscription
-			};
-			const response = await AddSubscriptionToCart(variables);
-			console.log(response);
+		// if this is a subscription
+		if (sellingPlanId) {
+			// Add line
+			lines.push({
+				merchandiseId,
+				quantity,
+				sellingPlanId
+			});
+			// Send mutation to shopify
+			const response = await AddSubscriptionToCart($cartId, lines);
 			if (response.ok) {
 				const newCart: Cart = await response.json();
-				console.log(newCart);
+				// Update cart
 				$cart = newCart;
+				// Open cart slideOver
 				$isCartOpen = true;
+				// Reset lines array
+				lines = [];
 				return;
 			}
-			console.log(`Error: ${response}`);
+			const errors = await response.json();
+			console.log(JSON.stringify(errors, null, ' '));
 			return;
 		}
-		const newCart = await addToCart($cartId, activeVariant.id, quantity, monthlySubscription);
-		console.log(newCart);
-		cart.set(newCart);
-		isCartOpen.set(true);
+
+		// Add line
+		lines.push({ merchandiseId, quantity });
+		const response = await AddItemToCart($cartId, lines);
+		if (response.ok) {
+			const newCart: Cart = await response.json();
+			// Update cart
+			$cart = newCart;
+			// Open cart slideOver
+			$isCartOpen = true;
+			// Reset lines array
+			lines = [];
+			return;
+		}
+		const errors = await response.json();
+		console.log(JSON.stringify(errors, null, ' '));
+		return;
 	}
 
 	// Update selectedOptions array with user input
@@ -158,7 +172,7 @@
 				<!-- Image selector -->
 				<div class="hidden mt-6 w-full max-w-2xl mx-auto sm:block lg:max-w-none">
 					<div class="grid grid-cols-4 gap-6" aria-orientation="horizontal" role="tablist">
-						{#each product.images.edges as image, index}
+						{#each data.images.edges as image, index}
 							<button
 								id="tab-{index}"
 								class="relative h-24 bg-white rounded-md flex items-center justify-center text-sm font-medium uppercase text-gray-900 cursor-pointer hover:bg-gray-50 focus:outline-none focus:ring focus:ring-offset-4 focus:ring-opacity-50"
@@ -171,7 +185,7 @@
 								<span class="absolute inset-0 rounded-md overflow-hidden">
 									<img
 										src={image.node.url}
-										alt={image.node.altText ? image.node.altText : product.title}
+										alt={image.node.altText ? image.node.altText : data.title}
 										class="w-full h-full object-center object-cover"
 									/>
 								</span>
@@ -189,7 +203,7 @@
 					<!-- Tab panel, show/hide based on tab state. -->
 					<div id="tabs-1-panel-1" aria-labelledby="tabs-1-tab-1" role="tabpanel" tabindex="0">
 						<img
-							src={product.images.edges[mainImage].node.url}
+							src={data.images.edges[mainImage].node.url}
 							alt="Angled front view with bag zipped and handles upright."
 							class="w-full h-full object-center object-cover sm:rounded-lg"
 						/>
@@ -199,12 +213,12 @@
 			<!-- Product info -->
 			<div class="mt-10 px-4 sm:px-0 sm:mt-16 lg:mt-0">
 				<h1 class="text-3xl font-extrabold tracking-tight text-gray-900">
-					{product.title}
+					{data.title}
 				</h1>
 
 				<div class="mt-3 flex flex-wrap">
 					<h2 class="sr-only">Product information</h2>
-					{#if product.totalInventory !== 0}
+					{#if data.totalInventory !== 0}
 						<p
 							class="text-2xl text-gray-900 mr-4 {isSubscription
 								? 'text-gray-500 line-through'
@@ -227,7 +241,7 @@
 
 					<div class="text-base text-gray-700 space-y-6">
 						<p>
-							{product.description}
+							{data.description}
 						</p>
 					</div>
 				</div>
@@ -280,7 +294,7 @@
 						<button
 							type="submit"
 							on:click|preventDefault={handleClick}
-							disabled={product.totalInventory == 0 ? true : false}
+							disabled={data.totalInventory == 0 ? true : false}
 							class="basis-3/4 bg-custard-500 disabled:bg-gray-300 disabled:text-gray-900 border border-transparent rounded-md md:ml-3 mt-3 py-3 px-8 flex items-center justify-center text-base font-medium text-gray-900 hover:bg-oldGrey hover:text-custard-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-custard-500 sm:w-full"
 						>
 							Add to Cart
