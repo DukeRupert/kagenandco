@@ -14,10 +14,8 @@ query ($id: ID!) {
 
 	try {
 		const response = await postToShopify({ query, variables });
-		console.log(response);
 		if (response.ok) {
 			const data: { data: { cart: Cart } } = await response.json();
-			console.log(data);
 			const {
 				data: { cart }
 			} = data;
