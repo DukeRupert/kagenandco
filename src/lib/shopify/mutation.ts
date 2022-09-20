@@ -70,3 +70,72 @@ export const userErrors = `userErrors {
         field
         message
       }`;
+
+export const product = `
+    id
+    handle
+    description
+    title
+    totalInventory
+    productType
+    variants(first: 15) {
+      edges {
+        node {
+          id
+          title
+          selectedOptions {
+            name,
+            value
+          }
+          priceV2 {
+            amount
+            currencyCode
+          }
+          quantityAvailable
+        }
+      }
+    }
+    options {
+      name,
+      values
+    }
+    priceRange {
+      maxVariantPrice {
+        amount
+        currencyCode
+      }
+      minVariantPrice {
+        amount
+        currencyCode
+      }
+    }
+    sellingPlanGroups(first: 5) {
+      edges {
+        node {
+          sellingPlans(first: 5) {
+            edges {
+              node {
+                id
+                description
+                priceAdjustments {
+                  adjustmentValue {
+                    ...on SellingPlanPercentagePriceAdjustment {
+                      adjustmentPercentage
+                    }
+                  }
+                }
+                
+              }
+            }
+          }
+        }
+      }
+    }
+    images(first: 4) {
+      edges {
+        node {
+          url
+          altText
+        }
+      }
+    }`;
