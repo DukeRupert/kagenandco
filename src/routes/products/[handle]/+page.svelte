@@ -4,11 +4,9 @@
 	import type { VariantNode } from '$lib/types/product';
 	import Counter from '$lib/components/Counter.svelte';
 	import OptionPicker from '$lib/components/OptionPicker.svelte';
-	import type { Product, Option } from '$lib/types/product';
+	import type { Option } from '$lib/types/product';
 	import { cart, cartId, isCartOpen } from '$lib/stores';
-	import { addItemToCart, addToCart } from '$lib/shopify';
-	import AddSubscriptionToCart from '$lib/shopify/AddSubscriptionToCart';
-	import AddItemToCart from '$lib/shopify/AddItemToCart';
+	import cartLinesAdd from '$lib/shopify/cartLinesAdd';
 	import type { Cart } from '$lib/types/cart';
 	import Spinner from '$lib/components/Spinner.svelte';
 
@@ -24,7 +22,6 @@
 	}
 
 	export let data: PageData;
-	console.log(data);
 
 	// Track active Main Image
 	let mainImage = 0;
@@ -109,60 +106,43 @@
 	// quantity: quantity,
 	// sellingPlanId: monthlySubscription
 
-	// cartLinesAdd payload
-	let lines = [];
-
 	// Disable submit button and activate spinner
 	let loading = false;
 
 	// Add item to cart
 	async function handleClick() {
+		let lines = [];
 		loading = true;
+
 		// if this is a subscription
 		if (sellingPlanId) {
-			// Add line
+			// Add subscription line
 			lines.push({
 				merchandiseId,
 				quantity,
 				sellingPlanId
 			});
-			// Send mutation to shopify
-			const response = await AddSubscriptionToCart($cartId, lines);
-			if (response.ok) {
-				const newCart: Cart = await response.json();
-				// Update cart
-				$cart = newCart;
-				// Open cart slideOver
-				$isCartOpen = true;
-				// Reset lines array
-				lines = [];
-				loading = false;
-				return;
-			}
-			const errors = await response.json();
-			console.log(JSON.stringify(errors, null, ' '));
-			loading = false;
-			return;
+		} else {
+			lines.push({
+				merchandiseId,
+				quantity
+			});
 		}
 
-		// Add line
-		lines.push({ merchandiseId, quantity });
-		const response = await AddItemToCart($cartId, lines);
+		// send mutation query
+		const response = await cartLinesAdd($cartId, lines);
 		if (response.ok) {
 			const newCart: Cart = await response.json();
 			// Update cart
 			$cart = newCart;
 			// Open cart slideOver
 			$isCartOpen = true;
-			// Reset lines array
-			lines = [];
 			loading = false;
 			return;
 		}
 		const errors = await response.json();
 		console.log(JSON.stringify(errors, null, ' '));
 		loading = false;
-		return;
 	}
 
 	// Update selectedOptions array with user input

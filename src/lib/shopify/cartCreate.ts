@@ -2,8 +2,8 @@ import { json } from '@sveltejs/kit';
 import { postToShopify } from '../../routes/api/utils/postToShopify/+server';
 import type { Cart } from '$lib/types/cart';
 
-export const CreateCart = async () => {
-	const query = `mutation CreateCart {
+export const cartCreate = async () => {
+	const query = `mutation cartCreate {
                     cartCreate {
                       cart {
                         checkoutUrl
@@ -29,4 +29,4 @@ export const CreateCart = async () => {
 	}
 };
 
-export default CreateCart;
+export default cartCreate;

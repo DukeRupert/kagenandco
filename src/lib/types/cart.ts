@@ -1,10 +1,66 @@
-import type { Product, Option } from './product';
+import type { Option } from './product';
 
 export interface EstimatedCost {
 	totalAmount: { amount: '32.56'; currencyCode: 'USD' };
 	subtotalAmount: { amount: '29.98'; currencyCode: 'USD' };
 	totalTaxAmount: { amount: '2.58'; currencyCode: 'USD' };
 	totalDutyAmount: null;
+}
+export interface Product {
+	id: string;
+	quantity: number;
+	sellingPlanAllocation: SellingPlanAllocation;
+	merchandise: Merchandise;
+}
+
+export interface Merchandise {
+	id: string;
+	title: string;
+	priceV2: PriceV2;
+	quantityAvailable: number;
+	product: ProductClass;
+}
+
+export interface PriceV2 {
+	amount: string;
+	currencyCode: string;
+}
+
+export interface ProductClass {
+	title: string;
+	handle: string;
+	images: Images;
+}
+
+export interface Images {
+	edges: Edge[];
+}
+
+export interface Edge {
+	node: Node;
+}
+
+export interface Node {
+	url: string;
+	altText: null;
+}
+
+export interface SellingPlanAllocation {
+	priceAdjustments: PriceAdjustment[];
+	sellingPlan: SellingPlan;
+}
+
+export interface PriceAdjustment {
+	price: Price;
+}
+
+export interface Price {
+	amount: string;
+}
+
+export interface SellingPlan {
+	id: string;
+	name: string;
 }
 
 export interface ProductNode {
@@ -21,9 +77,7 @@ export interface Cart {
 	createdAt?: string;
 	updatedAt?: string;
 	checkoutUrl: string;
-	lines?: {
-		edges: [ProductNode];
-	};
+	lines?: Edges;
 	options?: [Option];
 	estimatedCost?: EstimatedCost;
 }
@@ -112,13 +166,28 @@ export interface Location {
 }
 
 // CartLinesAddPayload
-
 export interface CartLinesAddPayload {
-	data: Data;
+	data: AddData;
 }
 
-export interface Data {
+export interface AddData {
 	cartLinesAdd: CartLinesAdd;
+}
+
+export interface CartLinesUpdatePayload {
+	data: UpdateData;
+}
+
+export interface UpdateData {
+	cartLinesUpdate: CartLinesAdd;
+}
+
+export interface CartLinesRemovePayload {
+	data: RemoveData;
+}
+
+export interface RemoveData {
+	cartLinesRemove: CartLinesAdd;
 }
 
 export interface CartLinesAdd {
@@ -127,11 +196,25 @@ export interface CartLinesAdd {
 }
 
 // CartLineAdd input
-export interface Lines {
+export interface Line {
 	attributes?: Attribute[];
 	merchandiseId: string;
 	quantity: number;
 	sellingPlanId?: string;
+}
+
+export interface Attribute {
+	key: string;
+	value: string;
+}
+
+// CartLinesUpdate input
+export interface LineUpdate {
+	attributes?: Attribute[];
+	id: string;
+	merchandiseId: string;
+	quantity: number;
+	sellingPlanId: string | null;
 }
 
 export interface Attribute {

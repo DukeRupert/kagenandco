@@ -1,13 +1,83 @@
 <!-- CartList.svelte -->
 <script lang="ts">
-	import type { Edges } from '$lib/types/cart';
+	import type { ProductNode, LineUpdate, Cart } from '$lib/types/cart';
 	import LineItem from './LineItem.svelte';
+	import Spinner from '../Spinner.svelte';
 	import { isCartOpen, checkoutUrl, subtotal } from '$lib/stores';
+	import cartLinesUpdate from '$lib/shopify/cartLinesUpdate';
+	import cartLinesRemove from '$lib/shopify/cartLinesRemove';
+	import { cartId, cart } from '$lib/stores';
 
-	export let items: Edges | [] = [];
+	export let items: ProductNode[] = [];
+
+	// Disable submit button and activate spinner
+	let loading = false;
+	// track if cart is dirty
+	let dirty = false;
+	// store CartLines to update
+	let lines: LineUpdate[] = [];
+
+	const handleChange = (event) => {
+		dirty = true;
+		const line: LineUpdate = event.detail;
+		const index = lines.map((e) => e.id).indexOf(line.id);
+		// line does not exist in array
+		if (index == -1) {
+			lines = [...lines, line];
+			return;
+		}
+		// replace line with new value
+		lines[index] = line;
+	};
+
+	const handleRemove = async (event) => {
+		dirty = true;
+		loading = true;
+		const line: LineUpdate = event.detail;
+
+		// Send mutation to shopify
+		const response = await cartLinesRemove($cartId, [line.id]);
+		if (response.ok) {
+			const newCart: Cart = await response.json();
+			// Update cart
+			$cart = newCart;
+			// Open cart slideOver
+			$isCartOpen = true;
+			loading = false;
+			dirty = false;
+			return;
+		}
+		const errors = await response.json();
+		console.log(JSON.stringify(errors, null, ' '));
+		loading = false;
+		dirty = false;
+	};
 
 	function closeCart() {
 		isCartOpen.set(false);
+	}
+
+	async function updateCart() {
+		loading = true;
+
+		// Send mutation to shopify
+		const response = await cartLinesUpdate($cartId, lines);
+		if (response.ok) {
+			const newCart: Cart = await response.json();
+			// Update cart
+			$cart = newCart;
+			// Open cart slideOver
+			$isCartOpen = true;
+			// Reset lines array
+			lines = [];
+			loading = false;
+			dirty = false;
+			return;
+		}
+		const errors = await response.json();
+		console.log(JSON.stringify(errors, null, ' '));
+		loading = false;
+		dirty = false;
 	}
 </script>
 
@@ -17,7 +87,7 @@
 
 		<ul class="border-t border-b border-gray-200 divide-y divide-gray-200">
 			{#each items as item (item.node.id)}
-				<LineItem item={item.node} />
+				<LineItem item={item.node} on:quantityChange={handleChange} on:remove={handleRemove} />
 			{/each}
 		</ul>
 		<!-- Order summary -->
@@ -37,11 +107,24 @@
 			</div>
 
 			<div class="mt-10 flex items-center text-center">
-				<a
-					href={$checkoutUrl}
-					class="w-full bg-oldGrey border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-custard-500 hover:bg-custard-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500"
-					>Checkout</a
-				>
+				{#if dirty}
+					<button
+						on:click|stopPropagation={updateCart}
+						class="w-full flex justify-center bg-custard-500 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-gray-900 hover:bg-oldGrey hover:text-custard-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500"
+					>
+						{#if loading}
+							<Spinner />
+						{:else}
+							Update Cart
+						{/if}
+					</button>
+				{:else}
+					<a
+						href={$checkoutUrl}
+						class="w-full bg-oldGrey border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-custard-500 hover:bg-custard-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500"
+						>Checkout</a
+					>
+				{/if}
 			</div>
 
 			<div class="mt-6 text-sm text-center text-gray-500">

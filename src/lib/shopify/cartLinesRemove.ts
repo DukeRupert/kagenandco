@@ -1,26 +1,26 @@
 import { postToShopify } from '../../routes/api/utils/postToShopify/+server';
 import { cart, userErrors } from './mutation';
-import type { CartLinesAddPayload, ErrorLineAdd, Lines } from '$lib/types/cart';
+import type { CartLinesRemovePayload, ErrorLineAdd } from '$lib/types/cart';
 import { json } from '@sveltejs/kit';
 
-const AddSubscriptionToCart = async (cartId: string, lines: Lines[]) => {
+const cartLinesRemove = async (cartId: string, lineIds: string[]) => {
 	const query = `
-  mutation cartLinesAdd($cartId: ID!, $lines: [CartLineInput!]!) {
-    cartLinesAdd(cartId: $cartId, lines: $lines) {
+  mutation cartLinesRemove($cartId: ID!, $lineIds: [ID!]!) {
+  cartLinesRemove(cartId: $cartId, lineIds: $lineIds) {
       ${cart}
       ${userErrors}
     }
-  }`;
-
+  }
+`;
 	const variables = {
 		cartId,
-		lines
+		lineIds
 	};
 
 	try {
 		const response = await postToShopify({ query, variables });
 		if (response.ok) {
-			const data: CartLinesAddPayload & ErrorLineAdd = await response.json();
+			const data: CartLinesRemovePayload & ErrorLineAdd = await response.json();
 
 			if (data.errors) {
 				return json(data, { status: 400 });
@@ -28,7 +28,7 @@ const AddSubscriptionToCart = async (cartId: string, lines: Lines[]) => {
 
 			const {
 				data: {
-					cartLinesAdd: { cart }
+					cartLinesRemove: { cart }
 				}
 			} = data;
 			return json(cart, { status: 200 });
@@ -39,4 +39,4 @@ const AddSubscriptionToCart = async (cartId: string, lines: Lines[]) => {
 	}
 };
 
-export default AddSubscriptionToCart;
+export default cartLinesRemove;

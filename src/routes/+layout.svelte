@@ -4,8 +4,8 @@
 	import '../app.css';
 	import { siteData, activeTopMenu } from '$lib/stores';
 	import { isCartOpen, cart } from '$lib/stores';
-	import CreateCart from '$lib/shopify/CreateCart';
-	import RetrieveCart from '$lib/shopify/RetrieveCart';
+	import cartCreate from '$lib/shopify/cartCreate';
+	import queryCart from '$lib/shopify/queryCart';
 	import Nav from '$lib/components/Nav.svelte';
 	import Footer from '$lib/components/Footer.svelte';
 	import SlideOver from '$lib/components/SlideOver.svelte';
@@ -21,7 +21,7 @@
 	}
 
 	async function createNewCart() {
-		const response = await CreateCart();
+		const response = await cartCreate();
 
 		if (!response.ok) {
 			throw error(500);
@@ -51,7 +51,7 @@
 		}
 
 		// cartId is found, retrieve cart from Shopify
-		const response = await RetrieveCart(storedCartId);
+		const response = await queryCart(storedCartId);
 
 		if (!response.ok) {
 			throw error(500);

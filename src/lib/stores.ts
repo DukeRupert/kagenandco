@@ -1,6 +1,6 @@
 import { writable, derived, type Writable, type Readable } from 'svelte/store';
 import type { Product } from '$lib/types/product';
-import type { Cart, Edges, Subtotal } from './types/cart';
+import type { Cart, Edges, ProductNode, Subtotal } from './types/cart';
 
 export const siteData = writable({
 	_createdAt: '2019-03-29T10:09:19Z',
@@ -263,7 +263,7 @@ export const checkoutUrl: Readable<string> = derived(
 	''
 );
 
-export const cartItems: Readable<Edges[] | any[]> = derived(
+export const cartItems: Readable<ProductNode[]> = derived(
 	cart,
 	($cart) => {
 		const items = $cart?.lines?.edges ?? [];

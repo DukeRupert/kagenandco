@@ -1,9 +1,9 @@
 import { postToShopify } from '../../routes/api/utils/postToShopify/+server';
 import { cart, userErrors } from './mutation';
-import type { CartLinesAddPayload, ErrorLineAdd, Lines } from '$lib/types/cart';
+import type { CartLinesAddPayload, ErrorLineAdd, Line } from '$lib/types/cart';
 import { json } from '@sveltejs/kit';
 
-const AddItemToCart = async (cartId: string, lines: Lines[]) => {
+const cartLinesAdd = async (cartId: string, lines: Line[]) => {
 	const query = `
   mutation cartLinesAdd($cartId: ID!, $lines: [CartLineInput!]!) {
     cartLinesAdd(cartId: $cartId, lines: $lines) {
@@ -41,4 +41,4 @@ const AddItemToCart = async (cartId: string, lines: Lines[]) => {
 	}
 };
 
-export default AddItemToCart;
+export default cartLinesAdd;

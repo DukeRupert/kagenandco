@@ -1,72 +1,62 @@
 <script lang="ts">
 	import { price } from '$lib/utils';
-	import Counter from '../Counter.svelte';
-	import type { CartItem } from '$lib/types/product';
-	import { cart, cartId, isCartOpen } from '$lib/stores';
-	export let item: CartItem;
-	const { id, sellingPlanAllocation } = item;
-	let sellingPlanId = '';
+	import { cart, cartId } from '$lib/stores';
+	import type { Product } from '$lib/types/cart';
+	import { createEventDispatcher } from 'svelte';
 
-	// prices
-	const fullPrice = item?.merchandise?.priceV2?.amount ?? '0';
-	const subPrice = item?.sellingPlanAllocation?.priceAdjustments[0]?.price?.amount ?? '0';
+	const dispatch = createEventDispatcher();
 
-	// Change quantity of an item in the cart
-	$: quantity = item.quantity;
-	if (sellingPlanAllocation) {
-		sellingPlanId = sellingPlanAllocation.sellingPlan.id;
-	}
-	const quantityAvailable = item.merchandise.quantityAvailable;
+	export let item: Product;
+	$: ({ id, merchandise, quantity, sellingPlanAllocation } = item);
 
-	let timer;
-	const debounceUpdate = async () => {
-		clearTimeout(timer);
-		timer = setTimeout(updateItem, 1000);
+	const quantityAvailable = merchandise?.quantityAvailable ?? 0;
+
+	const removeItem = () => {
+		dispatch('remove', {
+			id
+		});
 	};
 
-	function handleIncrement() {
-		if (quantity < quantityAvailable) {
+	const incrementItem = () => {
+		if (quantity > quantityAvailable) {
 			quantity++;
+			if (sellingPlanAllocation) {
+				dispatch('quantityChange', {
+					id,
+					merchandiseId: merchandise.id,
+					quantity,
+					sellingPlanId: sellingPlanAllocation.sellingPlan.id
+				});
+				return;
+			}
+			dispatch('quantityChange', {
+				id,
+				merchandiseId: merchandise.id,
+				quantity
+			});
+		} else {
+			alert('Inventory limit has been reached');
 		}
-		debounceUpdate();
-	}
-
-	function handleDecrement() {
-		if (quantity > 1) {
-			quantity--;
-		}
-		debounceUpdate();
-	}
-
-	const updateItem = async () => {
-		// remove item from Shopify cart
-		const newCart = await fetch('/api/utils/updateCart', {
-			method: 'POST',
-			body: JSON.stringify({
-				cartId: $cartId,
-				lines: [{ id, quantity, sellingPlanId }]
-			})
-		})
-			.then((res) => res.json())
-			.then((data) => data);
-		// update cart
-		cart.set(newCart);
 	};
 
-	const removeItem = async () => {
-		// remove item from Shopify cart
-		const newCart = await fetch('/api/utils/removeFromCart', {
-			method: 'POST',
-			body: JSON.stringify({
-				cartId: $cartId,
-				lineId: item.id
-			})
-		})
-			.then((res) => res.json())
-			.then((data) => data);
-		// update cart;
-		cart.set(newCart);
-		isCartOpen.set(true);
+	const decrementItem = () => {
+		if (quantity > 0) {
+			quantity--;
+			if (sellingPlanAllocation) {
+				dispatch('quantityChange', {
+					id,
+					merchandiseId: merchandise.id,
+					quantity,
+					sellingPlanId: sellingPlanAllocation.sellingPlan.id
+				});
+				return;
+			}
+			dispatch('quantityChange', {
+				id,
+				merchandiseId: merchandise.id,
+				quantity
+			});
+		}
 	};
 </script>
 
@@ -95,10 +85,10 @@
 					</a>
 				</h4>
 				<p class="ml-4 text-sm font-medium text-gray-900">
-					{#if subPrice !== '0'}
-						{price(parseFloat(subPrice))}
+					{#if sellingPlanAllocation}
+						{price(parseFloat(sellingPlanAllocation.priceAdjustments[0].price.amount))}
 					{:else}
-						{price(parseFloat(fullPrice))}
+						{price(parseFloat(merchandise.priceV2.amount))}
 					{/if}
 				</p>
 			</div>
@@ -109,11 +99,17 @@
 		</div>
 
 		<div class="mt-4 flex-1 flex items-end justify-between">
-			<Counter {quantity} on:increment={handleIncrement} on:decrement={handleDecrement} />
+			<div
+				class="basis-1/2 border rounded-md mt-3 flex items-center justify-center text-base font-medium text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500 sm:w-full"
+			>
+				<button on:click|stopPropagation={decrementItem} class="basis-1/3 h-full py-3"> - </button>
+				<p class="basis-1/3 h-full flex justify-center items-center text-center">{quantity}</p>
+				<button on:click|stopPropagation={incrementItem} class="basis-1/3 h-full py-3"> + </button>
+			</div>
 			<div class="ml-4">
 				<button
 					type="button"
-					on:click|preventDefault={removeItem}
+					on:click|stopPropagation={removeItem}
 					class="text-sm font-medium text-oldGrey hover:text-custard-600"
 				>
 					<span>Remove</span>

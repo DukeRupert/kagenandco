@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { isCartOpen, cartItems, itemCount } from '$lib/stores';
+	import { isCartOpen, cartItems, itemCount, cart } from '$lib/stores';
 	import CartList from './cart/CartList.svelte';
 
 	$: items = [...$cartItems];
