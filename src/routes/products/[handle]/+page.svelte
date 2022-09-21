@@ -22,7 +22,7 @@
 	}
 
 	export let data: PageData;
-
+	console.log(data);
 	// Track active Main Image
 	let mainImage = 0;
 
@@ -80,11 +80,11 @@
 	}
 
 	$: activeVariant = selectVariant(variants, selectedOptions);
+	$: console.log(activeVariant);
 	$: price = parseFloat(activeVariant.priceV2.amount);
 	$: reduction =
-		data.sellingPlanGroups.edges[0].node.sellingPlans.edges[0].node.priceAdjustments[0]
-			.adjustmentValue.adjustmentPercentage *
-		(price / 100);
+		data?.sellingPlanGroups?.edges[0]?.node?.sellingPlans?.edges[0]?.node?.priceAdjustments[0]
+			?.adjustmentValue?.adjustmentPercentage ?? 0 * (price / 100);
 	$: subscriptionPrice = price - reduction;
 
 	// Active variant merchandiseId
@@ -96,15 +96,10 @@
 	const decreaseQuantity = () => (quantity > 1 ? quantity-- : 1);
 	const increaseQuantity = () => (quantity < maxQuantity ? quantity++ : quantity);
 
-	// Default to active subscription, change to single purchase by setting sellingPlanId to empty string
-	let isSubscription = true;
+	// Default to active subscription if a subscription plan exists, change to single purchase by setting sellingPlanId to empty string
+	let isSubscription = data.sellingPlanGroups.edges.length > 0 ? true : false;
 	const planId = data?.sellingPlanGroups?.edges[0]?.node?.sellingPlans?.edges[0]?.node?.id ?? '';
 	$: sellingPlanId = isSubscription ? planId : '';
-
-	// cartId: $cartId,
-	// itemId: activeVariant.id,
-	// quantity: quantity,
-	// sellingPlanId: monthlySubscription
 
 	// Disable submit button and activate spinner
 	let loading = false;
@@ -235,42 +230,44 @@
 					</div>
 				</div>
 
-				<form class="mt-10 grid grid-cols-2 gap-3 sm:flex-col">
-					<label
-						class="flex-1 border rounded-md py-3 px-8 flex items-center justify-center text-base font-small text-gray-900 hover:bg-custard-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-custard-500 sm:w-full {isSubscription
-							? ''
-							: 'bg-oldGrey text-custard-400'}"
-					>
-						<input
-							type="radio"
-							name="variant"
-							bind:group={isSubscription}
-							value={false}
-							class="sr-only"
-							aria-labelledby="size-choice-0-label"
-						/>
-						<span id="size-choice-0-label" class="text-center">
-							Single purchase - ${price.toFixed(2)}</span
+				{#if data.sellingPlanGroups.edges.length > 0}
+					<form class="mt-10 grid grid-cols-2 gap-3 sm:flex-col">
+						<label
+							class="flex-1 border rounded-md py-3 px-8 flex items-center justify-center text-base font-small text-gray-900 hover:bg-custard-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-custard-500 sm:w-full {isSubscription
+								? ''
+								: 'bg-oldGrey text-custard-400'}"
 						>
-					</label>
-					<label
-						class="max-w-xs flex-1 border rounded-md py-3 px-8 flex items-center justify-center text-base font-small text-gray-900 hover:bg-custard-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-custard-500 sm:w-full {isSubscription
-							? 'bg-oldGrey text-custard-400'
-							: ''}"
-					>
-						<input
-							type="radio"
-							name="variant"
-							bind:group={isSubscription}
-							value={true}
-							class="sr-only"
-							aria-labelledby="size-choice-0-label"
-						/>
-						<span id="size-choice-0-label" class="text-center">
-							Subscribe & Save - ${subscriptionPrice.toFixed(2)}</span
+							<input
+								type="radio"
+								name="variant"
+								bind:group={isSubscription}
+								value={false}
+								class="sr-only"
+								aria-labelledby="size-choice-0-label"
+							/>
+							<span id="size-choice-0-label" class="text-center">
+								Single purchase - ${price.toFixed(2)}</span
+							>
+						</label>
+						<label
+							class="max-w-xs flex-1 border rounded-md py-3 px-8 flex items-center justify-center text-base font-small text-gray-900 hover:bg-custard-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-custard-500 sm:w-full {isSubscription
+								? 'bg-oldGrey text-custard-400'
+								: ''}"
 						>
-					</label>
-				</form>
+							<input
+								type="radio"
+								name="variant"
+								bind:group={isSubscription}
+								value={true}
+								class="sr-only"
+								aria-labelledby="size-choice-0-label"
+							/>
+							<span id="size-choice-0-label" class="text-center">
+								Subscribe & Save - ${subscriptionPrice.toFixed(2)}</span
+							>
+						</label>
+					</form>
+				{/if}
 
 				<!-- Options -->
 				<form class="mt-6">

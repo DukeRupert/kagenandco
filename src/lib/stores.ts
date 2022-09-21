@@ -1,6 +1,6 @@
 import { writable, derived, type Writable, type Readable } from 'svelte/store';
 import type { Product } from '$lib/types/product';
-import type { Cart, Edges, ProductNode, Subtotal } from './types/cart';
+import type { Cart, ProductNode, Subtotal } from './types/cart';
 
 export const siteData = writable({
 	_createdAt: '2019-03-29T10:09:19Z',
@@ -115,10 +115,6 @@ export const siteData = writable({
 });
 
 export const isMobileMenuOpen = writable(false);
-
-export const modal = writable(false);
-
-export const modalAction = writable('order');
 
 function createActiveTopMenu() {
 	const { subscribe, set, update } = writable('');
