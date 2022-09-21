@@ -80,11 +80,11 @@
 	}
 
 	$: activeVariant = selectVariant(variants, selectedOptions);
-	$: console.log(activeVariant);
 	$: price = parseFloat(activeVariant.priceV2.amount);
-	$: reduction =
+	$: reductionPercentage =
 		data?.sellingPlanGroups?.edges[0]?.node?.sellingPlans?.edges[0]?.node?.priceAdjustments[0]
-			?.adjustmentValue?.adjustmentPercentage ?? 0 * (price / 100);
+			?.adjustmentValue?.adjustmentPercentage ?? 0;
+	$: reduction = (reductionPercentage / 100) * price;
 	$: subscriptionPrice = price - reduction;
 
 	// Active variant merchandiseId
