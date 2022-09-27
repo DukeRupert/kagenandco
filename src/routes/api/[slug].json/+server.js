@@ -7,7 +7,9 @@ export async function GET({ params }) {
 
 	// Build query using slug
 	const filter = `*[_type == "page" && slug.current == "${slug}"]`;
-	const projection = `{..., 
+	const projection = `{
+		title,
+		description, 
         mainImage{..., 
             asset->},
 		body[]{..., 

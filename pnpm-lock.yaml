@@ -12,6 +12,7 @@ specifiers:
   '@sveltejs/kit': ^1.0.0-next.484
   '@tailwindcss/aspect-ratio': ^0.4.2
   '@tailwindcss/forms': ^0.5.3
+  '@tailwindcss/line-clamp': ^0.4.2
   '@tailwindcss/typography': ^0.5.7
   '@typescript-eslint/eslint-plugin': ^5.37.0
   '@typescript-eslint/parser': ^5.37.0
@@ -46,12 +47,13 @@ devDependencies:
   '@sanity/client': 3.4.1
   '@sanity/image-url': 1.0.1
   '@sendgrid/mail': 7.7.0
-  '@square/svelte-store': github.com/square/svelte-store/62b9afbdd20194c2c44f8f6e26f379a74056b781
+  '@square/svelte-store': github.com/square/svelte-store/a1e1a2df33d1e6eca8cd57ad6866ef13f16c9628
   '@sveltejs/adapter-auto': 1.0.0-next.75
   '@sveltejs/adapter-vercel': 1.0.0-next.76
   '@sveltejs/kit': 1.0.0-next.484_svelte@3.50.1+vite@3.1.2
   '@tailwindcss/aspect-ratio': 0.4.2_tailwindcss@3.1.8
   '@tailwindcss/forms': 0.5.3_tailwindcss@3.1.8
+  '@tailwindcss/line-clamp': 0.4.2_tailwindcss@3.1.8
   '@tailwindcss/typography': 0.5.7_tailwindcss@3.1.8
   '@typescript-eslint/eslint-plugin': 5.37.0_22c5fnooleyfkzrkkgdmel5kmi
   '@typescript-eslint/parser': 5.37.0_irgkl5vooow2ydyo6aokmferha
@@ -388,6 +390,14 @@ packages:
       tailwindcss: '>=3.0.0 || >= 3.0.0-alpha.1'
     dependencies:
       mini-svg-data-uri: 1.4.4
+      tailwindcss: 3.1.8_postcss@8.4.16
+    dev: true
+
+  /@tailwindcss/line-clamp/0.4.2_tailwindcss@3.1.8:
+    resolution: {integrity: sha512-HFzAQuqYCjyy/SX9sLGB1lroPzmcnWv1FHkIpmypte10hptf4oPUfucryMKovZh2u0uiS9U5Ty3GghWfEJGwVw==}
+    peerDependencies:
+      tailwindcss: '>=2.0.0 || >=3.0.0 || >=3.0.0-alpha.1'
+    dependencies:
       tailwindcss: 3.1.8_postcss@8.4.16
     dev: true
 
@@ -3302,10 +3312,10 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  github.com/square/svelte-store/62b9afbdd20194c2c44f8f6e26f379a74056b781:
-    resolution: {tarball: https://codeload.github.com/square/svelte-store/tar.gz/62b9afbdd20194c2c44f8f6e26f379a74056b781}
+  github.com/square/svelte-store/a1e1a2df33d1e6eca8cd57ad6866ef13f16c9628:
+    resolution: {tarball: https://codeload.github.com/square/svelte-store/tar.gz/a1e1a2df33d1e6eca8cd57ad6866ef13f16c9628}
     name: '@square/svelte-store'
-    version: 0.2.0
+    version: 0.2.3
     dependencies:
       svelte: 3.50.1
     dev: true

@@ -1,16 +1,15 @@
 <script lang="ts">
-	throw new Error("@migration task: Add data prop (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292707)");
-
 	import SvelteSeo from 'svelte-seo';
 	import { page } from '$app/stores';
 	import { urlFor } from '$lib/image-url';
 	import PortableText from '@portabletext/svelte';
 	import LocationCard from '$lib/components/LocationCard.svelte';
 	import Link from '$lib/components/Link.svelte';
-
+	import type { PageData } from './$types';
 	// Sanity Content
-	export let data;
-	const { title, description, body, mainImage } = data;
+	export let data: PageData;
+	console.log(data);
+	$: ({ title, description, body, mainImage } = data);
 </script>
 
 <SvelteSeo
@@ -57,7 +56,7 @@
 </div>
 <!-- Location Cards -->
 <div class="bg-white">
-	<div class="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-5xl lg:px-8">
+	<div class="max-w-6xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-5xl lg:px-8">
 		<h2 id="products-heading" class="sr-only">Locations</h2>
 		{#if body}
 			<div class="grid grid-cols-1 gap-y-10 sm:grid-cols-2 gap-x-6 lg:grid-cols-2 xl:gap-x-8">

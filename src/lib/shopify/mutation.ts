@@ -206,3 +206,22 @@ export const product = `
         }
       }
     }`;
+
+export const productCard = `
+    id,
+    title,
+    description,
+    handle,
+    images (first: 1) {
+    edges {
+        node {
+            url,
+            altText
+            }
+        }
+    }
+    priceRange {
+        minVariantPrice {
+            amount
+        }	
+    }`;

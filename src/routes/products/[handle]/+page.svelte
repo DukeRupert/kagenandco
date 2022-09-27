@@ -16,21 +16,20 @@
 	}
 
 	interface SelectedOptions {
-		Size: string;
-		Texture: string;
-		Type: string;
+		Size?: string;
+		Texture?: string;
+		Type?: string;
 	}
 
 	export let data: PageData;
-	console.log(data);
 	// Track active Main Image
 	let mainImage = 0;
 
 	// Options
-	const options = [...data.options];
+	const options = data?.options ?? [];
 
 	function setDefaults(arr: Option[]): SelectedOptions {
-		let object = {};
+		let object: SelectedOptions = {};
 		arr.forEach((v) => (object[v.name] = v.values[0]));
 		return object;
 	}

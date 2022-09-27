@@ -10,7 +10,7 @@
 </script>
 
 <script lang="ts">
-	import ProductList from '$lib/components/ProductList.svelte';
+	import ProductList from 'src/routes/mockup/ProductList.svelte';
 	import { products } from '$lib/store';
 
 	export let collection: string;

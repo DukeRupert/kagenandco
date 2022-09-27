@@ -119,11 +119,7 @@
 						{/if}
 					</button>
 				{:else}
-					<a
-						href={$checkoutUrl}
-						class="w-full bg-oldGrey border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-custard-500 hover:bg-custard-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500"
-						>Checkout</a
-					>
+					<a href={$checkoutUrl} class="w-full bt-primary">Checkout</a>
 				{/if}
 			</div>
 

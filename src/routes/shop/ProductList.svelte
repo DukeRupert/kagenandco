@@ -1,6 +1,6 @@
 <script lang="ts">
-	import ProductCard from './cards/ProductCard.svelte';
-	export let products;
+	import ProductCard from './ProductCard.svelte';
+	export let data;
 	export let heading = 'Products';
 </script>
 
@@ -10,8 +10,10 @@
 	<div
 		class="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:gap-x-8 xl:grid-cols-3"
 	>
-		{#each products as product}
-			<ProductCard product={product.node} />
-		{/each}
+		{#if data}
+			{#each data as product}
+				<ProductCard {product} />
+			{/each}
+		{/if}
 	</div>
 </section>
