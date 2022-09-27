@@ -1,6 +1,4 @@
 <script lang="ts">
-	throw new Error("@migration task: Add data prop (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292707)");
-
 	import SvelteSeo from 'svelte-seo';
 	import { page } from '$app/stores';
 	import { urlFor } from '$lib/image-url';
@@ -11,6 +9,7 @@
 
 	// Sanity Content
 	export let data;
+	console.log(data);
 	const { sweets, savorys, coffees, drinks, location } = data.body.menu;
 </script>
 

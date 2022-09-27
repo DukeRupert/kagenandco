@@ -6,7 +6,7 @@ export async function load({ params, fetch }) {
 	const res = await fetch(`/api/menu/${slug}.json`);
 	if (res.ok) {
 		const { data } = await res.json();
-		return { data };
+		return data;
 	}
 	throw error(500);
 }
