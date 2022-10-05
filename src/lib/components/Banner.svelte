@@ -1,27 +1,23 @@
 <script lang="ts">
 	import { slide } from 'svelte/transition';
-	import { quartOut } from 'svelte/easing';
+	import { quintOut } from 'svelte/easing';
 	import { TIMING } from '$lib/constants';
-	import { siteData } from '$lib/stores';
+	import { isBannerOpen } from '$lib/stores';
 	let timing = TIMING;
 	let data = {
-		longMessage: 'Merry Christmas! We have gift cards, and only gift cards',
+		longMessage: 'Merry Christmas! Give the gift of a great morning!',
 		shortMessage: 'Gift Cards!',
 		actionLabel: 'Shop Now',
-		url: $siteData.shop
-	};
-	let show = true;
-	const hideBanner = () => {
-		show = !show;
+		url: '/shop'
 	};
 </script>
 
-{#if show}
+{#if $isBannerOpen}
 	<div
-		out:slide={{ duration: timing, easing: quartOut }}
+		out:slide={{ duration: timing, easing: quintOut }}
 		class="relative max-w-7xl mx-auto sm:px-6 lg:px-8"
 	>
-		<div class="bg-red-900 mx-auto py-3 px-3 sm:px-6 lg:px-8">
+		<div class="bg-red-800 mx-auto py-3 px-3 sm:px-6 lg:px-8">
 			<div class="pr-8 text-center sm:px-16">
 				<p class="font-medium text-white">
 					<span class="md:hidden"> {data.shortMessage} </span>
@@ -41,7 +37,7 @@
 				<button
 					type="button"
 					class="flex p-2 rounded-md hover:bg-highlight focus:outline-none focus:ring-2 focus:ring-white"
-					on:click={hideBanner}
+					on:click={() => ($isBannerOpen = false)}
 				>
 					<span class="sr-only">Dismiss</span>
 					<!-- Heroicon name: outline/x -->

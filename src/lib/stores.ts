@@ -114,6 +114,8 @@ export const siteData = writable({
 	title: 'Kagen Coffee & Crepes'
 });
 
+export const isBannerOpen = writable(true);
+
 export const isMobileMenuOpen = writable(false);
 
 function createActiveTopMenu() {

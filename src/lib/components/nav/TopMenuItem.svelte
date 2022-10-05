@@ -2,7 +2,7 @@
 <script lang="ts">
 	import { slide } from 'svelte/transition';
 	import { quintOut } from 'svelte/easing';
-	import { activeTopMenu } from '$lib/stores';
+	import { activeTopMenu, isBannerOpen } from '$lib/stores';
 
 	export let title = 'Fix Me';
 	export let subItems = [
@@ -22,6 +22,8 @@
 		}
 		activeTopMenu.set(title);
 	}
+
+	$: offset = $isBannerOpen ? 144 : 96;
 </script>
 
 <div class="flex">
@@ -36,7 +38,7 @@
 
 	{#if $activeTopMenu === title}
 		<div
-			class="absolute top-[96px] left-0 w-full z-10 text-gray-500 sm:text-sm"
+			class="absolute top-[{offset}px] left-0 w-full z-10 text-gray-500 sm:text-sm"
 			transition:slide={{ delay: 250, duration: 300, easing: quintOut }}
 		>
 			<!-- Presentational element used to render the bottom shadow, if we put the shadow on the actual panel it pokes out the top, so we use this shorter element to hide the top of the shadow -->

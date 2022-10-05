@@ -19,11 +19,8 @@ const cartLinesAdd = async (cartId: string, lines: Line[]) => {
 
 	try {
 		const response = await postToShopify({ query, variables });
-		console.log(response);
 		if (response.ok) {
 			const data: CartLinesAddPayload & ErrorLineAdd = await response.json();
-			console.log(data);
-
 			if (data.errors) {
 				return json(data, { status: 400 });
 			}

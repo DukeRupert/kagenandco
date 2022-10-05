@@ -31,6 +31,8 @@
 		]
 	}}
 />
-<PrimaryBanner />
-<SubscriptionBanner />
-<MenuBanner />
+<div class="relative bg-white mx-auto">
+	<PrimaryBanner />
+	<SubscriptionBanner />
+	<MenuBanner />
+</div>

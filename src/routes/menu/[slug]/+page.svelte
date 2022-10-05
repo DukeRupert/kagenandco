@@ -9,7 +9,6 @@
 
 	// Sanity Content
 	export let data;
-	console.log(data);
 	const { sweets, savorys, coffees, drinks, location } = data.body.menu;
 </script>
 

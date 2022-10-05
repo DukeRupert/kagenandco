@@ -3,7 +3,6 @@
 	import { price } from '$lib/utils';
 
 	export let product: ProductsEdge;
-	console.log(product);
 
 	const { url, altText } = product.node.images.edges[0].node;
 	const { title, description, handle } = product.node;

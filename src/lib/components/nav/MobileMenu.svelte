@@ -19,7 +19,7 @@
 </script>
 
 <div
-	class="bg-white z-40 fixed w-full h-full pb-12 flex flex-col overflow-y-auto transition-transform ease-out duration-300 {$isMobileMenuOpen
+	class="bg-oldGrey z-40 fixed w-full h-full pb-12 flex flex-col overflow-y-auto transition-transform ease-out duration-300 {$isMobileMenuOpen
 		? 'translate-x-0'
 		: 'translate-x-full'}"
 >
@@ -27,7 +27,8 @@
 	<div class="px-4 pt-10 pb-6 space-y-12">
 		<div class="grid grid-cols-1 items-start gap-y-10 gap-x-6">
 			<MobileMenuItem title="Order Online" href={$siteData.order[0].url} primary />
-			<MobileMenuItem title="Shop Coffee" href="/products/the-rooster" primary />
+			<MobileMenuItem title="Coffee Club" href="/products/the-rooster" primary />
+			<MobileMenuItem title="Shop" href="/shop" />
 			<MobileMenuItem title="Locations" href="/locations" />
 			<MobileMenuItem title="Menu" href="/menu/tri-cities" />
 			<MobileMenuItem title="About" href="/about-us" subItems={about} />
@@ -39,7 +40,7 @@
 		<div class="w-10 h-10">
 			<a
 				href={$siteData.facebook}
-				class="flex justify-center items-center text-gray-400 h-full w-full hover:text-gray-600"
+				class="flex justify-center items-center text-gray-200 h-full w-full hover:text-gray-50"
 			>
 				<span class="sr-only">Facebook</span>
 				<svg class="h-8 w-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -55,7 +56,7 @@
 		<div class="w-10 h-10 flex justify-center">
 			<a
 				href={$siteData.instagram}
-				class="flex justify-center items-center text-gray-400 h-full w-full hover:text-gray-600"
+				class="flex justify-center items-center text-gray-200 h-full w-full hover:text-gray-50"
 			>
 				<span class="sr-only">Instagram</span>
 				<svg class="h-8 w-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">

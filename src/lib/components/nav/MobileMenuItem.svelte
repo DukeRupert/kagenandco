@@ -16,16 +16,16 @@
 			<a
 				{href}
 				class="{primary
-					? 'rounded-3xl bg-custard-500'
-					: ''} font-medium text-xl px-4 py-2 text-gray-900"
+					? 'rounded-3xl bg-custard-500 text-oldGrey'
+					: 'text-custard-500'} font-medium text-xl px-4 py-2"
 			>
 				{title.toUpperCase()}
 			</a>
 			{#if subItems.length > 0}
-				<span on:click={() => (toggle = !toggle)} class="ml-auto mr-2">
+				<span on:click={() => (toggle = !toggle)} class="flex flex-col justify-center ml-auto mr-2">
 					<!-- plus -->
 					<svg
-						class="h-6 w-6 text-gray-900"
+						class="h-6 w-6 text-custard-500"
 						width="24"
 						height="24"
 						viewBox="0 0 24 24"
@@ -58,7 +58,7 @@
 			>
 				{#each subItems as { title, href }}
 					<li class="flex">
-						<a sveltekit:prefetch {href} class="text-gray-500"> {title.toUpperCase()} </a>
+						<a sveltekit:prefetch {href} class="text-gray-100"> {title.toUpperCase()} </a>
 					</li>
 				{/each}
 			</ul>

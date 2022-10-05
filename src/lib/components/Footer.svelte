@@ -9,15 +9,18 @@
 			aria-label="Footer"
 		>
 			<div class="px-5 py-2">
+				<a href={$siteData.order[0].url} class="text-base text-custard-500 hover:text-custard-300">
+					Order Online
+				</a>
+			</div>
+			<div class="px-5 py-2">
 				<a href="/products/the-rooster" class="text-base text-custard-500 hover:text-custard-300">
-					Shop Coffee
+					Coffee Club
 				</a>
 			</div>
 
 			<div class="px-5 py-2">
-				<a href={$siteData.order[0].url} class="text-base text-custard-500 hover:text-custard-300">
-					Order Online
-				</a>
+				<a href="/shop" class="text-base text-custard-500 hover:text-custard-300"> Shop </a>
 			</div>
 
 			<div class="px-5 py-2">

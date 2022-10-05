@@ -13,16 +13,15 @@
 					alt="A strawberry crepe wtih chocoalte sauce and whipped cream"
 				/>
 			</div>
+
 			<div class="relative mr-32 px-4 py-16 sm:px-6 sm:py-24 lg:py-32 lg:px-8">
-				<div class="mt-10 max-w-sm mx-auto sm:max-w-none sm:flex sm:justify-center">
-					<div class="space-y-4 sm:space-y-0 sm:mx-auto sm:inline-grid sm:grid-cols-2 sm:gap-5">
-						<a
-							href={$siteData.order[0].url}
-							class="flex items-center justify-center px-4 py-3 border-2 text-base md:text-xl uppercase font-medium rounded-3xl shadow-sm text-white hover:bg-custard-500 hover:border-custard-500 transition-all ease-in sm:px-8"
-						>
-							Order Now
-						</a>
-					</div>
+				<div class="w-full mt-10 max-w-sm mx-auto sm:max-w-none sm:flex sm:justify-center">
+					<a
+						href={$siteData.order[0].url}
+						class="flex items-center justify-center px-4 py-3 border-2 text-base md:text-xl uppercase font-medium rounded-3xl shadow-sm text-white hover:bg-custard-500 hover:border-custard-500 transition-all ease-in sm:px-8"
+					>
+						Order Now
+					</a>
 				</div>
 			</div>
 		</div>

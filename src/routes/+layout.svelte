@@ -11,6 +11,7 @@
 	import SlideOver from '$lib/components/SlideOver.svelte';
 	import { onMount } from 'svelte';
 	import { error } from '@sveltejs/kit';
+	import Banner from '$lib/components/Banner.svelte';
 
 	// Write Sanity content to global store
 	export let data: LayoutData;

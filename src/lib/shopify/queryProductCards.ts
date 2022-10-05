@@ -19,7 +19,6 @@ query {
 	const variables = {};
 	try {
 		const response = await postToShopify({ query, variables });
-		console.log(response);
 		const data = await response.json();
 		return json(data);
 	} catch (error) {

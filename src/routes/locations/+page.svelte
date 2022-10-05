@@ -8,7 +8,6 @@
 	import type { PageData } from './$types';
 	// Sanity Content
 	export let data: PageData;
-	console.log(data);
 	$: ({ title, description, body, mainImage } = data);
 </script>
 

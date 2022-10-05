@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { navigating } from '$app/stores';
 	import { isMobileMenuOpen, activeTopMenu, isCartOpen } from '$lib/stores';
+	import Logo from '$lib/components/Logo.svelte';
+	import Banner from '../Banner.svelte';
 	import TopMenuItem from './TopMenuItem.svelte';
 	export let count: number;
 
@@ -27,20 +29,19 @@
 </script>
 
 <header class="w-full z-30 fixed bg-white shadow {$isMobileMenuOpen ? 'fixed' : ''}">
+	<Banner />
 	<nav aria-label="Top">
 		<!-- Main navigation -->
-		<div class="bg-white">
+		<div class="bg-white	">
 			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				<div class="h-24 flex items-center justify-between">
 					<!-- Logo (lg+) -->
 					<div class="hidden lg:flex lg:items-center">
 						<a href="/">
 							<span class="sr-only">Kagen's Coffee and Crepes</span>
-							<img
-								class="h-20 w-auto"
-								src="/logoKCC.svg"
-								alt="Kagen's Coffee and Crepes Rooster logo"
-							/>
+							<div class="h-20 w-auto">
+								<Logo stroke="#000" fill="#000" />
+							</div>
 						</a>
 					</div>
 
@@ -52,6 +53,11 @@
 									href="/products/the-rooster"
 									class="flex items-center text-sm font-medium text-gray-700 hover:text-gray-900"
 									>Coffee Club</a
+								>
+								<a
+									href="/shop"
+									class="flex items-center text-sm font-medium text-gray-700 hover:text-gray-900"
+									>Shop</a
 								>
 								<a
 									href="/menu/tri-cities"
@@ -72,7 +78,7 @@
 						<button
 							type="button"
 							on:click={() => isMobileMenuOpen.update((v) => (v = !v))}
-							class="-ml-2 bg-white p-2 rounded-md text-gray-400"
+							class="-ml-2 bg-white p-2 rounded-md text-gray-700"
 						>
 							<span class="sr-only">Open menu</span>
 							<!-- Heroicon name: outline/menu -->
@@ -113,7 +119,7 @@
 								>
 									<!-- Heroicon name: outline/shopping-cart -->
 									<svg
-										class="flex-shrink-0 h-6 w-6 text-gray-400 group-hover:text-gray-500"
+										class="flex-shrink-0 h-6 w-6 text-gray-700 group-hover:text-gray-900"
 										xmlns="http://www.w3.org/2000/svg"
 										fill="none"
 										viewBox="0 0 24 24"
