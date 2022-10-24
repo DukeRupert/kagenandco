@@ -39,7 +39,7 @@
 					<div class="hidden lg:flex lg:items-center">
 						<a href="/">
 							<span class="sr-only">Kagen's Coffee and Crepes</span>
-							<div class="h-20 w-auto">
+							<div class="h-20 w-20">
 								<Logo stroke="#000" fill="#000" />
 							</div>
 						</a>
