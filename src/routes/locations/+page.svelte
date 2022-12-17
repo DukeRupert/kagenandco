@@ -2,13 +2,14 @@
 	import SvelteSeo from 'svelte-seo';
 	import { page } from '$app/stores';
 	import { urlFor } from '$lib/image-url';
-	import PortableText from '@portabletext/svelte';
+	import { PortableText } from '@portabletext/svelte';
 	import LocationCard from '$lib/components/LocationCard.svelte';
 	import Link from '$lib/components/Link.svelte';
 	import type { PageData } from './$types';
 	// Sanity Content
 	export let data: PageData;
 	$: ({ title, description, body, mainImage } = data);
+	console.log(data);
 </script>
 
 <SvelteSeo
@@ -60,8 +61,8 @@
 		{#if body}
 			<div class="grid grid-cols-1 gap-y-10 sm:grid-cols-2 gap-x-6 lg:grid-cols-2 xl:gap-x-8">
 				<PortableText
-					blocks={body}
-					serializers={{ types: { locationReference: LocationCard }, marks: { link: Link } }}
+					value={body}
+					components={{ types: { locationReference: LocationCard }, marks: { link: Link } }}
 				/>
 			</div>
 		{/if}

@@ -1,6 +1,7 @@
 import { error } from '@sveltejs/kit';
+import type { PageLoad } from './$types';
 
-export async function load({ params, fetch }) {
+export const load = (async ({ params, fetch }) => {
 	const { slug } = params;
 
 	const res = await fetch(`/api/menu/${slug}.json`);
@@ -9,4 +10,4 @@ export async function load({ params, fetch }) {
 		return data;
 	}
 	throw error(500);
-}
+}) satisfies PageLoad;

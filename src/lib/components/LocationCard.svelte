@@ -1,11 +1,11 @@
 <script lang="ts">
-	export let portableText;
 	import { urlFor } from '$lib/image-url';
-	const { location } = portableText.block;
-	const { name, address, hours, locationUrl, orderUrl, phone } = location;
-	const url = urlFor(location.image.asset).width(500).format('webp').url();
-	const alt = location.image.alt;
-	const slug = location.slug.current;
+
+	export let portableText;
+	const { location } = portableText.value;
+	const { slug, name, image, address, hours, locationUrl, orderUrl, phone } = location;
+	const url = urlFor(image.asset).width(500).format('webp').url();
+	const alt = image.alt;
 </script>
 
 <div class="w-full aspect-w-1 aspect-h-1 rounded-lg overflow-hidden sm:aspect-w-2 sm:aspect-h-3">
@@ -47,7 +47,7 @@
 		</div>
 		<div class="mt-4 sm:mt-6">
 			<a
-				href={`/menu/${slug}`}
+				href={`/menu/${slug.current}`}
 				class="inline-flex justify-center w-full rounded-3xl border border-custard-500 shadow-sm px-4 py-2 lg:py-4 bg-custard-white text-base font-medium text-black hover:bg-custard-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-custard-300 sm:text-sm"
 			>
 				View Menu

@@ -6,9 +6,10 @@
 	import Crepe from '$lib/components/Crepe.svelte';
 	import Coffee from '$lib/components/Coffee.svelte';
 	import Drink from '$lib/components/Drink.svelte';
+	import type { PageData } from './$types';
 
 	// Sanity Content
-	export let data;
+	export let data: PageData;
 	const { sweets, savorys, coffees, drinks, location } = data.body.menu;
 </script>
 
