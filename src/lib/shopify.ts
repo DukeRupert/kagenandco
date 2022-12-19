@@ -1,5 +1,13 @@
 import { products } from '$lib/stores';
 import { postToShopify } from '../routes/api/utils/postToShopify/+server';
+import { dev } from '$app/environment';
+
+export const SHOPIFY_API_ENDPOINT = dev
+	? import.meta.env.VITE_SHOPIFY_API_ENDPOINT
+	: process.env.SHOPIFY_API_ENDPOINT;
+export const SHOPIFY_STOREFRONT_API_TOKEN = dev
+	? import.meta.env.VITE_SHOPIFY_STOREFRONT_API_TOKEN
+	: process.env.SHOPIFY_STOREFRONT_API_TOKEN;
 
 // Get all products
 export const getProducts = async () => {
