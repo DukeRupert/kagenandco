@@ -28,9 +28,6 @@ export async function POST({ request }) {
 		});
 
 		if (res.ErrorCode) {
-			throw new Error("@migration task: Migrate this return statement (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292701)");
-			// Suggestion (check for correctness before using):
-			// return new Response(res.Message, { status: res.ErrorCode });
 			return {
 				status: res.ErrorCode,
 				body: res.Message

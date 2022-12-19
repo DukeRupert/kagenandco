@@ -1,17 +1,16 @@
 <script lang="ts">
-	throw new Error("@migration task: Add data prop (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292707)");
-
 	import SvelteSeo from 'svelte-seo';
 	import { page } from '$app/stores';
 	import { urlFor } from '$lib/image-url';
-	import PortableText from '@portabletext/svelte';
+	import { PortableText } from '@portabletext/svelte';
 	import CallToAction from '$lib/components/CallToAction.svelte';
 	import Link from '$lib/components/Link.svelte';
 	import TextSection from '$lib/components/TextSection.svelte';
-
+	import type { PageData } from './$types';
 	// Sanity Content
-	export let data;
-	const { title, description, asset, alt, caption } = data.mainImage;
+	export let data: PageData;
+	$: ({ title, description } = data);
+	$: ({ asset, alt, caption } = data.mainImage);
 </script>
 
 <SvelteSeo
@@ -39,8 +38,8 @@
 		<div class="mt-6 prose prose-indigo prose-lg text-gray-700 mx-auto">
 			{#if data.body}
 				<PortableText
-					blocks={data.body}
-					serializers={{ types: { textSection: TextSection }, marks: { link: Link } }}
+					value={data.body}
+					components={{ types: { textSection: TextSection }, marks: { link: Link } }}
 				/>
 			{/if}
 			{#if data.mainImage}

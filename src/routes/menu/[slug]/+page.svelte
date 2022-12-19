@@ -2,7 +2,7 @@
 	import SvelteSeo from 'svelte-seo';
 	import { page } from '$app/stores';
 	import { urlFor } from '$lib/image-url';
-	import PortableText from '@portabletext/svelte';
+	import { PortableText } from '@portabletext/svelte';
 	import Crepe from '$lib/components/Crepe.svelte';
 	import Coffee from '$lib/components/Coffee.svelte';
 	import Drink from '$lib/components/Drink.svelte';
@@ -40,7 +40,7 @@
 		<div class="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
 			<h2 class="text-2xl font-extrabold tracking-tight text-gray-900">Sweet Crepes</h2>
 			<div class="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
-				<PortableText blocks={sweets} serializers={{ types: { crepe: Crepe } }} />
+				<PortableText value={sweets} components={{ types: { crepe: Crepe } }} />
 			</div>
 		</div>
 	{/if}
@@ -48,7 +48,7 @@
 		<div class="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
 			<h2 class="text-2xl font-extrabold tracking-tight text-gray-900">Savory Crepes</h2>
 			<div class="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
-				<PortableText blocks={savorys} serializers={{ types: { crepe: Crepe } }} />
+				<PortableText value={savorys} components={{ types: { crepe: Crepe } }} />
 			</div>
 		</div>
 	{/if}
@@ -56,7 +56,7 @@
 		<div class="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
 			<h2 class="text-2xl font-extrabold tracking-tight text-gray-900">Coffee</h2>
 			<div class="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
-				<PortableText blocks={coffees} serializers={{ types: { coffee: Coffee } }} />
+				<PortableText value={coffees} components={{ types: { coffee: Coffee } }} />
 			</div>
 		</div>
 	{/if}
@@ -64,7 +64,7 @@
 		<div class="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
 			<h2 class="text-2xl font-extrabold tracking-tight text-gray-900">Drinks</h2>
 			<div class="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
-				<PortableText blocks={drinks} serializers={{ types: { drink: Drink } }} />
+				<PortableText value={drinks} components={{ types: { drink: Drink } }} />
 			</div>
 		</div>
 	{/if}
@@ -73,7 +73,7 @@
 			<div class="mt-8 flex justify-center">
 				<div class="inline-flex rounded-3xl shadow">
 					<a
-						sveltekit:prefetch
+						data-sveltekit-preload-data="hover"
 						href={location.orderUrl}
 						class="inline-flex items-center justify-center px-5 py-3 border text-base font-medium rounded-3xl text-black bg-custard-500 hover:bg-custard-400"
 					>

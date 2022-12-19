@@ -1,14 +1,12 @@
 <script lang="ts">
-	throw new Error("@migration task: Add data prop (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292707)");
-
 	import SvelteSeo from 'svelte-seo';
 	import { page } from '$app/stores';
 	import { urlFor } from '$lib/image-url';
 	import JoinOurTeam from '$lib/forms/JoinOurTeam.svelte';
-
+	import type { PageData } from './$types';
 	// Sanity Content
-	export let data;
-	const { title, description, mainImage } = data;
+	export let data: PageData;
+	$: ({ title, description, mainImage } = data);
 </script>
 
 <SvelteSeo

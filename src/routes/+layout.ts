@@ -1,13 +1,18 @@
 import { error } from '@sveltejs/kit';
 import type { LayoutLoad } from './$types';
+import type { SanityPage } from '$lib/types/sanity';
 
-export const load: LayoutLoad = async ({ fetch }) => {
+interface Response {
+	data: SanityPage;
+}
+
+export const load = (async ({ fetch }) => {
 	const response = await fetch(`/api/siteSettings.json`);
 
 	if (response.ok) {
-		const { data } = await response.json();
+		const { data }: Response = await response.json();
 		return data;
 	}
 
 	throw error(500);
-};
+}) satisfies LayoutLoad;

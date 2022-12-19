@@ -4,7 +4,7 @@
 		<div class="mt-8 flex justify-center">
 			<div class="inline-flex rounded-3xl shadow">
 				<a
-					sveltekit:prefetch
+					data-sveltekit-preload-data="hover"
 					href="/locations"
 					class="inline-flex items-center justify-center px-5 py-3 border text-base font-medium rounded-3xl text-black bg-custard-500 hover:bg-custard-400"
 				>
@@ -13,7 +13,7 @@
 			</div>
 			<div class="ml-3 inline-flex">
 				<a
-					sveltekit:prefetch
+					data-sveltekit-preload-data="hover"
 					href="/"
 					class="inline-flex items-center justify-center px-5 py-3 border text-base font-medium rounded-3xl text-black hover:bg-custard-500 hover:border-custard-500 transition-all ease-in"
 				>

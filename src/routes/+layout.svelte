@@ -11,7 +11,6 @@
 	import SlideOver from '$lib/components/SlideOver.svelte';
 	import { onMount } from 'svelte';
 	import { error } from '@sveltejs/kit';
-	import Banner from '$lib/components/Banner.svelte';
 
 	// Write Sanity content to global store
 	export let data: LayoutData;
@@ -79,10 +78,11 @@
 	<main
 		class="bg-white flex flex-col min-h-screen overflow-y-auto"
 		on:click={closeActiveTopMenu}
+		on:keydown={closeActiveTopMenu}
 		on:mouseenter={closeActiveTopMenu}
 	>
 		<SlideOver />
-		<div class="h-full mt-[96px]">
+		<div class="h-full mt-[144px] md:mt-[96px]">
 			<slot />
 		</div>
 	</main>

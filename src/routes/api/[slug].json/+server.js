@@ -19,11 +19,8 @@ export async function GET({ params }) {
         }`;
 	const query = filter + projection;
 
-	console.log(`Query : ${query}`);
-	console.log('Fetching Sanity data');
 	// Since only one match is expected destructure result
 	const [data] = await client.fetch(query);
-	console.log(data);
 
 	if (data) {
 		return json({

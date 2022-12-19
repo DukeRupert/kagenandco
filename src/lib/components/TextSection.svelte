@@ -2,7 +2,7 @@
 	import { PortableText } from '@portabletext/svelte';
 	import Link from './Link.svelte';
 	export let portableText;
-	const { name, body } = portableText.block;
+	const { body } = portableText.value;
 </script>
 
 <PortableText value={body} components={{ marks: { link: Link } }} />

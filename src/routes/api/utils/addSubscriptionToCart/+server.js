@@ -1,5 +1,6 @@
 // src/routes/api/add-to-cart
 import { json } from '@sveltejs/kit';
+import { SHOPIFY_API_ENDPOINT, SHOPIFY_STOREFRONT_API_TOKEN } from '$lib/shopify';
 const query = `
 mutation addItemToCart($cartId: ID!, $lines: [CartLineInput!]!) {
 	cartLinesAdd(cartId: $cartId, lines: $lines) {

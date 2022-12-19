@@ -1,6 +1,6 @@
 <script lang="ts">
 	export let portableText;
-	const { name, price } = portableText.block;
+	const { name, price } = portableText.value;
 </script>
 
 <div class="group relative">

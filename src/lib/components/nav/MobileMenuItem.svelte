@@ -58,7 +58,9 @@
 			>
 				{#each subItems as { title, href }}
 					<li class="flex">
-						<a sveltekit:prefetch {href} class="text-gray-100"> {title.toUpperCase()} </a>
+						<a data-sveltekit-preload-data="hover" {href} class="text-gray-100">
+							{title.toUpperCase()}
+						</a>
 					</li>
 				{/each}
 			</ul>

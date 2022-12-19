@@ -1,14 +1,13 @@
 <script lang="ts">
-	throw new Error("@migration task: Add data prop (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292707)");
-
 	import SvelteSeo from 'svelte-seo';
 	import { page } from '$app/stores';
 	import { urlFor } from '$lib/image-url';
 	import ContactUs from '$lib/forms/ContactUs.svelte';
-
+	import type { PageData } from './$types';
 	// Sanity Content
-	export let data;
-	const { title, description, mainImage } = data;
+	export let data: PageData;
+	console.log(data);
+	$: ({ title, description, mainImage } = data);
 </script>
 
 <SvelteSeo
@@ -30,7 +29,7 @@
 		]
 	}}
 />
-<!-- Contact section -->
+
 <section class="relative bg-white" aria-labelledby="contact-heading">
 	<div class="absolute w-full h-1/2 bg-white" aria-hidden="true" />
 	<div class="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -38,7 +37,6 @@
 			<h2 id="contact-heading" class="sr-only">Contact us</h2>
 
 			<div class="grid grid-cols-1 lg:grid-cols-3">
-				<!-- Contact information -->
 				<div class="relative overflow-hidden py-10 px-6 bg-secondary sm:px-10 xl:p-12">
 					<img
 						src="/kccLogoNew.svg"
@@ -46,10 +44,8 @@
 						class="w-full h-auto"
 					/>
 				</div>
-				<!-- Contact form -->
 				<div class="py-10 px-6 sm:px-10 lg:col-span-2 xl:p-12">
 					<h3 class="text-lg font-medium text-gray-900">Send us a message</h3>
-					<!-- svelte-ignore component-name-lowercase -->
 					<ContactUs />
 				</div>
 			</div>
