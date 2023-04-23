@@ -3,6 +3,7 @@
 	import SvelteSeo from 'svelte-seo';
 	import { page } from '$app/stores';
 	import { urlFor } from '$lib/image-url';
+	import Hero from '$lib/components/Hero.svelte';
 	import PrimaryBanner from '$lib/components/PrimaryBanner.svelte';
 	import MenuBanner from '$lib/components/MenuBanner.svelte';
 	import SubscriptionBanner from '$lib/components/SubscriptionBanner.svelte';
@@ -32,6 +33,7 @@
 	}}
 />
 <div class="relative bg-white mx-auto">
+	<Hero />
 	<PrimaryBanner />
 	<SubscriptionBanner />
 	<MenuBanner />
