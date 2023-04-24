@@ -1,7 +1,11 @@
 const colors = require('tailwindcss/colors');
 
 const config = {
-	content: ['./src/**/*.{html,js,svelte,ts}'],
+	darkMode: 'class',
+	content: [
+		'./src/**/*.{html,js,svelte,ts}',
+		require('path').join(require.resolve('@skeletonlabs/skeleton'), '../**/*.{html,js,svelte,ts}')
+	],
 	theme: {
 		extend: {
 			animation: {
@@ -45,10 +49,11 @@ const config = {
 	},
 
 	plugins: [
-		require('@tailwindcss/aspect-ratio'),
+		// require('@tailwindcss/aspect-ratio'),
 		require('@tailwindcss/forms'),
 		require('@tailwindcss/line-clamp'),
-		require('@tailwindcss/typography')
+		require('@tailwindcss/typography'),
+		...require('@skeletonlabs/skeleton/tailwind/skeleton.cjs')()
 	]
 };
 

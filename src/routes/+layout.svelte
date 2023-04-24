@@ -1,7 +1,14 @@
 <script lang="ts">
+	// Your selected Skeleton theme:
+	import '@skeletonlabs/skeleton/themes/theme-skeleton.css';
+
+	// This contains the bulk of Skeletons required styles:
+	import '@skeletonlabs/skeleton/styles/all.css';
+
+	// Finally, your application's global stylesheet (sometimes labeled 'app.css')
+	import '../app.postcss';
 	import type { LayoutData } from './$types';
 	import type { Cart } from '$lib/types/cart';
-	import '../app.css';
 	import { siteData, activeTopMenu } from '$lib/stores';
 	import { isCartOpen, cart } from '$lib/stores';
 	import cartCreate from '$lib/shopify/cartCreate';
@@ -69,22 +76,49 @@
 	});
 </script>
 
-<div
-	class="flex flex-col h-full w-full min-h-screen scroll-smooth {$isCartOpen
-		? 'overflow-hidden'
-		: ''}}"
->
-	<Nav />
+<div class="parent {$isCartOpen ? 'overflow-hidden' : ''}}">
+	<header>
+		<Nav />
+	</header>
 	<main
-		class="bg-white flex flex-col min-h-screen overflow-y-auto"
 		on:click={closeActiveTopMenu}
 		on:keydown={closeActiveTopMenu}
 		on:mouseenter={closeActiveTopMenu}
 	>
 		<SlideOver />
-		<div class="h-full mt-[144px] md:mt-[96px]">
+		<div class="h-full">
 			<slot />
 		</div>
 	</main>
-	<Footer />
+	<footer>
+		<Footer />
+	</footer>
 </div>
+
+<!-- Holy Grail layout -->
+<style>
+	.parent {
+		display: grid;
+		grid-template: auto 1fr auto / auto 1fr auto;
+	}
+
+	header {
+		grid-column: 1 / 4;
+	}
+
+	.left-side {
+		grid-column: 1 / 2;
+	}
+
+	main {
+		grid-column: 2 / 3;
+	}
+
+	.right-side {
+		grid-column: 3 / 4;
+	}
+
+	footer {
+		grid-column: 1 / 4;
+	}
+</style>
