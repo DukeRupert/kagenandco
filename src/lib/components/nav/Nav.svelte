@@ -1,6 +1,6 @@
 <script lang="ts">
-	import MobileMenu from './nav/MobileMenu.svelte';
-	import TopMenu from './nav/TopMenu.svelte';
+	import MobileMenu from './MobileMenu.svelte';
+	import TopMenu from './TopMenu.svelte';
 	import { itemCount } from '$lib/stores';
 </script>
 

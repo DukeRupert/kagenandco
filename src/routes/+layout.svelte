@@ -1,6 +1,6 @@
 <script lang="ts">
 	// Your selected Skeleton theme:
-	import '@skeletonlabs/skeleton/themes/theme-skeleton.css';
+	import '../theme.postcss';
 
 	// This contains the bulk of Skeletons required styles:
 	import '@skeletonlabs/skeleton/styles/all.css';
@@ -13,11 +13,12 @@
 	import { isCartOpen, cart } from '$lib/stores';
 	import cartCreate from '$lib/shopify/cartCreate';
 	import queryCart from '$lib/shopify/queryCart';
-	import Nav from '$lib/components/Nav.svelte';
+	import Nav from '$lib/components/header/Nav.svelte';
 	import Footer from '$lib/components/Footer.svelte';
 	import SlideOver from '$lib/components/SlideOver.svelte';
 	import { onMount } from 'svelte';
 	import { error } from '@sveltejs/kit';
+	import Landing from '$lib/components/Landing.svelte';
 
 	// Write Sanity content to global store
 	export let data: LayoutData;
@@ -76,7 +77,7 @@
 	});
 </script>
 
-<div class="parent {$isCartOpen ? 'overflow-hidden' : ''}}">
+<!-- <div class="parent {$isCartOpen ? 'overflow-hidden' : ''}}">
 	<header>
 		<Nav />
 	</header>
@@ -93,6 +94,14 @@
 	<footer>
 		<Footer />
 	</footer>
+</div> -->
+<div>
+	<header class="absolute inset-x-0 top-0 z-50">
+		<Nav />
+	</header>
+	<main>
+		<slot />
+	</main>
 </div>
 
 <!-- Holy Grail layout -->
