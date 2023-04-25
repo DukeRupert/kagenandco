@@ -1,8 +1,9 @@
 <script lang="ts">
+	const order_online_link =
+		'https://www.toasttab.com/kagen-coffee-crepes-270-williams-blvd/v3/?mode=fulfillment';
 	const hero_data = {
 		title: 'Kagen Coffee & Crepes',
-		description: `Building community through delicious crepes and coffee. Cupidatat minim id magna ipsum sint dolor qui. Sunt sit in quis cupidatat mollit aute
-							velit. Et labore commodo nulla aliqua proident mollit ullamco exercitation tempor.`,
+		description: `Coffee, crepes, and community! Families and friends need a place to gather, catch up and simply enjoy life together. Our delicious crepes and crafted coffees are here to help you deepen friendships and build memories today.`,
 		images: [
 			{ src: '/crepes/black_bean_crepe_kagen_coffee_and_crepes.jpg' },
 			{ src: '/crepes/laptop_on_table_with_mug_in_kagen_coffee_and_crepes.jpg' },
@@ -67,9 +68,9 @@
 						{hero_data.description}
 					</p>
 					<div class="mt-10 flex items-center gap-x-6">
-						<a href="#" class="btn variant-filled-primary">Get started</a>
-						<a href="#" class="btn variant-ringed-primary"
-							>Live demo <span aria-hidden="true">→</span></a
+						<a href="/menu/tri-cities" class="btn variant-filled-primary">View Menu</a>
+						<a href={order_online_link} class="btn variant-ringed-primary"
+							>Order Online <span aria-hidden="true">→</span></a
 						>
 					</div>
 				</div>
