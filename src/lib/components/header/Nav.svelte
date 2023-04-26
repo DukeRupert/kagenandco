@@ -29,7 +29,7 @@
 	<div class="flex">
 		<a href="/" class="-m-1.5 p-1.5">
 			<span class="sr-only">Kagen's Coffee and Crepes</span>
-			<div class="h-20 w-auto">
+			<div class="h-20 w-20">
 				<Logo stroke="#000" fill="#000" />
 			</div>
 		</a>
@@ -104,7 +104,7 @@
 		<div class="flex items-center justify-between">
 			<a href="/" class="-m-1.5 p-1.5">
 				<span class="sr-only">Kagen's Coffee and Crepes</span>
-				<div class="h-12 w-auto">
+				<div class="h-12 w-12">
 					<Logo stroke="#000" fill="#000" />
 				</div>
 			</a>

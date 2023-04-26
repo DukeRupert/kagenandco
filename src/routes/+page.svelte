@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Reviews from '$lib/components/reviews/Reviews.svelte';
 	import type { PageData } from './$types';
 	import SvelteSeo from 'svelte-seo';
 	import { page } from '$app/stores';
@@ -35,6 +36,7 @@
 />
 
 <Hero />
+<Reviews />
 <!-- <PrimaryBanner />
 	<SubscriptionBanner />
 	<MenuBanner /> -->

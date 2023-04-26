@@ -4,23 +4,6 @@
 	import Logo from '$lib/components/Logo.svelte';
 	export let count: number = 0;
 	let is_mobile_open = false;
-	const order_online_href =
-		'https://www.toasttab.com/kagen-coffee-crepes-270-williams-blvd/v3/?mode=fulfillment';
-
-	function toggle_mobile_open() {
-		is_mobile_open = !is_mobile_open;
-	}
-
-	// Open Shopping Cart SlideOver
-	function openShoppingCart() {
-		isCartOpen.set(true);
-	}
-
-	const top_links = [
-		{ title: 'Menu', href: '/menu/tri-cities' },
-		{ title: 'Coffee Club', href: '/products/the-rooster' },
-		{ title: 'Our Story', href: '/about-us' }
-	];
 </script>
 
 <main>
