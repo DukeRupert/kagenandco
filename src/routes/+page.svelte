@@ -1,4 +1,5 @@
 <script lang="ts">
+	import CTA from '$lib/components/CTA.svelte';
 	import Reviews from '$lib/components/reviews/Reviews.svelte';
 	import type { PageData } from './$types';
 	import SvelteSeo from 'svelte-seo';
@@ -37,6 +38,7 @@
 
 <Hero />
 <Reviews />
+<CTA />
 <!-- <PrimaryBanner />
 	<SubscriptionBanner />
 	<MenuBanner /> -->
