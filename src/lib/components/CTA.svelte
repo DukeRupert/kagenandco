@@ -6,8 +6,8 @@
 	<div class="relative h-80 overflow-hidden md:absolute md:left-0 md:h-full md:w-1/3 lg:w-1/2">
 		<img
 			class="h-full w-full object-cover"
-			src="/images/coffee_cup_with_coffee_beans_kagen_coffee_and_crepes_square.jpg"
-			alt=""
+			src="/images/coffee_cup_with_coffee_beans_kagen_coffee_and_crepes_square.webp"
+			alt="A Kagen Coffee and Crepes mug with whole coffee beans sitting on the table in front of it."
 		/>
 		<svg
 			viewBox="0 0 926 676"
