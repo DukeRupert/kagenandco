@@ -19,6 +19,7 @@
 	import { onMount } from 'svelte';
 	import { error } from '@sveltejs/kit';
 	import Landing from '$lib/components/Landing.svelte';
+	import { Toast } from '@skeletonlabs/skeleton';
 
 	// Write Sanity content to global store
 	export let data: LayoutData;
@@ -95,6 +96,7 @@
 		<Footer />
 	</footer>
 </div> -->
+<Toast />
 <div>
 	<header class="absolute inset-x-0 top-0 z-50">
 		<Nav />
