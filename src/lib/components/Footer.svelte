@@ -2,8 +2,8 @@
 	import { siteData } from '$lib/stores';
 </script>
 
-<footer class="bg-oldGrey">
-	<div class="bg-oldGrey max-w-7xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
+<footer class="bg-surface-900">
+	<div class="max-w-7xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
 		<nav
 			class="-mx-5 -my-2 flex flex-wrap flex-col text-center md:flex-row md:text-left justify-center"
 			aria-label="Footer"

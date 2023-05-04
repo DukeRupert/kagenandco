@@ -104,6 +104,9 @@
 	<main>
 		<slot />
 	</main>
+	<footer>
+		<Footer />
+	</footer>
 </div>
 
 <!-- Holy Grail layout -->
