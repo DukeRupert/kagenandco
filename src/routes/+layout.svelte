@@ -97,7 +97,8 @@
 	</footer>
 </div> -->
 <Toast />
-<div>
+<SlideOver />
+<div class="{$isCartOpen ? 'overflow-hidden' : ''}}">
 	<header class="absolute inset-x-0 top-0 z-50">
 		<Nav />
 	</header>
