@@ -7,11 +7,7 @@
 	import { urlFor } from '$lib/image-url';
 	import Hero from '$lib/components/hero/ImageTiles.svelte';
 	import ContactUs from '$lib/forms/ContactUs.svelte';
-	import Landing from '$lib/components/Landing.svelte';
-	import PrimaryBanner from '$lib/components/PrimaryBanner.svelte';
-	import MenuBanner from '$lib/components/MenuBanner.svelte';
-	import SubscriptionBanner from '$lib/components/SubscriptionBanner.svelte';
-
+	import FoodStarsBanner from '$lib/components/FoodStarsBanner.svelte';
 	// Sanity Content
 	export let data: PageData;
 	export let form: ActionData;
@@ -38,6 +34,7 @@
 	}}
 />
 
+<FoodStarsBanner />
 <Hero />
 <Reviews />
 <CTA />

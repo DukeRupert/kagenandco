@@ -89,15 +89,8 @@
 			<a {href} class="text-sm font-semibold leading-6 !no-underline !text-token">{title}</a>
 		{/each}
 	</div>
-	<div class="hidden lg:flex lg:justify-end">
+	<div class="hidden space-x-2 lg:flex lg:justify-end">
 		<button on:click|preventDefault={openShoppingCart} class="btn-icon">
-			{#if count}
-				<span class="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">{count}</span
-				>
-			{:else}
-				<span class="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">&nbsp;</span>
-			{/if}
-			<span class="sr-only">items in cart, view bag</span>
 			<span>
 				<!-- Heroicon name: outline/shopping-cart -->
 				<svg
@@ -116,6 +109,13 @@
 					/>
 				</svg>
 			</span>
+			{#if count}
+				<span class="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">{count}</span
+				>
+			{:else}
+				<span class="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">&nbsp;</span>
+			{/if}
+			<span class="sr-only">items in cart, view bag</span>
 		</button>
 		<a href={order_online_href} class="btn variant-filled-primary text-sm font-semibold leading-6"
 			>Order Online<span aria-hidden="true">&rarr;</span></a
