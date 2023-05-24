@@ -37,7 +37,7 @@
 					<img
 						src="/kccLogoNew.svg"
 						alt="Kagen Coffee and Crepes Rooster logo"
-						class="w-full max-w-2xl h-auto m-auto"
+						class="w-full max-w-2xl h-96 lg:h-full m-auto"
 					/>
 				</div>
 			</div>

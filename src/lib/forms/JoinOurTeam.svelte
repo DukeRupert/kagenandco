@@ -358,13 +358,8 @@
 	</div>
 
 	<div class="pt-5">
-		<div class="flex items-center justify-center">
-			<button
-				type="submit"
-				class="w-full max-w-xs flex items-center justify-center px-6 py-3 rounded-3xl border border-transparent shadow-sm bg-custard-500 text-base text-center font-medium text-black hover:bg-custard-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-custard-300 sm:text-sm"
-			>
-				Submit
-			</button>
+		<div class="flex items-center justify-start">
+			<button type="submit" class="btn variant-filled-primary"> Submit </button>
 		</div>
 	</div>
 </form>
