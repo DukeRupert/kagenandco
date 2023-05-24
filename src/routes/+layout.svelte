@@ -18,7 +18,6 @@
 	import SlideOver from '$lib/components/SlideOver.svelte';
 	import { onMount } from 'svelte';
 	import { error } from '@sveltejs/kit';
-	import Landing from '$lib/components/Landing.svelte';
 	import { Toast } from '@skeletonlabs/skeleton';
 
 	// Write Sanity content to global store
@@ -78,28 +77,10 @@
 	});
 </script>
 
-<!-- <div class="parent {$isCartOpen ? 'overflow-hidden' : ''}}">
-	<header>
-		<Nav />
-	</header>
-	<main
-		on:click={closeActiveTopMenu}
-		on:keydown={closeActiveTopMenu}
-		on:mouseenter={closeActiveTopMenu}
-	>
-		<SlideOver />
-		<div class="h-full">
-			<slot />
-		</div>
-	</main>
-	<footer>
-		<Footer />
-	</footer>
-</div> -->
 <Toast />
 <SlideOver />
 <div class="{$isCartOpen ? 'overflow-hidden' : ''}}">
-	<header class="absolute inset-x-0 top-0 z-50">
+	<header>
 		<Nav />
 	</header>
 	<main>

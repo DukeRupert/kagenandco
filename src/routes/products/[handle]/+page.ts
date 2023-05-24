@@ -5,6 +5,7 @@ import GetProductByHandle from '$lib/shopify/GetProductByHandle';
 
 export const load: PageLoad = async ({ params }) => {
 	const { handle } = params;
+	console.log(`Handle: ${handle}`);
 	const response = await GetProductByHandle(handle);
 
 	if (response.ok) {

@@ -4,7 +4,8 @@
 	import { quadOut } from 'svelte/easing';
 	import { itemCount } from '$lib/stores';
 	import Logo from '$lib/components/Logo.svelte';
-	export let count: number = 0;
+	let count = 0;
+	$: count = $itemCount;
 	let is_mobile_open = false;
 	const order_online_href =
 		'https://www.toasttab.com/kagen-coffee-crepes-270-williams-blvd/v3/?mode=fulfillment';
@@ -90,6 +91,13 @@
 	</div>
 	<div class="hidden lg:flex lg:justify-end">
 		<button on:click|preventDefault={openShoppingCart} class="btn-icon">
+			{#if count}
+				<span class="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">{count}</span
+				>
+			{:else}
+				<span class="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">&nbsp;</span>
+			{/if}
+			<span class="sr-only">items in cart, view bag</span>
 			<span>
 				<!-- Heroicon name: outline/shopping-cart -->
 				<svg
@@ -108,14 +116,6 @@
 					/>
 				</svg>
 			</span>
-			{#if count}
-				<span class="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800"
-					>{$itemCount}</span
-				>
-			{:else}
-				<span class="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">&nbsp;</span>
-			{/if}
-			<span class="sr-only">items in cart, view bag</span>
 		</button>
 		<a href={order_online_href} class="btn variant-filled-primary text-sm font-semibold leading-6"
 			>Order Online<span aria-hidden="true">&rarr;</span></a

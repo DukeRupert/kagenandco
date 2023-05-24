@@ -1,20 +1,16 @@
-import { dev } from '$app/environment';
 import { json } from '@sveltejs/kit';
-
-const SHOPIFY_API_ENDPOINT = dev
-	? import.meta.env.VITE_SHOPIFY_API_ENDPOINT
-	: process.env.SHOPIFY_API_ENDPOINT;
-const SHOPIFY_STOREFRONT_API_TOKEN = dev
-	? import.meta.env.VITE_SHOPIFY_STOREFRONT_API_TOKEN
-	: process.env.SHOPIFY_STOREFRONT_API_TOKEN;
+import {
+	PUBLIC_SHOPIFY_API_ENDPOINT,
+	PUBLIC_SHOPIFY_STOREFRONT_API_TOKEN
+} from '$env/static/public';
 
 export async function postToShopify({ query, variables }) {
 	try {
-		const response = await fetch(SHOPIFY_API_ENDPOINT, {
+		const response = await fetch(PUBLIC_SHOPIFY_API_ENDPOINT, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
-				'X-Shopify-Storefront-Access-Token': SHOPIFY_STOREFRONT_API_TOKEN
+				'X-Shopify-Storefront-Access-Token': PUBLIC_SHOPIFY_STOREFRONT_API_TOKEN
 			},
 			body: JSON.stringify({ query, variables })
 		});

@@ -22,6 +22,7 @@
 	}
 
 	export let data: PageData;
+	console.log(data);
 	// Track active Main Image
 	let mainImage = 0;
 
@@ -148,7 +149,7 @@
 </script>
 
 <div class="bg-white">
-	<div class="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
+	<div class="max-w-2xl mx-auto py-8 px-4 lg:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
 		<div class="lg:grid lg:grid-cols-2 lg:gap-x-8 lg:items-start">
 			<!-- Image gallery -->
 			<div class="flex flex-col-reverse">
@@ -158,7 +159,7 @@
 						{#each data.images.edges as image, index}
 							<button
 								id="tab-{index}"
-								class="relative h-24 bg-white rounded-md flex items-center justify-center text-sm font-medium uppercase text-gray-900 cursor-pointer hover:bg-gray-50 focus:outline-none focus:ring focus:ring-offset-4 focus:ring-opacity-50"
+								class="relative h-24 btn variant-filled-primary"
 								aria-controls="tabs-{index}"
 								role="tab"
 								type="button"
@@ -230,41 +231,35 @@
 				</div>
 
 				{#if data.sellingPlanGroups.edges.length > 0}
-					<form class="mt-10 grid grid-cols-2 gap-3 sm:flex-col">
-						<label
-							class="flex-1 border rounded-md py-3 px-8 flex items-center justify-center text-base font-small text-gray-900 hover:bg-custard-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-custard-500 sm:w-full {isSubscription
-								? ''
-								: 'bg-oldGrey text-custard-400'}"
-						>
-							<input
-								type="radio"
-								name="variant"
-								bind:group={isSubscription}
-								value={false}
-								class="sr-only"
-								aria-labelledby="size-choice-0-label"
-							/>
-							<span id="size-choice-0-label" class="text-center">
-								Single purchase - ${price.toFixed(2)}</span
-							>
-						</label>
-						<label
-							class="max-w-xs flex-1 border rounded-md py-3 px-8 flex items-center justify-center text-base font-small text-gray-900 hover:bg-custard-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-custard-500 sm:w-full {isSubscription
-								? 'bg-oldGrey text-custard-400'
-								: ''}"
-						>
-							<input
-								type="radio"
-								name="variant"
-								bind:group={isSubscription}
-								value={true}
-								class="sr-only"
-								aria-labelledby="size-choice-0-label"
-							/>
-							<span id="size-choice-0-label" class="text-center">
-								Subscribe & Save - ${subscriptionPrice.toFixed(2)}</span
-							>
-						</label>
+					<form class="mt-10 sm:flex-col">
+						<div class="space-y-2">
+							<label class="flex items-center space-x-4">
+								<input
+									type="radio"
+									name="variant"
+									bind:group={isSubscription}
+									value={false}
+									class="radio"
+									aria-labelledby="size-choice-0-label"
+								/>
+								<span id="size-choice-0-label" class="text-center">
+									Single purchase - ${price.toFixed(2)}</span
+								>
+							</label>
+							<label class="flex items-center space-x-4">
+								<input
+									type="radio"
+									name="variant"
+									bind:group={isSubscription}
+									value={true}
+									class="radio"
+									aria-labelledby="size-choice-0-label"
+								/>
+								<span id="size-choice-0-label" class="text-center">
+									Subscribe & Save - ${subscriptionPrice.toFixed(2)}</span
+								>
+							</label>
+						</div>
 					</form>
 				{/if}
 

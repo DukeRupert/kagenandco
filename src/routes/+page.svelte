@@ -41,7 +41,7 @@
 <Hero />
 <Reviews />
 <CTA />
-<div class="relative mb-8">
+<div class="relative mx-auto max-w-4xl mb-8">
 	<h2 id="contact-heading" class="sr-only">Contact us</h2>
 
 	<div class="py-10 px-6 sm:px-10 lg:col-span-2 xl:p-12">
