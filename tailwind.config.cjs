@@ -1,12 +1,13 @@
 const colors = require('tailwindcss/colors');
 
 const config = {
-	content: ['./src/**/*.{html,js,svelte,ts}'],
+	darkMode: 'class',
+	content: [
+		'./src/**/*.{html,js,svelte,ts}',
+		require('path').join(require.resolve('@skeletonlabs/skeleton'), '../**/*.{html,js,svelte,ts}')
+	],
 	theme: {
 		extend: {
-			animation: {
-				wiggle: 'wiggle 1s ease-in-out infinite'
-			},
 			colors: {
 				maxWidth: {
 					'8xl': '92rem'
@@ -39,16 +40,53 @@ const config = {
 				wiggle: {
 					'0%, 100%': { transform: 'rotate(-3deg)' },
 					'50%': { transform: 'rotate(3deg)' }
+				},
+				'fade-in': {
+					from: {
+						opacity: 0
+					},
+					to: {
+						opacity: 1
+					}
+				},
+				marquee: {
+					'100%': {
+						transform: 'translateY(-50%)'
+					}
+				},
+				'spin-reverse': {
+					to: {
+						transform: 'rotate(-360deg)'
+					}
 				}
+			},
+			animation: {
+				wiggle: 'wiggle 1s ease-in-out infinite',
+				'fade-in': 'fade-in 0.5s linear forwards',
+				marquee: 'marquee var(--marquee-duration) linear infinite',
+				'spin-slow': 'spin 4s linear infinite',
+				'spin-slower': 'spin 6s linear infinite',
+				'spin-reverse': 'spin-reverse 1s linear infinite',
+				'spin-reverse-slow': 'spin-reverse 4s linear infinite',
+				'spin-reverse-slower': 'spin-reverse 6s linear infinite'
+			},
+			transitionTimingFunction: {
+				'expo-in': 'cubic-bezier(0.95, 0.05, 0.795, 0.035)',
+				'expo-out': 'cubic-bezier(0.19, 1, 0.22, 1)',
+				'in-expo': 'cubic-bezier(0.95, 0.05, 0.795, 0.035)',
+				'out-expo': 'cubic-bezier(0.19, 1, 0.22, 1)',
+				'quint-out': 'cubic-bezier(0.22, 1, 0.36, 1)',
+				'quint-in': 'cubic-bezier(0.64, 0, 0.78, 0)'
 			}
 		}
 	},
 
 	plugins: [
-		require('@tailwindcss/aspect-ratio'),
+		// require('@tailwindcss/aspect-ratio'),
 		require('@tailwindcss/forms'),
 		require('@tailwindcss/line-clamp'),
-		require('@tailwindcss/typography')
+		require('@tailwindcss/typography'),
+		...require('@skeletonlabs/skeleton/tailwind/skeleton.cjs')()
 	]
 };
 

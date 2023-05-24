@@ -13,12 +13,13 @@
 <div
 	class="relative {$isCartOpen ? 'z-[100]' : '-z-10 '}"
 	on:click={handleClick}
+	on:keypress={handleClick}
 	aria-labelledby="slide-over-title"
 	role="dialog"
 	aria-modal="true"
 >
 	<div
-		class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity ease-in-out {$isCartOpen
+		class="fixed inset-0 bg-gray-500 duration-200 bg-opacity-75 transition-opacity ease-in-out {$isCartOpen
 			? 'opacity-100'
 			: 'opacity-0'}"
 	/>

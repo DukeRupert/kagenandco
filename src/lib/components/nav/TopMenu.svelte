@@ -32,7 +32,7 @@
 	<Banner />
 	<nav aria-label="Top">
 		<!-- Main navigation -->
-		<div class="bg-white	">
+		<div class="bg-white">
 			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				<div class="h-24 flex items-center justify-between">
 					<!-- Logo (lg+) -->
