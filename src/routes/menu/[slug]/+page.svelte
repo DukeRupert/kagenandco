@@ -75,18 +75,13 @@
 					<a
 						data-sveltekit-preload-data="hover"
 						href={location.orderUrl}
-						class="inline-flex items-center justify-center px-5 py-3 border text-base font-medium rounded-3xl text-black bg-custard-500 hover:bg-custard-400"
+						class="btn variant-filled-primary"
 					>
 						Order Online
 					</a>
 				</div>
 				<div class="ml-3 inline-flex">
-					<a
-						href={location.locationUrl}
-						class="inline-flex items-center justify-center px-5 py-3 border text-base font-medium rounded-3xl text-black hover:bg-custard-500 hover:border-custard-500 transition-all ease-in"
-					>
-						Get Directions
-					</a>
+					<a href={location.locationUrl} class="btn variant-ringed-primary"> Get Directions </a>
 				</div>
 			</div>
 		</div>
