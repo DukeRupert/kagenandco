@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { navigating } from '$app/stores';
 	import { isCartOpen } from '$lib/stores';
 	import { fly } from 'svelte/transition';
 	import { quadOut } from 'svelte/easing';
@@ -14,6 +15,11 @@
 		is_mobile_open = !is_mobile_open;
 	}
 
+	// Close mobile menu when navigation
+	$: if ($navigating) {
+		is_mobile_open = false;
+	}
+
 	// Open Shopping Cart SlideOver
 	function openShoppingCart() {
 		$isCartOpen = true;
@@ -22,7 +28,11 @@
 	const top_links = [
 		{ title: 'Menu', href: '/menu/tri-cities' },
 		{ title: 'Coffee Club', href: '/products/the-rooster' },
-		{ title: 'Our Story', href: '/about-us' }
+		{ title: 'Our Story', href: '/about-us' },
+		{ title: 'Locations', href: '/locations' },
+		{ title: 'Join Our Team', href: '/join-our-team' },
+
+		{ title: 'Contact Us', href: '/contact-us' }
 	];
 </script>
 
