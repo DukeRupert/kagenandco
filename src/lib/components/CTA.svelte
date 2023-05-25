@@ -2,7 +2,7 @@
 	// Todo
 </script>
 
-<div class="relative bg-surface-900">
+<div class="relative bg-secondary-900">
 	<div class="relative h-80 overflow-hidden md:absolute md:left-0 md:h-full md:w-1/3 lg:w-1/2">
 		<img
 			class="h-full w-full object-cover"
