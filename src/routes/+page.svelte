@@ -8,6 +8,7 @@
 	import Hero from '$lib/components/hero/ImageTiles.svelte';
 	import ContactUs from '$lib/forms/ContactUs.svelte';
 	import FoodStarsBanner from '$lib/components/FoodStarsBanner.svelte';
+	import Quote from '$lib/components/Quote.svelte';
 	// Sanity Content
 	export let data: PageData;
 	export let form: ActionData;
@@ -36,6 +37,7 @@
 
 <FoodStarsBanner />
 <Hero />
+<Quote />
 <Reviews />
 <CTA />
 <div class="relative mx-auto max-w-4xl mb-8">
