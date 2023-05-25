@@ -1,3 +1,15 @@
+<script lang="ts">
+	export let data = {
+		quote: 'Not all superheroes wear capes...some make crepes.',
+		name: 'Kagen Cox',
+		title: 'Owner',
+		img: {
+			src: 'https://cdn.sanity.io/images/codowsse/production/7b5e94b83d75001698cb3325bd344e8772038e5e-800x800.jpg?rect=0,134,800,533&w=1310&h=873&fm=webp',
+			alt: 'Kagen Cox owner of Kagen Coffee and Crepes'
+		}
+	};
+</script>
+
 <section class="isolate overflow-hidden bg-primary-300 px-6 lg:px-8">
 	<div class="relative mx-auto max-w-2xl py-24 sm:py-32 lg:max-w-4xl">
 		<figure class="grid grid-cols-1 items-center gap-x-6 gap-y-8 lg:gap-x-10">
@@ -15,7 +27,7 @@
 					<use href="#b56e9dab-6ccb-4d32-ad02-6b4bb5d9bbeb" x="86" />
 				</svg>
 				<blockquote class="text-xl font-semibold leading-8 text-gray-900 sm:text-2xl sm:leading-9">
-					<p>Not all superheroes wear capes...some make crepes.</p>
+					<p>{data.quote}</p>
 				</blockquote>
 			</div>
 			<div class="col-end-1 w-16 lg:row-span-4 lg:w-72">

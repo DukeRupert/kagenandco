@@ -9,10 +9,21 @@
 	import ContactUs from '$lib/forms/ContactUs.svelte';
 	import FoodStarsBanner from '$lib/components/FoodStarsBanner.svelte';
 	import Quote from '$lib/components/Quote.svelte';
+	import QuoteOverlap from '$lib/components/QuoteOverlap.svelte';
 	// Sanity Content
 	export let data: PageData;
 	export let form: ActionData;
 	$: ({ title, description, mainImage } = data);
+
+	const quote = {
+		quote: 'Not all superheroes wear capes...some make crepes.',
+		name: 'Kagen Cox',
+		title: 'Owner',
+		img: {
+			src: 'https://cdn.sanity.io/images/codowsse/production/7b5e94b83d75001698cb3325bd344e8772038e5e-800x800.jpg?rect=0,134,800,533&w=1310&h=873&fm=webp',
+			alt: 'Kagen Cox owner of Kagen Coffee and Crepes'
+		}
+	};
 </script>
 
 <SvelteSeo
@@ -37,7 +48,7 @@
 
 <FoodStarsBanner />
 <Hero />
-<Quote />
+<QuoteOverlap data={quote} />
 <Reviews />
 <CTA />
 <div class="relative mx-auto max-w-4xl mb-8">
