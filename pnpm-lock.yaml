@@ -31,8 +31,8 @@ devDependencies:
     specifier: ^7.7.0
     version: 7.7.0
   '@skeletonlabs/skeleton':
-    specifier: ^1.2.0
-    version: 1.2.0
+    specifier: ^1.6.2
+    version: 1.6.2
   '@square/svelte-store':
     specifier: ^1.0.15
     version: 1.0.15
@@ -518,9 +518,10 @@ packages:
       - debug
     dev: true
 
-  /@skeletonlabs/skeleton@1.2.0:
-    resolution: {integrity: sha512-WM+vPS3kf2b9bnN4Gr8YpMjRj7Z6gNNgGLeRlmcS50lotpH5oGpbiGh8oxf/j2j0cJeHv2bIwtXkqISuypZs+Q==}
+  /@skeletonlabs/skeleton@1.6.2:
+    resolution: {integrity: sha512-Xp+gCAgxEfzwa6lUzeFHhIiTzPe7wKAWZJzo0UnNJfgMCuJy4Txu2bDXz6ZCyu9+B6+i8lShFPxPuENqTfP14w==}
     dependencies:
+      esm-env: 1.0.0
       svelte: 3.58.0
     dev: true
 
