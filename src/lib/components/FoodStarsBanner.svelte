@@ -3,7 +3,7 @@
 	import { FxReveal as Img } from '@zerodevx/svelte-img';
 </script>
 
-<div class="relative bg-black">
+<div class="relative bg-black flex justify-center">
 	<Img
 		src={gr_food_stars_banner}
 		alt="Gordan Ramsay Food Stars series banner"
