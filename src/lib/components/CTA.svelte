@@ -1,12 +1,13 @@
-<script lang="ts">
-	// Todo
+<script>
+	import coffee_cup from '$lib/assets/coffee_cup_with_coffee_beans_kagen_coffee_and_crepes_square.jpg?run';
+	import Img from '@zerodevx/svelte-img';
 </script>
 
 <div class="relative bg-secondary-900">
 	<div class="relative h-80 overflow-hidden md:absolute md:left-0 md:h-full md:w-1/3 lg:w-1/2">
-		<img
+		<Img
 			class="h-full w-full object-cover"
-			src="/images/coffee_cup_with_coffee_beans_kagen_coffee_and_crepes_square.webp"
+			src={coffee_cup}
 			alt="A Kagen Coffee and Crepes mug with whole coffee beans sitting on the table in front of it."
 		/>
 		<svg
