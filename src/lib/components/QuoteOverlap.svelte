@@ -1,13 +1,6 @@
 <script lang="ts">
-	export let data = {
-		quote: 'Not all superheroes wear capes...some make crepes.',
-		name: 'Kagen Cox',
-		title: 'Owner',
-		img: {
-			src: 'https://cdn.sanity.io/images/codowsse/production/7b5e94b83d75001698cb3325bd344e8772038e5e-800x800.jpg?rect=0,134,800,533&w=1310&h=873&fm=webp',
-			alt: 'Kagen Cox owner of Kagen Coffee and Crepes'
-		}
-	};
+	import kagen_cox_owner from '$lib/assets/kagen_coffee_and_crepes_owner.webp?run';
+	import Img from '@zerodevx/svelte-img';
 </script>
 
 <div class="bg-surface-50 pb-16 pt-24 sm:pb-24 sm:pt-32 xl:pb-32">
@@ -17,10 +10,10 @@
 		>
 			<div class="-mt-8 w-full max-w-2xl xl:-mb-8 xl:w-96 xl:flex-none">
 				<div class="relative aspect-[2/1] h-full md:-mx-8 xl:mx-0 xl:aspect-auto">
-					<img
+					<Img
 						class="absolute inset-0 h-full w-full rounded-2xl bg-gray-800 object-cover shadow-2xl"
-						src={data.img.src}
-						alt={data.img.alt}
+						src={kagen_cox_owner}
+						alt="Kagen Cox, owner of Kagen Coffee and Crepes"
 					/>
 				</div>
 			</div>
@@ -41,13 +34,13 @@
 					<blockquote class="!border-primary-500">
 						<p>
 							<span class="text-xl font-semibold leading-8 text-white sm:text-2xl sm:leading-9"
-								>{data.quote}</span
+								>Not all superheroes wear capes...some make crepes.</span
 							>
 						</p>
 					</blockquote>
 					<figcaption class="mt-8 text-base">
-						<div class="font-semibold text-white">{data.name}</div>
-						<div class="mt-1 text-white/50">{data.title}</div>
+						<div class="font-semibold text-white">Kagen Cox</div>
+						<div class="mt-1 text-white/50">Owner</div>
 					</figcaption>
 				</figure>
 			</div>
