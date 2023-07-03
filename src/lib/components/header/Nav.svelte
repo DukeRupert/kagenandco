@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { navigating } from '$app/stores';
 	import { isCartOpen } from '$lib/stores';
-	import { fly } from 'svelte/transition';
-	import { quadOut } from 'svelte/easing';
+	import { fly, fade } from 'svelte/transition';
+	import { quadIn, quadOut } from 'svelte/easing';
 	import { itemCount } from '$lib/stores';
 	import Logo from '$lib/components/Logo.svelte';
 	let count = 0;
@@ -143,9 +143,12 @@
 		aria-modal="true"
 	>
 		<!-- Background backdrop, show/hide based on slide-over state. -->
-		<div class="fixed inset-0 z-50" />
 		<div
-			class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10"
+			transition:fade={{ delay: 250, duration: 100, easing: quadOut }}
+			class="fixed inset-0 z-50 bg-gray-700/20"
+		/>
+		<div
+			class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-primary-500 px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10"
 		>
 			<div class="flex items-center justify-between">
 				<a href="/" class="-m-1.5 p-1.5">
@@ -173,18 +176,20 @@
 				</button>
 			</div>
 			<div class="mt-6 flow-root">
-				<div class="-my-6 divide-y divide-gray-500/10">
+				<div class="-my-6 divide-y divide-secondary-800/30">
 					<div class="space-y-2 py-6">
 						{#each top_links as { title, href }}
 							<a
 								{href}
-								class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 !no-underline !text-token"
+								class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 !no-underline !text-tertiary-600"
 								>{title}</a
 							>
 						{/each}
 					</div>
 					<div class="py-6">
-						<a href="#" class="btn variant-filled-primary">Order Online</a>
+						<a href={order_online_href} class="btn variant-ringed-tertiary !bg-white"
+							>Order Online</a
+						>
 					</div>
 				</div>
 			</div>
