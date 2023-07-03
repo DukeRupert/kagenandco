@@ -1,20 +1,10 @@
 <script lang="ts">
-	const order_online_link =
-		'https://www.toasttab.com/kagen-coffee-crepes-270-williams-blvd/v3/?mode=fulfillment';
-	const hero_data = {
-		title: 'Kagen Coffee & Crepes',
-		description: `Coffee, crepes, and community! Families and friends need a place to gather, catch up and simply enjoy life together. Our delicious crepes and crafted coffees are here to help you deepen friendships and build memories today.`,
-		images: [
-			{ src: '/crepes/black_bean_crepe_kagen_coffee_and_crepes.jpg' },
-			{ src: '/crepes/laptop_on_table_with_mug_in_kagen_coffee_and_crepes.jpg' },
-			{ src: '/crepes/mixed_berry_crepe_kagen_coffee_and_crepes.jpg' },
-			{ src: '/crepes/oreo_crepe_smiling_employee_kagen_coffee_and_crepes.jpg' },
-			{ src: '/crepes/smiling_woman_thank_you_bag_kagen_coffee_and_crepes.jpg' },
-			{ src: '/crepes/the_chunky_monkey_crepe_kagen_coffee_and_crepes.jpg' },
-			{ src: '/crepes/the_monte_cristo_crepe_kagen_coffee_and_crepes.jpg' },
-			{ src: '/crepes/turkey_bacon_crepe_kagen_coffee_and_crepes.jpg' }
-		]
-	};
+	import black_bean_crepe from '$lib/assets/crepes/black_bean_crepe_kagen_coffee_and_crepes.jpg?run';
+	import smiling_employee from '$lib/assets/crepes/oreo_crepe_smiling_employee_kagen_coffee_and_crepes.jpg?run';
+	import monte_cristo_crepe from '$lib/assets/crepes/the_monte_cristo_crepe_kagen_coffee_and_crepes.jpg?run';
+	import mixed_berry_crepe from '$lib/assets/crepes/mixed_berry_crepe_kagen_coffee_and_crepes.jpg?run';
+	import chunky_monkey_crepe from '$lib/assets/crepes/the_chunky_monkey_crepe_kagen_coffee_and_crepes.jpg?run';
+	import Img from '@zerodevx/svelte-img';
 </script>
 
 <div class="relative isolate">
@@ -32,15 +22,18 @@
 			<div class="mx-auto max-w-2xl gap-x-14 lg:mx-0 lg:flex lg:max-w-none lg:items-center">
 				<div class="w-full max-w-xl lg:shrink-0 xl:max-w-2xl">
 					<h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-						{hero_data.title}
+						Kagen Coffee & Crepes
 					</h1>
 					<p class="relative mt-6 text-lg leading-8 text-gray-600 sm:max-w-md lg:max-w-none">
-						{hero_data.description}
+						Coffee, crepes, and community! Families and friends need a place to gather, catch up and
+						simply enjoy life together. Our delicious crepes and crafted coffees are here to help
+						you deepen friendships and build memories today.
 					</p>
 					<div class="mt-10 flex items-center gap-x-6">
 						<a href="/menu/tri-cities" class="btn variant-filled-primary">View Menu</a>
-						<a href={order_online_link} class="btn variant-ringed-primary"
-							>Order Online <span aria-hidden="true">→</span></a
+						<a
+							href="https://www.toasttab.com/kagen-coffee-crepes-270-williams-blvd/v3/?mode=fulfillment"
+							class="btn variant-ringed-primary">Order Online <span aria-hidden="true">→</span></a
 						>
 					</div>
 				</div>
@@ -50,10 +43,10 @@
 					<div
 						class="ml-auto w-44 flex-none space-y-8 pt-32 sm:ml-0 sm:pt-80 lg:order-last lg:pt-36 xl:order-none xl:pt-80"
 					>
-						<div class="relative">
-							<img
-								src={hero_data.images[0].src}
-								alt=""
+						<div class="relative rounded-xl">
+							<Img
+								src={black_bean_crepe}
+								alt="A black bean crepe"
 								class="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"
 							/>
 							<div
@@ -63,9 +56,9 @@
 					</div>
 					<div class="mr-auto w-44 flex-none space-y-8 sm:mr-0 sm:pt-52 lg:pt-36">
 						<div class="relative">
-							<img
-								src={hero_data.images[3].src}
-								alt=""
+							<Img
+								src={smiling_employee}
+								alt="A smiling employee holding an oreo crepe"
 								class="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"
 							/>
 							<div
@@ -73,9 +66,9 @@
 							/>
 						</div>
 						<div class="relative">
-							<img
-								src={hero_data.images[6].src}
-								alt=""
+							<Img
+								src={monte_cristo_crepe}
+								alt="A monte cristo crepe"
 								class="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"
 							/>
 							<div
@@ -85,9 +78,9 @@
 					</div>
 					<div class="w-44 flex-none space-y-8 pt-32 sm:pt-0">
 						<div class="relative">
-							<img
-								src={hero_data.images[2].src}
-								alt=""
+							<Img
+								src={mixed_berry_crepe}
+								alt="A mixed berry crepe"
 								class="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"
 							/>
 							<div
@@ -95,9 +88,9 @@
 							/>
 						</div>
 						<div class="relative">
-							<img
-								src={hero_data.images[5].src}
-								alt=""
+							<Img
+								src={chunky_monkey_crepe}
+								alt="A chunky monkey crepe"
 								class="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"
 							/>
 							<div
