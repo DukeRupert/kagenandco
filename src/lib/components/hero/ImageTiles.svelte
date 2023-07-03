@@ -1,9 +1,9 @@
 <script lang="ts">
-	import black_bean_crepe from '$lib/assets/crepes/black_bean_crepe_kagen_coffee_and_crepes.jpg?run';
-	import smiling_employee from '$lib/assets/crepes/oreo_crepe_smiling_employee_kagen_coffee_and_crepes.jpg?run';
-	import monte_cristo_crepe from '$lib/assets/crepes/the_monte_cristo_crepe_kagen_coffee_and_crepes.jpg?run';
-	import mixed_berry_crepe from '$lib/assets/crepes/mixed_berry_crepe_kagen_coffee_and_crepes.jpg?run';
-	import chunky_monkey_crepe from '$lib/assets/crepes/the_chunky_monkey_crepe_kagen_coffee_and_crepes.jpg?run';
+	import black_bean_crepe from '$lib/assets/crepes/black_bean_crepe_kagen_coffee_and_crepes.jpg?run&width=240;480&format=avif;webp;jpg';
+	import smiling_employee from '$lib/assets/crepes/oreo_crepe_smiling_employee_kagen_coffee_and_crepes.jpg?run&width=240;480&format=avif;webp;jpg';
+	import monte_cristo_crepe from '$lib/assets/crepes/the_monte_cristo_crepe_kagen_coffee_and_crepes.jpg?run&width=240;480&format=avif;webp;jpg';
+	import mixed_berry_crepe from '$lib/assets/crepes/mixed_berry_crepe_kagen_coffee_and_crepes.jpg?run&width=240;480&format=avif;webp;jpg';
+	import chunky_monkey_crepe from '$lib/assets/crepes/the_chunky_monkey_crepe_kagen_coffee_and_crepes.jpg?run&width=240;480&format=avif;webp;jpg';
 	import Img from '@zerodevx/svelte-img';
 </script>
 
