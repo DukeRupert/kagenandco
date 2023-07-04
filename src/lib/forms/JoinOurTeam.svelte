@@ -88,12 +88,6 @@
 >
 	<div class="space-y-8 divide-y divide-gray-200">
 		<div class="pt-8">
-			<div>
-				<h3 class="text-lg leading-6 font-medium text-gray-900">Join Our Team</h3>
-				<!-- <p class="mt-1 text-sm text-gray-500">
-								Use a permanent address where you can receive mail.
-							</p> -->
-			</div>
 			<div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
 				<div class="sm:col-span-3">
 					<label for="first" class="block text-sm font-medium text-gray-700"> First name </label>
