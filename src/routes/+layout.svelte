@@ -80,31 +80,3 @@
 		<Footer />
 	</footer>
 </div>
-
-<!-- Holy Grail layout -->
-<style>
-	.parent {
-		display: grid;
-		grid-template: auto 1fr auto / auto 1fr auto;
-	}
-
-	header {
-		grid-column: 1 / 4;
-	}
-
-	.left-side {
-		grid-column: 1 / 2;
-	}
-
-	main {
-		grid-column: 2 / 3;
-	}
-
-	.right-side {
-		grid-column: 3 / 4;
-	}
-
-	footer {
-		grid-column: 1 / 4;
-	}
-</style>
