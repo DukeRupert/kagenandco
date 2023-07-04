@@ -1,60 +1,57 @@
 <script lang="ts">
-	import SvelteSeo from 'svelte-seo';
-	import { page } from '$app/stores';
-	import { urlFor } from '$lib/image-url';
-	import { PortableText } from '@portabletext/svelte';
 	import CallToAction from '$lib/components/CallToAction.svelte';
-	import Link from '$lib/components/Link.svelte';
-	import TextSection from '$lib/components/TextSection.svelte';
-	import type { PageData } from './$types';
-	// Sanity Content
-	export let data: PageData;
-	$: ({ title, description } = data);
-	$: ({ asset, alt, caption } = data.mainImage);
+	import kagen_cox_owner from '$lib/assets/kagen_coffee_and_crepes_owner.webp?run';
+	import Img from '@zerodevx/svelte-img';
+	import Seo from '$lib/components/SEO.svelte';
+	const seoData = {
+		title: 'Kagen Coffee & Crepes - Our Story',
+		description:
+			'When my wife and I would travel our favorite thing to do was visit crepe shops. It was then that we realized what we wanted to create for our community - a gathering place. Here, we bring you our heart and passion through our love of crepes, coffee, locally sourced ciders and wine.',
+		url: 'https://www.kagenandco.com/about-us',
+		og: {
+			src: 'https://www.kagenandco.com/images/kagen_coffee_and_crepes_owner_og.jpg',
+			alt: 'Kagen Coffee and Crepes landing page',
+			mimeType: 'image/jpg',
+			width: 1200,
+			height: 630
+		}
+	};
 </script>
 
-<SvelteSeo
-	{title}
-	{description}
-	canonical={$page.url.toString()}
-	openGraph={{
-		title: title,
-		description: description,
-		url: $page.url.toString(),
-		type: 'website',
-		images: [
-			{
-				url: urlFor(data.mainImage.asset).width(600).height(600).format('webp').url(),
-				width: '600',
-				height: '600',
-				alt: data.mainImage.alt
-			}
-		]
-	}}
-/>
+<Seo data={seoData} />
 
-<div class="relative py-16 bg-white overflow-hidden">
-	<div class="relative px-4 sm:px-6 lg:px-8">
-		<div class="mt-6 prose prose-indigo prose-lg text-gray-700 mx-auto">
-			{#if data.body}
-				<PortableText
-					value={data.body}
-					components={{ types: { textSection: TextSection }, marks: { link: Link } }}
-				/>
-			{/if}
-			{#if data.mainImage}
-				<figure>
-					<img
-						class="w-full rounded-lg"
-						src={urlFor(asset).width(1310).height(873).format('webp').url()}
-						{alt}
-						width="1310"
-						height="873"
-					/>
-					<figcaption>{caption}</figcaption>
-				</figure>
-			{/if}
+<div class="bg-white px-6 py-32 lg:px-8">
+	<div class="mx-auto max-w-3xl text-base leading-7 text-gray-700">
+		<p class="text-base font-semibold leading-7 text-primary-600">Our Story</p>
+		<h1 class="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">About Us</h1>
+		<p class="mt-6 text-xl leading-8">
+			Families and friends need a place to gather. A place to visit, catch up and simply enjoy life
+			together. At KCC we believe in togetherness and community. My family’s best conversations
+			growing up happened around a table while snacking on tasty food.
+		</p>
+		<div class="mt-10 max-w-2xl">
+			<p>
+				When my wife and I would travel our favorite thing to do was visit crepe shops. It was then
+				that we realized what we wanted to create for our community - a gathering place. A fun place
+				to visit a friend, a quiet place to do homework, a warm place to meet up with your small
+				group. Here, we bring you our heart and passion through our love of crepes, coffee, locally
+				sourced ciders and wine. So come on down, order a crepe and start making memories.
+			</p>
+
+			<p class="mt-8">
+				Keep following us here, Facebook, and Instagram to see our future growth plans!
+			</p>
 		</div>
-		<CallToAction />
+		<figure class="mt-16">
+			<Img
+				class="aspect-video rounded-xl bg-gray-50 object-cover"
+				src={kagen_cox_owner}
+				alt="Kagen Cox, owner of Kagen Coffee and Crepes"
+			/>
+			<figcaption class="mt-4 flex gap-x-2 text-sm leading-6 text-gray-500">
+				<strong class="font-semibold text-gray-900">Kagen Cox</strong> – Owner
+			</figcaption>
+		</figure>
 	</div>
+	<CallToAction />
 </div>
