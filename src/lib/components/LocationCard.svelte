@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { urlFor } from '$lib/image-url';
 
-	export let portableText;
 	const { location } = portableText.value;
 	const { slug, name, image, address, hours, locationUrl, orderUrl, phone } = location;
 	const url = urlFor(image.asset).width(500).format('webp').url();

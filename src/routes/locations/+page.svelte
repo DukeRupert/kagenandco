@@ -1,70 +1,129 @@
 <script lang="ts">
-	import SvelteSeo from 'svelte-seo';
-	import { page } from '$app/stores';
-	import { urlFor } from '$lib/image-url';
-	import { PortableText } from '@portabletext/svelte';
-	import LocationCard from '$lib/components/LocationCard.svelte';
-	import Link from '$lib/components/Link.svelte';
-	import type { PageData } from './$types';
-	// Sanity Content
-	export let data: PageData;
-	$: ({ title, description, body, mainImage } = data);
-	console.log(data);
+	import richland_location from '$lib/assets/location_richland.png?run';
+	import Img from '@zerodevx/svelte-img';
+	import Seo from '$lib/components/SEO.svelte';
+	const seoData = {
+		title: 'Kagen Coffee & Crepes - Locations',
+		description:
+			"Find our nearest location and come join us! It's hard to beat a delicous crepe paired with a strong, handcrafted coffee.",
+		url: 'https://www.kagenandco.com/locations',
+		og: {
+			src: 'https://www.kagenandco.com/images/coffee_cup_with_coffee_beans_kagen_coffee_and_crepes_square.webp',
+			alt: 'Kagen Coffee and Crepes coffee cup with coffee beans scattered around.',
+			mimeType: 'image/webp',
+			width: 650,
+			height: 619
+		}
+	};
+
+	const locations = {
+		richland: {
+			image: {
+				alt: 'Kagen Coffee and Crepes Richland Uptown location',
+				src: richland_location
+			},
+			address: {
+				line2: 'Richland, WA 99354',
+				line1: '270 Williams Blvd'
+			},
+			locationUrl: 'https://www.google.com/maps/place/270+Williams+Blvd,+Richland,+WA+99354/',
+
+			orderUrl:
+				'https://www.toasttab.com/kagen-coffee-crepes-270-williams-blvd/v3/?mode=fulfillment',
+
+			hours: ['Monday-Saturday: 7am-2pm', 'Sunday : Closed'],
+			name: 'Richland Uptown',
+
+			phone: '509-851-7186',
+			slug: {
+				current: 'tri-cities',
+				_type: 'slug'
+			}
+		}
+	};
 </script>
 
-<SvelteSeo
-	{title}
-	{description}
-	canonical={$page.url.toString()}
-	openGraph={{
-		title: title,
-		description: description,
-		url: $page.url.toString(),
-		type: 'website',
-		images: [
-			{
-				url: urlFor(mainImage.asset).width(600).height(600).format('webp').url(),
-				width: '600',
-				height: '600',
-				alt: mainImage.alt
-			}
-		]
-	}}
-/>
+<Seo data={seoData} />
 <!-- Hero -->
-<div class="relative">
-	<div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-		<div class="relative shadow-xl sm:rounded-2xl sm:overflow-hidden">
-			<div class="absolute inset-0">
-				<img
-					class="h-full w-full object-cover"
-					src={urlFor(mainImage.asset).width(1216).height(368).format('webp').url()}
-					alt={mainImage.alt}
-				/>
-				<div class="absolute inset-0 bg-gray-400 mix-blend-multiply" />
-			</div>
-			<div class="relative px-4 py-16 sm:px-6 sm:py-24 lg:py-32 lg:px-8">
-				<h1 class="text-center text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
-					<span class="block text-custard-500">{title}</span>
-				</h1>
-				<p class="mt-6 max-w-lg mx-auto text-center text-xl text-custard-200 sm:max-w-3xl">
-					Crepes, Coffee, Community
-				</p>
-			</div>
-		</div>
+<div class="bg-white px-6 py-24 sm:py-32 lg:px-8">
+	<div class="mx-auto max-w-2xl text-center">
+		<h2 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">Locations</h2>
+		<p class="mt-6 text-lg leading-8 text-gray-600">
+			Find our nearest location and come join us! It's hard to beat a delicous crepe paired with a
+			strong, handcrafted coffee.
+		</p>
 	</div>
 </div>
+
 <!-- Location Cards -->
-<div class="bg-white">
+<div class="bg-white px-6 pb-32 lg:px-8">
 	<div class="max-w-6xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-5xl lg:px-8">
 		<h2 id="products-heading" class="sr-only">Locations</h2>
-		{#if body}
-			<div class="grid grid-cols-1 gap-y-10 sm:grid-cols-2 gap-x-6 lg:grid-cols-2 xl:gap-x-8">
-				<PortableText
-					value={body}
-					components={{ types: { locationReference: LocationCard }, marks: { link: Link } }}
+
+		<div class="grid grid-cols-1 gap-y-10 sm:grid-cols-2 gap-x-6 lg:grid-cols-2 xl:gap-x-8">
+			<!-- Richland Location -->
+			<div
+				class="w-full aspect-w-1 aspect-h-1 rounded-lg overflow-hidden sm:aspect-w-2 sm:aspect-h-3"
+			>
+				<Img
+					src={locations.richland.image.src}
+					alt={locations.richland.image.alt}
+					class="w-full h-full object-center object-cover group-hover:opacity-75"
 				/>
 			</div>
-		{/if}
+			<div class="flex-1 p-4 flex flex-col">
+				<div class="flex-1 flex flex-col space-y-4">
+					<h3 class="text-2xl font-medium text-gray-900">
+						{locations.richland.name}
+					</h3>
+					<a href={locations.richland.locationUrl}>
+						<p class="text-base text-gray-600">
+							{locations.richland.address.line1}
+						</p>
+						<p class="text-base text-gray-600">{locations.richland.address.line2}</p>
+					</a>
+					<div class="flex flex-col">
+						{#each locations.richland.hours as hour}
+							<p class="text-base text-gray-600">{hour}</p>
+						{/each}
+					</div>
+					<p class="text-base text-gray-800">
+						Opening times may vary, please call to check, we always love hearing from you!
+					</p>
+				</div>
+				<div class="flex-1">
+					<div class="mt-4 sm:mt-6">
+						<a href={locations.richland.orderUrl} class="btn variant-filled-primary min-w-[150px]">
+							Order Online
+						</a>
+					</div>
+					<div class="mt-4 sm:mt-6">
+						<a
+							href={`/menu/${locations.richland.slug.current}`}
+							class="btn variant-ringed-primary min-w-[150px]"
+						>
+							View Menu
+						</a>
+					</div>
+					<div class="mt-4 sm:mt-6">
+						<a
+							href={locations.richland.locationUrl}
+							class="btn variant-ringed-primary min-w-[150px]"
+						>
+							Get Directions
+						</a>
+					</div>
+					<div class="mt-4 sm:mt-6">
+						<a
+							href={`tel:${locations.richland.phone}`}
+							class="btn variant-ringed-primary min-w-[150px]"
+						>
+							Call Us
+						</a>
+					</div>
+				</div>
+			</div>
+			<!-- Next Location -->
+		</div>
 	</div>
 </div>
