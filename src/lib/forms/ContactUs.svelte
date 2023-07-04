@@ -98,8 +98,8 @@
 	</div>
 	<div>
 		<div class="flex justify-between">
-			<label for="tel" class="block text-sm font-medium text-gray-900">Phone</label>
-			<span id="tel-optional" class="text-sm text-gray-500">Optional</span>
+			<label for="phone" class="block text-sm font-medium text-gray-900">Phone</label>
+			<span id="phone-optional" class="text-sm text-gray-500">Optional</span>
 		</div>
 		<div class="mt-1">
 			<input
