@@ -1,23 +1,18 @@
 <script lang="ts">
-	import { siteData } from '$lib/stores';
+	import { SITE_DATA } from '$lib/constants';
+	import Logo from '$lib/components/Logo.svelte';
 </script>
 
-<!--
-  This example requires updating your template:
-
-  ```
-  <html class="h-full">
-  <body class="h-full">
-  ```
--->
 <div class="min-h-screen pt-16 pb-12 flex flex-col bg-white">
 	<main
 		class="flex-grow flex flex-col justify-center max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8"
 	>
 		<div class="flex-shrink-0 flex justify-center">
 			<a href="/" class="inline-flex">
-				<span class="sr-only">{$siteData.title}</span>
-				<img class="h-40 w-auto" src="logoKCC.svg" alt="One Sleep Company logo" />
+				<span class="sr-only">{SITE_DATA.title}</span>
+				<div class="h-60 w-60">
+					<Logo stroke="#000" fill="#000" />
+				</div>
 			</a>
 		</div>
 		<div class="py-16">

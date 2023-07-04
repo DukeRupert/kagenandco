@@ -1,9 +1,10 @@
-import { json } from '@sveltejs/kit';
+import { json, fail } from '@sveltejs/kit';
 import client from '$lib/sanity-client';
 
 export async function GET({ params }) {
 	// You must be on the home page if you reached this endpoint
 	const { slug } = params;
+	console.log(`Calling sanity for slug : ${slug}`);
 
 	// Build query using slug
 	const filter = `*[_type == "page" && slug.current == "${slug}"]`;
@@ -28,5 +29,5 @@ export async function GET({ params }) {
 		});
 	}
 
-	return new Response(undefined, { status: data.status });
+	return fail(404, { status: data.status });
 }

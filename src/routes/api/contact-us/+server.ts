@@ -1,7 +1,4 @@
-import postmark from 'postmark';
-
-// Send an email:
-const client = new postmark.ServerClient(process.env.POSTMARK_API_KEY);
+import { client } from '$lib/postmark.js';
 
 export async function POST({ request }) {
 	const body = await request.formData();

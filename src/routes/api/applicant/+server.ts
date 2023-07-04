@@ -1,7 +1,4 @@
-import postmark from 'postmark';
-
-// Send an email:
-const client = new postmark.ServerClient(process.env.POSTMARK_API_KEY);
+import { client } from '$lib/postmark.js';
 
 export async function POST({ request }) {
 	const body = await request.formData();
@@ -51,7 +48,9 @@ export async function POST({ request }) {
 		});
 
 		if (res.ErrorCode) {
-			throw new Error("@migration task: Migrate this return statement (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292701)");
+			throw new Error(
+				'@migration task: Migrate this return statement (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292701)'
+			);
 			// Suggestion (check for correctness before using):
 			// return new Response(res.Message, { status: res.ErrorCode });
 			return {

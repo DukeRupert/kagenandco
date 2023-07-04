@@ -1,4 +1,4 @@
-import { json } from '@sveltejs/kit';
+import { json, fail } from '@sveltejs/kit';
 import client from '$lib/sanity-client';
 
 export async function GET() {
@@ -19,5 +19,5 @@ export async function GET() {
 		});
 	}
 
-	return new Response(undefined, { status: data.status });
+	return fail(404, { status: data.status });
 }

@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { siteData } from '$lib/stores';
-	import { urlFor } from '$lib/image-url';
+	import { SITE_DATA } from '$lib/constants';
+	import Logo from '$lib/components/Logo.svelte';
 </script>
 
 <div class="min-h-screen pt-16 pb-12 flex flex-col bg-white">
@@ -9,12 +9,10 @@
 	>
 		<div class="flex-shrink-0 flex justify-center">
 			<a href="/" class="inline-flex">
-				<span class="sr-only">{$siteData.title}</span>
-				<img
-					class="h-60 w-auto"
-					src={urlFor($siteData.logo.asset).format('webp').width(400).url()}
-					alt={$siteData.logo.alt}
-				/>
+				<span class="sr-only">{SITE_DATA.title}</span>
+				<div class="h-60 w-60">
+					<Logo stroke="#000" fill="#000" />
+				</div>
 			</a>
 		</div>
 		<div class="py-16">

@@ -7,9 +7,7 @@
 
 	// Finally, your application's global stylesheet (sometimes labeled 'app.css')
 	import '../app.postcss';
-	import type { LayoutData } from './$types';
 	import type { Cart } from '$lib/types/cart';
-	import { siteData, activeTopMenu } from '$lib/stores';
 	import { isCartOpen, cart } from '$lib/stores';
 	import cartCreate from '$lib/shopify/cartCreate';
 	import queryCart from '$lib/shopify/queryCart';
@@ -19,14 +17,6 @@
 	import { onMount } from 'svelte';
 	import { error } from '@sveltejs/kit';
 	import { Toast } from '@skeletonlabs/skeleton';
-
-	// Write Sanity content to global store
-	export let data: LayoutData;
-	$siteData = data;
-
-	function closeActiveTopMenu() {
-		activeTopMenu.set('');
-	}
 
 	async function createNewCart() {
 		const response = await cartCreate();

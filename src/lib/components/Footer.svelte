@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { siteData } from '$lib/stores';
+	import { SITE_DATA } from '$lib/constants';
 </script>
 
 <footer class="bg-secondary-900">
@@ -9,7 +9,7 @@
 			aria-label="Footer"
 		>
 			<div class="px-5 py-2">
-				<a href={$siteData.order[0].url} class="text-base text-primary-500 hover:text-primary-300">
+				<a href={SITE_DATA.order[0].url} class="text-base text-primary-500 hover:text-primary-300">
 					Order Online
 				</a>
 			</div>
@@ -52,7 +52,7 @@
 			</div>
 		</nav>
 		<div class="mt-8 flex justify-center space-x-6">
-			<a href={$siteData.facebook} class="!text-white !hover:text-gray-100">
+			<a href={SITE_DATA.facebook} class="!text-white !hover:text-gray-100">
 				<span class="sr-only">Facebook</span>
 				<svg class="h-8 w-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
 					<path
@@ -63,7 +63,7 @@
 				</svg>
 			</a>
 
-			<a href={$siteData.instagram} class="!text-white !hover:text-gray-100">
+			<a href={SITE_DATA.instagram} class="!text-white !hover:text-gray-100">
 				<span class="sr-only">Instagram</span>
 				<svg class="h-8 w-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
 					<path

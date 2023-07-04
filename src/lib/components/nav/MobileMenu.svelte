@@ -2,7 +2,8 @@
 <script lang="ts">
 	import { navigating } from '$app/stores';
 	import MobileMenuItem from './MobileMenuItem.svelte';
-	import { isMobileMenuOpen, siteData } from '$lib/stores';
+	import { isMobileMenuOpen } from '$lib/stores';
+	import { SITE_DATA } from '$lib/constants';
 
 	function close() {
 		isMobileMenuOpen.set(false);
@@ -26,7 +27,7 @@
 	<!-- Links -->
 	<div class="px-4 pt-10 pb-6 space-y-12">
 		<div class="grid grid-cols-1 items-start gap-y-10 gap-x-6">
-			<MobileMenuItem title="Order Online" href={$siteData.order[0].url} primary />
+			<MobileMenuItem title="Order Online" href={SITE_DATA.order[0].url} primary />
 			<MobileMenuItem title="Coffee Club" href="/products/the-rooster" primary />
 			<MobileMenuItem title="Shop" href="/shop" />
 			<MobileMenuItem title="Locations" href="/locations" />
@@ -39,7 +40,7 @@
 	<div class="w-full mt-2 flex border-t py-6 border-gray-200 justify-center space-x-6">
 		<div class="w-10 h-10">
 			<a
-				href={$siteData.facebook}
+				href={SITE_DATA.facebook}
 				class="flex justify-center items-center text-gray-200 h-full w-full hover:text-gray-50"
 			>
 				<span class="sr-only">Facebook</span>
@@ -55,7 +56,7 @@
 
 		<div class="w-10 h-10 flex justify-center">
 			<a
-				href={$siteData.instagram}
+				href={SITE_DATA.instagram}
 				class="flex justify-center items-center text-gray-200 h-full w-full hover:text-gray-50"
 			>
 				<span class="sr-only">Instagram</span>
