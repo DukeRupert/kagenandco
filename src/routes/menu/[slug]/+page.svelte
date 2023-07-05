@@ -79,22 +79,4 @@
 			</div>
 		</div>
 	{/if}
-	{#if location}
-		<div class="max-w-7xl mx-auto text-center py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
-			<div class="mt-8 flex justify-center">
-				<div class="inline-flex rounded-3xl shadow">
-					<a
-						data-sveltekit-preload-data="hover"
-						href={location.orderUrl}
-						class="btn variant-filled-primary"
-					>
-						Order Online
-					</a>
-				</div>
-				<div class="ml-3 inline-flex">
-					<a href={location.locationUrl} class="btn variant-ringed-primary"> Get Directions </a>
-				</div>
-			</div>
-		</div>
-	{/if}
 </div>

@@ -1,5 +1,5 @@
 import type { Actions } from './$types';
-import { fail, json } from '@sveltejs/kit';
+import { fail } from '@sveltejs/kit';
 import { z } from 'zod';
 import postmark from 'postmark';
 import { POSTMARK_API_KEY } from '$env/static/private';

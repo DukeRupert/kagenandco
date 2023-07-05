@@ -53,5 +53,4 @@
 			</figcaption>
 		</figure>
 	</div>
-	<CallToAction />
 </div>

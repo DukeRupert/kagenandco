@@ -2,6 +2,22 @@
 	import { SITE_DATA } from '$lib/constants';
 </script>
 
+<div class="bg-white">
+	<div
+		class="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:flex lg:items-center lg:justify-between lg:px-8"
+	>
+		<h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+			Need some coffee?<br /> It pairs great with a crepe.
+		</h2>
+		<div class="mt-10 flex items-center gap-x-6 lg:mt-0 lg:flex-shrink-0">
+			<a href={SITE_DATA.order[0].url} class="btn variant-filled-primary">Order online</a>
+			<a href={SITE_DATA.gmap} class="btn variant-ringed-primary"
+				>Get directions <span aria-hidden="true">→</span></a
+			>
+		</div>
+	</div>
+</div>
+
 <footer class="bg-secondary-900">
 	<div class="max-w-7xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
 		<nav
