@@ -31,8 +31,7 @@
 		{ title: 'Our Story', href: '/about-us' },
 		{ title: 'Locations', href: '/locations' },
 		{ title: 'Join Our Team', href: '/join-our-team' },
-
-		{ title: 'Contact Us', href: '/contact-us' }
+		{ title: 'Contact Us', href: '/#contact-us' }
 	];
 </script>
 
