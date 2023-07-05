@@ -34,6 +34,9 @@
   "@context": "http://schema.org",
   "@type": "Restaurant",
   "name": "Kagen Coffee & Crepes",
+  "url": "https://www.kagenandco.com/",
+  "logo": "https://www.kagenandco.com/images/logo_kcc.png"
+  "description": "Families and friends need a place to gather, catch up and simply enjoy life together. Our delicious crepes and crafted coffees are here to help you deepen friendships and build memories today."
   "image": [
     "https://www.kagenandco.com/_app/immutable/assets/black_bean_crepe_kagen_coffee_and_crepes.6c87b078.jpg",
     "https://www.kagenandco.com/_app/immutable/assets/oreo_crepe_smiling_employee_kagen_coffee_and_crepes.fc0343bf.jpg",
@@ -49,9 +52,12 @@
     "addressRegion": "WA",
     "postalCode": "99354"
   },
+  "sameAs": [
+	"https://www.facebook.com/kagencoffeeandcrepes/",
+	"https://www.instagram.com/kagencoffeeandcrepes/"
+  ],
   "menu": "https://www.kagenandco.com/menu/tri-cities",
   "servesCuisine": "Coffee shop",
-  "url": "https://www.kagenandco.com/",
   "aggregateRating": {
     "@type": "AggregateRating",
     "ratingValue": "4.6",

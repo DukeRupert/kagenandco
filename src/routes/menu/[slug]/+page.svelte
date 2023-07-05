@@ -10,6 +10,7 @@
 
 	// Sanity Content
 	export let data: PageData;
+	console.log(data);
 	const { sweets, savorys, coffees, drinks, location } = data.body.menu;
 </script>
 
@@ -32,6 +33,16 @@
 		]
 	}}
 />
+<!-- Hero -->
+<div class="bg-white px-6 py-24 sm:py-32 lg:px-8">
+	<div class="mx-auto max-w-2xl text-center">
+		<h2 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">{data.title}</h2>
+		<p class="mt-6 text-lg leading-8 text-gray-600">
+			Enjoy a fresh crepe today! We offer a variety of savory and sweet crepes that will satisfy any
+			craving. Gluten-free is also available.
+		</p>
+	</div>
+</div>
 <div class="bg-white">
 	<div class="max-w-2xl mx-auto py-8 px-4 sm:py-16 sm:px-6 lg:max-w-7xl lg:px-8">
 		<h1 class="text-3xl text-center font-bold">{data.title}</h1>
