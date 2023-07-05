@@ -159,7 +159,7 @@
 						{#each data.images.edges as image, index}
 							<button
 								id="tab-{index}"
-								class="relative h-24 btn variant-filled-primary"
+								class="relative h-24"
 								aria-controls="tabs-{index}"
 								role="tab"
 								type="button"
@@ -171,6 +171,8 @@
 										src={image.node.url}
 										alt={image.node.altText ? image.node.altText : data.title}
 										class="w-full h-full object-center object-cover"
+										height="568"
+										width="503"
 									/>
 								</span>
 
@@ -188,8 +190,10 @@
 					<div id="tabs-1-panel-1" aria-labelledby="tabs-1-tab-1" role="tabpanel" tabindex="0">
 						<img
 							src={data.images.edges[mainImage].node.url}
-							alt="Angled front view with bag zipped and handles upright."
+							alt={data.images.edges[mainImage].node.altText}
 							class="w-full h-full object-center object-cover sm:rounded-lg"
+							height="568"
+							width="503"
 						/>
 					</div>
 				</div>
