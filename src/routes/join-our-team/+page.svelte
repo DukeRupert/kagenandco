@@ -34,28 +34,6 @@
 	</div>
 </div>
 <!-- Contact section -->
-<!-- <section class="relative bg-white" aria-labelledby="join-our-team">
-	<div class="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
-		<div class="flex flex-col lg:flex-row">
-			<div class="flex-1 flex flex-col">
-				<div class="relative overflow-hidden py-10 px-6 bg-secondary sm:px-10 xl:p-12">
-					<Img
-						src={smiling_thank_you}
-						alt="A smiling woman holds out a brown bag with the words Thank You written on the front at a Kagen Coffee and Crepes store."
-						class="w-full max-w-2xl h-96 lg:h-full m-auto"
-					/>
-				</div>
-			</div>
-			<div class="flex-1 flex flex-col">
-				<div class="relative bg-white mb-8">
-					<h2 id="join-our-team" class="sr-only">Join Our Team</h2>
-					<JoinOurTeam />
-				</div>
-			</div>
-		</div>
-	</div>
-</section> -->
-
 <div class="relative bg-white">
 	<div class="lg:absolute lg:inset-0 lg:left-1/2">
 		<Img
@@ -69,7 +47,7 @@
 	>
 		<div class="px-6 lg:px-8">
 			<div class="mx-auto max-w-xl lg:mx-0 lg:max-w-lg">
-				<h2 class="text-3xl font-bold tracking-tight text-gray-900">Let's work together</h2>
+				<h3 class="text-3xl font-bold tracking-tight text-gray-900">Let's work together</h3>
 				<JoinOurTeam />
 			</div>
 		</div>
