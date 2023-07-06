@@ -23,7 +23,7 @@ export interface Crepe {
 }
 
 interface Image {
-	src: string[];
+	src: Object[];
 	alt: string;
 }
 
