@@ -1,5 +1,4 @@
 <script lang="ts">
-	import CallToAction from '$lib/components/CallToAction.svelte';
 	import kagen_cox_owner from '$lib/assets/kagen_coffee_and_crepes_owner.webp?run';
 	import Img from '@zerodevx/svelte-img';
 	import Seo from '$lib/components/SEO.svelte';

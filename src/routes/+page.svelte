@@ -3,7 +3,6 @@
 	import Instagram from './Instagram.svelte';
 	import CTA from '$lib/components/CTA.svelte';
 	import Hero from '$lib/components/hero/ImageTiles.svelte';
-	import ContactUs from '$lib/forms/ContactUs.svelte';
 	import FoodStarsBanner from '$lib/components/FoodStarsBanner.svelte';
 	import QuoteOverlap from '$lib/components/QuoteOverlap.svelte';
 	import TestimonialGrid from '$lib/components/TestimonialGrid.svelte';
