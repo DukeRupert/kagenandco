@@ -246,28 +246,18 @@
 	let id = 'all';
 
 	function filter_crepes(crepes: Crepe[], param: string): Crepe[] {
-		console.log('Filter crepes');
 		// If no filter param exists return full array
 		if (param == null) {
-			console.log('Return all crepes');
 			return crepes;
 		} else {
-			console.log('Filter crepes and return');
 			const result = crepes.filter((crepe) => crepe.type == param);
 			return result;
 		}
 	}
 
-	const remove = (event: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }) => {
-		// Get id of element to remove
-		const target = event.target as HTMLButtonElement;
-		const id = target.id;
-	};
-
 	const update_crepes = (
 		event: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }
 	) => {
-		console.log('Sort');
 		const target = event.target as HTMLButtonElement;
 		const crepe_type = target.id;
 		id = crepe_type;
@@ -277,10 +267,26 @@
 			filtered_crepes = all_crepes;
 		}
 	};
+
+	const remove = (event: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }) => {
+		// Get id of element to remove
+		const target = event.target as HTMLButtonElement;
+		const id = target.id;
+	};
+
+	// function list_ingredients(items: string[]): string {
+	// 	if (items.length > 1) {
+	// 		let result = items[0]
+
+	// 	}
+	// 	if (items.length == 1) return items[0]
+
+	// }
 </script>
 
+<Seo data={seoData} />
 <!-- Hero -->
-<div class="bg-white px-6 py-24 sm:py-32 lg:px-8">
+<div class="bg-white px-6 py-8 md:py-16 lg:py-32 lg:px-8">
 	<div class="mx-auto max-w-2xl px-4 py-16 text-center sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
 		<h2 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">Menu</h2>
 		<p class="mt-6 text-lg leading-8 text-gray-600">
@@ -334,18 +340,18 @@
 						alt={image.alt}
 						class="pointer-events-none object-cover group-hover:opacity-75"
 					/>
-					<button
-						on:click={remove}
-						id={name}
-						type="button"
-						class="absolute inset-0 focus:outline-none"
-					>
+					<button type="button" class="absolute inset-0 focus:outline-none">
 						<span class="sr-only">View details for IMG_4985.HEIC</span>
 					</button>
 				</div>
-				<p class="pointer-events-none mt-2 block truncate text-lg font-medium text-gray-900">
+				<p
+					class="pointer-events-none mt-2 block truncate text-sm md:text-lg font-medium text-gray-900"
+				>
 					{name}
 				</p>
+				<!-- <p class="pointer-events-none block text-sm font-medium text-gray-500">
+					Egg, bacon, blah, blah, blah
+				</p> -->
 			</li>
 		{/each}
 	</ul>
