@@ -1,16 +1,13 @@
 <script lang="ts">
-	import { crossfade } from 'svelte/transition';
 	import { quintOut } from 'svelte/easing';
 	import { flip } from 'svelte/animate';
-	import { page } from '$app/stores';
-	import { goto } from '$app/navigation';
 	import type { Crepe } from '../menu';
 	import the_egg_crepe from '$lib/assets/crepes/egg_crepe.jpg?run';
 	import the_bib_crepe from '$lib/assets/crepes/breakfast_in_bed_crepe.jpg?run';
 	import the_chicken_crepe from '$lib/assets/crepes/chicken_crepe.jpg?run';
 	import the_turkey_bacon_crepe from '$lib/assets/crepes/turkey_bacon_crepe_2.jpg?run';
-	import the_all_american_crepe from '$lib/assets/crepes/chicken_crepe.jpg?run';
-	import the_chipotle_chicken_crepe from '$lib/assets/crepes/chicken_crepe.jpg?run';
+	import the_all_american_crepe from '$lib/assets/crepes/the_all_american.jpg?run';
+	import the_chipotle_chicken_crepe from '$lib/assets/crepes/the_chipotle_chicken.jpg?run';
 	import the_montecristo_crepe from '$lib/assets/crepes/the_monte_cristo_crepe_2.jpg?run';
 	import the_black_bean_crepe from '$lib/assets/crepes/black_bean_crepe_2.jpg?run';
 	import the_lemon_crepe from '$lib/assets/crepes/lemon_crepe.jpg?run';
@@ -18,10 +15,12 @@
 	import the_peanut_butter_crepe from '$lib/assets/crepes/peanut_butter_crepe.jpg?run';
 	import the_nutella_crepe from '$lib/assets/crepes/nutella_crepe.jpg?run';
 	import the_mixed_berry_crepe from '$lib/assets/crepes/mixed_berry_crepe_2.jpg?run';
+	import the_caprese_crepe from '$lib/assets/crepes/the_caprese.jpg?run';
+	import the_cookie_monster from '$lib/assets/crepes/the_cookie_monster.jpg?run';
 	import Img from '@zerodevx/svelte-img';
 	import Seo from '$lib/components/SEO.svelte';
 	const seoData = {
-		title: 'Kagen Coffee & Crepes - Menu - Richland',
+		title: 'Kagen Coffee & Crepes | Menu | Richland',
 		description:
 			'Enjoy a fresh crepe today! We offer a variety of savory and sweet crepes that will satisfy any craving. Gluten-free is also available.',
 		url: 'https://www.kagenandco.com/about-us',
@@ -38,6 +37,7 @@
 		{
 			name: 'The Egg',
 			type: 'savory',
+			special: false,
 			image: {
 				alt: 'The Egg crepe',
 				src: the_egg_crepe
@@ -50,6 +50,7 @@
 		},
 		{
 			type: 'savory',
+			special: false,
 			image: {
 				src: the_bib_crepe,
 				alt: 'The Breakfast in Bed crepe'
@@ -65,6 +66,7 @@
 		},
 		{
 			name: 'The Chicken',
+			special: false,
 			type: 'savory',
 			price: {
 				mini: '8.50',
@@ -79,6 +81,7 @@
 		},
 		{
 			type: 'savory',
+			special: false,
 			image: {
 				src: the_turkey_bacon_crepe,
 				alt: 'The Turkey Bacon crepe'
@@ -103,6 +106,7 @@
 		},
 		{
 			name: 'The All American',
+			special: false,
 			type: 'savory',
 			price: {
 				mini: '8.50',
@@ -117,6 +121,7 @@
 		},
 		{
 			name: 'The Chipotle Chicken',
+			special: false,
 			type: 'savory',
 			price: {
 				mini: '8.50',
@@ -130,6 +135,7 @@
 		},
 		{
 			name: 'The Montecristo',
+			special: false,
 			type: 'savory',
 			ingredients: ['ham', 'turkey', 'provolone', 'cheddar', 'raspberry', 'eggs', 'dairy', 'flour'],
 
@@ -144,7 +150,26 @@
 			}
 		},
 		{
+			name: 'The Caprese',
+			description:
+				'Provolone, fresh mozzarella, chicken, sun dried tomatoes, and spinach topped with a balsamic glaze',
+			special: true,
+			type: 'savory',
+			ingredients: ['ham', 'turkey', 'provolone', 'cheddar', 'raspberry', 'eggs', 'dairy', 'flour'],
+
+			image: {
+				src: the_caprese_crepe,
+				alt: 'A Caprese crepe garnished with balsamic glaze.'
+			},
+
+			price: {
+				mini: '8.50',
+				full: '11.95'
+			}
+		},
+		{
 			name: 'The Black Bean',
+			special: false,
 			type: 'savory',
 			image: {
 				src: the_black_bean_crepe,
@@ -170,6 +195,7 @@
 		},
 		{
 			type: 'sweet',
+			special: false,
 			image: {
 				src: the_lemon_crepe,
 				alt: 'A lemon crepe garnished with whipped crème'
@@ -184,7 +210,22 @@
 			ingredients: ['lemon', 'sugar', 'eggs', 'dairy', 'flour']
 		},
 		{
+			name: 'The Cookie Monster',
+			special: true,
+			type: 'sweet',
+			image: {
+				src: the_cookie_monster,
+				alt: 'A cookie monster crepe garnished with pretzels'
+			},
+			price: {
+				mini: '6.00',
+				full: '7.00'
+			},
+			ingredients: ['lemon', 'sugar', 'eggs', 'dairy', 'flour']
+		},
+		{
 			name: 'The Chocolate',
+			special: false,
 			type: 'sweet',
 			ingredients: ['chocolate', 'raspberry', 'eggs', 'dairy', 'flour'],
 
@@ -199,6 +240,7 @@
 		},
 		{
 			name: 'The Peanut Butter',
+			special: false,
 			type: 'sweet',
 			price: {
 				mini: '7.50',
@@ -213,6 +255,7 @@
 		},
 		{
 			name: 'The Nutella',
+			special: false,
 			type: 'sweet',
 			image: {
 				src: the_nutella_crepe,
@@ -226,6 +269,7 @@
 		},
 		{
 			name: 'The Mixed Berry',
+			special: false,
 			type: 'sweet',
 			image: {
 				src: the_mixed_berry_crepe,
@@ -302,7 +346,7 @@
 				type="button"
 				class="{id == 'all'
 					? 'bg-primary-400'
-					: undefined} relative min-w-[80px] inline-flex justify-center items-center rounded-l-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-primary-300 focus:z-10"
+					: 'bg-white'} relative min-w-[80px] inline-flex justify-center items-center rounded-l-md px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-primary-300 focus:z-10"
 				>All</button
 			>
 			<button
@@ -311,7 +355,7 @@
 				type="button"
 				class="{id == 'savory'
 					? 'bg-primary-400'
-					: undefined} relative min-w-[80px] -ml-px inline-flex justify-center items-center bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-primary-300 focus:z-10"
+					: 'bg-white'} relative min-w-[80px] -ml-px inline-flex justify-center items-center px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-primary-300 focus:z-10"
 				>Savory</button
 			>
 			<button
@@ -320,7 +364,7 @@
 				type="button"
 				class="{id == 'sweet'
 					? 'bg-primary-400'
-					: undefined} relative min-w-[80px] -ml-px inline-flex justify-center items-center rounded-r-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-primary-300 focus:z-10"
+					: 'bg-white'} relative min-w-[80px] -ml-px inline-flex justify-center items-center rounded-r-md px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-primary-300 focus:z-10"
 				>Sweet</button
 			>
 		</span>
@@ -330,15 +374,19 @@
 		role="list"
 		class="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8"
 	>
-		{#each filtered_crepes as { name, type, image, ingredients } (name)}
+		{#each filtered_crepes as { name, type, image, ingredients, special } (name)}
 			<li id={name} animate:flip={{ duration: 250 }} class="relative">
+				{#if special}
+					<span class="badge bg-rose-600 text-white absolute -top-2 right-2 z-10">Limited Time</span
+					>
+				{/if}
 				<div
-					class="group aspect-h-4 aspect-w-5 block w-full overflow-hidden rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 focus-within:ring-offset-gray-100"
+					class="relative group aspect-h-7 aspect-w-10 block w-full overflow-hidden rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-primary-500 focus-within:ring-offset-2 focus-within:ring-offset-gray-100"
 				>
 					<Img
 						src={image.src}
 						alt={image.alt}
-						class="pointer-events-none object-cover group-hover:opacity-75"
+						class="pointer-events-none object-cover h-full group-hover:opacity-75"
 					/>
 					<button type="button" class="absolute inset-0 focus:outline-none">
 						<span class="sr-only">View details for IMG_4985.HEIC</span>

@@ -16,6 +16,8 @@ interface Drink {
 
 export interface Crepe {
 	name: string;
+	description?: string;
+	special: boolean;
 	type: string;
 	image: Image;
 	price: Price;
