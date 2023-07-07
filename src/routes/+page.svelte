@@ -62,7 +62,6 @@
 	</script>
 </svelte:head>
 
-<FoodStarsBanner />
 <Hero />
 <QuoteOverlap />
 <Instagram />
