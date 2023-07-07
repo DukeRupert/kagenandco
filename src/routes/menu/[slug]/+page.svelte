@@ -1,7 +1,6 @@
 <script lang="ts">
-	import { quintOut } from 'svelte/easing';
 	import { flip } from 'svelte/animate';
-	import type { Crepe } from '../menu';
+	import type { Crepe } from '$lib/types/menu';
 	import the_egg_crepe from '$lib/assets/crepes/egg_crepe.jpg?run';
 	import the_bib_crepe from '$lib/assets/crepes/breakfast_in_bed_crepe.jpg?run';
 	import the_chicken_crepe from '$lib/assets/crepes/chicken_crepe.jpg?run';
@@ -19,7 +18,6 @@
 	import the_cookie_monster from '$lib/assets/crepes/the_cookie_monster.jpg?run';
 	import Img from '@zerodevx/svelte-img';
 	import Seo from '$lib/components/SEO.svelte';
-	import Crepe from '$lib/components/Crepe.svelte';
 	const seoData = {
 		title: 'Kagen Coffee & Crepes | Menu | Richland',
 		description:
@@ -148,7 +146,7 @@
 			description:
 				'Egg, Ham, Turkey, Provolone, and Cheddar topped with powdered sugar and raspberry jam.',
 			special: false,
-			most_popular: false,
+			most_popular: true,
 			type: 'savory',
 			ingredients: ['ham', 'turkey', 'provolone', 'cheddar', 'raspberry', 'eggs', 'dairy', 'flour'],
 
@@ -422,7 +420,7 @@
 						type="button"
 						class="absolute inset-0 focus:outline-none"
 					>
-						<span class="sr-only">View details for IMG_4985.HEIC</span>
+						<span class="sr-only">View details for {name}</span>
 					</button>
 				</div>
 				<p
@@ -430,9 +428,6 @@
 				>
 					{name}
 				</p>
-				<!-- <p class="pointer-events-none block text-sm font-medium text-gray-500">
-					Egg, bacon, blah, blah, blah
-				</p> -->
 			</li>
 		{/each}
 	</ul>

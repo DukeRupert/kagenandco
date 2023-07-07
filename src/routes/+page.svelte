@@ -3,9 +3,9 @@
 	import Instagram from './Instagram.svelte';
 	import CTA from '$lib/components/CTA.svelte';
 	import Hero from '$lib/components/hero/ImageTiles.svelte';
-	import FoodStarsBanner from '$lib/components/FoodStarsBanner.svelte';
 	import QuoteOverlap from '$lib/components/QuoteOverlap.svelte';
 	import TestimonialGrid from '$lib/components/TestimonialGrid.svelte';
+	import CrepesOfTheMonth from '$lib/components/CrepesOfTheMonth.svelte';
 
 	const seoData = {
 		title: 'Kagen Coffee & Crepes - Coffee, Crepes, and Community!',
@@ -63,6 +63,7 @@
 </svelte:head>
 
 <Hero />
+<CrepesOfTheMonth />
 <QuoteOverlap />
 <Instagram />
 <TestimonialGrid />
