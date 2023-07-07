@@ -19,6 +19,7 @@
 	import the_cookie_monster from '$lib/assets/crepes/the_cookie_monster.jpg?run';
 	import Img from '@zerodevx/svelte-img';
 	import Seo from '$lib/components/SEO.svelte';
+	import Crepe from '$lib/components/Crepe.svelte';
 	const seoData = {
 		title: 'Kagen Coffee & Crepes | Menu | Richland',
 		description:
@@ -36,8 +37,10 @@
 	const all_crepes: Crepe[] = [
 		{
 			name: 'The Egg',
+			description: 'Ham, eggs, provolone and spinach.',
 			type: 'savory',
 			special: false,
+			most_popular: false,
 			image: {
 				alt: 'The Egg crepe',
 				src: the_egg_crepe
@@ -49,7 +52,10 @@
 			ingredients: ['provolone', 'ham', 'spinach', 'eggs', 'dairy', 'flour']
 		},
 		{
+			name: 'The Breakfast in Bed',
+			description: 'Egg, cheddar, bacon, maple sausage served with a side of maple syrup.',
 			type: 'savory',
+			most_popular: true,
 			special: false,
 			image: {
 				src: the_bib_crepe,
@@ -59,13 +65,12 @@
 				mini: '8.50',
 				full: '11.95'
 			},
-
-			name: 'The Breakfast in Bed',
-
 			ingredients: ['bacon', 'cheddar', 'maple sausage', 'maple syrup', 'eggs', 'dairy', 'flour']
 		},
 		{
 			name: 'The Chicken',
+			description: 'Chicken, provolone and spinach.',
+			most_popular: false,
 			special: false,
 			type: 'savory',
 			price: {
@@ -80,8 +85,11 @@
 			}
 		},
 		{
+			name: 'The Turkey Bacon',
+			description: 'Turkey, bacon, provalone, tomato and spinach with a side of ranch.',
 			type: 'savory',
 			special: false,
+			most_popular: false,
 			image: {
 				src: the_turkey_bacon_crepe,
 				alt: 'The Turkey Bacon crepe'
@@ -90,8 +98,6 @@
 				full: '11.95',
 				mini: '8.50'
 			},
-
-			name: 'The Turkey Bacon',
 			ingredients: [
 				'turkey',
 				'bacon',
@@ -106,7 +112,9 @@
 		},
 		{
 			name: 'The All American',
+			description: 'Bacon, eggs and chedder topped with gravy.',
 			special: false,
+			most_popular: true,
 			type: 'savory',
 			price: {
 				mini: '8.50',
@@ -121,7 +129,9 @@
 		},
 		{
 			name: 'The Chipotle Chicken',
+			description: 'Chicken, provolone, tomatoes, coleslaw, and a spicy sweet chipotle ranch.',
 			special: false,
+			most_popular: false,
 			type: 'savory',
 			price: {
 				mini: '8.50',
@@ -135,7 +145,10 @@
 		},
 		{
 			name: 'The Montecristo',
+			description:
+				'Egg, Ham, Turkey, Provolone, and Cheddar topped with powdered sugar and raspberry jam.',
 			special: false,
+			most_popular: false,
 			type: 'savory',
 			ingredients: ['ham', 'turkey', 'provolone', 'cheddar', 'raspberry', 'eggs', 'dairy', 'flour'],
 
@@ -154,6 +167,7 @@
 			description:
 				'Provolone, fresh mozzarella, chicken, sun dried tomatoes, and spinach topped with a balsamic glaze',
 			special: true,
+			most_popular: false,
 			type: 'savory',
 			ingredients: ['ham', 'turkey', 'provolone', 'cheddar', 'raspberry', 'eggs', 'dairy', 'flour'],
 
@@ -169,13 +183,14 @@
 		},
 		{
 			name: 'The Black Bean',
+			description: 'Black beans, tomato, guacamole, and spinach with a side of pico de gallo!',
 			special: false,
+			most_popular: true,
 			type: 'savory',
 			image: {
 				src: the_black_bean_crepe,
 				alt: 'The Black Bean crepe'
 			},
-
 			ingredients: [
 				'black bean',
 				'avocado',
@@ -187,14 +202,16 @@
 				'dairy',
 				'flour'
 			],
-
 			price: {
 				full: '11.95',
 				mini: '8.50'
 			}
 		},
 		{
+			name: 'The Lemon',
+			description: 'Sugar and lemon garnished with whipped cream.',
 			type: 'sweet',
+			most_popular: false,
 			special: false,
 			image: {
 				src: the_lemon_crepe,
@@ -204,13 +221,13 @@
 				mini: '6.00',
 				full: '7.00'
 			},
-
-			name: 'The Lemon',
-
 			ingredients: ['lemon', 'sugar', 'eggs', 'dairy', 'flour']
 		},
 		{
 			name: 'The Cookie Monster',
+			description:
+				'Milk chocolate chips tucked inside a warm crepe, topped with crushed pretzels and homemade edible cookie dough.',
+			most_popular: false,
 			special: true,
 			type: 'sweet',
 			image: {
@@ -225,6 +242,8 @@
 		},
 		{
 			name: 'The Chocolate',
+			description: 'Chocolate and raspberry garnished with whipped cream.',
+			most_popular: false,
 			special: false,
 			type: 'sweet',
 			ingredients: ['chocolate', 'raspberry', 'eggs', 'dairy', 'flour'],
@@ -240,6 +259,8 @@
 		},
 		{
 			name: 'The Peanut Butter',
+			description: 'Peanut butter and banana garnsihed with whipped cream.',
+			most_popular: false,
 			special: false,
 			type: 'sweet',
 			price: {
@@ -255,6 +276,8 @@
 		},
 		{
 			name: 'The Nutella',
+			description: 'Nutella and strawberry garnished with whipped cream.',
+			most_popular: false,
 			special: false,
 			type: 'sweet',
 			image: {
@@ -269,6 +292,8 @@
 		},
 		{
 			name: 'The Mixed Berry',
+			description: 'Cream cheese, strawberry and blueberry garnished with whipped cream.',
+			most_popular: true,
 			special: false,
 			type: 'sweet',
 			image: {
@@ -286,7 +311,6 @@
 	];
 
 	let filtered_crepes: Crepe[] = all_crepes.sort((a, b) => 0.5 - Math.random());
-
 	let id = 'all';
 
 	function filter_crepes(crepes: Crepe[], param: string): Crepe[] {
@@ -312,20 +336,21 @@
 		}
 	};
 
-	const remove = (event: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }) => {
-		// Get id of element to remove
+	let is_modal_active = false;
+	let active_crepe: Crepe = all_crepes[0];
+	const toggle_modal = (event: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }) => {
+		// Get id of crepe
 		const target = event.target as HTMLButtonElement;
+		console.log(target);
 		const id = target.id;
+		console.log(`Id : ${id}`);
+		// Find and set
+		const p = all_crepes.find((crepe) => crepe.name == id);
+		console.log(p);
+		if (p) active_crepe = p;
+		// trigger modal
+		is_modal_active = !is_modal_active;
 	};
-
-	// function list_ingredients(items: string[]): string {
-	// 	if (items.length > 1) {
-	// 		let result = items[0]
-
-	// 	}
-	// 	if (items.length == 1) return items[0]
-
-	// }
 </script>
 
 <Seo data={seoData} />
@@ -374,11 +399,14 @@
 		role="list"
 		class="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8"
 	>
-		{#each filtered_crepes as { name, type, image, ingredients, special } (name)}
+		{#each filtered_crepes as { name, type, image, ingredients, special, most_popular } (name)}
 			<li id={name} animate:flip={{ duration: 250 }} class="relative">
 				{#if special}
 					<span class="badge bg-rose-600 text-white absolute -top-2 right-2 z-10">Limited Time</span
 					>
+				{/if}
+				{#if most_popular}
+					<span class="badge bg-primary-500 absolute -top-2 right-2 z-10">Most popular</span>
 				{/if}
 				<div
 					class="relative group aspect-h-7 aspect-w-10 block w-full overflow-hidden rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-primary-500 focus-within:ring-offset-2 focus-within:ring-offset-gray-100"
@@ -388,7 +416,12 @@
 						alt={image.alt}
 						class="pointer-events-none object-cover h-full group-hover:opacity-75"
 					/>
-					<button type="button" class="absolute inset-0 focus:outline-none">
+					<button
+						id={name}
+						on:click={toggle_modal}
+						type="button"
+						class="absolute inset-0 focus:outline-none"
+					>
 						<span class="sr-only">View details for IMG_4985.HEIC</span>
 					</button>
 				</div>
@@ -403,4 +436,56 @@
 			</li>
 		{/each}
 	</ul>
+</div>
+<!-- Modal -->
+<div
+	class="relative z-10 {is_modal_active ? 'pointer-events-auto' : 'pointer-events-none'}"
+	aria-labelledby="modal-title"
+	role="dialog"
+	aria-modal="true"
+>
+	<!-- Background backdrop, show/hide based on modal state. -->
+	<div
+		class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity {is_modal_active
+			? 'opacity-100 ease-out duration-300'
+			: 'opacity-0 ease-in duration-200'}"
+	/>
+
+	<div class="fixed inset-0 z-10 overflow-y-auto">
+		<div class="flex min-h-full items-center justify-center p-4 text-center sm:items-center sm:p-0">
+			<!-- Modal panel, show/hide based on modal state. -->
+			<div
+				class="relative flex flex-col w-full transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:max-w-xl sm:p-6 {is_modal_active
+					? 'ease-out duration-300 opacity-100 translate-y-0 sm:scale-100'
+					: 'ease-in duration-200 opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95'}"
+			>
+				<div>
+					<div
+						class="mx-auto aspect-h-7 aspect-w-10 overflow-hidden flex items-center justify-center rounded-lg bg-green-100"
+					>
+						<Img
+							src={active_crepe.image.src}
+							alt={active_crepe.image.alt}
+							class="pointer-events-none object-cover h-full group-hover:opacity-75"
+						/>
+					</div>
+					<div class="mt-3 text-center sm:mt-5">
+						<h3 class="text-base font-semibold leading-6 text-gray-900" id="modal-title">
+							{active_crepe.name}
+						</h3>
+						<div class="mt-2">
+							<p class="text-sm text-gray-500">
+								{active_crepe.description ?? ''}
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="mt-5 sm:mt-6">
+					<button on:click={toggle_modal} type="button" class="btn variant-filled-primary w-full"
+						>Go back</button
+					>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
