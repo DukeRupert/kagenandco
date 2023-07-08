@@ -144,8 +144,6 @@
 		<!-- Background backdrop, show/hide based on slide-over state. -->
 		<div
 			transition:fade={{ delay: 250, duration: 100, easing: quadOut }}
-			on:click={() => (is_mobile_open = false)}
-			on:keydown|stopPropagation={() => (is_mobile_open = false)}
 			class="fixed inset-0 z-50 bg-gray-700/20"
 		/>
 		<div
