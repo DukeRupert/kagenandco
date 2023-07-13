@@ -5,13 +5,14 @@
 	import type { ActionData } from './$types';
 
 	export let data: ActionData;
+	console.log(data);
 
 	$: if (data && data.success) {
 		const message = 'Message sent.';
 		successToast(message);
 	}
 
-	$: if (data && !data.success) {
+	$: if (data && Object.keys(data).length > 0 && !data.success) {
 		const message = 'Error. Please try again later or call us.';
 		errorToast(message);
 	}
@@ -37,7 +38,7 @@
 	});
 </script>
 
-<div id="contact-us" class="relative isolate bg-white pb-32 pt-24 sm:pt-32">
+<div id="contact-us" class="relative isolate bg-white pb-32 pt-8 sm:pt-32">
 	<div class="relative mx-auto max-w-4xl mb-8">
 		<div class="py-10 px-6 sm:px-10 lg:col-span-2 xl:p-12">
 			<h2

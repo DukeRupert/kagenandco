@@ -22,7 +22,6 @@
 	};
 </script>
 
-<SEO data={seoData} />
 <svelte:head>
 	<script type="application/ld+json">
 {
@@ -62,6 +61,7 @@
 	</script>
 </svelte:head>
 
+<SEO data={seoData} />
 <Hero />
 <CrepesOfTheMonth />
 <QuoteOverlap />

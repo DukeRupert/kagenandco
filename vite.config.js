@@ -7,7 +7,8 @@ const config = {
 		sveltekit(),
 		imagetools({
 			// By default, directives are `?width=480;1024;1920&format=avif;webp;jpg`
-			defaultDirectives: () => new URLSearchParams('?width=240;480;1024;1920&format=avif;webp;jpg')
+			defaultDirectives: () =>
+				new URLSearchParams('?width=240;360;480;1024;1920&format=avif;webp;jpg')
 		})
 	],
 	define: {
