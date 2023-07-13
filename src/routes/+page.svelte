@@ -65,6 +65,6 @@
 <Hero />
 <CrepesOfTheMonth />
 <QuoteOverlap />
-<Instagram />
+<!-- <Instagram /> -->
 <TestimonialGrid />
 <CTA />

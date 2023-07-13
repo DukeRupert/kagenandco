@@ -7,7 +7,7 @@
 	import Img from '@zerodevx/svelte-img';
 </script>
 
-<div id="hero" class="relative isolate bg-white pb-32 pt-24 sm:pt-32">
+<div id="hero" class="relative isolate bg-white pb-16 pt-4 sm:pt-16 sm:bg-32">
 	<div class="relative isolate">
 		<div
 			class="absolute left-1/2 right-0 top-0 -z-10 -ml-24 transform-gpu overflow-hidden blur-3xl lg:ml-24 xl:ml-48"
@@ -19,7 +19,7 @@
 			/>
 		</div>
 		<div class="overflow-hidden">
-			<div class="mx-auto max-w-7xl px-6 pb-32 pt-16 sm:pt-60 lg:px-8 lg:pt-32">
+			<div class="mx-auto max-w-7xl px-6 pb-16 pt-4 lg:px-8 lg:pt-8">
 				<div class="mx-auto max-w-2xl gap-x-14 lg:mx-0 lg:flex lg:max-w-none lg:items-center">
 					<div class="w-full max-w-xl lg:shrink-0 xl:max-w-2xl">
 						<h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
