@@ -45,12 +45,12 @@
 		},
 		{
 			image: {
-				alt: 'Kagen Coffee and Crepes Richland Kennewick location',
+				alt: 'Kagen Coffee and Crepes Kennewick location',
 				src: kennewick_shop
 			},
 			address: {
-				line2: 'Richland, WA 99354',
-				line1: '270 Williams Blvd'
+				line2: 'Richland, WA 99336',
+				line1: '308 W Kennewick Ave'
 			},
 			locationUrl: '',
 			orderUrl:
@@ -135,14 +135,6 @@
 							class="btn variant-ringed-primary min-w-[150px]"
 						>
 							Get Directions
-						</a>
-					</div>
-					<div class="mt-4 sm:mt-6">
-						<a
-							href={`tel:${location.phone}`}
-							class="btn variant-ringed-primary min-w-[150px]"
-						>
-							Call Us
 						</a>
 					</div>
 				</div>
