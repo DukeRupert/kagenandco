@@ -1,23 +1,22 @@
 <script lang="ts">
 	import { flip } from 'svelte/animate';
-	import type { Crepe } from '$lib/types/menu';
-	import the_egg_crepe from '$lib/assets/crepes/egg_crepe.jpg?run';
-	import the_bib_crepe from '$lib/assets/crepes/breakfast_in_bed_crepe.jpg?run';
-	import the_chicken_crepe from '$lib/assets/crepes/chicken_crepe.jpg?run';
-	import the_turkey_bacon_crepe from '$lib/assets/crepes/turkey_bacon_crepe_2.jpg?run';
-	import the_all_american_crepe from '$lib/assets/crepes/the_all_american.jpg?run';
-	import the_chipotle_chicken_crepe from '$lib/assets/crepes/the_chipotle_chicken.jpg?run';
-	import the_montecristo_crepe from '$lib/assets/crepes/the_monte_cristo_crepe_2.jpg?run';
-	import the_black_bean_crepe from '$lib/assets/crepes/black_bean_crepe_2.jpg?run';
-	import the_lemon_crepe from '$lib/assets/crepes/lemon_crepe.jpg?run';
-	import the_chocolate_crepe from '$lib/assets/crepes/chocolate_crepe.jpg?run';
-	import the_peanut_butter_crepe from '$lib/assets/crepes/peanut_butter_crepe.jpg?run';
-	import the_nutella_crepe from '$lib/assets/crepes/nutella_crepe.jpg?run';
-	import the_mixed_berry_crepe from '$lib/assets/crepes/mixed_berry_crepe_2.jpg?run';
-	import the_caprese_crepe from '$lib/assets/crepes/the_caprese.jpg?run';
-	import the_cookie_monster from '$lib/assets/crepes/the_cookie_monster.jpg?run';
-	import Img from '@zerodevx/svelte-img';
-	import Seo from '$lib/components/SEO.svelte';
+	import type { Crepe } from '/src/lib/types/menu';
+	import the_egg_crepe from '/src/lib/assets/crepes/egg_crepe.jpg?enhanced&w=280';
+	import the_bib_crepe from '/src/lib/assets/crepes/breakfast_in_bed_crepe.jpg?enhanced&w=280';
+	import the_chicken_crepe from '/src/lib/assets/crepes/chicken_crepe.jpg?enhanced&w=280';
+	import the_turkey_bacon_crepe from '/src/lib/assets/crepes/turkey_bacon_crepe_2.jpg?enhanced&w=280';
+	import the_all_american_crepe from '/src/lib/assets/crepes/the_all_american.jpg?enhanced&w=280';
+	import the_chipotle_chicken_crepe from '/src/lib/assets/crepes/the_chipotle_chicken.jpg?enhanced&w=280';
+	import the_montecristo_crepe from '/src/lib/assets/crepes/the_monte_cristo_crepe_2.jpg?enhanced&w=280';
+	import the_black_bean_crepe from '/src/lib/assets/crepes/black_bean_crepe_2.jpg?enhanced&w=280';
+	import the_lemon_crepe from '/src/lib/assets/crepes/lemon_crepe.jpg?enhanced&w=280';
+	import the_chocolate_crepe from '/src/lib/assets/crepes/chocolate_crepe.jpg?enhanced&w=280';
+	import the_peanut_butter_crepe from '/src/lib/assets/crepes/peanut_butter_crepe.jpg?enhanced&w=280';
+	import the_nutella_crepe from '/src/lib/assets/crepes/nutella_crepe.jpg?enhanced&w=280';
+	import the_mixed_berry_crepe from '/src/lib/assets/crepes/mixed_berry_crepe_2.jpg?enhanced&w=280';
+	import the_caprese_crepe from '/src/lib/assets/crepes/the_caprese.jpg?enhanced&w=280';
+	import the_cookie_monster from '/src/lib/assets/crepes/the_cookie_monster.jpg?enhanced&w=280';
+	import Seo from '/src/lib/components/SEO.svelte';
 	const seoData = {
 		title: 'Kagen Coffee & Crepes | Menu | Richland',
 		description:
@@ -409,9 +408,10 @@
 				<div
 					class="relative group aspect-h-7 aspect-w-10 block w-full overflow-hidden rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-primary-500 focus-within:ring-offset-2 focus-within:ring-offset-gray-100"
 				>
-					<Img
+					<enhanced:img
 						src={image.src}
 						alt={image.alt}
+						sizes="(min-width:240px) 280px"
 						class="pointer-events-none object-cover h-full group-hover:opacity-75"
 					/>
 					<button
@@ -458,7 +458,7 @@
 					<div
 						class="mx-auto aspect-h-7 aspect-w-10 overflow-hidden flex items-center justify-center rounded-lg bg-green-100"
 					>
-						<Img
+						<enhanced:img
 							src={active_crepe.image.src}
 							alt={active_crepe.image.alt}
 							class="pointer-events-none object-cover h-full group-hover:opacity-75"

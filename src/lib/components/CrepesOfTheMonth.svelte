@@ -1,8 +1,7 @@
 <script lang="ts">
 	import type { Crepe } from '$lib/types/menu';
-	import the_caprese_crepe from '$lib/assets/crepes/the_caprese.jpg?run';
-	import the_cookie_monster from '$lib/assets/crepes/the_cookie_monster.jpg?run';
-	import Img from '@zerodevx/svelte-img';
+	import the_caprese_crepe from '/src/lib/assets/crepes/the_caprese.jpg?enhanced';
+	import the_cookie_monster from '/src/lib/assets/crepes/the_cookie_monster.jpg?enhanced';
 	import Seo from '$lib/components/SEO.svelte';
 	const seoData = {
 		title: 'Kagen Coffee & Crepes | Menu | Richland',
@@ -98,7 +97,7 @@
 				{#each crepes as { name, type, image, ingredients, special, most_popular } (name)}
 					<div>
 						<div class="group aspect-h-2 aspect-w-3 w-full overflow-hidden rounded-lg">
-							<Img
+							<enhanced:img
 								src={image.src}
 								alt={image.alt}
 								class="h-full w-full object-cover object-center group-hover:opacity-75"
@@ -109,7 +108,7 @@
 								type="button"
 								class="absolute inset-0 focus:outline-none"
 							>
-								<span class="sr-only">View details for IMG_4985.HEIC</span>
+								<span class="sr-only">View details for {image.alt}</span>
 							</button>
 						</div>
 						<p class="mt-8 text-base text-gray-500">
@@ -117,21 +116,7 @@
 						</p>
 					</div>
 				{/each}
-
-				<!-- <div>
-					<div class="aspect-h-2 aspect-w-3 w-full overflow-hidden rounded-lg">
-						<img
-							src="https://tailwindui.com/img/ecommerce-images/product-page-04-detail-product-shot-02.jpg"
-							alt="Front zipper pouch with included key ring."
-							class="h-full w-full object-cover object-center"
-						/>
-					</div>
-					<p class="mt-8 text-base text-gray-500">
-						Up your snack organization game with multiple compartment options. The quick-access
-						stash pouch is ready for even the most unexpected snack attacks and sharing needs.
-					</p>
-				</div> -->
-			</div>
+		</div>
 		</section>
 	</div>
 </div>
@@ -161,7 +146,7 @@
 					<div
 						class="mx-auto aspect-h-7 aspect-w-10 overflow-hidden flex items-center justify-center rounded-lg bg-green-100"
 					>
-						<Img
+						<enhanced:img
 							src={active_crepe.image.src}
 							alt={active_crepe.image.alt}
 							class="pointer-events-none object-cover h-full group-hover:opacity-75"

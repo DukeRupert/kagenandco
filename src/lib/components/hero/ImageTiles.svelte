@@ -1,10 +1,9 @@
 <script lang="ts">
-	import black_bean_crepe from '$lib/assets/crepes/black_bean_crepe_kagen_coffee_and_crepes.jpg?run&width=240&format=avif;webp;jpg';
-	import smiling_employee from '$lib/assets/oreo_crepe_smiling_employee_kagen_coffee_and_crepes.jpg?run&width=240&format=avif;webp;jpg';
-	import monte_cristo_crepe from '$lib/assets/crepes/the_monte_cristo_crepe_kagen_coffee_and_crepes.jpg?run&width=240&format=avif;webp;jpg';
-	import mixed_berry_crepe from '$lib/assets/crepes/mixed_berry_crepe_kagen_coffee_and_crepes.jpg?run&width=240&format=avif;webp;jpg';
-	import chunky_monkey_crepe from '$lib/assets/crepes/the_chunky_monkey_crepe_kagen_coffee_and_crepes.jpg?run&width=240&format=avif;webp;jpg';
-	import Img from '@zerodevx/svelte-img';
+	import black_bean_crepe from '/src/lib/assets/crepes/black_bean_crepe_kagen_coffee_and_crepes.jpg?enhanced&w=240';
+	import smiling_employee from '/src/lib/assets/oreo_crepe_smiling_employee_kagen_coffee_and_crepes.jpg?enhanced&w=240';
+	import monte_cristo_crepe from '/src/lib/assets/crepes/the_monte_cristo_crepe_kagen_coffee_and_crepes.jpg?enhanced&w=240';
+	import mixed_berry_crepe from '/src/lib/assets/crepes/mixed_berry_crepe_kagen_coffee_and_crepes.jpg?enhanced&w=240';
+	import chunky_monkey_crepe from '/src/lib/assets/crepes/the_chunky_monkey_crepe_kagen_coffee_and_crepes.jpg?enhanced&w=240';
 </script>
 
 <div id="hero" class="relative isolate bg-white pb-16 pt-4 sm:pt-16 sm:bg-32">
@@ -45,9 +44,10 @@
 							class="ml-auto w-44 flex-none space-y-8 pt-32 sm:ml-0 sm:pt-80 lg:order-last lg:pt-36 xl:order-none xl:pt-80"
 						>
 							<div class="relative rounded-xl">
-								<Img
+								<enhanced:img
 									src={black_bean_crepe}
 									alt="A black bean crepe"
+									sizes="(min-width:240px) 240px"
 									class="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"
 								/>
 								<div
@@ -57,9 +57,10 @@
 						</div>
 						<div class="mr-auto w-44 flex-none space-y-8 sm:mr-0 sm:pt-52 lg:pt-36">
 							<div class="relative">
-								<Img
+								<enhanced:img
 									src={smiling_employee}
 									alt="A smiling employee holding an oreo crepe"
+									sizes="(min-width:240px) 240px"
 									class="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"
 								/>
 								<div
@@ -67,9 +68,10 @@
 								/>
 							</div>
 							<div class="relative">
-								<Img
+								<enhanced:img
 									src={monte_cristo_crepe}
 									alt="A monte cristo crepe"
+									sizes="(min-width:240px) 240px"
 									class="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"
 								/>
 								<div
@@ -79,9 +81,10 @@
 						</div>
 						<div class="w-44 flex-none space-y-8 pt-32 sm:pt-0">
 							<div class="relative">
-								<Img
+								<enhanced:img
 									src={mixed_berry_crepe}
 									alt="A mixed berry crepe"
+									sizes="(min-width:240px) 240px"
 									class="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"
 								/>
 								<div
@@ -89,9 +92,10 @@
 								/>
 							</div>
 							<div class="relative">
-								<Img
+								<enhanced:img
 									src={chunky_monkey_crepe}
 									alt="A chunky monkey crepe"
+									sizes="(min-width:240px) 240px"
 									class="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"
 								/>
 								<div

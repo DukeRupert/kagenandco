@@ -1,6 +1,5 @@
 <script lang="ts">
-	import kagen_cox_owner from '$lib/assets/kagen_coffee_and_crepes_owner.webp?run';
-	import Img from '@zerodevx/svelte-img';
+	import kagen_cox_owner from '/src/lib/assets/kagen_coffee_and_crepes_owner.webp?enhanced';
 </script>
 
 <div class="bg-surface-50 pb-16 pt-24 sm:pb-24 sm:pt-32 xl:pb-32">
@@ -10,7 +9,7 @@
 		>
 			<div class="-mt-8 w-full max-w-2xl xl:-mb-8 xl:w-96 xl:flex-none">
 				<div class="relative aspect-[2/1] h-full md:-mx-8 xl:mx-0 xl:aspect-auto">
-					<Img
+					<enhanced:img
 						class="absolute inset-0 h-full w-full rounded-2xl bg-gray-800 object-cover shadow-2xl"
 						src={kagen_cox_owner}
 						alt="Kagen Cox, owner of Kagen Coffee and Crepes"

@@ -1,12 +1,11 @@
 <script>
-	import coffee_cup from '$lib/assets/coffee_cup_with_coffee_beans_kagen_coffee_and_crepes_square.jpg?run';
-	import Img from '@zerodevx/svelte-img';
+	import coffee_cup from '/src/lib/assets/coffee_cup_with_coffee_beans_kagen_coffee_and_crepes_square.jpg?enhanced';
 </script>
 
 <div id="cta-coffee-club" class="relative isolate bg-white pb-32 pt-24 sm:pt-32">
 	<div class="relative bg-secondary-900">
 		<div class="relative h-80 overflow-hidden md:absolute md:left-0 md:h-full md:w-1/3 lg:w-1/2">
-			<Img
+			<enhanced:img
 				class="h-full w-full object-cover"
 				src={coffee_cup}
 				alt="A Kagen Coffee and Crepes mug with whole coffee beans sitting on the table in front of it."

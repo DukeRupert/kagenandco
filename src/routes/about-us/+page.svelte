@@ -1,6 +1,5 @@
 <script lang="ts">
-	import kagen_cox_owner from '$lib/assets/kagen_coffee_and_crepes_owner.webp?run';
-	import Img from '@zerodevx/svelte-img';
+	import kagen_cox_owner from '/src/lib/assets/kagen_coffee_and_crepes_owner.webp?enhanced';
 	import Seo from '$lib/components/SEO.svelte';
 	const seoData = {
 		title: 'Kagen Coffee & Crepes - Our Story',
@@ -42,7 +41,7 @@
 			</p>
 		</div>
 		<figure class="mt-16">
-			<Img
+			<enhanced:img
 				class="aspect-video rounded-xl bg-gray-50 object-cover"
 				src={kagen_cox_owner}
 				alt="Kagen Cox, owner of Kagen Coffee and Crepes"

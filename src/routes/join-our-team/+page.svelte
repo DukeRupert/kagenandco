@@ -4,8 +4,7 @@
 	// Sanity Content
 	export let data: PageData;
 
-	import smiling_thank_you from '$lib/assets/oreo_crepe_smiling_employee_kagen_coffee_and_crepes.jpg?run';
-	import Img from '@zerodevx/svelte-img';
+	import smiling_thank_you from '/src/lib/assets/oreo_crepe_smiling_employee_kagen_coffee_and_crepes.jpg?enhanced';
 	import Seo from '$lib/components/SEO.svelte';
 	const seoData = {
 		title: 'Kagen Coffee & Crepes - Join Our Team',
@@ -36,7 +35,7 @@
 <!-- Contact section -->
 <div class="relative bg-white">
 	<div class="lg:absolute lg:inset-0 lg:left-1/2">
-		<Img
+		<enhanced:img
 			class="h-64 w-full bg-gray-50 object-cover sm:h-80 lg:absolute lg:h-full rounded-tl-lg"
 			src={smiling_thank_you}
 			alt="A smiling woman holds out a brown bag with the words Thank You written on the front at a Kagen Coffee and Crepes store."
