@@ -123,7 +123,7 @@
 					</div>
 					<div class="mt-4 sm:mt-6">
 						<a
-							href={`/menu/${location.slug.current}`}
+							href={`/menu/tri-cities`}
 							class="btn variant-ringed-primary min-w-[150px]"
 						>
 							View Menu
