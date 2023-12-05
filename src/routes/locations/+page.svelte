@@ -1,7 +1,7 @@
 <script lang="ts">
-	import type {PageData } from './$types'
+	import type { PageData } from './$types';
 	import richland_location from '/static/images/location_richland.png?enhanced';
-	import kennewick_shop from '/static/images/IMG_4900.jpg?enhanced'
+	import kennewick_shop from '/static/images/IMG_4900.jpg?enhanced';
 	import Seo from '$lib/components/SEO.svelte';
 	export let data: PageData;
 
@@ -53,9 +53,8 @@
 				line1: '308 W Kennewick Ave'
 			},
 			locationUrl: '',
-			orderUrl:
-				'https://www.toasttab.com/kagen-coffee-crepes-308-w-kennewick-ave',
-			hours: ['Wednesday-Saturday: 7am-2pm', 'Sunday-Tuesday : Closed'],
+			orderUrl: 'https://www.toasttab.com/kagen-coffee-crepes-308-w-kennewick-ave',
+			hours: ['Tuesday-Saturday: 7am-2pm', 'Sunday-Monday : Closed'],
 			name: 'Kennewick',
 			phone: '509-851-7186',
 			slug: {
@@ -85,60 +84,54 @@
 
 		<div class="grid grid-cols-1 gap-y-14 sm:grid-cols-2 gap-x-6 lg:grid-cols-2 xl:gap-x-8">
 			{#each locations as location}
-			<!-- Richland Location -->
-			<div
-				class="w-full aspect-w-1 aspect-h-1 rounded-lg overflow-hidden sm:aspect-w-2 sm:aspect-h-3"
-			>
-				<enhanced:img
-					src={location.image.src}
-					alt={location.image.alt}
-					class="w-full h-full object-center object-cover group-hover:opacity-75"
-				/>
-			</div>
-			<div class="flex-1 p-4 flex flex-col">
-				<div class="flex-1 flex flex-col space-y-4">
-					<h3 class="text-2xl font-medium text-gray-900">
-						{location.name}
-					</h3>
-					<a href={location.locationUrl}>
-						<p class="text-base text-gray-600">
-							{location.address.line1}
+				<!-- Richland Location -->
+				<div
+					class="w-full aspect-w-1 aspect-h-1 rounded-lg overflow-hidden sm:aspect-w-2 sm:aspect-h-3"
+				>
+					<enhanced:img
+						src={location.image.src}
+						alt={location.image.alt}
+						class="w-full h-full object-center object-cover group-hover:opacity-75"
+					/>
+				</div>
+				<div class="flex-1 p-4 flex flex-col">
+					<div class="flex-1 flex flex-col space-y-4">
+						<h3 class="text-2xl font-medium text-gray-900">
+							{location.name}
+						</h3>
+						<a href={location.locationUrl}>
+							<p class="text-base text-gray-600">
+								{location.address.line1}
+							</p>
+							<p class="text-base text-gray-600">{location.address.line2}</p>
+						</a>
+						<div class="flex flex-col">
+							{#each location.hours as hour}
+								<p class="text-base text-gray-600">{hour}</p>
+							{/each}
+						</div>
+						<p class="text-base text-gray-800">
+							Opening times may vary, please call to check, we always love hearing from you!
 						</p>
-						<p class="text-base text-gray-600">{location.address.line2}</p>
-					</a>
-					<div class="flex flex-col">
-						{#each location.hours as hour}
-							<p class="text-base text-gray-600">{hour}</p>
-						{/each}
 					</div>
-					<p class="text-base text-gray-800">
-						Opening times may vary, please call to check, we always love hearing from you!
-					</p>
-				</div>
-				<div class="flex-1">
-					<div class="mt-4 sm:mt-6">
-						<a href={location.orderUrl} class="btn variant-filled-primary min-w-[150px]">
-							Order Online
-						</a>
-					</div>
-					<div class="mt-4 sm:mt-6">
-						<a
-							href={`/menu/tri-cities`}
-							class="btn variant-ringed-primary min-w-[150px]"
-						>
-							View Menu
-						</a>
-					</div>
-					<div class="mt-4 sm:mt-6">
-						<a
-							href={location.locationUrl}
-							class="btn variant-ringed-primary min-w-[150px]"
-						>
-							Get Directions
-						</a>
+					<div class="flex-1">
+						<div class="mt-4 sm:mt-6">
+							<a href={location.orderUrl} class="btn variant-filled-primary min-w-[150px]">
+								Order Online
+							</a>
+						</div>
+						<div class="mt-4 sm:mt-6">
+							<a href={`/menu/tri-cities`} class="btn variant-ringed-primary min-w-[150px]">
+								View Menu
+							</a>
+						</div>
+						<div class="mt-4 sm:mt-6">
+							<a href={location.locationUrl} class="btn variant-ringed-primary min-w-[150px]">
+								Get Directions
+							</a>
+						</div>
 					</div>
 				</div>
-			</div>
 			{/each}
 		</div>
 	</div>

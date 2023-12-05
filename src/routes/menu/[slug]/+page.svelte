@@ -16,7 +16,7 @@
 	import the_mixed_berry_crepe from '/src/lib/assets/crepes/mixed_berry_crepe_2.jpg?enhanced&w=280';
 	import the_caprese_crepe from '/src/lib/assets/crepes/the_caprese.jpg?enhanced&w=280';
 	import the_cookie_monster from '/src/lib/assets/crepes/the_cookie_monster.jpg?enhanced&w=280';
-	import Seo from '/src/lib/components/SEO.svelte';
+	import Seo from '$lib/components/SEO.svelte';
 	const seoData = {
 		title: 'Kagen Coffee & Crepes | Menu | Richland',
 		description:
@@ -220,23 +220,23 @@
 			},
 			ingredients: ['lemon', 'sugar', 'eggs', 'dairy', 'flour']
 		},
-		{
-			name: 'The Cookie Monster',
-			description:
-				'Milk chocolate chips tucked inside a warm crepe, topped with crushed pretzels and homemade edible cookie dough.',
-			most_popular: false,
-			special: true,
-			type: 'sweet',
-			image: {
-				src: the_cookie_monster,
-				alt: 'A cookie monster crepe garnished with pretzels'
-			},
-			price: {
-				mini: '6.00',
-				full: '7.00'
-			},
-			ingredients: ['lemon', 'sugar', 'eggs', 'dairy', 'flour']
-		},
+		// {
+		// 	name: 'The Cookie Monster',
+		// 	description:
+		// 		'Milk chocolate chips tucked inside a warm crepe, topped with crushed pretzels and homemade edible cookie dough.',
+		// 	most_popular: false,
+		// 	special: true,
+		// 	type: 'sweet',
+		// 	image: {
+		// 		src: the_cookie_monster,
+		// 		alt: 'A cookie monster crepe garnished with pretzels'
+		// 	},
+		// 	price: {
+		// 		mini: '6.00',
+		// 		full: '7.00'
+		// 	},
+		// 	ingredients: ['lemon', 'sugar', 'eggs', 'dairy', 'flour']
+		// },
 		{
 			name: 'The Chocolate',
 			description: 'Chocolate and raspberry garnished with whipped cream.',
@@ -412,7 +412,7 @@
 						src={image.src}
 						alt={image.alt}
 						sizes="(min-width:240px) 280px"
-						class="pointer-events-none object-cover h-full group-hover:opacity-75"
+						class="pointer-events-none object-cover h-full w-full group-hover:opacity-75"
 					/>
 					<button
 						id={name}

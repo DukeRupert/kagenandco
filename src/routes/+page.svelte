@@ -63,7 +63,7 @@
 
 <SEO data={seoData} />
 <Hero />
-<CrepesOfTheMonth />
+<!-- <CrepesOfTheMonth /> -->
 <QuoteOverlap />
 <!-- <Instagram /> -->
 <TestimonialGrid />
