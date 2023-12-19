@@ -11,6 +11,8 @@
 		"format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. ."
 	},
 	"devDependencies": {
+		"@melt-ui/pp": "^0.2.0",
+		"@melt-ui/svelte": "^0.66.0",
 		"@portabletext/svelte": "^1.0.1",
 		"@sanity/client": "^3.4.1",
 		"@sanity/image-url": "^1.0.1",
@@ -40,6 +42,7 @@
 		"svelte-check": "^2.10.3",
 		"svelte-preprocess": "^5.0.4",
 		"svelte-seo": "^1.4.1",
+		"svelte-sequential-preprocessor": "^2.0.1",
 		"tailwindcss": "^3.3.1",
 		"tslib": "^2.4.1",
 		"typescript": "^4.9.4"
@@ -48,6 +51,7 @@
 	"dependencies": {
 		"@felte/reporter-svelte": "^1.1.10",
 		"felte": "^1.2.11",
+		"lucide-svelte": "^0.298.0",
 		"postmark": "^3.0.15",
 		"vite": "^4.0.1",
 		"zod": "^3.21.4"

@@ -5,11 +5,36 @@
 	import { quadIn, quadOut } from 'svelte/easing';
 	import { itemCount } from '$lib/stores';
 	import Logo from '$lib/components/Logo.svelte';
+	import { createDialog, melt } from '@melt-ui/svelte';
+	/** Internal helpers */
+	import { X } from 'lucide-svelte';
+
+	const {
+		elements: { trigger, overlay, content, title, description, close, portalled },
+		states: { open }
+	} = createDialog({
+		forceVisible: true
+	});
+
 	let count = 0;
 	$: count = $itemCount;
 	let is_mobile_open = false;
-	const order_online_href =
-		'https://www.toasttab.com/kagen-coffee-crepes-270-williams-blvd/v3/?mode=fulfillment';
+	const online_order_locations = [
+		{
+			address: {
+				line2: 'Kennewick, WA 99336',
+				line1: '308 W Kennewick Ave'
+			},
+			href: 'https://order.toasttab.com/online/kagen-coffee-crepes-308-w-kennewick-ave'
+		},
+		{
+			address: {
+				line2: 'Richland, WA 99354',
+				line1: '270 Williams Blvd'
+			},
+			href: 'https://order.toasttab.com/online/kagen-coffee-crepes-270-williams-blvd'
+		}
+	];
 
 	function toggle_mobile_open() {
 		is_mobile_open = !is_mobile_open;
@@ -126,8 +151,8 @@
 			{/if}
 			<span class="sr-only">items in cart, view bag</span>
 		</button>
-		<a href={order_online_href} class="btn variant-filled-primary text-sm font-semibold leading-6"
-			>Order Online<span aria-hidden="true">&rarr;</span></a
+		<button use:melt={$trigger} class="btn variant-filled-primary text-sm font-semibold leading-6"
+			>Order Online<span aria-hidden="true">&rarr;</span></button
 		>
 	</div>
 </nav>
@@ -186,8 +211,8 @@
 						{/each}
 					</div>
 					<div class="py-6">
-						<a href={order_online_href} class="btn variant-ringed-tertiary !bg-white"
-							>Order Online</a
+						<button use:melt={$trigger} class="btn variant-ringed-tertiary !bg-white"
+							>Order Online</button
 						>
 					</div>
 				</div>
@@ -195,3 +220,58 @@
 		</div>
 	</div>
 {/if}
+
+<!-- Online Order Store selection modal -->
+<div use:melt={$portalled}>
+	{#if $open}
+		<div use:melt={$overlay} class="fixed inset-0 bg-gray-700 bg-opacity-75" />
+		<div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+			<div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+				<div
+					use:melt={$content}
+					class="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm sm:p-6"
+				>
+					<button
+						use:melt={$close}
+						aria-label="Close"
+						class="absolute right-[10px] top-[10px] inline-flex h-6 w-6
+                appearance-none items-center justify-center rounded-full text-gray-400
+                hover:bg-gray-100 focus:shadow-magnum-400"
+					>
+						<X class="square-4" />
+					</button>
+					<div>
+						<div class="mt-3 text-center sm:mt-5">
+							<h3
+								use:melt={$title}
+								class="text-base font-semibold leading-6 text-gray-900"
+								id="modal-title"
+							>
+								Select your location
+							</h3>
+							<ul role="list" class="mt-4 divide-y divide-gray-200">
+								{#each online_order_locations as { address, href }}
+									<li class="py-4">
+										<a
+											class="!no-underline text-base font-semibold leading-6 !text-gray-900"
+											{href}
+										>
+											{address.line1}<br />
+											<span class="mt-1 truncate text-xs leading-5 text-gray-500"
+												>{address.line2}</span
+											></a
+										>
+									</li>{/each}
+							</ul>
+						</div>
+					</div>
+					<div class="mt-5 sm:mt-6">
+						<button type="button" use:melt={$close} class="btn variant-filled-primary w-full"
+							>Go back</button
+						>
+					</div>
+				</div>
+			</div>
+		</div>
+	{/if}
+</div>

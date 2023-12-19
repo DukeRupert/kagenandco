@@ -1,6 +1,5 @@
 <script lang="ts">
 	import SEO from '$lib/components/SEO.svelte';
-	import Instagram from './Instagram.svelte';
 	import CTA from '$lib/components/CTA.svelte';
 	import Hero from '$lib/components/hero/ImageTiles.svelte';
 	import QuoteOverlap from '$lib/components/QuoteOverlap.svelte';
