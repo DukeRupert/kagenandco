@@ -40,6 +40,11 @@
 		is_mobile_open = !is_mobile_open;
 	}
 
+	// Close mobile menu when online order modal is open
+	$: if($open) {
+		is_mobile_open = false;
+	}
+
 	// Close mobile menu when navigation
 	$: if ($navigating) {
 		is_mobile_open = false;
@@ -159,7 +164,7 @@
 <!-- Mobile menu, show/hide based on menu open state. -->
 {#if is_mobile_open}
 	<div
-		transition:fly={{ duration: 300, x: 400, easing: quadOut }}
+		transition:fly={{ duration: 200, x: 400, easing: quadOut }}
 		class="fixed inset-0 {is_mobile_open
 			? 'translate-x-0'
 			: 'translate-x-full'} z-50 min-h-screen lg:hidden"
@@ -168,7 +173,7 @@
 	>
 		<!-- Background backdrop, show/hide based on slide-over state. -->
 		<div
-			transition:fade={{ delay: 250, duration: 100, easing: quadOut }}
+			transition:fade={{ delay: 200, duration: 100, easing: quadOut }}
 			class="fixed inset-0 z-50 bg-gray-700/20"
 		/>
 		<div
@@ -224,9 +229,9 @@
 <!-- Online Order Store selection modal -->
 <div use:melt={$portalled}>
 	{#if $open}
-		<div use:melt={$overlay} class="fixed inset-0 bg-gray-700 bg-opacity-75" />
-		<div class="fixed inset-0 z-10 w-screen overflow-y-auto">
-			<div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+		<div transition:fade={{delay: 100, duration: 200, easing: quadOut}} use:melt={$overlay} class="fixed inset-0 bg-gray-700 bg-opacity-75" />
+		<div transition:fade={{delay: 100, duration: 200, easing: quadOut}} class="fixed inset-0 z-10 w-screen overflow-y-auto">
+			<div class="flex min-h-full items-center justify-center p-4 text-center sm:p-0">
 				<div
 					use:melt={$content}
 					class="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm sm:p-6"
