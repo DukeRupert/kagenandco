@@ -2,23 +2,23 @@
 	import { navigating } from '$app/stores';
 	import { isCartOpen } from '$lib/stores';
 	import { fly, fade } from 'svelte/transition';
-	import { quadIn, quadOut } from 'svelte/easing';
+	import { quadOut } from 'svelte/easing';
 	import { itemCount } from '$lib/stores';
-	import Logo from '$lib/components/Logo.svelte';
 	import { createDialog, melt } from '@melt-ui/svelte';
-	/** Internal helpers */
 	import { X } from 'lucide-svelte';
-
-	const {
-		elements: { trigger, overlay, content, title, close, portalled },
-		states: { open }
-	} = createDialog({
-		forceVisible: true,
-	});
+	import Logo from '$lib/components/Logo.svelte';
 
 	let count = 0;
 	$: count = $itemCount;
 	let is_mobile_open = false;
+	const top_links = [
+		{ title: 'Menu', href: '/menu/tri-cities' },
+		{ title: 'Coffee Club', href: '/products/the-rooster' },
+		{ title: 'Our Story', href: '/about-us' },
+		{ title: 'Locations', href: '/locations' },
+		{ title: 'Join Our Team', href: '/join-our-team' },
+		{ title: 'Contact Us', href: '/contact-us' }
+	];
 	const online_order_locations = [
 		{
 			address: {
@@ -36,33 +36,31 @@
 		}
 	];
 
+	// Setup online order location modal
+	// https://melt-ui.com/docs/builders/dialog
+	const {
+		elements: { trigger, overlay, content, title, close, portalled },
+		states: { open }
+	} = createDialog({
+		forceVisible: true
+	});
+
+	// Utility functions
 	function toggle_mobile_open() {
 		is_mobile_open = !is_mobile_open;
 	}
-
-	// Close mobile menu when online order modal is open
-	$: if($open) {
-		is_mobile_open = false;
-	}
-
-	// Close mobile menu when navigation
-	$: if ($navigating) {
-		is_mobile_open = false;
-	}
-
-	// Open Shopping Cart SlideOver
 	function openShoppingCart() {
 		$isCartOpen = true;
 	}
 
-	const top_links = [
-		{ title: 'Menu', href: '/menu/tri-cities' },
-		{ title: 'Coffee Club', href: '/products/the-rooster' },
-		{ title: 'Our Story', href: '/about-us' },
-		{ title: 'Locations', href: '/locations' },
-		{ title: 'Join Our Team', href: '/join-our-team' },
-		{ title: 'Contact Us', href: '/contact-us' }
-	];
+	// Reactive functions
+	$: if ($open) {
+		is_mobile_open = false; // Close mobile menu when online order modal is open
+	}
+
+	$: if ($navigating) {
+		is_mobile_open = false; // Close mobile menu when navigation
+	}
 </script>
 
 <nav class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
@@ -229,21 +227,30 @@
 <!-- Online Order Store selection modal -->
 <div use:melt={$portalled}>
 	{#if $open}
-		<div in:fade={{delay: 100, duration: 200, easing: quadOut}} out:fade={{duration: 200, easing: quadOut}} use:melt={$overlay} class="fixed inset-0 bg-gray-700 bg-opacity-75" />
-		<div in:fly={{delay: 100, x:-100, duration: 200, easing: quadOut}} out:fly={{duration: 200, x:-100, easing: quadOut}} class="fixed inset-0 z-10 w-screen overflow-y-auto">
+		<div
+			in:fade={{ delay: 100, duration: 200, easing: quadOut }}
+			out:fade={{ duration: 200, easing: quadOut }}
+			use:melt={$overlay}
+			class="fixed inset-0 bg-gray-700 bg-opacity-75"
+		/>
+		<div
+			in:fly={{ delay: 100, x: -100, duration: 200, easing: quadOut }}
+			out:fly={{ duration: 200, x: -100, easing: quadOut }}
+			class="fixed inset-0 z-10 w-screen overflow-y-auto"
+		>
 			<div class="flex min-h-full items-center justify-center p-4 text-center sm:p-0">
 				<div
 					use:melt={$content}
-					class="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm sm:p-6"
+					class="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 w-full max-w-sm md:max-w-md p-6 sm:p-8"
 				>
 					<button
 						use:melt={$close}
 						aria-label="Close"
 						class="absolute right-[10px] top-[10px] inline-flex h-6 w-6
                 appearance-none items-center justify-center rounded-full text-gray-400
-                hover:bg-gray-100 focus:shadow-magnum-400"
+                hover:bg-gray-100 focus:shadow-gray-400"
 					>
-						<X class="square-4" />
+						<X class="w-4 h-4" />
 					</button>
 					<div>
 						<div class="mt-3 text-center sm:mt-5">

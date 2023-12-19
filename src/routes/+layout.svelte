@@ -9,7 +9,7 @@
 	import { isCartOpen, cart } from '$lib/stores';
 	import cartCreate from '$lib/shopify/cartCreate';
 	import queryCart from '$lib/shopify/queryCart';
-	import Nav from '$lib/components/header/Nav.svelte';
+	import Navigation from '$lib/components/Navigation.svelte';
 	import Footer from '$lib/components/Footer.svelte';
 	import SlideOver from '$lib/components/SlideOver.svelte';
 	import { onMount } from 'svelte';
@@ -69,7 +69,7 @@
 <SlideOver />
 <div class="{$isCartOpen ? 'overflow-hidden' : ''}}">
 	<header>
-		<Nav />
+		<Navigation />
 	</header>
 	<main>
 		<slot />
