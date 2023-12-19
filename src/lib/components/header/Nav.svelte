@@ -10,10 +10,10 @@
 	import { X } from 'lucide-svelte';
 
 	const {
-		elements: { trigger, overlay, content, title, description, close, portalled },
+		elements: { trigger, overlay, content, title, close, portalled },
 		states: { open }
 	} = createDialog({
-		forceVisible: true
+		forceVisible: true,
 	});
 
 	let count = 0;
@@ -229,8 +229,8 @@
 <!-- Online Order Store selection modal -->
 <div use:melt={$portalled}>
 	{#if $open}
-		<div transition:fade={{delay: 100, duration: 200, easing: quadOut}} use:melt={$overlay} class="fixed inset-0 bg-gray-700 bg-opacity-75" />
-		<div transition:fade={{delay: 100, duration: 200, easing: quadOut}} class="fixed inset-0 z-10 w-screen overflow-y-auto">
+		<div in:fade={{delay: 100, duration: 200, easing: quadOut}} out:fade={{duration: 200, easing: quadOut}} use:melt={$overlay} class="fixed inset-0 bg-gray-700 bg-opacity-75" />
+		<div in:fly={{delay: 100, x:-100, duration: 200, easing: quadOut}} out:fly={{duration: 200, x:-100, easing: quadOut}} class="fixed inset-0 z-10 w-screen overflow-y-auto">
 			<div class="flex min-h-full items-center justify-center p-4 text-center sm:p-0">
 				<div
 					use:melt={$content}
