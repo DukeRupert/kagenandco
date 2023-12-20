@@ -1,18 +1,18 @@
 import { z } from 'zod';
 
 export const applicantSchema = z.object({
-    password: z.string().default(""), // honeypot
+	password: z.string().default(''), // honeypot
 	first_name: z.string().max(30),
 	last_name: z.string().max(30),
 	email: z.string().email(),
-	phone: z.string().default(""),
-    location: z.string().default("All"),
-    start_date: z.date(),
-    employment_type: z.string(),
-    legal: z.boolean(),
-    veteran: z.boolean(),
-    background_check: z.boolean(),
-    work_history: z.string()
+	phone: z.string().default(''),
+	location: z.string().default('All'),
+	start_date: z.string(),
+	employment_type: z.string(),
+	legal: z.boolean(),
+	veteran: z.boolean(),
+	background_check: z.boolean(),
+	work_history: z.string()
 });
 
-export type ApplicantSchema = typeof applicantSchema
+export type ApplicantSchema = typeof applicantSchema;

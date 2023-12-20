@@ -7,7 +7,6 @@
 	import { page } from '$app/stores';
 	import { createEventDispatcher } from 'svelte';
 	import { AlertCircle } from 'lucide-svelte';
-	import SuperDebug from 'sveltekit-superforms/client/SuperDebug.svelte';
 
 	export let data: SuperValidated<ApplicantSchema>;
 	export let delayMs = 200;
@@ -312,4 +311,3 @@
 		</div>
 	</div>
 </form>
-<SuperDebug data={$form} />
