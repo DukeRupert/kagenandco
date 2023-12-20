@@ -7,6 +7,7 @@
 	import { page } from '$app/stores';
 	import { createEventDispatcher } from 'svelte';
 	import { AlertCircle } from 'lucide-svelte';
+	import SuperDebug from 'sveltekit-superforms/client/SuperDebug.svelte';
 
 	export let data: SuperValidated<ApplicantSchema>;
 	export let delayMs = 200;
@@ -21,6 +22,12 @@
 					dispatch('toast', {
 						type: 'warning',
 						title: 'Warning',
+						description: form.message
+					});
+				if ($page.status === 500)
+					dispatch('toast', {
+						type: 'error',
+						title: 'Error',
 						description: form.message
 					});
 			} else {
@@ -40,14 +47,14 @@
 			});
 		},
 		validators: applicantSchema,
-		invalidateAll: true,
-		taintedMessage: null,
+		resetForm: false,
+		taintedMessage: false,
 		delayMs: delayMs,
 		timeoutMs: timeoutMs
 	});
 </script>
 
-<form use:enhance>
+<form method="POST" use:enhance>
 	<div class="space-y-6 md:space-y-12">
 		<div class="mt-6 grid grid-cols-1 gap-y-2 gap-x-4 sm:grid-cols-6">
 			<div class="sm:col-span-3">
@@ -151,6 +158,7 @@
 				<div class="flex items-center h-5">
 					<input
 						type="checkbox"
+						id="legal"
 						name="legal"
 						bind:checked={$form.legal}
 						class="focus:ring-custard-500 h-4 w-4 text-custard-600 border-gray-300 rounded"
@@ -166,6 +174,7 @@
 				<div class="flex items-center h-5">
 					<input
 						type="checkbox"
+						id="veteran"
 						name="veteran"
 						bind:checked={$form.veteran}
 						class="focus:ring-custard-500 h-4 w-4 text-custard-600 border-gray-300 rounded"
@@ -179,6 +188,7 @@
 				<div class="flex items-center h-5">
 					<input
 						type="checkbox"
+						id="background_check"
 						name="background_check"
 						bind:checked={$form.background_check}
 						class="focus:ring-custard-500 h-4 w-4 text-custard-600 border-gray-300 rounded"
@@ -216,6 +226,7 @@
 				<div class="relative flex items-start">
 					<div class="flex items-center h-5">
 						<input
+							id="start_date"
 							type="date"
 							name="start_date"
 							bind:value={$form.start_date}
@@ -238,7 +249,7 @@
 						id="full-time"
 						class="focus:ring-custard-500 text-custard-500"
 						type="radio"
-						name="employmentType"
+						name="employment_type"
 						value="full-time"
 						bind:group={$form.employment_type}
 					/>
@@ -251,7 +262,7 @@
 						id="part-time"
 						class="focus:ring-custard-500 text-custard-500"
 						type="radio"
-						name="employmentType"
+						name="employment_type"
 						value="part-time"
 						bind:group={$form.employment_type}
 					/>
@@ -264,7 +275,7 @@
 						id="seasonal"
 						class="focus:ring-custard-500 text-custard-500"
 						type="radio"
-						name="employmentType"
+						name="employment_type"
 						value="seasonal"
 						bind:group={$form.employment_type}
 					/>
@@ -275,14 +286,14 @@
 			</div>
 		</fieldset>
 		<div>
-			<label for="about" class="block text-base font-medium text-gray-900"> About </label>
+			<label for="about" class="block text-base font-medium text-gray-900"> Work History </label>
 			<p class="text-sm text-gray-500">Please provide the last 5 years of your work history.</p>
 
 			<div class="mt-2">
 				<textarea
 					placeholder="Example:   Job Title - Company - 2y 6mo"
-					id="about"
-					name="about"
+					id="work_history"
+					name="work_history"
 					rows="3"
 					aria-invalid={$errors.work_history ? 'true' : undefined}
 					bind:value={$form.work_history}
@@ -301,3 +312,4 @@
 		</div>
 	</div>
 </form>
+<SuperDebug data={$form} />

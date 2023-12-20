@@ -1,6 +1,7 @@
 import { z } from 'zod';
 
 export const applicantSchema = z.object({
+    password: z.string().default(""), // honeypot
 	first_name: z.string().max(30),
 	last_name: z.string().max(30),
 	email: z.string().email(),
@@ -11,7 +12,7 @@ export const applicantSchema = z.object({
     legal: z.boolean(),
     veteran: z.boolean(),
     background_check: z.boolean(),
-    work_history: z.string().max(1500).default("")
+    work_history: z.string()
 });
 
 export type ApplicantSchema = typeof applicantSchema

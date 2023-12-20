@@ -21,20 +21,26 @@
 -->
 
 <script lang="ts" context="module">
-	export type ToastData = {
-		type: 'success' | 'warning' | 'error';
-		title: string;
-		description: string;
-	};
+	
+	import type { ToastEventPayload } from './toast';
 
 	const {
 		elements,
 		helpers,
 		states: { toasts },
 		actions: { portal }
-	} = createToaster<ToastData>();
+	} = createToaster<ToastEventPayload>();
 
 	export const addToast = helpers.addToast;
+
+	export const handleToast = (e: CustomEvent<ToastEventPayload>) => {
+		const details = e.detail;
+		addToast({
+			data: {
+				...details
+			}
+		});
+	}
 </script>
 
 <script lang="ts">

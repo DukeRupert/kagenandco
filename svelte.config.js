@@ -18,6 +18,9 @@ const config = {
 		adapter: adapter(),
 		prerender: {
 			handleHttpError: 'warn'
+		},
+		csrf: {
+			checkOrigin: false
 		}
 	}
 };
