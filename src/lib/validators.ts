@@ -5,13 +5,13 @@ export const applicantSchema = z.object({
 	last_name: z.string().max(30),
 	email: z.string().email(),
 	phone: z.string().default(""),
-    location: z.string(),
+    location: z.string().default("All"),
     start_date: z.date(),
     employment_type: z.string(),
     legal: z.boolean(),
     veteran: z.boolean(),
     background_check: z.boolean(),
-    jobs: z.string().max(1500).default("")
+    work_history: z.string().max(1500).default("")
 });
 
 export type ApplicantSchema = typeof applicantSchema

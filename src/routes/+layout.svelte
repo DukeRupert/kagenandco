@@ -15,7 +15,7 @@
 	import { onMount } from 'svelte';
 	import { error } from '@sveltejs/kit';
 	import { Toast } from '@skeletonlabs/skeleton';
-	// import Toaster from '$lib/components/toast/index.svelte';
+	import Toaster from '$lib/components/toast/index.svelte';
 
 	async function createNewCart() {
 		const response = await cartCreate();
@@ -66,6 +66,7 @@
 	});
 </script>
 
+<Toaster />
 <Toast />
 <SlideOver />
 <div class="{$isCartOpen ? 'overflow-hidden' : ''}}">
