@@ -1,5 +1,5 @@
 <script lang="ts">
-	import JoinOurTeam from '$lib/forms/JoinOurTeam.svelte';
+	import ApplicantForm from './ApplicantForm.svelte';
 	import type { PageData } from './$types';
 	// Sanity Content
 	export let data: PageData;
@@ -22,16 +22,6 @@
 </script>
 
 <Seo data={seoData} />
-<!-- Hero -->
-<div class="bg-white px-6 py-24 sm:py-32 lg:px-8">
-	<div class="mx-auto max-w-2xl text-center">
-		<h2 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">Join Our Team</h2>
-		<p class="mt-6 text-lg leading-8 text-gray-600">
-			No experience needed. Just bring your best attitude and a desire to make our customer's day
-			better. You will fit right in.
-		</p>
-	</div>
-</div>
 <!-- Contact section -->
 <div class="relative bg-white">
 	<div class="lg:absolute lg:inset-0 lg:left-1/2">
@@ -46,8 +36,12 @@
 	>
 		<div class="px-6 lg:px-8">
 			<div class="mx-auto max-w-xl lg:mx-0 lg:max-w-lg">
-				<h3 class="text-3xl font-bold tracking-tight text-gray-900">Let's work together</h3>
-				<JoinOurTeam />
+				<h1 class="text-3xl font-bold tracking-tight text-gray-900">Join Our Team</h1>
+				<p class="mt-6 text-lg leading-8 text-gray-600">
+					No experience needed. Just bring your best attitude and a desire to make our customer's
+					day better. You will fit right in.
+				</p>
+				<ApplicantForm data={data.form} />
 			</div>
 		</div>
 	</div>
