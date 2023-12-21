@@ -5,6 +5,7 @@
 	import { handleToast } from '$lib/components/toast/index.svelte';
 	import Seo from '$lib/components/SEO.svelte';
 	import ApplicantForm from './ApplicantForm.svelte';
+	import PageWrapper from '$lib/components/PageWrapper.svelte';
 
 	export let data: PageData;
 	$: ({ form } = data);
@@ -25,19 +26,16 @@
 </script>
 
 <Seo data={seoData} />
-<div class="relative bg-white">
-	<div class="relative mx-auto max-w-7xl pt-12 sm:pt-24 md:py-24">
-		<div class="text-center">
-			<h1 class="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-				Join Our Team
-			</h1>
-			<p class="mt-6 text-base leading-7 text-gray-600">
-				No experience needed. Just bring your best attitude and a desire to make our customer's day
-				better. You will fit right in.
-			</p>
+<PageWrapper>
+	<div class="mx-auto max-w-3xl text-base leading-7 text-gray-700">
+		<p class="text-base font-semibold leading-7 text-primary-600">Employment Opportunities</p>
+		<h1 class="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Join Our Team</h1>
+		<p class="mt-6 text-base leading-7 text-gray-600">
+			No experience needed. Just bring your best attitude and a desire to make our customer's day
+			better. You will fit right in.
+		</p>
+		<div class="relative py-12 sm:py-16">
+			<ApplicantForm on:toast={handleToast} data={form} />
 		</div>
 	</div>
-</div>
-<div class="relative mx-auto max-w-2xl px-6 pb-12 lg:px-8">
-	<ApplicantForm on:toast={handleToast} data={form} />
-</div>
+</PageWrapper>

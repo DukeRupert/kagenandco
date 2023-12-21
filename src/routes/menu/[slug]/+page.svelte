@@ -1,22 +1,23 @@
 <script lang="ts">
 	import { flip } from 'svelte/animate';
 	import type { Crepe } from '/src/lib/types/menu';
-	import the_egg_crepe from '/src/lib/assets/crepes/egg_crepe.jpg?enhanced&w=280';
-	import the_bib_crepe from '/src/lib/assets/crepes/breakfast_in_bed_crepe.jpg?enhanced&w=280';
-	import the_chicken_crepe from '/src/lib/assets/crepes/chicken_crepe.jpg?enhanced&w=280';
-	import the_turkey_bacon_crepe from '/src/lib/assets/crepes/turkey_bacon_crepe_2.jpg?enhanced&w=280';
-	import the_all_american_crepe from '/src/lib/assets/crepes/the_all_american.jpg?enhanced&w=280';
-	import the_chipotle_chicken_crepe from '/src/lib/assets/crepes/the_chipotle_chicken.jpg?enhanced&w=280';
-	import the_montecristo_crepe from '/src/lib/assets/crepes/the_monte_cristo_crepe_2.jpg?enhanced&w=280';
-	import the_black_bean_crepe from '/src/lib/assets/crepes/black_bean_crepe_2.jpg?enhanced&w=280';
-	import the_lemon_crepe from '/src/lib/assets/crepes/lemon_crepe.jpg?enhanced&w=280';
-	import the_chocolate_crepe from '/src/lib/assets/crepes/chocolate_crepe.jpg?enhanced&w=280';
-	import the_peanut_butter_crepe from '/src/lib/assets/crepes/peanut_butter_crepe.jpg?enhanced&w=280';
-	import the_nutella_crepe from '/src/lib/assets/crepes/nutella_crepe.jpg?enhanced&w=280';
-	import the_mixed_berry_crepe from '/src/lib/assets/crepes/mixed_berry_crepe_2.jpg?enhanced&w=280';
-	import the_caprese_crepe from '/src/lib/assets/crepes/the_caprese.jpg?enhanced&w=280';
-	import the_cookie_monster from '/src/lib/assets/crepes/the_cookie_monster.jpg?enhanced&w=280';
+	import the_egg_crepe from '/src/lib/assets/crepes/egg_crepe.jpg?enhanced&w=400;280';
+	import the_bib_crepe from '/src/lib/assets/crepes/breakfast_in_bed_crepe.jpg?enhanced&w=400;280';
+	import the_chicken_crepe from '/src/lib/assets/crepes/chicken_crepe.jpg?enhanced&w=400;280';
+	import the_turkey_bacon_crepe from '/src/lib/assets/crepes/turkey_bacon_crepe_2.jpg?enhanced&w=400;280';
+	import the_all_american_crepe from '/src/lib/assets/crepes/the_all_american.jpg?enhanced&w=400;280';
+	import the_chipotle_chicken_crepe from '/src/lib/assets/crepes/the_chipotle_chicken.jpg?enhanced&w=400;280';
+	import the_montecristo_crepe from '/src/lib/assets/crepes/the_monte_cristo_crepe_2.jpg?enhanced&w=400;280';
+	import the_black_bean_crepe from '/src/lib/assets/crepes/black_bean_crepe_2.jpg?enhanced&w=400;280';
+	import the_lemon_crepe from '/src/lib/assets/crepes/lemon_crepe.jpg?enhanced&w=400;280';
+	import the_chocolate_crepe from '/src/lib/assets/crepes/chocolate_crepe.jpg?enhanced&w=400;280';
+	import the_peanut_butter_crepe from '/src/lib/assets/crepes/peanut_butter_crepe.jpg?enhanced&w=400;280';
+	import the_nutella_crepe from '/src/lib/assets/crepes/nutella_crepe.jpg?enhanced&w=400;280';
+	import the_mixed_berry_crepe from '/src/lib/assets/crepes/mixed_berry_crepe_2.jpg?enhanced&w=400;280';
+	import the_caprese_crepe from '/src/lib/assets/crepes/the_caprese.jpg?enhanced&w=400;280';
 	import Seo from '$lib/components/SEO.svelte';
+	import PageWrapper from '$lib/components/PageWrapper.svelte';
+
 	const seoData = {
 		title: 'Kagen Coffee & Crepes | Menu | Richland',
 		description:
@@ -351,16 +352,16 @@
 </script>
 
 <Seo data={seoData} />
-<!-- Hero -->
-<div class="bg-white px-6 py-8 md:py-16 lg:py-32 lg:px-8">
-	<div class="mx-auto max-w-2xl px-4 py-16 text-center sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-		<h2 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">Menu</h2>
-		<p class="mt-6 text-lg leading-8 text-gray-600">
+<PageWrapper>
+	<div class="mx-auto max-w-3xl text-base leading-7 text-gray-700">
+		<p class="text-base font-semibold leading-7 text-primary-600">Our Story</p>
+		<h1 class="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Our Menu</h1>
+		<p class="mt-6 text-xl leading-8">
 			Enjoy a fresh crepe today! We offer a variety of savory and sweet crepes that will satisfy any
 			craving. Gluten-free is also available.
 		</p>
 	</div>
-	<div class="mx-auto max-w-2xl px-4 py-8 flex justify-center">
+	<div class="mx-auto max-w-2xl px-4 py-8 md:py-12 flex justify-center">
 		<span class="isolate inline-flex rounded-md shadow-sm">
 			<button
 				id="all"
@@ -411,7 +412,7 @@
 					<enhanced:img
 						src={image.src}
 						alt={image.alt}
-						sizes="(min-width:240px) 280px"
+						sizes="(min-width:240px) 280px, (min-width:300) 400px"
 						class="pointer-events-none object-cover h-full w-full group-hover:opacity-75"
 					/>
 					<button
@@ -431,7 +432,7 @@
 			</li>
 		{/each}
 	</ul>
-</div>
+</PageWrapper>
 <!-- Modal -->
 <div
 	class="relative z-10 {is_modal_active ? 'pointer-events-auto' : 'pointer-events-none'}"
@@ -461,7 +462,7 @@
 						<enhanced:img
 							src={active_crepe.image.src}
 							alt={active_crepe.image.alt}
-							class="pointer-events-none object-cover h-full group-hover:opacity-75"
+							class="pointer-events-none object-cover h-full w-full group-hover:opacity-75"
 						/>
 					</div>
 					<div class="mt-3 text-center sm:mt-5">

@@ -14,8 +14,15 @@
 	import SlideOver from '$lib/components/SlideOver.svelte';
 	import { onMount } from 'svelte';
 	import { error } from '@sveltejs/kit';
+	import { page } from '$app/stores';
 	import { Toast } from '@skeletonlabs/skeleton';
 	import Toaster from '$lib/components/toast/index.svelte';
+	import PageWrapper from '$lib/components/PageWrapper.svelte';
+
+	const nakedPaths = [
+		'/sitemap.xml'
+	];
+	$: naked = nakedPaths.includes($page.url.pathname);
 
 	async function createNewCart() {
 		const response = await cartCreate();
@@ -69,7 +76,11 @@
 <Toaster />
 <Toast />
 <SlideOver />
-<div class="{$isCartOpen ? 'overflow-hidden' : ''}}">
+
+{#if naked}
+	<slot />
+{:else}
+	<div class="{$isCartOpen ? 'overflow-hidden' : ''}}">
 	<header>
 		<Navigation />
 	</header>
@@ -80,3 +91,4 @@
 		<Footer />
 	</footer>
 </div>
+{/if}

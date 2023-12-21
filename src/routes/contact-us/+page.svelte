@@ -3,6 +3,7 @@
 	import { enhance } from '$app/forms';
 	import { successToast, errorToast } from '$lib/toast';
 	import type { ActionData } from './$types';
+	import PageWrapper from '$lib/components/PageWrapper.svelte';
 
 	export let data: ActionData;
 	console.log(data);
@@ -38,9 +39,9 @@
 	});
 </script>
 
-<div id="contact-us" class="relative isolate bg-white pb-32 pt-8 sm:pt-32">
-	<div class="relative mx-auto max-w-4xl mb-8">
-		<div class="py-10 px-6 sm:px-10 lg:col-span-2 xl:p-12">
+<PageWrapper>
+	<div class="relative mx-auto max-w-3xl mb-8">
+		<div class="pb-10 lg:col-span-2">
 			<h2
 				id="contact-heading"
 				class="unstyled text-lg font-semibold leading-8 tracking-tight text-primary-600"
@@ -173,4 +174,4 @@
 			</form>
 		</div>
 	</div>
-</div>
+</PageWrapper>
