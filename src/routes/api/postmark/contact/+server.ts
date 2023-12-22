@@ -13,12 +13,10 @@ export const POST: RequestHandler = async ({ request }) => {
 		TemplateId: 26884441,
 		TemplateModel: model,
 		From: 'logan@fireflysoftware.dev',
-		To: 'logan@fireflysoftware.dev',
+		To: 'kagen.cox@gmail.com, cadem.tcsllc@gmail.com',
 		MessageStream: 'outbound',
 		TrackOpens: true
 	});
-
-	// 'kagen.cox@gmail.com, cadem.tcsllc@gmail.com'
 
 	// Handle result
 	if (res.ErrorCode) {

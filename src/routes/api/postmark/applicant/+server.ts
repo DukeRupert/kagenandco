@@ -7,19 +7,11 @@ export const POST: RequestHandler = async ({ request }) => {
 	const data = await request.json();
 
 	// Send message
-	// const res = await client.sendEmailWithTemplate({
-	// 	TemplateId: 26884441,
-	// 	TemplateModel: data,
-	// 	From: 'logan@fireflysoftware.dev',
-	// 	To: 'kagen.cox@gmail.com, cadem.tcsllc@gmail.com',
-	// 	MessageStream: 'outbound',
-	// 	TrackOpens: true
-	// });
 	const res = await client.sendEmailWithTemplate({
-		TemplateId: 26884441,
+		TemplateId: 21027639,
 		TemplateModel: data,
 		From: 'logan@fireflysoftware.dev',
-		To: 'logan@fireflysoftware.dev',
+		To: 'kagen.cox@gmail.com, cadem.tcsllc@gmail.com',
 		MessageStream: 'outbound',
 		TrackOpens: true
 	});
