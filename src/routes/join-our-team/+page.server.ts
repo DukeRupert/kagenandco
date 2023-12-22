@@ -46,10 +46,6 @@ export const actions: Actions = {
 		} catch (err) {
 			console.log(err);
 		}
-		// Send email to kcc
-
-		// Send email to developer
-
 		return { form };
 	}
 };

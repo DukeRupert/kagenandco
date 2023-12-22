@@ -1,14 +1,14 @@
 <script lang="ts">
 	import type { ToastEvent } from '$lib/types/toast';
 	import type { SuperValidated } from 'sveltekit-superforms';
-	import type { ApplicantSchema } from '$lib/validators';
-	import { applicantSchema } from '$lib/validators';
+	import type { ContactSchema } from '$lib/validators';
+	import { contactSchema } from '$lib/validators';
 	import { superForm } from 'sveltekit-superforms/client';
 	import { page } from '$app/stores';
 	import { createEventDispatcher } from 'svelte';
 	import { AlertCircle } from 'lucide-svelte';
 
-	export let data: SuperValidated<ApplicantSchema>;
+	export let data: SuperValidated<ContactSchema>;
 	export let delayMs = 200;
 	export let timeoutMs = 8000;
 
@@ -33,7 +33,7 @@
 				dispatch('toast', {
 					type: 'success',
 					title: 'Success',
-					description: 'Success! Your information has been sent.'
+					description: 'Success! Your message has been sent.'
 				});
 			}
 		},
@@ -45,7 +45,7 @@
 				description: result.error.message
 			});
 		},
-		validators: applicantSchema,
+		validators: contactSchema,
 		resetForm: false,
 		taintedMessage: false,
 		delayMs: delayMs,
@@ -152,58 +152,9 @@
 			</div>
 		</div>
 
-		<div class="space-y-6">
-			<div class="relative flex items-start">
-				<div class="flex items-center h-5">
-					<input
-						type="checkbox"
-						id="legal"
-						name="legal"
-						bind:checked={$form.legal}
-						class="focus:ring-custard-500 h-4 w-4 text-custard-600 border-gray-300 rounded"
-					/>
-				</div>
-				<div class="ml-3 text-sm">
-					<label for="legal" class="font-medium text-gray-700"
-						>Are you legally eligible to work in the US?</label
-					>
-				</div>
-			</div>
-			<div class="relative flex items-start">
-				<div class="flex items-center h-5">
-					<input
-						type="checkbox"
-						id="veteran"
-						name="veteran"
-						bind:checked={$form.veteran}
-						class="focus:ring-custard-500 h-4 w-4 text-custard-600 border-gray-300 rounded"
-					/>
-				</div>
-				<div class="ml-3 text-sm">
-					<label for="veteran" class="font-medium text-gray-700">Are you a veteran?</label>
-				</div>
-			</div>
-			<div class="relative flex items-start">
-				<div class="flex items-center h-5">
-					<input
-						type="checkbox"
-						id="background_check"
-						name="background_check"
-						bind:checked={$form.background_check}
-						class="focus:ring-custard-500 h-4 w-4 text-custard-600 border-gray-300 rounded"
-					/>
-				</div>
-				<div class="ml-3 text-sm">
-					<label for="background_check" class="font-medium text-gray-700"
-						>Are you willing to submit to a background check?</label
-					>
-				</div>
-			</div>
-		</div>
-
 		<div>
 			<label for="location" class="block text-base font-medium text-gray-900"> Location </label>
-			<p class="text-sm text-gray-500">Is there a location that you would prefer?</p>
+			<p class="text-sm text-gray-500">Which location is your message about?</p>
 			<div class="mt-1">
 				<select
 					id="location"
@@ -218,88 +169,22 @@
 			</div>
 		</div>
 
+		
 		<div>
-			<label for="start_date" class="block text-base font-medium text-gray-900"> Start Date </label>
-			<p class="text-sm text-gray-500">What date would you be available to start?</p>
-			<div class="mt-4 space-y-4">
-				<div class="relative flex items-start">
-					<div class="flex items-center h-5">
-						<input
-							id="start_date"
-							type="date"
-							name="start_date"
-							bind:value={$form.start_date}
-							class="border-gray-300 rounded"
-							required
-						/>
-					</div>
-					<div class="ml-3 text-sm" />
-				</div>
-			</div>
-		</div>
-		<fieldset>
-			<div class="mt-4">
-				<legend class="text-base font-medium text-gray-900"> Employment Type </legend>
-				<p class="text-sm text-gray-500">What kind of job are you looking for?</p>
-			</div>
-			<div class="mt-4 space-y-4">
-				<div class="flex items-center">
-					<input
-						id="full-time"
-						class="focus:ring-custard-500 text-custard-500"
-						type="radio"
-						name="employment_type"
-						value="full-time"
-						bind:group={$form.employment_type}
-					/>
-					<label for="full-time" class="ml-3 block text-sm font-medium text-gray-700">
-						Full-Time
-					</label>
-				</div>
-				<div class="flex items-center">
-					<input
-						id="part-time"
-						class="focus:ring-custard-500 text-custard-500"
-						type="radio"
-						name="employment_type"
-						value="part-time"
-						bind:group={$form.employment_type}
-					/>
-					<label for="part-time" class="ml-3 block text-sm font-medium text-gray-700">
-						Part-time
-					</label>
-				</div>
-				<div class="flex items-center">
-					<input
-						id="seasonal"
-						class="focus:ring-custard-500 text-custard-500"
-						type="radio"
-						name="employment_type"
-						value="seasonal"
-						bind:group={$form.employment_type}
-					/>
-					<label for="seasonal" class="ml-3 block text-sm font-medium text-gray-700">
-						Seasonal
-					</label>
-				</div>
-			</div>
-		</fieldset>
-		<div>
-			<label for="work_history" class="block text-base font-medium text-gray-900"> Work History </label>
-			<p class="text-sm text-gray-500">Please provide the last 5 years of your work history.</p>
+			<label for="body" class="block text-base font-medium text-gray-900"> Message </label>
+			<p class="text-sm text-gray-500">Please keep your message under 1500 characters in lenght. If that's not enough, please call us :)</p>
 
 			<div class="mt-2">
 				<textarea
-					placeholder="Example:   Job Title - Company - 2y 6mo"
-					id="work_history"
-					name="work_history"
+					id="body"
+					name="vody"
 					rows="3"
-					aria-invalid={$errors.work_history ? 'true' : undefined}
-					bind:value={$form.work_history}
-					{...$constraints.work_history}
+					aria-invalid={$errors.body ? 'true' : undefined}
+					bind:value={$form.body}
+					{...$constraints.body}
 					class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
 				></textarea>
-				{#if $errors.work_history}
+				{#if $errors.body}
 					<div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
 						<AlertCircle class="h-5 w-5 text-red-500" />
 					</div>

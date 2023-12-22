@@ -16,19 +16,18 @@
 			height: 630
 		}
 	};
+
+	const title = "About Us"
+	const description = `Families and friends need a place to gather. A place to visit, catch up and simply enjoy life
+			together. At KCC we believe in togetherness and community. My family’s best conversations
+			growing up happened around a table while snacking on tasty food.`
+	 
 </script>
 
 <Seo data={seoData} />
 
-<PageWrapper>
+<PageWrapper {title} {description}>
 	<div class="mx-auto max-w-3xl text-base leading-7 text-gray-700">
-		<p class="text-base font-semibold leading-7 text-primary-600">Our Story</p>
-		<h1 class="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">About Us</h1>
-		<p class="mt-6 text-xl leading-8">
-			Families and friends need a place to gather. A place to visit, catch up and simply enjoy life
-			together. At KCC we believe in togetherness and community. My family’s best conversations
-			growing up happened around a table while snacking on tasty food.
-		</p>
 		<div class="mt-10 max-w-2xl">
 			<p>
 				When my wife and I would travel our favorite thing to do was visit crepe shops. It was then

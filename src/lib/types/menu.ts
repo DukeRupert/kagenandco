@@ -14,7 +14,7 @@ interface Drink {
 	name: string;
 }
 
-export interface Crepe {
+export type Crepe = {
 	name: string;
 	description?: string;
 	special: boolean;

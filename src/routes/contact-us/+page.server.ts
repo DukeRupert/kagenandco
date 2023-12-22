@@ -1,92 +1,51 @@
-import type { Actions } from './$types';
-import { fail } from '@sveltejs/kit';
-import { z } from 'zod';
-import postmark from 'postmark';
-import { POSTMARK_API_KEY } from '$env/static/private';
+import type { PageServerLoad, Actions } from './$types';
+import { superValidate, message } from 'sveltekit-superforms/server';
+import { contactSchema } from '$lib/validators';
 
-// Send an email:
-const client = new postmark.ServerClient(POSTMARK_API_KEY);
+export const load: PageServerLoad = async function () {
+	// Setup forms
+	const form = await superValidate(contactSchema);
+
+	return {
+		form
+	};
+};
 
 export const actions: Actions = {
-	contact: async ({ request }) => {
-		const formData = await request.formData();
-
-		// check honeypot
-		const password = formData.get('password');
-		if (password) {
-			return fail(400, { success: false, message: 'Nice try, bot.' });
-		}
-
-		// create payload
-		const first_name: string = formData.get('first_name') as string;
-		const last_name: string = formData.get('last_name') as string;
-		const email: string = formData.get('email') as string;
-		const phone: string = formData.get('phone') as string;
-		const location: string = formData.get('location') as string;
-		const subject: string = formData.get('subject') as string;
-		const body: string = formData.get('body') as string;
-		const payload = {
-			first_name,
-			last_name,
-			email,
-			phone,
-			location,
-			subject,
-			body
-		};
-
-		// validate payload
-		const Contact_Form_Schema = z.object({
-			first_name: z.string(),
-			last_name: z.string(),
-			email: z.string().email(),
-			phone: z.string(),
-			location: z.string(),
-			subject: z.string(),
-			body: z.string()
-		});
-
-		const result = Contact_Form_Schema.safeParse(payload);
-
-		// Handle validation errors
-		if (!result.success) {
-			console.log(JSON.stringify(result, null, 2));
-
-			// Loop through the errors array and create a custom errors array
-			const errors = result.error.errors.map((error) => {
-				return {
-					field: error.path[0],
-					message: error.message
-				};
-			});
-			return fail(400, { success: false, errors });
-		} else {
-			// Send message
-			const { data } = result;
-			const response = await client.sendEmailWithTemplate({
-				TemplateId: 26884441,
-				TemplateModel: {
-					first: data.first_name,
-					last: data.last_name,
-					email: data.email,
-					phone: data.phone,
-					location: data.location,
-					subject: data.subject,
-					body: data.body
-				},
-				From: 'logan@fireflysoftware.dev',
-				To: 'logan@fireflysoftware.dev',
-				MessageStream: 'outbound',
-				TrackOpens: true
-			});
-
-			// handle error
-			if (response.ErrorCode) {
-				return fail(response.ErrorCode, { message: response.Message });
+	default: async ({ request, fetch }) => {
+		console.log('Submit applicant email');
+		// Cast Superform magic
+		const form = await superValidate(request, contactSchema);
+		// Check the honeypot
+		if (form.data.password !== '') return message(form, 'Nice try bot', { status: 400 });
+		// Check if data is valid
+		if (!form.valid) return message(form, 'Invalid form', { status: 400 });
+		// Send email to applicant
+		try {
+			// Setup
+			const resource = '/api/postmark/contact';
+			const headers = new Headers({ 'Content-Type': 'application/json' });
+			const options = {
+				method: 'POST',
+				headers: headers,
+				body: JSON.stringify(form.data)
+			};
+			// Call
+			const res = await fetch(resource, options);
+			console.log(`Received response from ${resource}`);
+			const status = res.status;
+			console.log(`Status is ${status}`);
+			if (status === 200) {
+				console.log('Response ok');
+				return { form };
+			} else {
+				return message(form, 'An error occured on our end. Please try again later or call.', {
+					status: 500
+				});
 			}
-
-			// handle success
-			return { success: true };
+		} catch (err) {
+			console.log(err);
 		}
+		return { form };
 	}
 };

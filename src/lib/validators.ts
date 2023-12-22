@@ -15,4 +15,16 @@ export const applicantSchema = z.object({
 	work_history: z.string()
 });
 
+export const contactSchema = z.object({
+	password: z.string().default(''), // honeypot
+	first_name: z.string().max(30),
+	last_name: z.string().max(30),
+	email: z.string().email(),
+	phone: z.string().default(''),
+	location: z.string(),
+	subject: z.string(),
+	body: z.string()
+});
+
 export type ApplicantSchema = typeof applicantSchema;
+export type ContactSchema = typeof contactSchema;
