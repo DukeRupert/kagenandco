@@ -1,9 +1,35 @@
 <script lang="ts">
-	import { flip } from 'svelte/animate';
+	import type { PageData } from './$types';
 	import type { Crepe } from '$lib/types/menu';
-	import { crepes } from '$lib/data/crepes';
+	import type { FlipParams } from 'svelte/animate';
+	import { flip } from 'svelte/animate';
+	import { quadOut } from 'svelte/easing';
 	import Seo from '$lib/components/SEO.svelte';
 	import PageWrapper from '$lib/components/PageWrapper.svelte';
+
+	export let data: PageData;
+	$: ({ crepes, type } = data);
+	let is_modal_active = false;
+	let active_crepe: Crepe;
+
+	const flip_params: FlipParams = {
+		duration: 500,
+		easing: quadOut
+	}
+
+	const toggle_modal = (event: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }) => {
+		// Get id of crepe
+		const target = event.target as HTMLButtonElement;
+		console.log(target);
+		const id = target.id;
+		console.log(`Id : ${id}`);
+		// Find and set
+		const p = crepes.find((crepe) => crepe.name == id);
+		console.log(p);
+		if (p) active_crepe = p;
+		// trigger modal
+		is_modal_active = !is_modal_active;
+	};
 
 	const title = 'Our Menu';
 	const description =
@@ -20,80 +46,38 @@
 			height: 630
 		}
 	};
-
-	let id = 'all';
-	let filtered_crepes: Crepe[] = crepes.sort((a, b) => 0.5 - Math.random());
-	let is_modal_active = false;
-	let active_crepe: Crepe = crepes[0];
-
-	const filter_crepes = (crepes: Crepe[], param: string): Crepe[] => {
-		// If no filter param exists return full array
-		if (param == null) {
-			return crepes;
-		} else {
-			const result = crepes.filter((crepe) => crepe.type == param);
-			return result;
-		}
-	};
-
-	const update_crepes = (
-		event: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }
-	) => {
-		const target = event.target as HTMLButtonElement;
-		const crepe_type = target.id;
-		id = crepe_type;
-		if (id && id !== 'all') {
-			filtered_crepes = filter_crepes(crepes, crepe_type);
-		} else {
-			filtered_crepes = crepes;
-		}
-	};
-
-	const toggle_modal = (event: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }) => {
-		// Get id of crepe
-		const target = event.target as HTMLButtonElement;
-		console.log(target);
-		const id = target.id;
-		console.log(`Id : ${id}`);
-		// Find and set
-		const p = crepes.find((crepe) => crepe.name == id);
-		console.log(p);
-		if (p) active_crepe = p;
-		// trigger modal
-		is_modal_active = !is_modal_active;
-	};
 </script>
 
 <Seo data={seoData} />
 <PageWrapper {title} {description}>
 	<div class="mx-auto max-w-2xl px-4 py-8 md:py-12 flex justify-center">
 		<span class="isolate inline-flex rounded-md shadow-sm">
-			<button
+			<a
+				data-sveltekit-noscroll
 				id="all"
-				on:click={update_crepes}
-				type="button"
-				class="{id == 'all'
+				href="/menu"
+				class="{type === ''
 					? 'bg-primary-400'
-					: 'bg-white'} relative min-w-[80px] inline-flex justify-center items-center rounded-l-md px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-primary-300 focus:z-10"
-				>All</button
+					: 'bg-white'} relative min-w-[80px] inline-flex justify-center items-center rounded-l-md px-3 py-2 text-sm font-semibold !text-gray-900 !no-underline ring-1 ring-inset ring-gray-300 hover:bg-primary-300 focus:z-10"
+				>All</a
 			>
-			<button
+			<a
+				data-sveltekit-noscroll
 				id="savory"
-				on:click={update_crepes}
-				type="button"
-				class="{id == 'savory'
+				href="/menu?type=savory"
+				class="{type === 'savory'
 					? 'bg-primary-400'
-					: 'bg-white'} relative min-w-[80px] -ml-px inline-flex justify-center items-center px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-primary-300 focus:z-10"
-				>Savory</button
+					: 'bg-white'} relative min-w-[80px] -ml-px inline-flex justify-center items-center px-3 py-2 text-sm font-semibold !text-gray-900 !no-underline ring-1 ring-inset ring-gray-300 hover:bg-primary-300 focus:z-10"
+				>Savory</a
 			>
-			<button
+			<a
+				data-sveltekit-noscroll
 				id="sweet"
-				on:click={update_crepes}
-				type="button"
-				class="{id == 'sweet'
+				href="/menu?type=sweet"
+				class="{type === 'sweet'
 					? 'bg-primary-400'
-					: 'bg-white'} relative min-w-[80px] -ml-px inline-flex justify-center items-center rounded-r-md px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-primary-300 focus:z-10"
-				>Sweet</button
+					: 'bg-white'} relative min-w-[80px] -ml-px inline-flex justify-center items-center rounded-r-md px-3 py-2 text-sm font-semibold !text-gray-900 !no-underline ring-1 ring-inset ring-gray-300 hover:bg-primary-300 focus:z-10"
+				>Sweet</a
 			>
 		</span>
 	</div>
@@ -102,8 +86,8 @@
 		role="list"
 		class="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8"
 	>
-		{#each filtered_crepes as { name, type, image, ingredients, special, most_popular } (name)}
-			<li id={name} animate:flip={{ duration: 250 }} class="relative">
+		{#each crepes as { name, type, image, ingredients, special, most_popular } (name)}
+			<li id={name} animate:flip={flip_params} class="relative">
 				{#if special}
 					<span class="badge bg-rose-600 text-white absolute -top-2 right-2 z-10">Limited Time</span
 					>
@@ -160,32 +144,34 @@
 					? 'ease-out duration-300 opacity-100 translate-y-0 sm:scale-100'
 					: 'ease-in duration-200 opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95'}"
 			>
-				<div>
-					<div
-						class="mx-auto aspect-h-7 aspect-w-10 overflow-hidden flex items-center justify-center rounded-lg bg-green-100"
-					>
-						<enhanced:img
-							src={active_crepe.image.src}
-							alt={active_crepe.image.alt}
-							class="pointer-events-none object-cover h-full w-full group-hover:opacity-75"
-						/>
-					</div>
-					<div class="mt-3 text-center sm:mt-5">
-						<h3 class="text-base font-semibold leading-6 text-gray-900" id="modal-title">
-							{active_crepe.name}
-						</h3>
-						<div class="mt-2">
-							<p class="text-sm text-gray-500">
-								{active_crepe.description ?? ''}
-							</p>
+				{#if active_crepe}
+					<div>
+						<div
+							class="mx-auto aspect-h-7 aspect-w-10 overflow-hidden flex items-center justify-center rounded-lg bg-green-100"
+						>
+							<enhanced:img
+								src={active_crepe.image.src}
+								alt={active_crepe.image.alt}
+								class="pointer-events-none object-cover h-full w-full group-hover:opacity-75"
+							/>
+						</div>
+						<div class="mt-3 text-center sm:mt-5">
+							<h3 class="text-base font-semibold leading-6 text-gray-900" id="modal-title">
+								{active_crepe.name}
+							</h3>
+							<div class="mt-2">
+								<p class="text-sm text-gray-500">
+									{active_crepe.description ?? ''}
+								</p>
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="mt-5 sm:mt-6">
-					<button on:click={toggle_modal} type="button" class="btn variant-filled-primary w-full"
-						>Go back</button
-					>
-				</div>
+					<div class="mt-5 sm:mt-6">
+						<button on:click={toggle_modal} type="button" class="btn variant-filled-primary w-full"
+							>Go back</button
+						>
+					</div>
+				{/if}
 			</div>
 		</div>
 	</div>
