@@ -42,7 +42,7 @@
 									<button
 										on:click|preventDefault={handleClick}
 										type="button"
-										class="rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 hover:animate-wiggle"
+										class="rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-custard-500 focus:ring-offset-2 hover:animate-wiggle"
 									>
 										<span class="sr-only">Close panel</span>
 										<!-- Heroicon name: outline/x -->

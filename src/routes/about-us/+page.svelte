@@ -3,10 +3,15 @@
 	import kagen_cox_owner from '/src/lib/assets/kagen_coffee_and_crepes_owner.webp?enhanced';
 	import Seo from '$lib/components/SEO.svelte';
 	import PageWrapper from '$lib/components/PageWrapper.svelte';
+	
+	const eyebrow = "About Us"
+	const title = "Our Story"
+	const description = `Families and friends need a place to gather. A place to visit, catch up and simply enjoy life
+			together. At KCC we believe in togetherness and community. My family’s best conversations
+			growing up happened around a table while snacking on tasty food.`
 	const seoData = {
-		title: 'Kagen Coffee & Crepes - Our Story',
-		description:
-			'When my wife and I would travel our favorite thing to do was visit crepe shops. It was then that we realized what we wanted to create for our community - a gathering place. Here, we bring you our heart and passion through our love of crepes, coffee, locally sourced ciders and wine.',
+		title: `Kagen Coffee & Crepes: ${title}`,
+		description: description,
 		url: 'https://www.kagenandco.com/about-us',
 		og: {
 			src: 'https://www.kagenandco.com/images/kagen_coffee_and_crepes_owner_og.jpg',
@@ -17,16 +22,12 @@
 		}
 	};
 
-	const title = "About Us"
-	const description = `Families and friends need a place to gather. A place to visit, catch up and simply enjoy life
-			together. At KCC we believe in togetherness and community. My family’s best conversations
-			growing up happened around a table while snacking on tasty food.`
+	
 	 
 </script>
 
 <Seo data={seoData} />
-
-<PageWrapper {title} {description}>
+<PageWrapper {eyebrow} {title} {description}>
 	<div class="mx-auto max-w-3xl text-base leading-7 text-gray-700">
 		<div class="mt-10 max-w-2xl">
 			<p>

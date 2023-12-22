@@ -4,12 +4,15 @@
 	import Seo from '$lib/components/SEO.svelte';
 	import PageWrapper from '$lib/components/PageWrapper.svelte';
 	import LocationCard from './LocationCard.svelte';
+
 	export let data: PageData;
 
+	const title = 'Store Locations';
+	const description =
+		"Find our nearest location and come join us! It's hard to beat a delicious crepe paired with a strong, handcrafted coffee.";
 	const seoData = {
-		title: 'Kagen Coffee & Crepes - Locations',
-		description:
-			"Find our nearest location and come join us! It's hard to beat a delicous crepe paired with a strong, handcrafted coffee.",
+		title: `Kagen Coffee & Crepes: ${title}`,
+		description: description,
 		url: 'https://www.kagenandco.com/locations',
 		og: {
 			src: 'https://www.kagenandco.com/images/coffee_cup_with_coffee_beans_kagen_coffee_and_crepes_square.webp',
@@ -19,9 +22,6 @@
 			height: 619
 		}
 	};
-
-	const title = 'Locations';
-	const description = seoData.description;
 </script>
 
 <Seo data={seoData} />

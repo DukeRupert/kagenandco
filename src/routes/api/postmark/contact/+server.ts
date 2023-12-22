@@ -5,16 +5,20 @@ import type { RequestHandler } from './$types';
 export const POST: RequestHandler = async ({ request }) => {
 	console.log('Invoke Postmark contact endpoint');
 	const data = await request.json();
+	const business_name = "Kagen's Coffee & Crepes"
+	const model = {...data, business_name: business_name}
 
 	// Send message
 	const res = await client.sendEmailWithTemplate({
-		TemplateId: 21027639,
-		TemplateModel: data,
+		TemplateId: 26884441,
+		TemplateModel: model,
 		From: 'logan@fireflysoftware.dev',
-		To: 'kagen.cox@gmail.com, cadem.tcsllc@gmail.com',
+		To: 'logan@fireflysoftware.dev',
 		MessageStream: 'outbound',
 		TrackOpens: true
 	});
+
+	// 'kagen.cox@gmail.com, cadem.tcsllc@gmail.com'
 
 	// Handle result
 	if (res.ErrorCode) {

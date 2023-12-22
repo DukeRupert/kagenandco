@@ -15,7 +15,7 @@
 </script>
 
 <div
-	class="basis-1/2 border rounded-md mt-3 flex items-center justify-center text-base font-medium text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500 sm:w-full"
+	class="basis-1/2 border rounded-md mt-3 flex items-center justify-center text-base font-medium text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-custard-500 sm:w-full"
 >
 	<button on:click|preventDefault|stopPropagation={decrementQuantity} class="basis-1/3 h-full py-3">
 		-

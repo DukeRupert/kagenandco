@@ -9,10 +9,13 @@
 	export let data: PageData;
 	$: ({ form } = data);
 
+	const eyebrow = 'Employment Opportunities';
+	const title = "Join Our Team";
+	const description = "No experience needed. Just bring your best attitude and a desire to make our customer's day better. You will fit right in.";
+
 	const seoData = {
-		title: 'Kagen Coffee & Crepes - Join Our Team',
-		description:
-			"No experience needed. Just bring your best attitude and a desire to make our customer's day better. You will fit right in.",
+		title: `Kagen Coffee & Crepes: ${title}`,
+		description: description,
 		url: 'https://www.kagenandco.com/join-our-team',
 		og: {
 			src: 'https://www.kagenandco.com/images/coffee_cup_with_coffee_beans_kagen_coffee_and_crepes_square.webp',
@@ -22,10 +25,6 @@
 			height: 619
 		}
 	};
-
-	const eyebrow = 'Employment Opportunities';
-	const title = seoData.title;
-	const description = seoData.description;
 </script>
 
 <Seo data={seoData} />

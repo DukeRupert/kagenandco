@@ -100,7 +100,7 @@
 
 		<div class="mt-4 flex-1 flex items-end justify-between">
 			<div
-				class="basis-1/2 border rounded-md mt-3 flex items-center justify-center text-base font-medium text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500 sm:w-full"
+				class="basis-1/2 border rounded-md mt-3 flex items-center justify-center text-base font-medium text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-custard-500 sm:w-full"
 			>
 				<button on:click|stopPropagation={decrementItem} class="basis-1/3 h-full py-3"> - </button>
 				<p class="basis-1/3 h-full flex justify-center items-center text-center">{quantity}</p>

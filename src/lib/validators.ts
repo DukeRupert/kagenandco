@@ -22,8 +22,7 @@ export const contactSchema = z.object({
 	email: z.string().email(),
 	phone: z.string().default(''),
 	location: z.string(),
-	subject: z.string(),
-	body: z.string()
+	message: z.string().max(1500)
 });
 
 export type ApplicantSchema = typeof applicantSchema;

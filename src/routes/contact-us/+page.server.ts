@@ -36,9 +36,9 @@ export const actions: Actions = {
 			const status = res.status;
 			console.log(`Status is ${status}`);
 			if (status === 200) {
-				console.log('Response ok');
 				return { form };
 			} else {
+				console.log(res)
 				return message(form, 'An error occured on our end. Please try again later or call.', {
 					status: 500
 				});

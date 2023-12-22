@@ -171,20 +171,20 @@
 
 		
 		<div>
-			<label for="body" class="block text-base font-medium text-gray-900"> Message </label>
-			<p class="text-sm text-gray-500">Please keep your message under 1500 characters in lenght. If that's not enough, please call us :)</p>
+			<label for="message" class="block text-base font-medium text-gray-900"> Message </label>
+			<p class="text-sm text-gray-500">Please keep your message under 1500 characters in length. If that's not enough, please call us :)</p>
 
 			<div class="mt-2">
 				<textarea
-					id="body"
-					name="vody"
+					id="message"
+					name="message"
 					rows="3"
-					aria-invalid={$errors.body ? 'true' : undefined}
-					bind:value={$form.body}
-					{...$constraints.body}
-					class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+					aria-invalid={$errors.message? 'true' : undefined}
+					bind:value={$form.message}
+					{...$constraints.message}
+					class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-custard-600 sm:text-sm sm:leading-6"
 				></textarea>
-				{#if $errors.body}
+				{#if $errors.message}
 					<div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
 						<AlertCircle class="h-5 w-5 text-red-500" />
 					</div>

@@ -9,6 +9,8 @@
 	import cartLinesAdd from '$lib/shopify/cartLinesAdd';
 	import type { Cart } from '$lib/types/cart';
 	import Spinner from '$lib/components/Spinner.svelte';
+	import Seo from '$lib/components/SEO.svelte';
+	import { page } from '$app/stores';
 
 	interface Choice {
 		name: string;
@@ -23,6 +25,24 @@
 
 	export let data: PageData;
 	console.log(data);
+
+	const title = data?.title
+	const description = data?.description
+	const { origin, pathname } = $page.url
+	const { url: image_url, altText } = data?.images.edges[0].node
+	const seoData = {
+		title: `Kagen Coffee & Crepes: ${title} `,
+		description: description,
+		url: `${origin}${pathname}`,
+		og: {
+			src: image_url,
+			alt: altText ?? "Kagen Coffee & Crepes product",
+			mimeType: 'image/jpg',
+			height: 568,
+			width: 503
+		}
+	};
+
 	// Track active Main Image
 	let mainImage = 0;
 
@@ -143,11 +163,11 @@
 	// Update selectedOptions array with user input
 	function handleOption(event) {
 		const choice = event.detail;
-
 		selectedOptions = updateOptions(choice, selectedOptions);
 	}
 </script>
 
+<Seo data={seoData} />
 <div class="bg-white">
 	<div class="max-w-2xl mx-auto py-8 px-4 lg:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
 		<div class="lg:grid lg:grid-cols-2 lg:gap-x-8 lg:items-start">

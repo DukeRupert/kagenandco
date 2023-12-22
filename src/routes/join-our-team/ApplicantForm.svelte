@@ -297,7 +297,7 @@
 					aria-invalid={$errors.work_history ? 'true' : undefined}
 					bind:value={$form.work_history}
 					{...$constraints.work_history}
-					class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+					class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-custard-600 sm:text-sm sm:leading-6"
 				></textarea>
 				{#if $errors.work_history}
 					<div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
