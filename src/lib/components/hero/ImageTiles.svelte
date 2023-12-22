@@ -4,6 +4,8 @@
 	import monte_cristo_crepe from '/src/lib/assets/crepes/the_monte_cristo_crepe_kagen_coffee_and_crepes.jpg?enhanced&w=240';
 	import mixed_berry_crepe from '/src/lib/assets/crepes/mixed_berry_crepe_kagen_coffee_and_crepes.jpg?enhanced&w=240';
 	import chunky_monkey_crepe from '/src/lib/assets/crepes/the_chunky_monkey_crepe_kagen_coffee_and_crepes.jpg?enhanced&w=240';
+
+	import {open_online_order_modal} from "$lib/components/Navigation.svelte"
 </script>
 
 <div id="hero" class="relative isolate bg-white pb-16 pt-4 sm:pt-16 sm:bg-32">
@@ -30,10 +32,11 @@
 							help you deepen friendships and build memories today.
 						</p>
 						<div class="mt-10 flex items-center gap-x-6">
-							<a href="/menu/tri-cities" class="btn variant-filled-primary">View Menu</a>
-							<a
-								href="https://www.toasttab.com/kagen-coffee-crepes-270-williams-blvd/v3/?mode=fulfillment"
-								class="btn variant-ringed-primary">Order Online <span aria-hidden="true">→</span></a
+							<a href="/menu" class="btn variant-filled-primary">View Menu</a>
+							<button
+								type="button"
+								on:click={open_online_order_modal}
+								class="btn variant-ringed-primary">Order Online <span aria-hidden="true">→</span></button
 							>
 						</div>
 					</div>

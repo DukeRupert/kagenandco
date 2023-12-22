@@ -1,3 +1,18 @@
+<script context="module">
+	// Setup online order location modal
+	// https://melt-ui.com/docs/builders/dialog
+	const {
+		elements: { trigger, overlay, content, title, close, portalled },
+		states: { open }
+	} = createDialog({
+		forceVisible: true
+	});
+
+	export const open_online_order_modal = () => {
+		open.set(true)
+	}
+</script>
+
 <script lang="ts">
 	import { navigating } from '$app/stores';
 	import { isCartOpen } from '$lib/stores';
@@ -35,15 +50,6 @@
 			href: 'https://order.toasttab.com/online/kagen-coffee-crepes-270-williams-blvd'
 		}
 	];
-
-	// Setup online order location modal
-	// https://melt-ui.com/docs/builders/dialog
-	const {
-		elements: { trigger, overlay, content, title, close, portalled },
-		states: { open }
-	} = createDialog({
-		forceVisible: true
-	});
 
 	// Utility functions
 	function toggle_mobile_open() {
