@@ -15,7 +15,6 @@
 	import { onMount } from 'svelte';
 	import { error } from '@sveltejs/kit';
 	import { page } from '$app/stores';
-	import { Toast } from '@skeletonlabs/skeleton';
 	import Toaster from '$lib/components/toast/index.svelte';
 	import PageWrapper from '$lib/components/PageWrapper.svelte';
 
@@ -74,7 +73,6 @@
 </script>
 
 <Toaster />
-<Toast />
 <SlideOver />
 
 {#if naked}

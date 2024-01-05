@@ -4,7 +4,6 @@
 	import Hero from '$lib/components/hero/ImageTiles.svelte';
 	import QuoteOverlap from '$lib/components/QuoteOverlap.svelte';
 	import TestimonialGrid from '$lib/components/TestimonialGrid.svelte';
-	import CrepesOfTheMonth from '$lib/components/CrepesOfTheMonth.svelte';
 
 	const seoData = {
 		title: 'Kagen Coffee & Crepes - Coffee, Crepes, and Community!',
@@ -22,7 +21,7 @@
 </script>
 
 <svelte:head>
-	<script type="application/ld+json">
+	<script defer type="application/ld+json">
 {
   "@context": "http://schema.org",
   "@type": "Restaurant",
@@ -62,8 +61,6 @@
 
 <SEO data={seoData} />
 <Hero />
-<!-- <CrepesOfTheMonth /> -->
 <QuoteOverlap />
-<!-- <Instagram /> -->
 <TestimonialGrid />
 <CTA />
