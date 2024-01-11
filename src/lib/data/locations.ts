@@ -3,24 +3,24 @@ import richland_location from '/static/images/location_richland.png?enhanced';
 import kennewick_shop from '/static/images/IMG_4900.jpg?enhanced';
 
 export type Location = {
-    image: {
-        alt: string;
-        src: any; 
-    },
-    address: {
-        line2: string; 
-        line1: string; 
-    },
-    locationUrl: string;
-    orderUrl: string;
-    hours: string[];
-    name: string;
-    phone: string;
-    slug: {
-        current: string;
-        _type: string;
-    }
-}
+	image: {
+		alt: string;
+		src: any;
+	};
+	address: {
+		line2: string;
+		line1: string;
+	};
+	locationUrl: string;
+	orderUrl: string;
+	hours: string[];
+	name: string;
+	phone: string;
+	slug: {
+		current: string;
+		_type: string;
+	};
+};
 
 export const locations: Location[] = [
 	{
@@ -51,7 +51,7 @@ export const locations: Location[] = [
 			src: kennewick_shop
 		},
 		address: {
-			line2: 'Richland, WA 99336',
+			line2: 'Kennewick, WA 99336',
 			line1: '308 W Kennewick Ave'
 		},
 		locationUrl: '',
