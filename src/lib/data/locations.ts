@@ -36,7 +36,7 @@ export const locations: Location[] = [
 
 		orderUrl: 'https://www.toasttab.com/kagen-coffee-crepes-270-williams-blvd/v3/?mode=fulfillment',
 
-		hours: ['Monday-Saturday: 7am-2pm', 'Sunday : Closed'],
+		hours: ['Monday-Saturday: 7am-2pm', 'Sunday : 9am-2pm'],
 		name: 'Richland Uptown',
 
 		phone: '509-851-7186',
