@@ -1,9 +1,10 @@
 <script lang="ts">
-	import black_bean_crepe from '/src/lib/assets/crepes/black_bean_crepe_kagen_coffee_and_crepes.jpg?enhanced&w=240';
-	import smiling_employee from '/src/lib/assets/oreo_crepe_smiling_employee_kagen_coffee_and_crepes.jpg?enhanced&w=240';
-	import monte_cristo_crepe from '/src/lib/assets/crepes/the_monte_cristo_crepe_kagen_coffee_and_crepes.jpg?enhanced&w=240';
-	import mixed_berry_crepe from '/src/lib/assets/crepes/mixed_berry_crepe_kagen_coffee_and_crepes.jpg?enhanced&w=240';
-	import chunky_monkey_crepe from '/src/lib/assets/crepes/the_chunky_monkey_crepe_kagen_coffee_and_crepes.jpg?enhanced&w=240';
+	import { Button } from "$lib/components/ui/button/index.js";
+	import black_bean_crepe from '$lib/assets/crepes/black_bean_crepe_kagen_coffee_and_crepes.jpg?enhanced&w=240';
+	import smiling_employee from '$lib/assets/oreo_crepe_smiling_employee_kagen_coffee_and_crepes.jpg?enhanced&w=240';
+	import monte_cristo_crepe from '$lib/assets/crepes/the_monte_cristo_crepe_kagen_coffee_and_crepes.jpg?enhanced&w=240';
+	import mixed_berry_crepe from '$lib/assets/crepes/mixed_berry_crepe_kagen_coffee_and_crepes.jpg?enhanced&w=240';
+	import chunky_monkey_crepe from '$lib/assets/crepes/the_chunky_monkey_crepe_kagen_coffee_and_crepes.jpg?enhanced&w=240';
 
 	import {open_online_order_modal} from "$lib/components/Navigation.svelte"
 </script>
@@ -23,21 +24,20 @@
 			<div class="mx-auto max-w-7xl px-6 pb-16 pt-4 lg:px-8 lg:pt-8">
 				<div class="mx-auto max-w-2xl gap-x-14 lg:mx-0 lg:flex lg:max-w-none lg:items-center">
 					<div class="w-full max-w-xl lg:shrink-0 xl:max-w-2xl">
-						<h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
+						<h1 class="text-4xl font-bold tracking-tight sm:text-6xl">
 							Kagen Coffee & Crepes
 						</h1>
-						<p class="relative mt-6 text-lg leading-8 text-gray-600 sm:max-w-md lg:max-w-none">
-							Coffee, crepes, and community! Families and friends need a place to gather, catch up
-							and simply enjoy life together. Our delicious crepes and crafted coffees are here to
-							help you deepen friendships and build memories today.
+						<p class="relative mt-6 text-muted-foreground text-lg leading-8 sm:max-w-md lg:max-w-none">
+							Coffee, crepes, and good company – the perfect recipe for lasting memories. Savor handcrafted coffee and delicious crepes while creating unforgettable moments with friends and family.
 						</p>
 						<div class="mt-10 flex items-center gap-x-6">
-							<a href="/menu" class="btn variant-filled-primary">View Menu</a>
-							<button
-								type="button"
+							<!-- <a href="/menu" class="btn variant-filled-primary">View Menu</a> -->
+							<Button
+								variant="default"
 								on:click={open_online_order_modal}
-								class="btn variant-ringed-primary">Order Online <span aria-hidden="true">→</span></button
+								>Order Online</Button
 							>
+							<Button variant="outline" href="/menu">View menu</Button>
 						</div>
 					</div>
 					<div

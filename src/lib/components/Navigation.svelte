@@ -9,26 +9,22 @@
 	});
 
 	export const open_online_order_modal = () => {
-		open.set(true)
-	}
+		open.set(true);
+	};
 </script>
 
 <script lang="ts">
 	import { navigating } from '$app/stores';
-	import { isCartOpen } from '$lib/stores';
 	import { fly, fade } from 'svelte/transition';
 	import { quadOut } from 'svelte/easing';
-	import { itemCount } from '$lib/stores';
 	import { createDialog, melt } from '@melt-ui/svelte';
 	import { X } from 'lucide-svelte';
 	import Logo from '$lib/components/Logo.svelte';
+	import { Button } from '$lib/components/ui/button/index.js';
 
-	let count = 0;
-	$: count = $itemCount;
 	let is_mobile_open = false;
 	const top_links = [
 		{ title: 'Menu', href: '/menu/tri-cities' },
-		{ title: 'Coffee Club', href: '/products/the-rooster' },
 		{ title: 'Our Story', href: '/about-us' },
 		{ title: 'Locations', href: '/locations' },
 		{ title: 'Join Our Team', href: '/join-our-team' },
@@ -55,9 +51,6 @@
 	function toggle_mobile_open() {
 		is_mobile_open = !is_mobile_open;
 	}
-	function openShoppingCart() {
-		$isCartOpen = true;
-	}
 
 	// Reactive functions
 	$: if ($open) {
@@ -79,35 +72,7 @@
 		</a>
 	</div>
 	<div class="flex lg:hidden">
-		<button on:click|preventDefault={openShoppingCart} class="btn-icon">
-			<span>
-				<!-- Heroicon name: outline/shopping-cart -->
-				<svg
-					class="flex-shrink-0 h-6 w-6 text-gray-700 group-hover:text-gray-900"
-					xmlns="http://www.w3.org/2000/svg"
-					fill="none"
-					viewBox="0 0 24 24"
-					stroke="currentColor"
-					aria-hidden="true"
-				>
-					<path
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						stroke-width="2"
-						d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-					/>
-				</svg>
-			</span>
-			{#if count}
-				<span class="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800"
-					>{$itemCount}</span
-				>
-			{:else}
-				<span class="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">&nbsp;</span>
-			{/if}
-			<span class="sr-only">items in cart, view bag</span>
-		</button>
-		<button type="button" on:click={toggle_mobile_open} class="btn-icon">
+		<Button type="button" on:click={toggle_mobile_open} class="btn-icon">
 			<span class="sr-only">Open main menu</span>
 			<span>
 				<svg
@@ -125,7 +90,7 @@
 					/>
 				</svg>
 			</span>
-		</button>
+		</Button>
 	</div>
 	<div class="hidden lg:flex lg:gap-x-12">
 		{#each top_links as { title, href }}
@@ -133,35 +98,10 @@
 		{/each}
 	</div>
 	<div class="hidden space-x-2 lg:flex lg:justify-end">
-		<button on:click|preventDefault={openShoppingCart} class="btn-icon">
-			<span>
-				<!-- Heroicon name: outline/shopping-cart -->
-				<svg
-					class="flex-shrink-0 h-6 w-6 text-gray-700 group-hover:text-gray-900"
-					xmlns="http://www.w3.org/2000/svg"
-					fill="none"
-					viewBox="0 0 24 24"
-					stroke="currentColor"
-					aria-hidden="true"
-				>
-					<path
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						stroke-width="2"
-						d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-					/>
-				</svg>
-			</span>
-			{#if count}
-				<span class="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">{count}</span
-				>
-			{:else}
-				<span class="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">&nbsp;</span>
-			{/if}
-			<span class="sr-only">items in cart, view bag</span>
-		</button>
-		<button use:melt={$trigger} class="btn variant-filled-primary text-sm font-semibold leading-6"
-			>Order Online<span aria-hidden="true">&rarr;</span></button
+		<Button
+			variant="default"
+			href="https://order.toasttab.com/online/kagen-coffee-crepes-270-williams-blvd"
+			>Order online</Button
 		>
 	</div>
 </nav>
@@ -190,8 +130,9 @@
 						<Logo stroke="#000" fill="#000" />
 					</div>
 				</a>
-				<button
+				<Button
 					type="button"
+					size="icon"
 					on:click={toggle_mobile_open}
 					class="-m-2.5 rounded-md p-2.5 text-gray-700"
 				>
@@ -206,7 +147,7 @@
 					>
 						<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
 					</svg>
-				</button>
+				</Button>
 			</div>
 			<div class="mt-6 flow-root">
 				<div class="-my-6 divide-y divide-secondary-800/30">
@@ -220,8 +161,10 @@
 						{/each}
 					</div>
 					<div class="py-6">
-						<button use:melt={$trigger} class="btn variant-ringed-tertiary !bg-white"
-							>Order Online</button
+						<Button
+							variant="default"
+							href="https://order.toasttab.com/online/kagen-coffee-crepes-270-williams-blvd"
+							>Order online</Button
 						>
 					</div>
 				</div>

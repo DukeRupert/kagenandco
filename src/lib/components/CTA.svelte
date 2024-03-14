@@ -1,5 +1,6 @@
-<script>
+<script lang="ts">
 	import coffee_cup from '/src/lib/assets/coffee_cup_with_coffee_beans_kagen_coffee_and_crepes_square.jpg?enhanced';
+	import { Button } from "$lib/components/ui/button/index.js";
 </script>
 
 <div id="cta-coffee-club" class="relative isolate bg-white pb-32 pt-24 sm:pt-32">
@@ -46,7 +47,7 @@
 					you. Yea we got you! Order a bag or join our coffee club today.
 				</p>
 				<div class="mt-8">
-					<a href="/products/the-rooster" class="btn variant-filled-primary">Shop Coffee</a>
+					<Button href="/products/the-rooster" >Shop Coffee</Button>
 				</div>
 			</div>
 		</div>
