@@ -8,7 +8,7 @@
 	import PageWrapper from '$lib/components/PageWrapper.svelte';
 
 	export let data: PageData;
-	$: ({ crepes, type } = data);
+	let { crepes, type } = data;
 	let is_modal_active = false;
 	let active_crepe: Crepe;
 

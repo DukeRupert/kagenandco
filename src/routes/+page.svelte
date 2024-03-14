@@ -2,7 +2,8 @@
 	import SEO from '$lib/components/SEO.svelte';
 	import Hero from './(components)/hero.svelte';
 	import QuoteOverlap from './(components)/quote-with-overlap.svelte';
-	import CallToAction from './(components)/call-to-action.svelte';
+	import Location from './(components)/location.svelte'
+	import CallToAction from '$lib/components/call-to-action.svelte';
 
 	const seoData = {
 		title: 'Kagen Coffee & Crepes - Coffee, Crepes, and Community!',
@@ -22,4 +23,5 @@
 <SEO data={seoData} />
 <Hero />
 <QuoteOverlap />
+<Location />
 <CallToAction />

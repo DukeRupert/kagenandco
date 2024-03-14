@@ -5,8 +5,7 @@
 	import monte_cristo_crepe from '$lib/assets/crepes/the_monte_cristo_crepe_kagen_coffee_and_crepes.jpg?enhanced&w=240';
 	import mixed_berry_crepe from '$lib/assets/crepes/mixed_berry_crepe_kagen_coffee_and_crepes.jpg?enhanced&w=240';
 	import chunky_monkey_crepe from '$lib/assets/crepes/the_chunky_monkey_crepe_kagen_coffee_and_crepes.jpg?enhanced&w=240';
-
-	import {open_online_order_modal} from "$lib/components/Navigation.svelte"
+	import { SITE_DATA } from "$lib/constants";
 </script>
 
 <div id="hero" class="relative isolate bg-white pb-16 pt-4 sm:pt-16 sm:bg-32">
@@ -34,7 +33,7 @@
 							<!-- <a href="/menu" class="btn variant-filled-primary">View Menu</a> -->
 							<Button
 								variant="default"
-								on:click={open_online_order_modal}
+								href={SITE_DATA.online_order_url}
 								>Order Online</Button
 							>
 							<Button variant="outline" href="/menu">View menu</Button>

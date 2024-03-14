@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { SITE_DATA } from '$lib/constants';
-	import { urlFor } from '$lib/image-url';
 	import Logo from '$lib/components/Logo.svelte';
 </script>
 

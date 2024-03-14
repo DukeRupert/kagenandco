@@ -10,7 +10,7 @@
 			Need some coffee?<br /> It pairs great with a crepe.
 		</h2>
 		<div class="mt-10 flex items-center gap-x-6 lg:mt-0 lg:flex-shrink-0">
-			<Button href={SITE_DATA.order[0].url} variant="default">Order online</Button>
+			<Button href={SITE_DATA.online_order_url} variant="default">Order online</Button>
 			<Button href={SITE_DATA.gmap} variant="outline"
 				>Get directions <span aria-hidden="true">→</span></Button
 			>

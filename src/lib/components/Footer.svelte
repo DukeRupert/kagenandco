@@ -9,38 +9,21 @@
 			aria-label="Footer"
 		>
 			<div class="px-5 py-2">
-				<a href={SITE_DATA.order[0].url} class="text-base text-primary-500 hover:text-primary-300">
+				<a
+					href={SITE_DATA.online_order_url}
+					class="text-base text-primary-500 hover:text-primary-300"
+				>
 					Order Online
 				</a>
 			</div>
 
-			<div class="px-5 py-2">
-				<a href="/menu/tri-cities" class="text-base text-primary-500 hover:text-primary-300">
-					Menu
-				</a>
-			</div>
-
-			<div class="px-5 py-2">
-				<a href="/about-us" class="text-base text-primary-500 hover:text-primary-300"> About </a>
-			</div>
-
-			<div class="px-5 py-2">
-				<a href="/locations" class="text-base text-primary-500 hover:text-primary-300">
-					Locations
-				</a>
-			</div>
-
-			<div class="px-5 py-2">
-				<a href="/join-our-team" class="text-base text-primary-500 hover:text-primary-300">
-					Join Our Team
-				</a>
-			</div>
-
-			<div class="px-5 py-2">
-				<a href="/contact-us" class="text-base text-primary-500 hover:text-primary-300">
-					Contact Us
-				</a>
-			</div>
+			{#each SITE_DATA.routes as { title, href }}
+				<div class="px-5 py-2">
+					<a {href} class="text-base text-primary-500 hover:text-primary-300">
+						{title}
+					</a>
+				</div>
+			{/each}
 		</nav>
 		<div class="mt-8 flex justify-center space-x-6">
 			<a href={SITE_DATA.facebook} class="!text-white !hover:text-gray-100">

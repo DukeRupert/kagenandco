@@ -1,62 +1,14 @@
-<script context="module">
-	// Setup online order location modal
-	// https://melt-ui.com/docs/builders/dialog
-	const {
-		elements: { trigger, overlay, content, title, close, portalled },
-		states: { open }
-	} = createDialog({
-		forceVisible: true
-	});
-
-	export const open_online_order_modal = () => {
-		open.set(true);
-	};
-</script>
-
 <script lang="ts">
+	import { SITE_DATA } from '$lib/constants';
 	import { navigating } from '$app/stores';
-	import { fly, fade } from 'svelte/transition';
-	import { quadOut } from 'svelte/easing';
-	import { createDialog, melt } from '@melt-ui/svelte';
-	import { X } from 'lucide-svelte';
 	import Logo from '$lib/components/Logo.svelte';
+	import { MenuIcon } from 'lucide-svelte';
+	import * as Sheet from '$lib/components/ui/sheet';
 	import { Button } from '$lib/components/ui/button/index.js';
 
 	let is_mobile_open = false;
-	const top_links = [
-		{ title: 'Menu', href: '/menu/tri-cities' },
-		{ title: 'Our Story', href: '/about-us' },
-		{ title: 'Locations', href: '/locations' },
-		{ title: 'Join Our Team', href: '/join-our-team' },
-		{ title: 'Contact Us', href: '/contact-us' }
-	];
-	const online_order_locations = [
-		{
-			address: {
-				line2: 'Kennewick, WA 99336',
-				line1: '308 W Kennewick Ave'
-			},
-			href: 'https://order.toasttab.com/online/kagen-coffee-crepes-308-w-kennewick-ave'
-		},
-		{
-			address: {
-				line2: 'Richland, WA 99354',
-				line1: '270 Williams Blvd'
-			},
-			href: 'https://order.toasttab.com/online/kagen-coffee-crepes-270-williams-blvd'
-		}
-	];
-
-	// Utility functions
-	function toggle_mobile_open() {
-		is_mobile_open = !is_mobile_open;
-	}
 
 	// Reactive functions
-	$: if ($open) {
-		is_mobile_open = false; // Close mobile menu when online order modal is open
-	}
-
 	$: if ($navigating) {
 		is_mobile_open = false; // Close mobile menu when navigation
 	}
@@ -72,167 +24,43 @@
 		</a>
 	</div>
 	<div class="flex lg:hidden">
-		<Button type="button" on:click={toggle_mobile_open} class="btn-icon">
-			<span class="sr-only">Open main menu</span>
-			<span>
-				<svg
-					class="h-6 w-6"
-					fill="none"
-					viewBox="0 0 24 24"
-					stroke-width="1.5"
-					stroke="currentColor"
-					aria-hidden="true"
+		<Sheet.Root bind:open={is_mobile_open}>
+			<Sheet.Trigger asChild let:builder>
+				<Button builders={[builder]} variant="outline">
+					<span class="sr-only">Open navigation menu</span>
+					<MenuIcon class="h-6 w-6" /></Button
 				>
-					<path
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-					/>
-				</svg>
-			</span>
-		</Button>
+			</Sheet.Trigger>
+			<Sheet.Content side="right">
+				<Sheet.Header>
+					<Sheet.Title>Navigation</Sheet.Title>
+				</Sheet.Header>
+				<div class="mt-6 flow-root">
+					<div class="-my-6 divide-y divide-secondary-800/30">
+						<div class="space-y-2 py-6">
+							<a href="/" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7"
+								>Home</a
+							>
+							{#each SITE_DATA.routes as { title, href }}
+								<a {href} class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7"
+									>{title}</a
+								>
+							{/each}
+						</div>
+						<div class="py-6">
+							<Button variant="default" href={SITE_DATA.online_order_url}>Order online</Button>
+						</div>
+					</div>
+				</div>
+			</Sheet.Content>
+		</Sheet.Root>
 	</div>
 	<div class="hidden lg:flex lg:gap-x-12">
-		{#each top_links as { title, href }}
-			<a {href} class="text-sm font-semibold leading-6 !no-underline !text-token">{title}</a>
+		{#each SITE_DATA.routes as { title, href }}
+			<a {href} class="text-sm font-semibold leading-6">{title}</a>
 		{/each}
 	</div>
 	<div class="hidden space-x-2 lg:flex lg:justify-end">
-		<Button
-			variant="default"
-			href="https://order.toasttab.com/online/kagen-coffee-crepes-270-williams-blvd"
-			>Order online</Button
-		>
+		<Button variant="default" href={SITE_DATA.online_order_url}>Order online</Button>
 	</div>
 </nav>
-<!-- Mobile menu, show/hide based on menu open state. -->
-{#if is_mobile_open}
-	<div
-		transition:fly={{ duration: 200, x: 400, easing: quadOut }}
-		class="fixed inset-0 {is_mobile_open
-			? 'translate-x-0'
-			: 'translate-x-full'} z-50 min-h-screen lg:hidden"
-		role="dialog"
-		aria-modal="true"
-	>
-		<!-- Background backdrop, show/hide based on slide-over state. -->
-		<div
-			transition:fade={{ delay: 200, duration: 100, easing: quadOut }}
-			class="fixed inset-0 z-50 bg-gray-700/20"
-		/>
-		<div
-			class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-primary-500 px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10"
-		>
-			<div class="flex items-center justify-between">
-				<a href="/" class="-m-1.5 p-1.5">
-					<span class="sr-only">Kagen's Coffee and Crepes</span>
-					<div class="h-12 w-12">
-						<Logo stroke="#000" fill="#000" />
-					</div>
-				</a>
-				<Button
-					type="button"
-					size="icon"
-					on:click={toggle_mobile_open}
-					class="-m-2.5 rounded-md p-2.5 text-gray-700"
-				>
-					<span class="sr-only">Close menu</span>
-					<svg
-						class="h-6 w-6"
-						fill="none"
-						viewBox="0 0 24 24"
-						stroke-width="1.5"
-						stroke="currentColor"
-						aria-hidden="true"
-					>
-						<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-					</svg>
-				</Button>
-			</div>
-			<div class="mt-6 flow-root">
-				<div class="-my-6 divide-y divide-secondary-800/30">
-					<div class="space-y-2 py-6">
-						{#each top_links as { title, href }}
-							<a
-								{href}
-								class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 !no-underline !text-tertiary-600"
-								>{title}</a
-							>
-						{/each}
-					</div>
-					<div class="py-6">
-						<Button
-							variant="default"
-							href="https://order.toasttab.com/online/kagen-coffee-crepes-270-williams-blvd"
-							>Order online</Button
-						>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-{/if}
-
-<!-- Online Order Store selection modal -->
-<div use:melt={$portalled}>
-	{#if $open}
-		<div
-			in:fade={{ delay: 100, duration: 200, easing: quadOut }}
-			out:fade={{ duration: 200, easing: quadOut }}
-			use:melt={$overlay}
-			class="fixed inset-0 bg-gray-700 bg-opacity-75"
-		/>
-		<div
-			in:fly={{ delay: 100, x: -100, duration: 200, easing: quadOut }}
-			out:fly={{ duration: 200, x: -100, easing: quadOut }}
-			class="fixed inset-0 z-10 w-screen overflow-y-auto"
-		>
-			<div class="flex min-h-full items-center justify-center p-4 text-center sm:p-0">
-				<div
-					use:melt={$content}
-					class="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 w-full max-w-sm md:max-w-md p-6 sm:p-8"
-				>
-					<button
-						use:melt={$close}
-						aria-label="Close"
-						class="absolute right-[10px] top-[10px] inline-flex h-6 w-6
-                appearance-none items-center justify-center rounded-full text-gray-400
-                hover:bg-gray-100 focus:shadow-gray-400"
-					>
-						<X class="w-4 h-4" />
-					</button>
-					<div>
-						<div class="mt-3 text-center sm:mt-5">
-							<h3
-								use:melt={$title}
-								class="text-base font-semibold leading-6 text-gray-900"
-								id="modal-title"
-							>
-								Select your location
-							</h3>
-							<ul role="list" class="mt-4 divide-y divide-gray-200">
-								{#each online_order_locations as { address, href }}
-									<li class="py-4">
-										<a
-											class="!no-underline text-base font-semibold leading-6 !text-gray-900"
-											{href}
-										>
-											{address.line1}<br />
-											<span class="mt-1 truncate text-xs leading-5 text-gray-500"
-												>{address.line2}</span
-											></a
-										>
-									</li>{/each}
-							</ul>
-						</div>
-					</div>
-					<div class="mt-5 sm:mt-6">
-						<button type="button" use:melt={$close} class="btn variant-filled-primary w-full"
-							>Go back</button
-						>
-					</div>
-				</div>
-			</div>
-		</div>
-	{/if}
-</div>
