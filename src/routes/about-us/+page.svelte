@@ -1,6 +1,5 @@
 <script lang="ts">
-	// @ts-ignore
-	import kagen_cox_owner from '/src/lib/assets/kagen_coffee_and_crepes_owner.webp?enhanced';
+	import Image from '$lib/components/cloudinary-image.svelte'
 	import Seo from '$lib/components/SEO.svelte';
 	import PageWrapper from '$lib/components/PageWrapper.svelte';
 	
@@ -43,10 +42,13 @@
 			</p>
 		</div>
 		<figure class="mt-16">
-			<enhanced:img
+			<Image
 				class="aspect-video rounded-xl bg-gray-50 object-cover"
-				src={kagen_cox_owner}
+				src="/Kagenandco/kagen_coffee_and_crepes_owner_ge3yhz"
 				alt="Kagen Cox, owner of Kagen Coffee and Crepes"
+				width="1310"
+				height="863"
+				sizes="(min-width: 1024px) 75vw, 100vw"
 			/>
 			<figcaption class="mt-4 flex gap-x-2 text-sm leading-6 text-gray-500">
 				<strong class="font-semibold text-gray-900">Kagen Cox</strong> – Owner
