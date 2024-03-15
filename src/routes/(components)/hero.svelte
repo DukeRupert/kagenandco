@@ -29,11 +29,15 @@
 				</div>
 			</div>
 			<CldImage
-				src="/Kagenandco/cgyc92xr8gqna2fw5mlw.jpg"
+				src="/Kagenandco/cgyc92xr8gqna2fw5mlw"
 				alt="A delicous crepe with banana, strawberies and blueberries."
 				width="7360"
 				height="4912"
-				sizes="(max-width: 767px) 50vw, 33vw" 
+				sizes="(min-width: 1536px) 33vw, 
+						(min-width: 1280px) 33vw, 
+						(min-width: 1024px) 50vw, 
+						(min-width: 640px) 90vw,
+						100vw"
 				class="mt-10 aspect-[6/5] w-full max-w-lg rounded-2xl object-cover sm:mt-16 lg:mt-0 lg:max-w-none xl:row-span-2 xl:row-end-2 xl:mt-36"
 			/>
 		</div>
