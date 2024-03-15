@@ -1,12 +1,15 @@
 <script lang="ts">
-	import type { Location } from '$lib/data/locations';
+	import Image from '$lib/components/cloudinary-image.svelte'
+	import type { Location } from './location.svelte';
 	export let location: Location;
 </script>
 
 <div class="w-full aspect-w-1 aspect-h-1 rounded-lg overflow-hidden sm:aspect-w-2 sm:aspect-h-3">
-	<enhanced:img
+	<Image
 		src={location.image.src}
 		alt={location.image.alt}
+		width={location.image.width}
+		height={location.image.height}
 		class="w-full h-full object-center object-cover group-hover:opacity-75"
 	/>
 </div>

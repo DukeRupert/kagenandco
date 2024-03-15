@@ -1,15 +1,40 @@
+<script lang="ts" context="module">
+	export interface Location {
+		image: {
+			alt: string;
+			src: string;
+			height: string;
+			width: string;
+		};
+		address: {
+			line1: string;
+			line2: string;
+		};
+		locationUrl: string;
+		orderUrl: string;
+		hours: string[];
+		name: string;
+		phone: string;
+		slug: {
+			current: string;
+			_type: 'slug';
+		};
+	}
+</script>
+
 <script lang="ts">
-	import richland_location from '$lib/assets/location_richland.png?enhanced';
 	import PageWrapper from '$lib/components/PageWrapper.svelte';
 	import LocationCard from './location-card.svelte';
 
 	const title = 'Store Locations';
 	const description =
 		"Find our nearest location and come join us! It's hard to beat a delicious crepe paired with a strong, handcrafted coffee.";
-	const location = {
+	const location: Location = {
 		image: {
 			alt: 'Kagen Coffee and Crepes Richland Uptown location',
-			src: richland_location
+			src: '/Kagenandco/location_richland_g2q3b7',
+			height: "995",
+			width: "968"
 		},
 		address: {
 			line2: 'Richland, WA 99354',

@@ -1,6 +1,5 @@
 <script lang="ts">
-	import { CldImage } from 'svelte-cloudinary';
-	import kagen_cox_owner from '/src/lib/assets/kagen_coffee_and_crepes_owner.webp?enhanced';
+	import Image from '$lib/components/cloudinary-image.svelte'
 </script>
 
 <div class="bg-surface-50 pb-16 pt-24 sm:pb-24 sm:pt-32 xl:pb-32">
@@ -10,10 +9,12 @@
 		>
 			<div class="-mt-8 w-full max-w-2xl xl:-mb-8 xl:w-96 xl:flex-none">
 				<div class="relative aspect-[2/1] h-full md:-mx-8 xl:mx-0 xl:aspect-auto">
-					<CldImage
+					<Image
 						class="absolute inset-0 h-full w-full rounded-2xl object-cover shadow-2xl"
 						src="/Kagenandco/kagen_coffee_and_crepes_owner_ge3yhz"
 						alt="Kagen Cox, owner of Kagen Coffee and Crepes"
+						width="1310"
+						height="863"
 					/>
 				</div>
 			</div>

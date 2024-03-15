@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { CldImage } from 'svelte-cloudinary';
+	import Image from '$lib/components/cloudinary-image.svelte';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import { SITE_DATA } from '$lib/constants';
 
@@ -28,9 +28,10 @@
 					<Button variant="outline" href="/menu">View menu</Button>
 				</div>
 			</div>
-			<CldImage
+			<Image
 				src="/Kagenandco/cgyc92xr8gqna2fw5mlw"
 				alt="A delicous crepe with banana, strawberies and blueberries."
+				eager={true}
 				width="7360"
 				height="4912"
 				sizes="(min-width: 1536px) 33vw, 
