@@ -1,21 +1,35 @@
+
+
 <script lang="ts">
-	import type { PageData } from './$types';
 	import type { Crepe } from '$lib/types/menu';
 	import type { FlipParams } from 'svelte/animate';
 	import { flip } from 'svelte/animate';
 	import { quadOut } from 'svelte/easing';
+	import { crepes } from '$lib/data/crepes';
 	import Seo from '$lib/components/SEO.svelte';
 	import PageWrapper from '$lib/components/PageWrapper.svelte';
 
-	export let data: PageData;
-	let { crepes, type } = data;
-	let is_modal_active = false;
+	let type = '';
 	let active_crepe: Crepe;
+	let is_modal_active = false;
+	let filtered_crepes: Crepe[] = [];
+	$: console.log(type)
+	$: filtered_crepes = filter_crepes(crepes, type);
+
+	const filter_crepes = (crepes: Crepe[], param: string): Crepe[] => {
+		console.log('Filtering crepes')
+		// If no filter param exists return full array
+		if (param === '' || param == null || param == undefined) {
+			return crepes;
+		} else {
+			return crepes.filter((crepe) => crepe.type == param);
+		}
+	};
 
 	const flip_params: FlipParams = {
 		duration: 500,
 		easing: quadOut
-	}
+	};
 
 	const toggle_modal = (event: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }) => {
 		// Get id of crepe
@@ -52,32 +66,32 @@
 <PageWrapper {title} {description}>
 	<div class="mx-auto max-w-2xl px-4 py-8 md:py-12 flex justify-center">
 		<span class="isolate inline-flex rounded-md shadow-sm">
-			<a
+			<button
 				data-sveltekit-noscroll
 				id="all"
-				href="/menu"
+				on:click={() => (type = '')}
 				class="{type === ''
 					? 'bg-primary-400'
 					: 'bg-white'} relative min-w-[80px] inline-flex justify-center items-center rounded-l-md px-3 py-2 text-sm font-semibold !text-gray-900 !no-underline ring-1 ring-inset ring-gray-300 hover:bg-primary-300 focus:z-10"
-				>All</a
+				>All</button
 			>
-			<a
+			<button
 				data-sveltekit-noscroll
 				id="savory"
-				href="/menu?type=savory"
+				on:click={() => (type = 'savory')}
 				class="{type === 'savory'
 					? 'bg-primary-400'
 					: 'bg-white'} relative min-w-[80px] -ml-px inline-flex justify-center items-center px-3 py-2 text-sm font-semibold !text-gray-900 !no-underline ring-1 ring-inset ring-gray-300 hover:bg-primary-300 focus:z-10"
-				>Savory</a
+				>Savory</button
 			>
-			<a
+			<button
 				data-sveltekit-noscroll
 				id="sweet"
-				href="/menu?type=sweet"
+				on:click={() => (type = 'sweet')}
 				class="{type === 'sweet'
 					? 'bg-primary-400'
 					: 'bg-white'} relative min-w-[80px] -ml-px inline-flex justify-center items-center rounded-r-md px-3 py-2 text-sm font-semibold !text-gray-900 !no-underline ring-1 ring-inset ring-gray-300 hover:bg-primary-300 focus:z-10"
-				>Sweet</a
+				>Sweet</button
 			>
 		</span>
 	</div>
@@ -86,7 +100,7 @@
 		role="list"
 		class="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8"
 	>
-		{#each crepes as { name, type, image, ingredients, special, most_popular } (name)}
+		{#each filtered_crepes as { name, type, image, ingredients, special, most_popular } (name)}
 			<li id={name} animate:flip={flip_params} class="relative">
 				{#if special}
 					<span class="badge bg-rose-600 text-white absolute -top-2 right-2 z-10">Limited Time</span

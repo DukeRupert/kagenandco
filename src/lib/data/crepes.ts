@@ -14,23 +14,7 @@ import the_nutella_crepe from '/src/lib/assets/crepes/nutella_crepe.jpg?enhanced
 import the_mixed_berry_crepe from '/src/lib/assets/crepes/mixed_berry_crepe_2.jpg?enhanced&w=400;280';
 import the_caprese_crepe from '/src/lib/assets/crepes/the_caprese.jpg?enhanced&w=400;280';
 
-export const crepes: Crepe[] = [
-	{
-		name: 'The Egg',
-		description: 'Ham, eggs, provolone and spinach.',
-		type: 'savory',
-		special: false,
-		most_popular: false,
-		image: {
-			alt: 'The Egg crepe',
-			src: the_egg_crepe
-		},
-		price: {
-			mini: '8.50',
-			full: '11.95'
-		},
-		ingredients: ['provolone', 'ham', 'spinach', 'eggs', 'dairy', 'flour']
-	},
+export const crepes: Crepe[] = [	
 	{
 		name: 'The Breakfast in Bed',
 		description: 'Egg, cheddar, bacon, maple sausage served with a side of maple syrup.',
@@ -202,6 +186,22 @@ export const crepes: Crepe[] = [
 			full: '7.00'
 		},
 		ingredients: ['lemon', 'sugar', 'eggs', 'dairy', 'flour']
+	},
+	{
+		name: 'The Egg',
+		description: 'Ham, eggs, provolone and spinach.',
+		type: 'savory',
+		special: false,
+		most_popular: false,
+		image: {
+			alt: 'The Egg crepe',
+			src: the_egg_crepe
+		},
+		price: {
+			mini: '8.50',
+			full: '11.95'
+		},
+		ingredients: ['provolone', 'ham', 'spinach', 'eggs', 'dairy', 'flour']
 	},
 	// {
 	// 	name: 'The Cookie Monster',

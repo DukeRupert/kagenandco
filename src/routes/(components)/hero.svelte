@@ -1,113 +1,42 @@
 <script lang="ts">
-	import { Button } from "$lib/components/ui/button/index.js";
-	import black_bean_crepe from '$lib/assets/crepes/black_bean_crepe_kagen_coffee_and_crepes.jpg?enhanced&w=240';
-	import smiling_employee from '$lib/assets/oreo_crepe_smiling_employee_kagen_coffee_and_crepes.jpg?enhanced&w=240';
-	import monte_cristo_crepe from '$lib/assets/crepes/the_monte_cristo_crepe_kagen_coffee_and_crepes.jpg?enhanced&w=240';
-	import mixed_berry_crepe from '$lib/assets/crepes/mixed_berry_crepe_kagen_coffee_and_crepes.jpg?enhanced&w=240';
-	import chunky_monkey_crepe from '$lib/assets/crepes/the_chunky_monkey_crepe_kagen_coffee_and_crepes.jpg?enhanced&w=240';
-	import { SITE_DATA } from "$lib/constants";
+	import { CldImage } from 'svelte-cloudinary';
+	import { Button } from '$lib/components/ui/button/index.js';
+	import { SITE_DATA } from '$lib/constants';
+
+	const heroData = {
+		title: 'Kagen Coffee & Crepes',
+		subtext:
+			'Coffee, crepes, and good company – the perfect recipe for lasting memories. Savor handcrafted coffee and delicious crepes while creating unforgettable moments with friends and family.'
+	};
 </script>
 
-<div id="hero" class="relative isolate bg-white pb-16 pt-4 sm:pt-16 sm:bg-32">
-	<div class="relative isolate">
+<div id="hero" class="relative isolate overflow-hidden pt-14">
+	<!-- <div class="absolute inset-y-0 right-1/2 -z-10 -mr-96 w-[200%] origin-top-right skew-x-[-30deg] bg-white shadow-xl shadow-indigo-600/10 ring-1 ring-indigo-50 sm:-mr-80 lg:-mr-96" aria-hidden="true"></div> -->
+	<div class="mx-auto max-w-7xl px-6 py-32 sm:py-40 lg:px-8">
 		<div
-			class="absolute left-1/2 right-0 top-0 -z-10 -ml-24 transform-gpu overflow-hidden blur-3xl lg:ml-24 xl:ml-48"
-			aria-hidden="true"
+			class="mx-auto max-w-2xl lg:mx-0 lg:grid lg:max-w-none lg:grid-cols-2 lg:gap-x-16 lg:gap-y-6 xl:grid-cols-1 xl:grid-rows-1 xl:gap-x-8"
 		>
-			<div
-				class="aspect-[801/1036] w-[50.0625rem] bg-gradient-to-tr from-[#fcc24c] to-[#fef0d2] opacity-30"
-				style="clip-path: polygon(63.1% 29.5%, 100% 17.1%, 76.6% 3%, 48.4% 0%, 44.6% 4.7%, 54.5% 25.3%, 59.8% 49%, 55.2% 57.8%, 44.4% 57.2%, 27.8% 47.9%, 35.1% 81.5%, 0% 97.7%, 39.2% 100%, 35.2% 81.4%, 97.2% 52.8%, 63.1% 29.5%)"
-			/>
-		</div>
-		<div class="overflow-hidden">
-			<div class="mx-auto max-w-7xl px-6 pb-16 pt-4 lg:px-8 lg:pt-8">
-				<div class="mx-auto max-w-2xl gap-x-14 lg:mx-0 lg:flex lg:max-w-none lg:items-center">
-					<div class="w-full max-w-xl lg:shrink-0 xl:max-w-2xl">
-						<h1 class="text-4xl font-bold tracking-tight sm:text-6xl">
-							Kagen Coffee & Crepes
-						</h1>
-						<p class="relative mt-6 text-muted-foreground text-lg leading-8 sm:max-w-md lg:max-w-none">
-							Coffee, crepes, and good company – the perfect recipe for lasting memories. Savor handcrafted coffee and delicious crepes while creating unforgettable moments with friends and family.
-						</p>
-						<div class="mt-10 flex items-center gap-x-6">
-							<!-- <a href="/menu" class="btn variant-filled-primary">View Menu</a> -->
-							<Button
-								variant="default"
-								href={SITE_DATA.online_order_url}
-								>Order Online</Button
-							>
-							<Button variant="outline" href="/menu">View menu</Button>
-						</div>
-					</div>
-					<div
-						class="mt-14 flex justify-end gap-8 sm:-mt-44 sm:justify-start sm:pl-20 lg:mt-0 lg:pl-0"
-					>
-						<div
-							class="ml-auto w-44 flex-none space-y-8 pt-32 sm:ml-0 sm:pt-80 lg:order-last lg:pt-36 xl:order-none xl:pt-80"
-						>
-							<div class="relative rounded-xl">
-								<enhanced:img
-									src={black_bean_crepe}
-									alt="A black bean crepe"
-									sizes="(min-width:240px) 240px"
-									class="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"
-								/>
-								<div
-									class="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset ring-gray-900/10"
-								/>
-							</div>
-						</div>
-						<div class="mr-auto w-44 flex-none space-y-8 sm:mr-0 sm:pt-52 lg:pt-36">
-							<div class="relative">
-								<enhanced:img
-									src={smiling_employee}
-									alt="A smiling employee holding an oreo crepe"
-									sizes="(min-width:240px) 240px"
-									class="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"
-								/>
-								<div
-									class="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset ring-gray-900/10"
-								/>
-							</div>
-							<div class="relative">
-								<enhanced:img
-									src={monte_cristo_crepe}
-									alt="A monte cristo crepe"
-									sizes="(min-width:240px) 240px"
-									class="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"
-								/>
-								<div
-									class="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset ring-gray-900/10"
-								/>
-							</div>
-						</div>
-						<div class="w-44 flex-none space-y-8 pt-32 sm:pt-0">
-							<div class="relative">
-								<enhanced:img
-									src={mixed_berry_crepe}
-									alt="A mixed berry crepe"
-									sizes="(min-width:240px) 240px"
-									class="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"
-								/>
-								<div
-									class="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset ring-gray-900/10"
-								/>
-							</div>
-							<div class="relative">
-								<enhanced:img
-									src={chunky_monkey_crepe}
-									alt="A chunky monkey crepe"
-									sizes="(min-width:240px) 240px"
-									class="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"
-								/>
-								<div
-									class="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset ring-gray-900/10"
-								/>
-							</div>
-						</div>
-					</div>
+			<h1
+				class="max-w-2xl text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl lg:col-span-2 xl:col-auto"
+			>
+				{heroData.title}
+			</h1>
+			<div class="mt-6 max-w-xl lg:mt-0 xl:col-end-1 xl:row-start-1">
+				<p class="text-lg leading-8 text-gray-600">{heroData.subtext}</p>
+				<div class="mt-10 flex items-center gap-x-6">
+					<Button variant="default" href={SITE_DATA.online_order_url}>Order Online</Button>
+					<Button variant="outline" href="/menu">View menu</Button>
 				</div>
 			</div>
+			<CldImage
+				src="/Kagenandco/cgyc92xr8gqna2fw5mlw.jpg"
+				alt="A delicous crepe with banana, strawberies and blueberries."
+				width="7360"
+				height="4912"
+				sizes="(max-width: 767px) 50vw, 33vw" 
+				class="mt-10 aspect-[6/5] w-full max-w-lg rounded-2xl object-cover sm:mt-16 lg:mt-0 lg:max-w-none xl:row-span-2 xl:row-end-2 xl:mt-36"
+			/>
 		</div>
 	</div>
+	<div class="absolute inset-x-0 bottom-0 -z-10 h-24 bg-gradient-to-t from-white sm:h-32"></div>
 </div>
