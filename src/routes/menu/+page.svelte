@@ -171,9 +171,15 @@
 						<div
 							class="mx-auto aspect-h-7 aspect-w-10 overflow-hidden flex items-center justify-center rounded-lg bg-green-100"
 						>
-							<enhanced:img
+							<Image
 								src={active_crepe.image.src}
 								alt={active_crepe.image.alt}
+								height={active_crepe.image.height.toString()}
+								width={active_crepe.image.width.toString()}
+								crop="fill,g_auto"
+								sizes="(min-width: 1024px) 50vw, 
+										(min-width: 640px) 75vw,
+										50vw"
 								class="pointer-events-none object-cover h-full w-full group-hover:opacity-75"
 							/>
 						</div>
