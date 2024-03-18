@@ -14,6 +14,7 @@
                         (min-width: 640px) 90vw,
                         100vw`;
 	export let eager = false;
+	export let crop: string = ''
 </script>
 
 <CldImage
@@ -22,6 +23,7 @@
 	{height}
 	{width}
 	{sizes}
+	{crop}
 	class={className}
 	loading={eager ? "eager" : "lazy"}
 />

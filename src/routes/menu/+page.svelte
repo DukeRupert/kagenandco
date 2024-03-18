@@ -1,29 +1,35 @@
-
-
 <script lang="ts">
-	import type { Crepe } from '$lib/types/menu';
+	import { crepes, type Crepe } from './(data)/crepes';
 	import type { FlipParams } from 'svelte/animate';
 	import { flip } from 'svelte/animate';
 	import { quadOut } from 'svelte/easing';
-	import { crepes } from '$lib/data/crepes';
 	import Seo from '$lib/components/SEO.svelte';
+	import CallToAction from '$lib/components/call-to-action.svelte';
 	import PageWrapper from '$lib/components/PageWrapper.svelte';
+	import Image from '$lib/components/cloudinary-image.svelte';
 
-	let type = '';
+	let type = 'all';
 	let active_crepe: Crepe;
 	let is_modal_active = false;
-	let filtered_crepes: Crepe[] = [];
-	$: console.log(type)
-	$: filtered_crepes = filter_crepes(crepes, type);
+	let all_crepes = crepes;
+	let filtered_crepes: Crepe[] = all_crepes;
 
 	const filter_crepes = (crepes: Crepe[], param: string): Crepe[] => {
-		console.log('Filtering crepes')
-		// If no filter param exists return full array
-		if (param === '' || param == null || param == undefined) {
-			return crepes;
-		} else {
+		console.log('Filtering crepes');
+		if (param === 'savory' || param === 'sweet ')
 			return crepes.filter((crepe) => crepe.type == param);
+		return all_crepes;
+	};
+
+	const handle_click = (event: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }) => {
+		const target = event.target as HTMLButtonElement;
+		let t = target?.id;
+		if (!t) {
+			console.log('Error: missing id');
+			t = 'all';
 		}
+		type = t;
+		filtered_crepes = filter_crepes(all_crepes, t);
 	};
 
 	const flip_params: FlipParams = {
@@ -67,27 +73,24 @@
 	<div class="mx-auto max-w-2xl px-4 py-8 md:py-12 flex justify-center">
 		<span class="isolate inline-flex rounded-md shadow-sm">
 			<button
-				data-sveltekit-noscroll
 				id="all"
-				on:click={() => (type = '')}
-				class="{type === ''
+				on:click={handle_click}
+				class="{type === 'all'
 					? 'bg-primary-400'
 					: 'bg-white'} relative min-w-[80px] inline-flex justify-center items-center rounded-l-md px-3 py-2 text-sm font-semibold !text-gray-900 !no-underline ring-1 ring-inset ring-gray-300 hover:bg-primary-300 focus:z-10"
 				>All</button
 			>
 			<button
-				data-sveltekit-noscroll
 				id="savory"
-				on:click={() => (type = 'savory')}
+				on:click={handle_click}
 				class="{type === 'savory'
 					? 'bg-primary-400'
 					: 'bg-white'} relative min-w-[80px] -ml-px inline-flex justify-center items-center px-3 py-2 text-sm font-semibold !text-gray-900 !no-underline ring-1 ring-inset ring-gray-300 hover:bg-primary-300 focus:z-10"
 				>Savory</button
 			>
 			<button
-				data-sveltekit-noscroll
 				id="sweet"
-				on:click={() => (type = 'sweet')}
+				on:click={handle_click}
 				class="{type === 'sweet'
 					? 'bg-primary-400'
 					: 'bg-white'} relative min-w-[80px] -ml-px inline-flex justify-center items-center rounded-r-md px-3 py-2 text-sm font-semibold !text-gray-900 !no-underline ring-1 ring-inset ring-gray-300 hover:bg-primary-300 focus:z-10"
@@ -112,10 +115,15 @@
 				<div
 					class="relative group aspect-h-7 aspect-w-10 block w-full overflow-hidden rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-primary-500 focus-within:ring-offset-2 focus-within:ring-offset-gray-100"
 				>
-					<enhanced:img
+					<Image
 						src={image.src}
 						alt={image.alt}
-						sizes="(min-width:240px) 280px, (min-width:300) 400px"
+						height={image.height.toString()}
+						width={image.width.toString()}
+						crop="fill,g_auto"
+						sizes="(min-width: 1024px) 25vw, 
+								(min-width: 640px) 33vw,
+								50vw"
 						class="pointer-events-none object-cover h-full w-full group-hover:opacity-75"
 					/>
 					<button
@@ -190,3 +198,4 @@
 		</div>
 	</div>
 </div>
+<CallToAction />
